@@ -3,12 +3,20 @@
 @section('content')
 
 <!-- google map api start -->
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyCaWBIHePh4f4bQIROBybqJzKfaqiNCkac"></script>
+<!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCaWBIHePh4f4bQIROBybqJzKfaqiNCkac"></script> -->
 <!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyDkduGOlqZSICxQ40aTrr_shmIr1Nm5k2Q"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script> -->
 
-
-<style type="text/css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+   integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+   integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+   crossorigin=""></script>
+   <style type="text/css">
+        #map { height: 180px; }
+</style>
+<!-- <style type="text/css">
     #mymap {
         border: 1px solid red;
         width: 100%;
@@ -20,7 +28,7 @@
         width: 800px;
         height: 500px;
     }
-</style>
+</style> -->
 <!-- google map api end -->
 
 <div class="content-wrapper">
@@ -74,9 +82,9 @@
                             <div class="form-group">
                                 <label for="password">@lang('gamecreate.type') *</label>
                                 <select id="type" name="type" type="text" class="required form-control">
-                                    <option disabled selected></option>
-                                    {{-- <option disabled>@lang('gamecreate.item')</option> --}}
-                                    <option>@lang('gamecreate.code')</option>
+                                    <!-- <option disabled selected></option> -->
+                                    <option selected>@lang('gamecreate.item')</option>
+                                    <!-- <option>@lang('gamecreate.code')</option> -->
                                 </select>
                             </div>
                             <div class="form-group">
@@ -87,8 +95,8 @@
                                 <label for="points">@lang('gamecreate.points') *</label>
                                 <select id="points" name="points" type="text" class="required form-control">
                                     <option disabled selected></option>
-                                    <option>10.00</option>
-                                    <option>20.00</option>
+                                    <option>1.00</option>
+                                    <option>2.00</option>
                                 </select>
                                 <small>@lang('gamecreate.points_text')</small>
                             </div>
@@ -96,6 +104,7 @@
                                 <label for="full_comment">@lang('gamecreate.full_description') *</label>
                                 <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
                             </div>
+
                             {{-- <script>
                                 $(document).ready(function() {
                                     $('#city').on('change', function() {
@@ -113,29 +122,15 @@
                                     });
                                 });
                             </script> --}}
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="city">@lang('gamecreate.city') *</label>
                                 <select id="city" name="city" type="text" class="required js-example-basic-single" style="width:100%">
                                     <option disabled selected></option>
-                                    <!-- <option>თბილისი</option> -->
-                                    <option data-lat="41.716667" data-long="44.783333">@lang('gamecreate.tbilisi')</option>
-                                    <option data-lat="41.643414" data-long="41.639900">@lang('gamecreate.batumi')</option>
-                                    <option data-lat="42.26791" data-long="42.69459">@lang('gamecreate.kutaisi')</option>
-                                    <option data-lat="41.5494919" data-long="44.9932289">@lang('gamecreate.rustavi')</option>
-                                    <option data-lat="41.9842186" data-long="44.1157799">@lang('gamecreate.gori')</option>
-                                    <option data-lat="42.5088" data-long="41.87088">@lang('gamecreate.zugdidi')</option>
-                                    <option data-lat="42.138499446" data-long="41.67249731">@lang('gamecreate.poti')</option>
-                                    <option data-lat="41.99414" data-long="43.59994">@lang('gamecreate.khashuri')</option>
-                                    <option data-lat="42.1537" data-long="42.33517">@lang('gamecreate.samtredia')</option>
-                                    <option data-lat="42.2704" data-long="42.0675">@lang('gamecreate.senaki')</option>
-                                    <option data-lat="42.1100006" data-long="43.0525017">@lang('gamecreate.zestaponi')</option>
-                                    <option data-lat="41.4758797" data-long="44.8089485">@lang('gamecreate.marneuli')</option>
-                                    <option data-lat="41.91978" data-long="45.47315">@lang('gamecreate.telavi')</option>
-                                    <option data-lat="41.63901" data-long="42.98262">@lang('gamecreate.akhaltsikhe')</option>
-                                    <option data-lat="41.8214302" data-long="41.7792091">@lang('gamecreate.kobuleti')</option>
-                                    {{-- <option>ბ�?თუმი</option> --}}
+                                    <option data-lat="42" data-long="43.499998">Georgia</option>
+                                    <option data-lat="40" data-long="21.499998">USA</option>
                                 </select>
-                            </div>
+                            </div> -->
+
                             {{-- <div id="district" style='display:none;' class="form-group">
                                 <label for="district">@lang('gamecreate.district') *</label>
                                 <select id="district" name="district" type="text" class="required js-example-basic-single" style="width:100%">
@@ -190,28 +185,28 @@
                                             </select>
                                         </div> --}}
                             <small>(*) @lang('gamecreate.mandatory')</small>
-                            {{-- <div class="card">
+                            <!-- <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">@lang('gamecreate.upload_image') *</h4>
                                     <input name="photo" id="clipboardExample2" value="{{ old('photo') }}" type="file" class="required dropify" />
                                 </div>
-                            </div> --}}
+                            </div> -->
                     </div>
                     <div>
-                        {{-- <div class="input-group">
-                            <span class="input-group-addon bg-dark" id="basic-addon1">ur_</span>
+                        <div class="input-group">
+                            <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span>
                             <input required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
-                        </div> --}}
-                        {{-- <small class="text text-danger">* @lang('gamecreate.code_text')</small> --}}
-                        <input type="hidden" class="required form-control" id="city_lat" name="city_lat">
-                        <input type="hidden" class="required form-control" id="city_long" name="city_long">
-                        <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat">
-                        <input type="hidden" class="required form-control" id="mark_long" name="mark_long">
+                        </div>
+                        <small class="text text-danger">* @lang('gamecreate.code_text')</small>
+                        <!-- <input type="hidden" class="required form-control" id="city_lat" name="city_lat">
+                        <input type="hidden" class="required form-control" id="city_long" name="city_long"> -->
+                        <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
+                        <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">
 
                         <br>
 
                         <br>
-                        <div class="col-md-12" id="mymap" style="display: none;"></div>
+                        <div class="col-md-12" id="map"></div>
 
                         <br>
                         <br>
@@ -223,7 +218,38 @@
         </div>
     </div>
 </div>
+
 <script>
+var map = L.map('map').fitWorld();
+
+
+var circle = null;
+
+map.on('click', function (e) {
+    if (circle !== null) {
+        map.removeLayer(circle);
+    }
+    circle = L.circle(e.latlng,{
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+}).addTo(map);
+var ll = circle.getLatLng();
+document.querySelector('#mark_lat').value = ll.lat;
+document.querySelector('#mark_long').value = ll.lng;
+
+});
+
+
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+</script>
+
+<!-- <script>
 
     var resStr = "Lonesome Dove,Bobby’s,Melting Pot,Daytime Place,Easy Eats,Macro Bites,Grubber Hub,Cheerful Rhino,Home Cooking Experience,Fare & Feed,Golden Palace,Soups & Snacks,Quick Bite,Fast & Friendly,Big Bites,Blind Pig,Eatable,Eatery,Goodies,Lard Boy,Many Foods,Me Likey,Wonton Express,Great Burger,Awesome Burger,Amazing Sauce,Asian Express,Fearless Wander,Crate Express,Smothered In Love,Sweet Delectable,Appetizing As Heck,Appetizing Bird,Scrumptious Temptations,Smile N’ Delight,Choice Foods,Dainty Dog,Hungry Dog,Heavenly Creations,Food For Thought,Food In My Tummy,Tum Tum Express,Lil Johnny’s,Bill’s Burgers,A Night In Paris,Distinctive Creations,Spicy Heat,Spicy Jack’s,Pepper Jack’s,Rich Meat,Fit For A King,King of Meat,Delicious Donuts,Rare Meats,Rare Cuts,Rare Choice,Sapid Salads,Soup & Salad Express,Seasoned,Smitten,Love Street,Ice Cream Sandwiches,For The Love Of Ice Cream,Infatuated Creations,Smack Dab,Frozen Yogurt,Sherbet,Mickey’s Foodstuff,Pick & Go,The Satiated Drink,Pearl,Bless This Mess Hall,Grits & Gravy,Cheerful Hippo,Mealtime,Summer’s End,Winter Comes,Nightcap,It’s Good Food,Leggo My Wagyu,Tokyo Beat,New York Pulse,Chicago Style Pizza,Hill Country Fare,TidBits,No Place Like Home,Trial & Error,Rinse & Repeat,Cook & Boil,Broiler,Broiled Duck,Prancing Pig,Sweet Duck,Aaron’s,Salt & Snow,Roaring Tiger,Fig’s BBQ,Odd Pig,Southside,Northend,Roaring Ridgemont,Tia’s Mexican Hut,Atomic Good,L’Gran,Casa Del Rio,Clio,Bartholomew’s,Villa,Sushi Roll,Hand Roll,By Hand,Made by Hand,Scratch House,Los Alma’s,Upstate,Fatty’s,Halal Meats,Shake It Up,Bridge,Uptown Park,Parrots,No Way,Prince’s,Ramen & Rolls,Flavor Town,Madison,Fig Tree,Lonely Grape";
     var resArr = resStr.split(",");
@@ -327,7 +353,10 @@
             }
         });
     });
-</script>
+</script> -->
+
+
+
 
 {{--<div class="row grid-margin">--}}
 {{--<div class="col-lg-12">--}}

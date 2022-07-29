@@ -58,9 +58,9 @@
           <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}">
             @csrf
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>@lang('register.first_name')</label>
             <input id="name" type="text" class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" name="firstname" value="{{ old('firstname') }}" required autofocus>
         <small>@lang('register.fntext')</small>
@@ -79,7 +79,7 @@
                                 <strong>{{ $errors->first('lastname') }}</strong>
                             </span>
                 @endif
-            </div>
+            </div> -->
             <div class="form-group">
                 <label>@lang('register.username')</label>
                 <div class="input-group">
@@ -93,7 +93,7 @@
                             </span>
                 @endif
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label>@lang('register.phone_number')</label>
                   <div class="input-group">
                       <span class="input-group-addon bg-dark" id="basic-addon1">+995</span>
@@ -105,7 +105,7 @@
                                     <strong>{{ $errors->first('phone_number') }}</strong>
                                 </span>
                             @endif
-              </div>
+              </div> -->
               {{-- <div class="form-group">
                   <label>@lang('register.id_number')</label>
                     <div class="input-group">
@@ -118,7 +118,7 @@
                                   </span>
                               @endif
                 </div> --}}
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>@lang('register.gender')</label>
               <div class="input-group">
                   <select name="gender" id="gender" required autofocus class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}">
@@ -132,8 +132,8 @@
                                 <strong>{{ $errors->first('gender') }}</strong>
                             </span>
                         @endif
-          </div>
-          <div class="form-group">
+          </div> -->
+          <!-- <div class="form-group">
             <label>@lang('register.date_of_birth')</label>
               <div class="input-group date datepicker">
                   <input name="date_of_birth" type="date" id="date_of_birth" required autofocus class="form-control{{ $errors->has('date_of_birth') ? ' is-invalid' : '' }}">
@@ -144,7 +144,7 @@
                                 <strong>{{ $errors->first('date_of_birth') }}</strong>
                             </span>
                         @endif
-          </div>
+          </div> -->
           <div class="form-group">
             <label>@lang('register.email')</label>
                         <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
@@ -172,15 +172,16 @@
             <button type="submit" class="btn btn-primary btn-block enter-btn">@lang('register.register')</button>
           </div>
         </form>
+        <!-- <span>Coming Soon</span> -->
           </div>
         {{-- <div class="modal-footer">
           <p style="color:white" class="sign-up">@lang('register.read')</p> <a class="btn btn-dark" href="#" data-toggle="modal" data-target="#myModal" data-dismiss="modal"> @lang('register.register')</a>
           <button style="color:white" type="button" class="btn btn-danger" data-dismiss="modal">@lang('login.close')</button>
         </div> --}}
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <p style="color:white" class="sign-up">@lang('register.haveacc')</p> <a class="btn btn-dark" href="/login"> @lang('register.haveacclogin')</a>
           {{-- <button style="color:white" type="button" class="btn btn-danger" data-dismiss="modal">@lang('login.close')</button> --}}
-        </div>
+        </div> -->
       </div>
 
     </div>
@@ -215,26 +216,12 @@
 			  <!-- navbar links -->
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			    <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+			        <a class="nav-link" href="/">@lang('login.home')</a>
+            </li>
 			      <li class="nav-item">
 			        <a class="nav-link active" href="/register">@lang('register.register')</a>
             </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="/">@lang('login.home')</a>
-            </li>
-            <li class="nav-item">
-              <a href="locale/ge" class="nav-link">
-                <div class="preview-thumbnail">
-                <img src="{{ asset('images/flags/ge.png') }}" alt="image" class="rounded-circle profile-pic" style="width:20px;height:20px;">
-                </div>
-              </a>
-          </li>
-          <li class="nav-item">
-            <a href="locale/en" class="nav-link">
-              <div class="preview-thumbnail">
-                <img src="{{ asset('images/flags/en.png') }}" alt="image" class="rounded-circle profile-pic" style="width:20px;height:20px;">
-              </div>
-            </a>
-          </li>
 
 			    </ul>
 			  </div>
@@ -286,15 +273,15 @@
                 </a>
 
                 <div class="social">
-                    <a href="https://www.facebook.com/Unreal-Reality-685933075171285/" class="icon">
+                    <a href="/" class="icon">
                         <i class="fab fa-facebook-square"></i>
                     </a>
-                    <a href="https://t.me/joinchat/LsZusBeowb2o1U30XcVfXw" class="icon">
+                    <a href="/" class="icon">
                         <i class="fab fa-telegram"></i>
                     </a>
                   </div>
 
-                <p>&copy; 2020 Unreal Reality.</p>
+                <p>&copy; 2022 HIDENSEEK.</p>
 
             </div>
         </footer>

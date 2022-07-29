@@ -21,7 +21,29 @@
         height: 500px;
     }
 </style>
+<!-- <div class="container-fluid text-center mt-5">
+    <h1>{{ config('app.name') }}</h1>
+    <div class="d-flex justify-content-center mt-5">
+        <button id="login-button" onclick="phantomLogin()" class="btn btn-dark">Login with Phantom Wallet</button>
+    </div>
 
+    <div class="d-flex justify-content-center mt-5">
+        <div class="public-key" style="display: none"></div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <div class="sol-balance" style="display: none">
+
+        </div>
+    </div>
+</div> -->
+<div id="app">
+</div>
+<script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Work-around node polyfills missing in Vite.
+      window.global = window;
+    </script>    
           <div class="content-wrapper">
             @if(session()->get('success'))
             <div class="alert alert-success">
@@ -80,6 +102,7 @@
                       <div class="align-self-top">
                         <p class="card-title mb-1 font-weight-bold">@lang('dashboard.your_points')</p>
                         <h3 class="mb-0">{{ Auth::user()->points }}</h3>
+                        <input id="phantomProvider">
                       </div>
                       <div class="align-self-center flex-grow text-right">
                         <i class="icon-lg mdi mdi-account-outline text-success"></i>
@@ -113,6 +136,7 @@
                 </div>
               </div>
             </div>
+            
             <div id="myModal" id="darkModalForm" tabindex="-1" class="modal fade" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
 
@@ -173,7 +197,8 @@
                 {
                     title: '{{ Lang::trans('games.created_at') }}',
                     data: 'created_at'
-                },
+                }
+                ,
                 {
                 title: '{{ Lang::trans('games.status') }}',
                 data: 'status', render : function(data, type, row)
@@ -184,14 +209,15 @@
                             break;
                         case '2': return '<span class="btn btn-danger">{{ Lang::trans('games.disabled') }}</span>';
                             break;
-                        case '3': return '<a href="game/activate/'+row['id']+'" class="btn btn-warning" onclick=" name="activate" value="1">{{ Lang::trans('games.activate') }}</a>';
-
+                        // case '3': return '<a href="game/activate/'+row['id']+'" class="btn btn-warning" onclick=" name="activate" value="1">{{ Lang::trans('games.activate') }}</a>';
+                        // break;
+                        
 //                        case '3': return '<form enctype="multipart/form-data" action="{{ route('games.activate') }}" method="post">' +
 //                          '<input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />'+
 //                          '<input hidden type="numbers" name="user_id" class="form-control"/ value="{{ Auth::user()->id }}">'+
 //                                        ' <button class="btn btn-warning" name="activate" value="1">{{ Lang::trans('games.activate') }}</button>' +
 //                                    '</form>';
-                            break;
+
                     }
                 }
             },
