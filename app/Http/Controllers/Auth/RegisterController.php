@@ -60,12 +60,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'firstname' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
+            // 'firstname' => ['required', 'string', 'max:255'],
+            // 'lastname' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'min:3', 'max:15', 'unique:users'],
-            'gender' => ['required', 'string', 'min:9', 'max:10'],
-            'date_of_birth' => ['required', 'before:today'],
-            'phone_number' => ['required', 'string', 'min:9', 'max:9', 'unique:users'],
+            // 'gender' => ['required', 'string', 'min:9', 'max:10'],
+            // 'date_of_birth' => ['required', 'before:today'],
+            // 'phone_number' => ['required', 'string', 'min:9', 'max:9', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed', 'unique:users'],
             // 'id_number' => ['required', 'string', 'min:11', 'max:11', 'unique:users'],
@@ -81,15 +81,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = User::create([
-            'firstname' => $data['firstname'],
-            'lastname' => $data['lastname'],
+            // 'firstname' => $data['firstname'],
+            // 'lastname' => $data['lastname'],
             'username' => $data['username'],
-            'gender' => $data['gender'],
-            'date_of_birth' => $data['date_of_birth'],
-            'phone_number' => $data['phone_number'],
+            // 'gender' => $data['gender'],
+            // 'date_of_birth' => $data['date_of_birth'],
+            // 'phone_number' => $data['phone_number'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'id_number' => '0',
+            // 'id_number' => '0',
             'type' => User::DEFAULT_TYPE,
         ]);
 

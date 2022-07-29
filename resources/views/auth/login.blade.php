@@ -101,6 +101,7 @@
                   {{--<i class="mdi mdi-google-plus"></i> Google plus </button>--}}
               {{--</div>--}}
             </form>
+            <!-- <span>Coming Soon</span> -->
           </div>
         <div class="modal-footer">
           <p style="color:white">@lang('login.no_account')</p> <a class="btn btn-dark" href="/register"> @lang('login.sign_up')</a>
@@ -143,7 +144,7 @@
 			  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			    <ul class="navbar-nav ml-auto">
 			      <li class="nav-item">
-			        <a class="nav-link active" href="#" data-scroll-nav="0">@lang('login.home')</a>
+			        <a class="nav-link active" href="/" data-scroll-nav="0">@lang('login.home')</a>
 			      </li>
 			      <li class="nav-item">
 			        <a class="nav-link" href="/register">@lang('register.register')</a>
@@ -151,22 +152,6 @@
 			      <li class="nav-item">
                     <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
                   </li>
-
-			      <li class="nav-item">
-                <a href="locale/ge" class="nav-link">
-                  <div class="preview-thumbnail">
-                  <img src="{{ asset('images/flags/ge.png') }}" alt="image" class="rounded-circle profile-pic" style="width:20px;height:20px;">
-                  </div>
-                </a>
-            </li>
-			      <li class="nav-item">
-              <a href="locale/en" class="nav-link">
-                <div class="preview-thumbnail">
-                  <img src="{{ asset('images/flags/en.png') }}" alt="image" class="rounded-circle profile-pic" style="width:20px;height:20px;">
-                </div>
-              </a>
-            </li>
-
 			    </ul>
 			  </div>
 			</div>
@@ -188,8 +173,11 @@
     			<div class="row">
     				<div class="full-width text-center caption mt-30">
     					<h4>@lang('login.firsttext')</h4>
-                        <h1>@lang('login.secondtext')</h1>
+                        <!-- <h1>@lang('login.secondtext')</h1> -->
+                        <h1 id="demo"></h1>
                         <p>@lang('login.thirdtext')</p>
+
+
                         <div class="full-width text-center caption mt-30">
                             @if(session()->get('message'))
                             <div class="alert alert-success">
@@ -218,6 +206,20 @@
         ==== Start Hero -->
 
         <section class="hero section-padding" data-scroll-index="1">
+            <div class="container">
+                <div class="row">
+
+                    <div class="intro offset-lg-1 col-lg-10 text-center mb-80" style="color:black">
+                        <h3>@lang('login.first')</h3>
+                        <h4>@lang('login.second')</h4>
+                        <p>@lang('login.third')</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <hr>
+        <section class="hero section-padding" data-scroll-index="2">
             <div class="container">
                 <div class="row">
 
@@ -270,15 +272,15 @@
                 </a>
 
                 <div class="social">
-                  <a href="https://www.facebook.com/Unreal-Reality-685933075171285/" class="icon">
+                  <a href="#" class="icon">
                       <i class="fab fa-facebook-square"></i>
                   </a>
-                  {{-- <a href="https://t.me/joinchat/LsZusBeowb2o1U30XcVfXw" class="icon">
+                  <a href="#" class="icon">
                       <i class="fab fa-telegram"></i>
-                  </a> --}}
+                  </a> 
                 </div>
 
-                <p>&copy; 2020 Unreal Reality.</p>
+                <p>&copy; 2022 HIDENSEEK.GAMES</p>
 
             </div>
         </footer>
@@ -288,7 +290,36 @@
 
 
 
+        <script>
+// Set the date we're counting down to
+var countDownDate = new Date("Aug 20, 2022 00:00:00").getTime();
 
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
 
         <!-- jQuery -->
         <script src="{{ asset('js/login/jquery-3.0.0.min.js') }}"></script>

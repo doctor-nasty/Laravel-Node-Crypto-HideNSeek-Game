@@ -47,7 +47,7 @@ class GameController extends Controller {
 
         if (Cache::get($index) == NULL) {
             srand((double) microtime() * 1000000);
-            $identifier = rand(1000, 9999);
+            $identifier = rand(10000, 99999);
             Cache::put($index, $identifier, 1800);
         } else {
             $identifier = Cache::get($index);
@@ -83,7 +83,7 @@ class GameController extends Controller {
                 'title' => 'required',
                 'type' => 'required',
                 'points' => 'required',
-                'city' => 'required',
+                // 'city' => 'required',
                 'mark_lat' => 'required',
                 'mark_long' => 'required',
                 // 'district' => 'required',
@@ -99,7 +99,7 @@ class GameController extends Controller {
                 'title' => $request->get('title'),
                 'points' => $request->get('points'),
                 'type' => $request->get('type'),
-                'city' => $request->get('city'),
+                'city' => 'test',
                 // 'district' => $request->get('district'),
                 'district' => 'TEST',
                 'comment' => $request->get('comment'),

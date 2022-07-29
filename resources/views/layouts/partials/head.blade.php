@@ -49,6 +49,7 @@
     <!-- endinject -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/DataTableManager.js') }}"></script>
+    <!-- <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script> -->
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
@@ -73,3 +74,5 @@
             ])
         !!};
 </script>
+
+<!-- <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script> -->

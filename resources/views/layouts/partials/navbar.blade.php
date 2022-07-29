@@ -163,23 +163,11 @@
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                 {{-- <h6 class="p-3 mb-0">Languages</h6> --}}
                 <div class="dropdown-divider"></div>
-                <a href="locale/ge" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                  <img src="{{ asset('images/flags/ge.png') }}" alt="image" class="rounded-circle profile-pic">
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1">ქართული</p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a href="locale/en" class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <img src="{{ asset('images/flags/en.png') }}" alt="image" class="rounded-circle profile-pic">
-                  </div>
-                  <div class="preview-item-content">
-                    <p class="preview-subject ellipsis mb-1">English</p>
-                  </div>
-                </a>
+
+                
+
+
+
 
                 {{-- <div class="dropdown-divider"></div>
                 <p class="p-3 mb-0 text-center">Coming Soon</p> --}}

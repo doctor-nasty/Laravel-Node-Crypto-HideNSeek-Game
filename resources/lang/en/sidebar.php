@@ -14,6 +14,9 @@ return [
     */
 
     'dashboard' => 'Dashboard',
+    'mainpage' => 'Main Page',
+    'mybids' => 'My Bids',
+    'users' => 'Users',
     'profile' => 'My Profile',
     'settings' => 'Settings',
     'logout' => 'Log out',
