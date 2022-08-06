@@ -23,8 +23,6 @@ class CreateGamesTable extends Migration
             $table->longText('comment');
             $table->string('title', 255);
             $table->string('city', 255);
-            $table->string('city_lat', 255)->nullable();
-            $table->string('city_long', 255)->nullable();
             $table->string('mark_lat', 255)->nullable();
             $table->string('mark_long', 255)->nullable();
             $table->string('district', 255)->nullable();

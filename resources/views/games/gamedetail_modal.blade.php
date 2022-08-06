@@ -141,7 +141,10 @@
         </form>
 
         <br>
-        <div class="col-md-12" id="mymap" style="display: none;"></div>
+        <div class="col-md-12" id="map"></div>
+
+        {{ Request::get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=47.217954&lon=-1.552918') }}
+
         @else
         @if(isset($bid_on) && $bid_on == 1 and count($game->bids) <= 2)
         <blockquote class="blockquote blockquote-primary">
@@ -172,13 +175,24 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<script>
+var map = L.map('map').setView(["{{$game->mark_lat}}", "{{$game->mark_long}}"], 14);
 
-    $("#input-id").rating();
+var circle = L.circle(["{{$game->mark_lat}}", "{{$game->mark_long}}"], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+}).addTo(map);
 
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
 </script>
 
-<script>
+<!-- <script>
 
     var resStr = "Lonesome Dove,Bobby’s,Melting Pot,Daytime Place,Easy Eats,Macro Bites,Grubber Hub,Cheerful Rhino,Home Cooking Experience,Fare & Feed,Golden Palace,Soups & Snacks,Quick Bite,Fast & Friendly,Big Bites,Blind Pig,Eatable,Eatery,Goodies,Lard Boy,Many Foods,Me Likey,Wonton Express,Great Burger,Awesome Burger,Amazing Sauce,Asian Express,Fearless Wander,Crate Express,Smothered In Love,Sweet Delectable,Appetizing As Heck,Appetizing Bird,Scrumptious Temptations,Smile N’ Delight,Choice Foods,Dainty Dog,Hungry Dog,Heavenly Creations,Food For Thought,Food In My Tummy,Tum Tum Express,Lil Johnny’s,Bill’s Burgers,A Night In Paris,Distinctive Creations,Spicy Heat,Spicy Jack’s,Pepper Jack’s,Rich Meat,Fit For A King,King of Meat,Delicious Donuts,Rare Meats,Rare Cuts,Rare Choice,Sapid Salads,Soup & Salad Express,Seasoned,Smitten,Love Street,Ice Cream Sandwiches,For The Love Of Ice Cream,Infatuated Creations,Smack Dab,Frozen Yogurt,Sherbet,Mickey’s Foodstuff,Pick & Go,The Satiated Drink,Pearl,Bless This Mess Hall,Grits & Gravy,Cheerful Hippo,Mealtime,Summer’s End,Winter Comes,Nightcap,It’s Good Food,Leggo My Wagyu,Tokyo Beat,New York Pulse,Chicago Style Pizza,Hill Country Fare,TidBits,No Place Like Home,Trial & Error,Rinse & Repeat,Cook & Boil,Broiler,Broiled Duck,Prancing Pig,Sweet Duck,Aaron’s,Salt & Snow,Roaring Tiger,Fig’s BBQ,Odd Pig,Southside,Northend,Roaring Ridgemont,Tia’s Mexican Hut,Atomic Good,L’Gran,Casa Del Rio,Clio,Bartholomew’s,Villa,Sushi Roll,Hand Roll,By Hand,Made by Hand,Scratch House,Los Alma’s,Upstate,Fatty’s,Halal Meats,Shake It Up,Bridge,Uptown Park,Parrots,No Way,Prince’s,Ramen & Rolls,Flavor Town,Madison,Fig Tree,Lonely Grape";
     var resArr = resStr.split(",");
@@ -290,5 +304,5 @@
     {
         google.maps.event.addDomListener(window, 'load', init_map("{{$game->city_lat}}", "{{$game->city_long}}"));
     }
-</script>
+</script> -->
 

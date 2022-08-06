@@ -31,6 +31,8 @@ return [
     'active' => 'Active',
     'disabled' => 'Finished',
     'going' => 'Going',
+    'activate' => 'Activate',
+    'points' => 'Price',
     'create_new_game' => 'Create New Game',
 
 ];

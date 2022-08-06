@@ -1,22 +1,36 @@
 # Laravel Rateable
 
-[![Build Status](https://travis-ci.org/willvincent/laravel-rateable.svg?branch=master)](https://travis-ci.org/willvincent/laravel-rateable)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/08d52e5f-e13b-42db-bf3f-821d4005e6a6.svg?style=flat-square)](https://insight.sensiolabs.com/projects/08d52e5f-e13b-42db-bf3f-821d4005e6a6)
 [![Latest Stable Version](https://poser.pugx.org/willvincent/laravel-rateable/v/stable.svg)](https://packagist.org/packages/willvincent/laravel-rateable) [![License](https://poser.pugx.org/willvincent/laravel-rateable/license.svg)](https://packagist.org/packages/willvincent/laravel-rateable)
 
 [![Total Downloads](https://poser.pugx.org/willvincent/laravel-rateable/downloads.svg)](https://packagist.org/packages/willvincent/laravel-rateable) [![Monthly Downloads](https://poser.pugx.org/willvincent/laravel-rateable/d/monthly.png)](https://packagist.org/packages/willvincent/laravel-rateable) [![Daily Downloads](https://poser.pugx.org/willvincent/laravel-rateable/d/daily.png)](https://packagist.org/packages/willvincent/laravel-rateable)
 
-Provides a trait to allow rating of any Eloquent models within your app for Laravel 5.
+Provides a trait to allow rating of any Eloquent models within your app for Laravel 6/7/8/9.
 
 Ratings could be fivestar style, or simple +1/-1 style.
 
-# Installation
-Require the package using Composer:
 
-```
+## Compatability
+
+Laravel versions < 6.x should use the 1.x releases
+
+Laravel versions >= 6.x and < 8.x should use 2.x+ releases
+
+Laravel versions >= 8.x should use the 3.x releases
+
+## Installation
+
+You can install the package via composer:
+
+```bash
 composer require willvincent/laravel-rateable
 ```
 
+You can publish and run the migrations with:
+
+```bash
+php artisan vendor:publish --provider="willvincent\Rateable\RateableServiceProvider" --tag="migrations"
+php artisan migrate
+```
 As with most Laravel packages, if you're using Laravel 5.5 or later, the package will be auto-discovered ([learn more if this is new to you](https://medium.com/@taylorotwell/package-auto-discovery-in-laravel-5-5-ea9e3ab20518)).
 
 If you're using a version of Laravel before 5.5, you'll need to register the Rateable *service provider*. In your `config/app.php` add `'willvincent\Rateable\RateableServiceProvider'` to the end of the `$providers` array.
@@ -32,20 +46,8 @@ If you're using a version of Laravel before 5.5, you'll need to register the Rat
 ],
 ````
 
-# Getting started
-After the package is correctly installed, you need to generate the migration.
-````
-php artisan rateable:migration
-````
+## Usage
 
-It will generate the `<timestamp>_create_ratings_table.php` migration. You may now run it with the artisan migrate command:
-````
-php artisan migrate
-````
-
-After the migration, one new table will be present, `ratings`.
-
-# Usage
 In order to mark a model as "rateable", import the `Rateable` trait.
 
 ````php
@@ -68,12 +70,20 @@ First, to add a rating to your model:
 ````php
 $post = Post::first();
 
-$rating = new willvincent\Rateable\Rating;
-$rating->rating = 5;
-$rating->user_id = \Auth::id();
+// Add a rating of 5, from the currently authenticated user
+$post->rate(5);
+dd(Post::first()->ratings);
+````
 
-$post->ratings()->save($rating);
+Or perhaps you want to enforce that users can only rate each model one time,
+and if they submit a new value, it will _update_ their existing rating.
 
+In that case, you'll want to use `rateOnce()` instead:
+```php
+$post = Post::first();
+
+// Add a rating of 3, or change the user's existing rating _to_ 3.
+$post->rateOnce(3);
 dd(Post::first()->ratings);
 ````
 
@@ -110,3 +120,34 @@ dd($post->userAverageRating);
 
 dd($post->userSumRating);
 ````
+
+Want to know how many ratings a model has?
+```php
+dd($post->timesRated());
+
+// Or if you specifically want the number of unique users that have rated the model:
+dd($post->usersRated());
+```
+
+## Testing
+
+``` bash
+composer test
+```
+
+## Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Credits
+
+- [Will Vincent](https://github.com/willvincent)
+- [All Contributors](https://github.com/willvincent/laravel-rateable/graphs/contributors)
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

@@ -52,7 +52,7 @@ class JsController extends Controller {
         //    die;
             $query = DB::table('games')
             ->leftJoin('users', 'games.user_id', '=', 'users.id')
-            ->select('users.average_rating', 'games.id', 'games.status', 'games.title', 'games.city', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
+            ->select('users.average_rating', 'games.id', 'games.status', 'games.title', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
                     ->where('games.user_id', '<>', Auth::user()->id)
                     ->where('games.status', '=', '1')
                     // ->random(10);
@@ -77,7 +77,7 @@ class JsController extends Controller {
 
     public function ListOwnGames(Request $request) {
         $query = Game::select(
-                        'games.id', 'games.status', 'games.title', 'games.city', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
+                        'games.id', 'games.status', 'games.title', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
                 ->where('games.user_id', '=', Auth::user()->id);
         // ->leftJoin('game_bids', 'games.status', '=', 'game_bids.is_awarded');
         // ->whereIn('games.status_id', [ExamManager::getStatus(false, 'regular')->id, ExamManager::getStatus(false, 'retake')->id]);
@@ -98,7 +98,7 @@ class JsController extends Controller {
 //        print_r(Game_bid::all()->toArray());
 //        die;
         $query = Game_bid::select(
-                        'games.id', 'games.status', 'games.title', 'games.city', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
+                        'games.id', 'games.status', 'games.title', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
                 // ->where(['games.user_id' => Game_bid::find($user_id)]);
                 ->where('games.status', '=', '1')
                 ->where('game_bids.user_id', '=', Auth::user()->id)
@@ -114,7 +114,7 @@ class JsController extends Controller {
     public function ListMyBids(Request $request) {
         return 1;
         $query = Game::select(
-                        'games.id', 'games.status', 'games.title', 'games.city', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
+                        'games.id', 'games.status', 'games.title', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
                 // ->where(['games.user_id' => Game_bid::find($user_id)]);
                 ->where('games.status', '=', '1')
                 ->leftJoin('game_bids', 'games.user_id', '=', 'game_bids.user_id');

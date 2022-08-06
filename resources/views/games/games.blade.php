@@ -3,12 +3,12 @@
 @section('content')
 
 <!-- google map api start -->
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyCaWBIHePh4f4bQIROBybqJzKfaqiNCkac"></script>
+<!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCaWBIHePh4f4bQIROBybqJzKfaqiNCkac"></script> -->
 <!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyDkduGOlqZSICxQ40aTrr_shmIr1Nm5k2Q"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script> -->
 
 
-<style type="text/css">
+<!-- <style type="text/css">
     #mymap {
         border: 1px solid red;
         width: 100%;
@@ -20,7 +20,7 @@
         width: 800px;
         height: 500px;
     }
-</style>
+</style> -->
 
     <div class="content-wrapper">
         <nav aria-label="breadcrumb" role="navigation">
@@ -38,11 +38,8 @@
       <div class="card">
 
         <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                  <table class="table sortable-table table-hover" id="data-table" cellspacing="0" width="100%"></table>
-              </div>
-
+            <div class="container">
+                  <table id="data-table" class="table table-responsive" style="width:100%"></table>
             </div>
 
         </div>
@@ -69,54 +66,58 @@
         <script>
             dataTableInit('#data-table', [5, 'desc'], 'POST', '{{ url('list/games') }}', [
                 {
-                    title: '{{ Lang::trans('games.photo') }}',
+                    title: 'Photo',
                     data: 'photo', render : function(data, type, row){
                       return '<img src="/images/bid_to_see.jpg" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">'
                 }},
                 {
-                    title: '{{ Lang::trans('games.title') }}',
+                    title: 'Title',
                     data: 'title'
                 },
                 {
-                    title: '{{ Lang::trans('games.city') }}',
+                    title: 'City',
                     data: 'city'
                 },
                 {
-                    title: '{{ Lang::trans('games.points') }}',
+                    title: 'District',
+                    data: 'district'
+                },
+                {
+                    title: 'Points',
                     data: 'points'
                 },
                 {
-                    title: '{{ Lang::trans('games.rating') }}',
+                    title: 'Rating',
                     data: 'average_rating'
                 },
                 {
-                    title: '{{ Lang::trans('games.created_at') }}',
+                    title: 'Created At',
                     data: 'created_at'
                 },
                 {
-                title: '{{ Lang::trans('games.status') }}',
+                title: 'Status',
                 data: 'status', render : function(data, type, row)
                 {
                     switch (data)
                     {
-                        case '1': return '<span class="btn btn-success">{{ Lang::trans('games.going') }}</span>';
+                        case 1: return '<span class="btn btn-success">Going</span>';
                             break;
-                        case '2': return '<span class="btn btn-danger">{{ Lang::trans('games.disabled') }}</span>';
+                        case 2: return '<span class="btn btn-danger">Disabled</span>';
                             break;
                     }
                 }
             },
                 {
-                    title: '{{ Lang::trans('games.actions') }}',
+                    title: 'Actions',
                     data: 'status', render : function(data, type, row)
                     {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">{{ Lang::trans('games.view') }}</button></div>';
+                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
                     }
                 }
 //                {
-//                    title: '{{ Lang::trans('games.actions') }}',
+//                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
-//                                        '<button type="button" class="btn btn-info details-button" title="Details">{{ Lang::trans('games.view') }}</button> ' +
+//                                        '<button type="button" class="btn btn-info details-button" title="Details">View</button> ' +
 //                                    '</div>'
 //                }
             ],undefined, [], false );
@@ -137,5 +138,8 @@ $(document).ready(function(){
 });
 
         </script>
+
+
+
 
 @endsection

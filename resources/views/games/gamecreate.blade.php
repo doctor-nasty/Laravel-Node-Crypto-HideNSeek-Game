@@ -7,7 +7,7 @@
 <!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyDkduGOlqZSICxQ40aTrr_shmIr1Nm5k2Q"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script> -->
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
    crossorigin=""/>
    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
@@ -15,7 +15,7 @@
    crossorigin=""></script>
    <style type="text/css">
         #map { height: 180px; }
-</style>
+</style> -->
 <!-- <style type="text/css">
     #mymap {
         border: 1px solid red;
@@ -73,7 +73,7 @@
                     <div class="col-lg-12 table-responsive">
                         <h4 class="card-title mb-0">@lang('gamecreate.create_new_game')</h4>
                         <br>
-                        <form method="post" action="{{ route('games.store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('games.store') }}" enctype="multipart/form-data" id="form">
                             {{csrf_field()}}
                             <div class="form-group">
                                 <label for="userName">@lang('gamecreate.title') *</label>
@@ -220,8 +220,9 @@
 </div>
 
 <script>
-var map = L.map('map').fitWorld();
+// var map = L.map('map').fitWorld();
 
+var map = L.map('map').setView([42.3154, 43.3569], 3);
 
 var circle = null;
 
@@ -248,6 +249,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap'
 }).addTo(map);
 </script>
+
+
+
 
 <!-- <script>
 

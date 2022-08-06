@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        User::setStripeKey('sk_test_jXm0F0ryCL9ia8Upi4hPWiJS00ARMo8JK4');
+        // User::setStripeKey('sk_test_jXm0F0ryCL9ia8Upi4hPWiJS00ARMo8JK4');
     }
 
     /**

@@ -30,15 +30,13 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'country', 'gender', 'username', 'phone_number', 'date_of_birth', 'email', 'password', 'stripe_id', 'id_number'
+        'firstname', 'lastname', 'country', 'gender', 'username', 'phone_number', 'date_of_birth', 'email', 'password', 'stripe_id', 'id_number', 'account'
     ];
 
     protected $rules = [
-        'date_of_birth' => 'date_format:Y-M-D|before:today',
-        'username' => 'required|unique:users',
-        'email' => 'required|unique:users',
-        'phone_number' => 'required|unique:users',
-        'id_number' => 'required|unique:users',
+        // 'username' => 'required|unique:users',
+        // 'email' => 'required|unique:users',
+        
     ];
 
     /**
