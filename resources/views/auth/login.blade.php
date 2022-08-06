@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
     <head>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142304536-1"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YED843SXDX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-        gtag('config', 'UA-142304536-1');
-      </script>
+  gtag('config', 'G-YED843SXDX');
+</script>
 
 
     	<!-- Metas -->
@@ -48,6 +48,7 @@
     </head>
 
     <body>
+
 <!-- Modal -->
 <div class="container">
 <div id="myModal" id="darkModalForm" class="modal fade" role="dialog">
@@ -133,7 +134,7 @@
 
             <!-- Logo -->
             <a class="logo" href="#">
-                <img src="{{ asset('login-img/logo.png') }}" alt="logo">
+                <img src="{{ asset('login-img/logo-new.png') }}" alt="logo">
             </a>
 
 			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,12 +147,25 @@
 			      <li class="nav-item">
 			        <a class="nav-link active" href="/" data-scroll-nav="0">@lang('login.home')</a>
 			      </li>
-			      <li class="nav-item">
-			        <a class="nav-link" href="/register">@lang('register.register')</a>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
+            </li>
+            <li class="nav-item header-nav header-social">
+                <a href="#" class="nav-icon">
+                  <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
+                </a>
+                <a href="#" class="nav-icon">
+                  <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
+                </a>
+            </li>
+			      <li class="nav-item header-nav">
+			        <!-- <a class="nav-link" href="/register">@lang('register.register')</a> -->
+              <a href="/register">
+                <button type="button" class="sign-in-btn" href="/register">
+                  Sign in
+                </button>
+              </a>
 			      </li>
-			      <li class="nav-item">
-                    <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
-                  </li>
 			    </ul>
 			  </div>
 			</div>
@@ -164,37 +178,36 @@
     	<!-- =====================================
     	==== Start Header -->
 
-    	<header class="header valign bg-img" data-scroll-index="0" data-overlay-dark="5" data-background="{{ asset('login-img/bg.jpg') }}" data-stellar-background-ratio="0.5">
-
-            <!-- particles -->
-            <div id="particles-js"></div>
-
+    	<header class="header valign bg-img" data-scroll-index="0" data-overlay-dark="5" data-background="{{ asset('login-img/background.jpg') }}" data-stellar-background-ratio="0.5">
+        <!-- particles -->
+        <div id="particles-js"></div>
     		<div class="container">
     			<div class="row">
     				<div class="full-width text-center caption mt-30">
-    					<h4>@lang('login.firsttext')</h4>
-                        <!-- <h1>@lang('login.secondtext')</h1> -->
-                        <h1 id="demo"></h1>
-                        <p>@lang('login.thirdtext')</p>
-
-
-                        <div class="full-width text-center caption mt-30">
-                            @if(session()->get('message'))
-                            <div class="alert alert-success">
-                                {{ session()->get('message') }}
-                            </div>
-                        @endif
-
-                        <a href="#" class="btn btn-dark" data-scroll-nav="1">
-                            <span>@lang('login.learn')</span>
-                        </a>
-                        <!-- Trigger the modal with a button -->
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-    <span>@lang('login.play')</span>
-</button></div>
+    					<h1><b>@lang('login.boldtitle')</b> @lang('login.firsttext')</h1>
+              <!-- <h1>@lang('login.secondtext')</h1> -->
+              <h4 id="demo"></h4>
+              <p>@lang('login.thirdtext')</p>
+              <div class="full-width caption mt-30 btn-start-block">
+                @if(session()->get('message'))
+                  <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                  </div>
+                @endif
+                <!-- Trigger the modal with a button -->
+                <button type="button" class="btn btn-start" data-toggle="modal" data-target="#myModal">
+                    <span>@lang('login.play')</span>
+                </button>
+              </div>
     				</div>
     			</div>
     		</div>
+        <div class="header-learn-more">
+          <a href="#" class="btn" data-scroll-nav="1">
+            <span>@lang('login.learn')</span>
+            <img src="{{ asset('svgs/mouse.svg')}}" alt="mouse icon">
+          </a>
+        </div>
     	</header>
 
     	<!-- End Header ====
@@ -207,19 +220,62 @@
 
         <section class="hero section-padding" data-scroll-index="1">
             <div class="container">
-                <div class="row">
+                <div class="row about-game-row">
 
-                    <div class="intro offset-lg-1 col-lg-10 text-center mb-80" style="color:black">
+                    <!-- <div class="intro offset-lg-1 col-lg-10 text-center mb-80" style="color:black">
                         <h3>@lang('login.first')</h3>
                         <h4>@lang('login.second')</h4>
                         <p>@lang('login.third')</p>
+                    </div> -->
+                    <div class="col-12 col-lg-6 about-us-row">
+                      <div class="nft-examples-block">
+                        <img src="{{ asset('images/nft-esample.png')}}" alt="Nft Example">
+                      </div>
+                      <button class="about-us-button">
+                        Explore the NFT Collection
+                        <img src="{{ asset('svgs/arrow-right-circle.svg')}}" alt="button-arrow">
+                      </button>
                     </div>
-
+                    <article class="col-12 col-lg-6 about-us-article mb-md50">
+                      <h2>About the Game</h2>
+                      <h4 class="about-us-subheading">How it Works</h4>
+                      <p>
+                        Game instructions: We will have 2 types of NFTs for users, 
+                        one type is with game creation option and another type is with 
+                        game playing option. Game creation NFT costs $500, game playing NFT 
+                        costs $100. If user owns both NFTs they can do both, game creation 
+                        and playing. There will be a limited amount of NFTs on opensea. 
+                        User who owns NFT will receive a USDC to their wallets daily for 
+                        the first month, twice a week for the second month, once a week 
+                        for a third month.
+                      </p>
+                      <p>
+                        Users will need to login to our website through Phantom wallet 
+                        mobile app browser in order to be able to connect Phantom wallet, 
+                        when connecting Phantom wallet system will check if there is a NFT 
+                        in the wallet. Based on the NFT user will have either game creation 
+                        option or game playing option.
+                      </p>
+                      <p>
+                        When creating a game users should choose participant amount for game 
+                        starting and game bid amount (after game is created bid amount will be 
+                        deducted from users wallet and sent to our wallet). User should write 
+                        small comment which will be visible for all users and full description 
+                        with hints which will be visible to only users who makes a bid. Users 
+                        should mark a location with circle in the radius of 500 meters, where 
+                        item is hidden.
+                      </p>
+                      <p>
+                        When user joins a game USDC will be deducted from his wallet and sent 
+                        to our wallet. Then he will see games full description, hints, and 
+                        radius of the hidden item on the map. User who wins a game gets 55% 
+                        from total amount, creator gets 30% and 15% stays in our wallet.
+                      </p> 
+                    </article>
                 </div>
             </div>
         </section>
-        <hr>
-        <section class="hero section-padding" data-scroll-index="2">
+        <!-- <section class="hero section-padding" data-scroll-index="2">
             <div class="container">
                 <div class="row">
 
@@ -252,11 +308,81 @@
                             <p>@lang('login.thirdboxtext')</p>
                         </div>
                     </div>
-
                 </div>
             </div>
+        </section> -->
+        <section class="card-list-section" data-scroll-index="2">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-4 mb-mb-120">
+                <div class="card-list-block">
+                  <div class="card-icon">
+                    <img src="{{ asset('svgs/controller.svg')}}" alt="controller icon">
+                  </div>
+                  <h3>Game</h3>
+                  <p>
+                    Game instructions: We will have 2 types of NFTs for users, 
+                    one type is with game creation option and another type is 
+                    with game playing option. Game creation NFT costs $500, game 
+                    playing NFT costs $100. If user owns both NFTs they can do both, 
+                    game creation and playing. There will be a limited amount of NFTs 
+                    on opensea. User who owns NFT will receive a USDC to their wallets 
+                    daily for the first month, twice a week for the second 
+                    month, once a week for a third month. Users will need to 
+                    login to our website through Phantom wallet mobile app browser 
+                    in order to be able to connect Phantom wallet, when connecting 
+                    Phantom wallet system will check if there is a NFT in the wallet. 
+                    Based on the NFT user will have either game creation option or game playing option.
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-4 mb-mb-120">
+                <div class="card-list-block">
+                  <div class="card-icon">
+                    <img src="{{ asset('svgs/piggy-bank.svg')}}" alt="piggy bank icon">
+                  </div>
+                  <h3>Money</h3>
+                  <p>
+                    Game instructions: We will have 2 types of NFTs for users, 
+                    one type is with game creation option and another type is 
+                    with game playing option. Game creation NFT costs $500, game 
+                    playing NFT costs $100. If user owns both NFTs they can do both, 
+                    game creation and playing. There will be a limited amount of NFTs 
+                    on opensea. User who owns NFT will receive a USDC to their wallets 
+                    daily for the first month, twice a week for the second 
+                    month, once a week for a third month. Users will need to 
+                    login to our website through Phantom wallet mobile app browser 
+                    in order to be able to connect Phantom wallet, when connecting 
+                    Phantom wallet system will check if there is a NFT in the wallet. 
+                    Based on the NFT user will have either game creation option or game playing option.
+                  </p>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card-list-block">
+                  <div class="card-icon">
+                    <img src="{{ asset('svgs/mobile.svg')}}" alt="mobile icon">
+                  </div>
+                  <h3>Contact</h3>
+                  <p>
+                    Game instructions: We will have 2 types of NFTs for users, 
+                    one type is with game creation option and another type is 
+                    with game playing option. Game creation NFT costs $500, game 
+                    playing NFT costs $100. If user owns both NFTs they can do both, 
+                    game creation and playing. There will be a limited amount of NFTs 
+                    on opensea. User who owns NFT will receive a USDC to their wallets 
+                    daily for the first month, twice a week for the second 
+                    month, once a week for a third month. Users will need to 
+                    login to our website through Phantom wallet mobile app browser 
+                    in order to be able to connect Phantom wallet, when connecting 
+                    Phantom wallet system will check if there is a NFT in the wallet. 
+                    Based on the NFT user will have either game creation option or game playing option.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
-
         <!-- End Hero ====
         ======================================= -->
 
@@ -268,15 +394,15 @@
 
                 <!-- Logo -->
                 <a class="logo" href="#">
-                    <img src="{{ asset('login-img/logo.png') }}" alt="logo">
+                    <img src="{{ asset('login-img/logo-new.png') }}" alt="logo">
                 </a>
 
                 <div class="social">
                   <a href="#" class="icon">
-                      <i class="fab fa-facebook-square"></i>
+                      <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
                   </a>
                   <a href="#" class="icon">
-                      <i class="fab fa-telegram"></i>
+                      <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
                   </a> 
                 </div>
 
@@ -320,7 +446,6 @@ var x = setInterval(function() {
   }
 }, 1000);
 </script>
-
         <!-- jQuery -->
         <script src="{{ asset('js/login/jquery-3.0.0.min.js') }}"></script>
         <script src="{{ asset('js/login/jquery-migrate-3.0.0.min.js') }}"></script>

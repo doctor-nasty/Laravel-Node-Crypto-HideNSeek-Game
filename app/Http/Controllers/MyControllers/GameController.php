@@ -22,7 +22,7 @@ class GameController extends Controller {
     public function index() {
         // $games = Game::All();
         return view('games.games')
-                        ->with('title', Lang::trans('title.games'));
+                        ->with('title', 'Games');
     }
 
     // public function index(Request $request)
@@ -54,24 +54,59 @@ class GameController extends Controller {
         }
 
         return view('games.gamecreate')->with('identifier', $identifier)
-                        ->with('title', Lang::trans('title.create_game'));
+                        ->with('title', 'Create a game');
     }
 
-    public function activate(array $data) {
-//        echo "<pre>";
-//        print_r('inin');
-//        die;
-        return Game::update([
-                    'status' => $data['1'],
-        ]);
-    }
+//     public function activate(array $data) {
+// //        echo "<pre>";
+// //        print_r('inin');
+// //        die;
+// $url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=45.533&lon=35.423';
+// $ch = curl_init();
+// curl_setopt($ch, CURLOPT_URL,$url);
+// curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
+// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+// $result= curl_exec ($ch);
+// curl_close ($ch);
+// $city = json_decode($result->address['place_id'], true); 
+// $district = json_decode($result->address['place_id'], true); 
 
-    public function activeGame($id) {
-//        echo "<pre>";
-//        print_r($id);
-//        die;
+//         return Game::update([
+//             'status' => $data['1'],
+//             'city' => $city,
+//             'district' => $district,
+//         ]);
+//     }
+
+    public function activeGame($id, Request $request) {
+
+// $game = Game::find($request->id);
+
+// $lat = $game->mark_lat;
+// $long = $game->mark_long;
+
+// $url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat='.$lat.'&lon='.$long;
+// $ch = curl_init();
+// curl_setopt($ch, CURLOPT_URL,$url);
+// curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
+// curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+// $result= curl_exec ($ch);
+// curl_close ($ch);
+// $j=json_decode($result, true);
+// $city = $j['address']['city']; 
+// $suburb = $j['address']['suburb']; 
+
+
         Game::where('id', $id)->update([
                     'status' => 1,
+                    // 'city' => $city,
+                    // 'district' => $suburb,
         ]);
 
         return redirect()->back()->with('success', 'Status updated successfully!');
@@ -94,14 +129,32 @@ class GameController extends Controller {
 
             $index = 'user|' . Auth::user()->id . '|identifier';
 
+            $lat = $request->get('mark_lat');
+            $long = $request->get('mark_long');
+            
+            $url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat='.$lat.'&lon='.$long;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $result= curl_exec ($ch);
+            curl_close ($ch);
+            $j=json_decode($result, true);
+            $city = $j['address']['city']; 
+            $suburb = $j['address']['suburb']; 
+
             $game = new Game([
                 'identifier' => Cache::get($index),
                 'title' => $request->get('title'),
                 'points' => $request->get('points'),
                 'type' => $request->get('type'),
-                'city' => 'test',
+                'city' => $city,
+                'status' => '1',
                 // 'district' => $request->get('district'),
-                'district' => 'TEST',
+                'district' => $suburb,
                 'comment' => $request->get('comment'),
                 'full_comment' => $request->get('full_comment'),
                 // 'photo' => $request->get('photo'),
@@ -112,6 +165,8 @@ class GameController extends Controller {
                 'mark_long' => $request->get('mark_long'),
                 'user_id' => Auth::user()->id,
             ]);
+            
+
 
             if ($request->has('photo')) {
 
@@ -129,7 +184,7 @@ class GameController extends Controller {
             $user->save();
 
             Cache::forget($index);
-
+            
             return redirect('/')->with('success', 'Game has been added!');
         } else {
             return redirect()->back()->with('error', 'You do not have enough points to create game');
@@ -178,11 +233,11 @@ class GameController extends Controller {
 
         if (Auth::user()->id == $game->user_id) {
             return view('games.gameeditmodal', compact('game'))
-                            ->with('title', Lang::trans('title.edit'));
+                            ->with('title', 'Edit');
         }
         if (Auth::user()->type == 'admin') {
             return view('games.gameeditmodal', compact('game'))
-                            ->with('title', Lang::trans('title.edit'));
+                            ->with('title', 'Edit');
         } else {
             return redirect('404');
         }

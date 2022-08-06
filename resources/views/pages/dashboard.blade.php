@@ -3,12 +3,12 @@
 @section('content')
 
 <!-- google map api start -->
-<script src="https://maps.google.com/maps/api/js?key=AIzaSyCaWBIHePh4f4bQIROBybqJzKfaqiNCkac"></script>
+<!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCaWBIHePh4f4bQIROBybqJzKfaqiNCkac"></script> -->
 <!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyDkduGOlqZSICxQ40aTrr_shmIr1Nm5k2Q"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script> -->
 
 
-<style type="text/css">
+<!-- <style type="text/css">
     #mymap {
         border: 1px solid red;
         width: 100%;
@@ -20,7 +20,7 @@
         width: 800px;
         height: 500px;
     }
-</style>
+</style> -->
 <!-- <div class="container-fluid text-center mt-5">
     <h1>{{ config('app.name') }}</h1>
     <div class="d-flex justify-content-center mt-5">
@@ -39,11 +39,11 @@
 </div> -->
 <div id="app">
 </div>
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- <script src="https://cdn.tailwindcss.com"></script>
     <script>
       // Work-around node polyfills missing in Vite.
       window.global = window;
-    </script>    
+    </script>     -->
           <div class="content-wrapper">
             @if(session()->get('success'))
             <div class="alert alert-success">
@@ -102,7 +102,6 @@
                       <div class="align-self-top">
                         <p class="card-title mb-1 font-weight-bold">@lang('dashboard.your_points')</p>
                         <h3 class="mb-0">{{ Auth::user()->points }}</h3>
-                        <input id="phantomProvider">
                       </div>
                       <div class="align-self-center flex-grow text-right">
                         <i class="icon-lg mdi mdi-account-outline text-success"></i>
@@ -129,6 +128,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">@lang('dashboard.your_games')</h4>
+                    
                     <div class="table-responsive">
                         <table class="table sortable-table table-hover" id="data-table" cellspacing="0" width="100%"></table>
                     </div>
@@ -174,64 +174,68 @@
           <script>
             dataTableInit('#data-table', [4, 'desc'], 'POST', '{{ url('list/own_games') }}', [
                 {
-                    title: '{{ Lang::trans('games.photo') }}',
+                    title: 'Photo',
                     data: 'photo', render : function(data, type, row){
                       return '<img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">'
                 }},
                 {
-                    title: '{{ Lang::trans('games.title') }}',
+                    title: 'Title',
                     data: 'title'
                 },
                 {
-                    title: '{{ Lang::trans('games.city') }}',
+                    title: 'City',
                     data: 'city'
                 },
                 {
-                    title: '{{ Lang::trans('games.points') }}',
+                    title: 'District',
+                    data: 'district'
+                },
+                {
+                    title: 'Points',
                     data: 'points'
                 },
                 // {
-                //     title: '{{ Lang::trans('games.type') }}',
+                //     title: 'Type',
                 //     data: 'type'
                 // },
                 {
-                    title: '{{ Lang::trans('games.created_at') }}',
+                    title: 'Created At',
                     data: 'created_at'
                 }
                 ,
                 {
-                title: '{{ Lang::trans('games.status') }}',
+                title: 'Status',
                 data: 'status', render : function(data, type, row)
                 {
                     switch (data)
                     {
-                        case '1': return '<span class="btn btn-success">{{ Lang::trans('games.going') }}</span>';
+                        case 1: return '<span class="btn btn-success">Going</span>';
                             break;
-                        case '2': return '<span class="btn btn-danger">{{ Lang::trans('games.disabled') }}</span>';
+                        case 2: return '<span class="btn btn-danger">Disabled</span>';
                             break;
-                        // case '3': return '<a href="game/activate/'+row['id']+'" class="btn btn-warning" onclick=" name="activate" value="1">{{ Lang::trans('games.activate') }}</a>';
-                        // break;
+                        case 3: return '<a href="game/activate/'+row['id']+'" class="btn btn-warning" onclick=" name="activate" value="1">Activate</a>';
+                        break;
                         
 //                        case '3': return '<form enctype="multipart/form-data" action="{{ route('games.activate') }}" method="post">' +
 //                          '<input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />'+
 //                          '<input hidden type="numbers" name="user_id" class="form-control"/ value="{{ Auth::user()->id }}">'+
-//                                        ' <button class="btn btn-warning" name="activate" value="1">{{ Lang::trans('games.activate') }}</button>' +
+//                                        ' <button class="btn btn-warning" name="activate" value="1">Activate</button>' +
 //                                    '</form>';
 
                     }
                 }
             },
             {
-                    title: '{{ Lang::trans('games.actions') }}',
+                    title: 'Actions',
                     data: 'status', render : function(data, type, row)
                     {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">{{ Lang::trans('games.view') }}</button></div>';
+                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
                     }
                 }
 //                {
-//                    title: '{{ Lang::trans('games.actions') }}',
+//                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
-//                                        '<button type="button" class="btn btn-info details-button" title="Details">{{ Lang::trans('games.view') }}</button> ' +
+//                                        '<button type="button" class="btn btn-info details-button" title="Details">View</button> ' +
 //                                    '</div>'
 //                }
             ]);
@@ -240,54 +244,58 @@
         <script>
               dataTableInit('#data-table-bid', [4, 'desc'], 'POST', '{{ url('list/bid_games') }}', [
                 {
-                    title: '{{ Lang::trans('games.photo') }}',
+                    title: 'Photo',
                     data: 'photo', render : function(data, type, row){
                       return '<img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">'
                 }},
                 {
-                    title: '{{ Lang::trans('games.title') }}',
+                    title: 'Title',
                     data: 'title'
                 },
                 {
-                    title: '{{ Lang::trans('games.city') }}',
+                    title: 'City',
                     data: 'city'
                 },
                 {
-                    title: '{{ Lang::trans('games.points') }}',
+                    title: 'District',
+                    data: 'district'
+                },
+                {
+                    title: 'Points',
                     data: 'points'
                 },
                 // {
-                //     title: '{{ Lang::trans('games.type') }}',
+                //     title: 'Type',
                 //     data: 'type'
                 // },
                 {
-                    title: '{{ Lang::trans('games.created_at') }}',
+                    title: 'Created At',
                     data: 'created_at'
                 },
                 {
-                title: '{{ Lang::trans('games.status') }}',
+                title: 'Status',
                 data: 'status', render : function(data, type, row)
                 {
                     switch (data)
                     {
-                        case '1': return '<span class="btn btn-success">{{ Lang::trans('games.going') }}</span>';
+                        case 1: return '<span class="btn btn-success">Going</span>';
                             break;
-                        case '2': return '<span class="btn btn-danger">{{ Lang::trans('games.disabled') }}</span>';
+                        case 2: return '<span class="btn btn-danger">Disabled</span>';
                             break;
                     }
                 }
             },
                 {
-                    title: '{{ Lang::trans('games.actions') }}',
+                    title: 'Actions',
                     data: 'status', render : function(data, type, row)
                     {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">{{ Lang::trans('games.view') }}</button></div>';
+                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
                     }
                 }
 //                {
-//                    title: '{{ Lang::trans('games.actions') }}',
+//                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
-//                                        '<button type="button" class="btn btn-info details-button" title="Details">{{ Lang::trans('games.view') }}</button> ' +
+//                                        '<button type="button" class="btn btn-info details-button" title="Details">View</button> ' +
 //                                    '</div>'
 //                }
             ]);
@@ -319,4 +327,23 @@ $(document).ready(function(){
      });
 });
         </script>
+<!-- <script>
+    $(function() {
+        $.ajax({
+            url: 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=&lon=',
+            type: 'GET',
+            dataType: 'html',
+            success: function(data, status, xhr)
+            {
+                var suburb = JSON.parse(data).address.suburb;
+
+                $("#city").html(suburb);
+            },
+            error: function(xhr, status, error)
+            {
+                $("#city").html("Error: " + status + " " + error);
+            }
+        });
+    });
+</script> -->
 @endsection

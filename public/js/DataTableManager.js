@@ -4,34 +4,49 @@ var filters = [];
 var values = {};
 
 function dataTableInit(element, order, type, url, columns, footerFunction, definitions = [], serverSide = true){
-    $(document).ready(function(){
+    // $(document).ready(function(){
+    //     baseElement = element;
+    //     if(typeof footerFunction === 'undefined'){ footerFunction = function(){}; }
+    //     table = $(baseElement).DataTable({
+    //         responsive: true,
+    //         processing: true,
+    //         serverSide: serverSide,
+    //         scrollX: true,
+    //         order:[order],
+    //         lengthMenu:[[1,5,10,15,20,-1],[1,5,10,15,20,"All"]],
+    //         pageLength:10,
+    //         ajax: {"url": url, "type": type, "data": function(data){ return $.extend(data, values); }},
+    //         columnDefs : definitions,
+    //         columns: columns,
+    //         oLanguage: {
+    //             info: "",
+    //             sZeroRecords: 'recordsNotFound',
+    //             sEmptyTable: 'recordsAreEmpty',
+    //             sSearch: "<span>"+ 'search' +":</span> _INPUT_",
+    //             sLengthMenu: "<span>"+ 'records' +":</span> _MENU_",
+    //         },
+    //         footerCallback: footerFunction
+    //     });
+    //     $(baseElement + ' tbody').on('click', 'tr', function () {
+    //         if($(this).hasClass('selected')){ $(this).removeClass('selected'); }
+    //         else{ table.$('tr.selected').removeClass('selected'); $(this).addClass('selected'); }
+    //     });
+    // });
+    $(document).ready(function() {
         baseElement = element;
-        if(typeof footerFunction === 'undefined'){ footerFunction = function(){}; }
         table = $(baseElement).DataTable({
-            responsive: true,
-            processing: true,
-            serverSide: serverSide,
-            scrollX: true,
-            order:[order],
-            lengthMenu:[[1,5,10,15,20,-1],[1,5,10,15,20,"All"]],
-            pageLength:10,
             ajax: {"url": url, "type": type, "data": function(data){ return $.extend(data, values); }},
             columnDefs : definitions,
-            columns: columns,
-            oLanguage: {
-                info: "",
-                sZeroRecords: 'recordsNotFound',
-                sEmptyTable: 'recordsAreEmpty',
-                sSearch: "<span>"+ 'search' +":</span> _INPUT_",
-                sLengthMenu: "<span>"+ 'records' +":</span> _MENU_",
-            },
-            footerCallback: footerFunction
-        });
-        $(baseElement + ' tbody').on('click', 'tr', function () {
+            columns: columns
+            // drawCallback: function() {
+            // $(baseElement).remove();
+            // }
+        } );
+            $(baseElement + ' tbody').on('click', 'tr', function () {
             if($(this).hasClass('selected')){ $(this).removeClass('selected'); }
             else{ table.$('tr.selected').removeClass('selected'); $(this).addClass('selected'); }
         });
-    });
+    } );
 }
 
 function editButton(wildcard, field = 'id'){

@@ -46,6 +46,7 @@
 @include('layouts.partials.footer-scripts')
 @yield('stripe-scripts')
     <!-- End custom js for this page-->
+
   </body>
 
 <!-- RLG.GE -->

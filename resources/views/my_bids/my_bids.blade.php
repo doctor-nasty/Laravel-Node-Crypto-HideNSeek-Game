@@ -99,6 +99,10 @@
                     data: 'city'
                 },
                 {
+                    title: '{{ Lang::trans('games.district') }}',
+                    data: 'district'
+                },
+                {
                     title: '{{ Lang::trans('games.points') }}',
                     data: 'points'
                 },
@@ -116,9 +120,9 @@
                 {
                     switch (data)
                     {
-                        case '1': return '<span class="btn btn-success">{{ Lang::trans('games.going') }}</span>';
+                        case 1: return '<span class="btn btn-success">{{ Lang::trans('games.going') }}</span>';
                             break;
-                        case '2': return '<span class="btn btn-danger">{{ Lang::trans('games.disabled') }}</span>';
+                        case 2: return '<span class="btn btn-danger">{{ Lang::trans('games.disabled') }}</span>';
                             break;
                     }
                 }

@@ -72,22 +72,22 @@
                 <span class="menu-title">@lang('sidebar.mybids')</span>
               </a>
             </li>
-            <li class="nav-item menu-items">
+            <!-- <li class="nav-item menu-items">
               <a class="nav-link" href="{{ url('users') }}">
                 <span class="menu-icon">
                   <i class="mdi mdi-account"></i>
                 </span>
                 <span class="menu-title">@lang('sidebar.users')</span>
               </a>
-            </li>
-            <li class="nav-item menu-items">
+            </li> -->
+            <!-- <li class="nav-item menu-items">
               <a class="nav-link" href="{{ url('points') }}">
                 <span class="menu-icon">
                   <i class="mdi mdi-star-circle"></i>
                 </span>
                 <span class="menu-title">@lang('sidebar.points')</span>
               </a>
-            </li>
+            </li> -->
             {{-- <li class="nav-item menu-items">
               <a class="nav-link" href="{{ url('plans') }}">
                 <span class="menu-icon">
@@ -96,25 +96,25 @@
                 <span class="menu-title">@lang('sidebar.subscriptions')</span>
               </a>
             </li> --}}
-            <li class="nav-item menu-items">
+            <!-- <li class="nav-item menu-items">
               <a class="nav-link" href="{{ url('redeem') }}">
                 <span class="menu-icon">
                   <i class="mdi mdi-cash"></i>
                 </span>
                 <span class="menu-title">@lang('sidebar.redeem')</span>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item nav-category">
               <span class="nav-link">@lang('sidebar.more')</span>
             </li>
-            <li class="nav-item menu-items">
+            <!-- <li class="nav-item menu-items">
               <a class="nav-link" href="{{ url('documentation') }}">
                 <span class="menu-icon">
                   <i class="mdi mdi-file-document-box"></i>
                 </span>
                 <span class="menu-title">@lang('sidebar.documentation')</span>
               </a>
-            </li>
+            </li> -->
             <li class="nav-item menu-items">
               <a class="nav-link" href="{{ url('contact') }}">
                 <span class="menu-icon">
@@ -133,6 +133,16 @@
             </li>
             <li class="nav-item nav-category">
             <span class="nav-link">@lang('sidebar.balance'): {{ Auth::user()->points }}</span>
+            <div class="d-flex justify-content-center mt-5">
+                <div class="public-key" style="display: none"></div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-5">
+                <div class="sol-balance" style="display: none">
+
+                </div>
+            </div>
+            
             </li>
           </ul>
         </nav>

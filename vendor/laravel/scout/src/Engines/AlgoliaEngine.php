@@ -3,7 +3,9 @@
 namespace Laravel\Scout\Engines;
 
 use Algolia\AlgoliaSearch\SearchClient as Algolia;
+use Exception;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\LazyCollection;
 use Laravel\Scout\Builder;
 
 class AlgoliaEngine extends Engine
@@ -39,8 +41,9 @@ class AlgoliaEngine extends Engine
      * Update the given model in the index.
      *
      * @param  \Illuminate\Database\Eloquent\Collection  $models
-     * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      * @return void
+     *
+     * @throws \Algolia\AlgoliaSearch\Exceptions\AlgoliaException
      */
     public function update($models)
     {
@@ -152,9 +155,15 @@ class AlgoliaEngine extends Engine
      */
     protected function filters(Builder $builder)
     {
-        return collect($builder->wheres)->map(function ($value, $key) {
+        $wheres = collect($builder->wheres)->map(function ($value, $key) {
             return $key.'='.$value;
-        })->values()->all();
+        })->values();
+
+        return $wheres->merge(collect($builder->whereIns)->map(function ($values, $key) {
+            return collect($values)->map(function ($value) use ($key) {
+                return $key.'='.$value;
+            })->all();
+        })->values())->values()->all();
     }
 
     /**
@@ -183,11 +192,38 @@ class AlgoliaEngine extends Engine
         }
 
         $objectIds = collect($results['hits'])->pluck('objectID')->values()->all();
+
         $objectIdPositions = array_flip($objectIds);
 
         return $model->getScoutModelsByIds(
+            $builder, $objectIds
+        )->filter(function ($model) use ($objectIds) {
+            return in_array($model->getScoutKey(), $objectIds);
+        })->sortBy(function ($model) use ($objectIdPositions) {
+            return $objectIdPositions[$model->getScoutKey()];
+        })->values();
+    }
+
+    /**
+     * Map the given results to instances of the given model via a lazy collection.
+     *
+     * @param  \Laravel\Scout\Builder  $builder
+     * @param  mixed  $results
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @return \Illuminate\Support\LazyCollection
+     */
+    public function lazyMap(Builder $builder, $results, $model)
+    {
+        if (count($results['hits']) === 0) {
+            return LazyCollection::make($model->newCollection());
+        }
+
+        $objectIds = collect($results['hits'])->pluck('objectID')->values()->all();
+        $objectIdPositions = array_flip($objectIds);
+
+        return $model->queryScoutModelsByIds(
                 $builder, $objectIds
-            )->filter(function ($model) use ($objectIds) {
+            )->cursor()->filter(function ($model) use ($objectIds) {
                 return in_array($model->getScoutKey(), $objectIds);
             })->sortBy(function ($model) use ($objectIdPositions) {
                 return $objectIdPositions[$model->getScoutKey()];
@@ -219,6 +255,31 @@ class AlgoliaEngine extends Engine
     }
 
     /**
+     * Create a search index.
+     *
+     * @param  string  $name
+     * @param  array  $options
+     * @return mixed
+     *
+     * @throws \Exception
+     */
+    public function createIndex($name, array $options = [])
+    {
+        throw new Exception('Algolia indexes are created automatically upon adding objects.');
+    }
+
+    /**
+     * Delete a search index.
+     *
+     * @param  string  $name
+     * @return mixed
+     */
+    public function deleteIndex($name)
+    {
+        return $this->algolia->initIndex($name)->delete();
+    }
+
+    /**
      * Determine if the given model uses soft deletes.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
@@ -233,7 +294,7 @@ class AlgoliaEngine extends Engine
      * Dynamically call the Algolia client instance.
      *
      * @param  string  $method
-     * @param  array   $parameters
+     * @param  array  $parameters
      * @return mixed
      */
     public function __call($method, $parameters)

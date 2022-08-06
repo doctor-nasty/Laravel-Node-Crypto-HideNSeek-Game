@@ -21,10 +21,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar', 255)->default('user.jpg');
-            $table->string('stripe_id', 255)->nullable()->collation('utf8mb4_bin');
-            $table->string('card_brand', 255)->nullable();
-            $table->string('card_last_four', 255)->nullable();
-            $table->string('trial_ends_at', 255)->nullable();
             $table->string('settings', 255)->nullable();
             $table->string('points', 255)->default('35')->nullable();
             $table->string('lockout_time', 255)->nullable();
@@ -42,6 +38,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        // Schema::dropIfExists('users');
     }
 }
