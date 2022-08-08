@@ -74,7 +74,7 @@ $(document).ready(function () {
     if (message == "Success") {
       window.location.href = "/";
     } else {
-      alert("You need a HidenSeek NFT to login this page.");
+      alert(message);
     }
   });
 
