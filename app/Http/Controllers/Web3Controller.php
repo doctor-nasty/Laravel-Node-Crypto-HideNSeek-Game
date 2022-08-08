@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Web3\Web3;
+use Web3\Contract;
+use Web3\Providers\HttpProvider;
+use Web3\RequestManagers\HttpRequestManager;
+use phpseclib\Math\BigInteger;
 
 class Web3Controller
 {
@@ -14,7 +19,7 @@ class Web3Controller
         $nonce = Str::random();
         request()->session()->put('nonce', $nonce);
 
-        return ['message' => $this->generateSignatureMessage($nonce)];
+        return $this->generateSignatureMessage($nonce);
     }
 
     public function store()
@@ -24,9 +29,29 @@ class Web3Controller
             'signature' => ['required', 'string', 'regex:/^0x([A-Fa-f0-9]{130})$/'],
         ]);
 
+        // verify signature
         if ($this->verifySignature(request()->session()->pull('nonce'), $data['signature'], $data['address'])) {
             throw ValidationException::withMessages(['signature' => 'Signature verification failed.']);
         }
+
+        // verify token balance
+        $timeout = 30; // set this time accordingly by default it is 1 sec
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+        $abi = json_decode(file_get_contents(base_path('public/web3/ERC721.json')));
+        $nft = new Contract($web3->provider, $abi);
+
+        // check balance
+        $nft->at(config('web3.chain.nft'))->call('balanceOf', $data['address'], function($error, $result) {
+            if ($error !== null) {
+                // error occured
+                throw ValidationException::withMessages(['signature' => 'Error occured in checking balance.']);
+            } else {
+                $amount = $result[0];
+                if ($amount->compare(new BigInteger(0)) <= 0) {
+                    throw ValidationException::withMessages(['signature' => 'Insufficient balance.']);
+                }
+            }
+        });
 
         $user = $this->getUserModel()::firstOrCreate([
             config('web3.model.column') => $data['address'],
@@ -40,7 +65,7 @@ class Web3Controller
 
         Auth::login($user);
 
-        return response()->noContent();
+        return 'Success';
     }
 
     public function logout()
@@ -61,7 +86,7 @@ class Web3Controller
     {
         $appName = config('app.name');
 
-        return "You are logging to {$appName}. Nonce: $nonce";
+        return "Welcome to {$appName}. Sign this message to login.\n\nNonce: $nonce";
     }
 
     protected function verifySignature($nonce, $signature, $address)

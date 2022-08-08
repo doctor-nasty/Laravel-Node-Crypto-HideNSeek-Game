@@ -195,7 +195,7 @@
                   </div>
                 @endif
                 <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-start" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-start" id="login">
                     <span>@lang('login.play')</span>
                 </button>
               </div>
@@ -498,6 +498,9 @@ var x = setInterval(function() {
         <!-- custom scripts -->
         <script src="{{ asset('js/login/scripts.js') }}"></script>
 
+        <!-- wallet scripts -->
+        <script src="{{ asset('js/wallet.js') }}"></script>
+        
         <script type="text/javascript">
           @if (count($errors) > 0)
               $('#myModal').modal('show');
