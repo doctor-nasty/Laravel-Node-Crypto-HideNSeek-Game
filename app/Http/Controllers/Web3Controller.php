@@ -31,7 +31,7 @@ class Web3Controller
 
         // verify signature
         if ($this->verifySignature(request()->session()->pull('nonce'), $data['signature'], $data['address'])) {
-            throw ValidationException::withMessages(['signature' => 'Signature verification failed.']);
+            return "Invalid signature";
         }
 
         // verify token balance
@@ -39,20 +39,25 @@ class Web3Controller
         $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
         $abi = json_decode(file_get_contents(base_path('public/web3/ERC721.json')));
         $nft = new Contract($web3->provider, $abi);
+        $balance = new BigInteger(0);
+        $error = "";
 
         // check balance
-        $nft->at(config('web3.chain.nft'))->call('balanceOf', $data['address'], function($error, $result) {
-            if ($error !== null) {
+        $nft->at(config('web3.chain.nft'))->call('balanceOf', $data['address'], function($err, $result) use(&$balance, &$error) {
+            if ($err !== null) {
                 // error occured
-                throw ValidationException::withMessages(['signature' => 'Error occured in checking balance.']);
+                $error = "Error: " . $err->getMessage();
             } else {
-                $amount = $result[0];
-                if ($amount->compare(new BigInteger(0)) <= 0) {
-                    throw ValidationException::withMessages(['signature' => 'Insufficient balance.']);
-                }
+                $balance = $result[0];
             }
         });
 
+        if ($error !== "") return $error;
+
+        if ($balance->compare(new BigInteger(0)) <= 0) {
+            return 'Error: Insufficient balance';
+        }
+        
         $user = $this->getUserModel()::firstOrCreate([
             config('web3.model.column') => $data['address'],
         ]);
