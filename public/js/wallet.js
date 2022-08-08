@@ -1,5 +1,5 @@
-$(document).ready(function () {
-  function getCoinbaseWalletProvider() {
+$(document).ready(function() {
+  async function getProvider() {
     let provider = undefined;
 
     if (window.ethereum != undefined) {
@@ -16,35 +16,42 @@ $(document).ready(function () {
       }
     }
 
-    if (provider == undefined) alert("Coinbase wallet is not installed");
+    if (provider == undefined) {
+      alert("Coinbase wallet is not installed");
+      return;
+    }
 
-    return provider;
-  }
+    // connect to wallet
+    try {
+      await provider.request({ method: "eth_requestAccounts", params: [] });
+    } catch (err) {
+      alert("Wallet connection is denied by user");
+      return;
+    }
 
-  async function checkNetwork(walletProvider) {
+    // change to polygon network
     const targetChain = 4; // rinkeby testnet
     // const targetChain = 137; // polygon
-    if (walletProvider.getChainId() != targetChain) {
+
+    if (provider.getChainId() != targetChain) {
       try {
-        await walletProvider.request({
+        await provider.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId: targetChain.toString(16) }],
         });
       } catch (err) {
-        console.log(err);
         alert("Please change to polygon network");
-        return false;
+        return;
       }
     }
-    return true;
+
+    return new ethers.providers.Web3Provider(provider);
   }
 
-  $("#login").on("click", async function (event) {
-    const walletProvider = getCoinbaseWalletProvider();
+  $("#login").on("click", async function(event) {
+    const provider = await getProvider();
 
-    if (walletProvider == undefined || !(await checkNetwork(walletProvider))) {
-      return;
-    }
+    if (provider === undefined) return;
 
     // get message to sign
     let response = await fetch("/login/signature");
@@ -52,7 +59,6 @@ $(document).ready(function () {
 
     console.log(message);
 
-    const provider = new ethers.providers.Web3Provider(walletProvider);
     const signer = provider.getSigner();
 
     const address = await signer.getAddress();
@@ -78,17 +84,18 @@ $(document).ready(function () {
     }
   });
 
-  $("#create_game").on("click", async function (event) {
+  $("#create_game").on("click", async function(event) {
     event.preventDefault();
 
-    const walletProvider = getCoinbaseWalletProvider();
+    const provider = await getProvider();
 
-    if (walletProvider == undefined || !(await checkNetwork(walletProvider))) {
-      return;
-    }
+    if (provider === undefined) return;
 
-    const provider = new ethers.providers.Web3Provider(walletProvider);
     const signer = provider.getSigner();
+
+    const address = await signer.getAddress();
+
+    console.log(address);
 
     const addrUSDT = "0xc6fDe3FD2Cc2b173aEC24cc3f267cb3Cd78a26B7";
 
@@ -111,8 +118,10 @@ $(document).ready(function () {
     const usdt = new ethers.Contract(addrUSDT, usdtAbi, signer);
     const decimals = await usdt.decimals();
 
+    console.log(await usdt.balanceOf(address));
+
     let tx = await usdt.transfer(
-      "0x6eee87d99ccf05c0a8297e6b4cf98898e47a0642",
+      address,
       ethers.utils.parseUnits("1", decimals)
     );
 
