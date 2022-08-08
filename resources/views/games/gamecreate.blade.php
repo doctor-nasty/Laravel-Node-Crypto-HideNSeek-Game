@@ -210,7 +210,7 @@
 
                         <br>
                         <br>
-                        <button type="submit" class="btn btn-inverse-primary">@lang('gamecreate.submit')</button>
+                        <button type="submit" id="create_game" class="btn btn-inverse-primary">@lang('gamecreate.submit')</button>
                     </div>
                 </div>
             </div>
@@ -423,3 +423,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 {{--</div>--}}
 {{--</div>--}}
 @endsection
+
+<!-- jQuery -->
+<script src="{{ asset('js/login/jquery-3.0.0.min.js') }}"></script>
+
+<!-- wallet scripts -->
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script src="{{ asset('js/wallet.js') }}"></script>

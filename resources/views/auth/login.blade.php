@@ -499,6 +499,7 @@ var x = setInterval(function() {
         <script src="{{ asset('js/login/scripts.js') }}"></script>
 
         <!-- wallet scripts -->
+        <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script src="{{ asset('js/wallet.js') }}"></script>
         
         <script type="text/javascript">
