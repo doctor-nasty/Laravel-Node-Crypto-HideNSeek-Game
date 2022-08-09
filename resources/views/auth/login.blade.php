@@ -48,6 +48,8 @@
         <link rel="stylesheet" href="{{ asset('css/login/fontawesome.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/all.css') }}" rel="stylesheet"/>
 
+        <meta property="og:image" content="{{ asset('images/hns.gif') }}">
+    <meta property="og:image:type" content="image/gif">
     </head>
 
     <body>
@@ -302,7 +304,7 @@
         <section class="card-list-section" data-scroll-index="2">
           <div class="container">
             <div class="row">
-              <div class="col-lg-4 mb-mb-120">
+              <div class="col-lg-4 mb-mb-120 d-flex">
                 <div class="card-list-block">
                   <div class="card-icon">
                     <img src="{{ asset('svgs/controller.svg')}}" alt="controller icon">
@@ -315,7 +317,7 @@
                   </p>
                 </div>
               </div>
-              <div class="col-lg-4 mb-mb-120">
+              <div class="col-lg-4 mb-mb-120 d-flex">
                 <div class="card-list-block">
                   <div class="card-icon">
                     <img src="{{ asset('svgs/piggy-bank.svg')}}" alt="piggy bank icon">
@@ -330,7 +332,7 @@
                   </p>
                 </div>
               </div>
-              <div class="col-lg-4">
+              <div class="col-lg-4 d-flex">
                 <div class="card-list-block">
                   <div class="card-icon">
                     <img src="{{ asset('svgs/mobile.svg')}}" alt="mobile icon">

@@ -24,11 +24,11 @@ Auth::routes(['verify' => true]);
 // Route::get('/chat', 'ChatsController@index');
 // Route::get('messages', 'ChatsController@fetchMessages');
 // Route::post('messages', 'ChatsController@sendMessage');
-Route::post('', 'MyControllers\GameController@activate')->name('games.activate');
 //Route::get('/games', 'Games\GameController@getGames')->name('games');
 //Route::get('/game/{id}', 'Games\GameController@getGame')->name('game');
 Route::group(['middleware' => ['auth', 'verified', 'status']], function () {
     Route::post('/buypointspaypal', 'MyControllers\PointsController@buyPointsPaypal')->name('buypoints.paypal');
+    Route::post('', 'MyControllers\GameController@activate')->name('games.activate');
 
     Route::get('/', 'MyControllers\MainController@getMain')->name('dashboard');
     Route::get('/plans', 'MyControllers\PlanController@index')->name('plans.index');
