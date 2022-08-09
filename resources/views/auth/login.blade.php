@@ -29,7 +29,10 @@
     </title>
 
 		<!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('images/site.webmanifest') }}">
 
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700" rel="stylesheet">
@@ -151,21 +154,20 @@
               <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
             </li>
             <li class="nav-item header-nav header-social">
-                <a href="#" class="nav-icon">
+                <a href="https://t.me/+QBpGQCnQMEE4YmYy" class="nav-icon">
                   <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
                 </a>
-                <a href="#" class="nav-icon">
+                <a href="https://discord.gg/S9UPDjnY" class="nav-icon">
                   <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
                 </a>
             </li>
-			      <li class="nav-item header-nav">
-			        <!-- <a class="nav-link" href="/register">@lang('register.register')</a> -->
+			      <!-- <li class="nav-item header-nav">
               <a href="/register">
                 <button type="button" class="sign-in-btn" href="/register">
                   Sign in
                 </button>
               </a>
-			      </li>
+			      </li> -->
 			    </ul>
 			  </div>
 			</div>
@@ -238,39 +240,25 @@
                     </div>
                     <article class="col-12 col-lg-6 about-us-article mb-md50">
                       <h2>About the Game</h2>
-                      <h4 class="about-us-subheading">How it Works</h4>
+                      <h4 class="about-us-subheading">Get NFT  ->  Play Free Hide & Seek Game  ->  Earn USDT</h4>
                       <p>
-                        Game instructions: We will have 2 types of NFTs for users, 
-                        one type is with game creation option and another type is with 
-                        game playing option. Game creation NFT costs $500, game playing NFT 
-                        costs $100. If user owns both NFTs they can do both, game creation 
-                        and playing. There will be a limited amount of NFTs on opensea. 
-                        User who owns NFT will receive a USDC to their wallets daily for 
-                        the first month, twice a week for the second month, once a week 
-                        for a third month.
+                      NFT supply will be limited, we will be minting 5000 NFT's,
+                      before starting our open beta program. From the first minting we will list
+                      125 Pirates NFT's and 4875 Treasure NFT's. With Pirates you will be able to
+                      create a game, and with Treasure you will be able to play a game.  
                       </p>
                       <p>
-                        Users will need to login to our website through Phantom wallet 
-                        mobile app browser in order to be able to connect Phantom wallet, 
-                        when connecting Phantom wallet system will check if there is a NFT 
-                        in the wallet. Based on the NFT user will have either game creation 
-                        option or game playing option.
+                        Game creators will earn 35% from total bid amount in game.
+                        Players will earn 55% from total bid amount in game.
+                        Please note that we will never ask for your private keys, 
+                        NFT's you buy will stay in your wallet.
+                        USDT you earn daily will also be staying in your wallet.
                       </p>
                       <p>
-                        When creating a game users should choose participant amount for game 
-                        starting and game bid amount (after game is created bid amount will be 
-                        deducted from users wallet and sent to our wallet). User should write 
-                        small comment which will be visible for all users and full description 
-                        with hints which will be visible to only users who makes a bid. Users 
-                        should mark a location with circle in the radius of 500 meters, where 
-                        item is hidden.
+                        To explore our whole collection please use a button to go to Opensea.
+                        In case you need help or want to ask questions about our game feel free
+                        to join our communities on Discord or on Telegram.
                       </p>
-                      <p>
-                        When user joins a game USDC will be deducted from his wallet and sent 
-                        to our wallet. Then he will see games full description, hints, and 
-                        radius of the hidden item on the map. User who wins a game gets 55% 
-                        from total amount, creator gets 30% and 15% stays in our wallet.
-                      </p> 
                     </article>
                 </div>
             </div>
@@ -321,18 +309,9 @@
                   </div>
                   <h3>Game</h3>
                   <p>
-                    Game instructions: We will have 2 types of NFTs for users, 
-                    one type is with game creation option and another type is 
-                    with game playing option. Game creation NFT costs $500, game 
-                    playing NFT costs $100. If user owns both NFTs they can do both, 
-                    game creation and playing. There will be a limited amount of NFTs 
-                    on opensea. User who owns NFT will receive a USDC to their wallets 
-                    daily for the first month, twice a week for the second 
-                    month, once a week for a third month. Users will need to 
-                    login to our website through Phantom wallet mobile app browser 
-                    in order to be able to connect Phantom wallet, when connecting 
-                    Phantom wallet system will check if there is a NFT in the wallet. 
-                    Based on the NFT user will have either game creation option or game playing option.
+                    To start playing you will need to download Coinbase Wallet application
+                    on your mobile phone and open our website from browser located within app.
+                    To be able to successfully authenticate you must own NFT.
                   </p>
                 </div>
               </div>
@@ -343,18 +322,11 @@
                   </div>
                   <h3>Money</h3>
                   <p>
-                    Game instructions: We will have 2 types of NFTs for users, 
-                    one type is with game creation option and another type is 
-                    with game playing option. Game creation NFT costs $500, game 
-                    playing NFT costs $100. If user owns both NFTs they can do both, 
-                    game creation and playing. There will be a limited amount of NFTs 
-                    on opensea. User who owns NFT will receive a USDC to their wallets 
+                    User who owns NFT will receive a USDT coins to their wallets 
                     daily for the first month, twice a week for the second 
-                    month, once a week for a third month. Users will need to 
-                    login to our website through Phantom wallet mobile app browser 
-                    in order to be able to connect Phantom wallet, when connecting 
-                    Phantom wallet system will check if there is a NFT in the wallet. 
-                    Based on the NFT user will have either game creation option or game playing option.
+                    month, once a week for a third month. 
+                    With the received amount you can either withdraw it, or 
+                    you can join or create a games to earn more.
                   </p>
                 </div>
               </div>
@@ -365,18 +337,9 @@
                   </div>
                   <h3>Contact</h3>
                   <p>
-                    Game instructions: We will have 2 types of NFTs for users, 
-                    one type is with game creation option and another type is 
-                    with game playing option. Game creation NFT costs $500, game 
-                    playing NFT costs $100. If user owns both NFTs they can do both, 
-                    game creation and playing. There will be a limited amount of NFTs 
-                    on opensea. User who owns NFT will receive a USDC to their wallets 
-                    daily for the first month, twice a week for the second 
-                    month, once a week for a third month. Users will need to 
-                    login to our website through Phantom wallet mobile app browser 
-                    in order to be able to connect Phantom wallet, when connecting 
-                    Phantom wallet system will check if there is a NFT in the wallet. 
-                    Based on the NFT user will have either game creation option or game playing option.
+                    If by any chance you need to contact our administration
+                    you can do so by contacting us on our Discord server or directly
+                    to Email at: support@hidenseek.games
                   </p>
                 </div>
               </div>
@@ -398,10 +361,10 @@
                 </a>
 
                 <div class="social">
-                  <a href="#" class="icon">
+                  <a href="https://discord.gg/S9UPDjnY" class="icon">
                       <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
                   </a>
-                  <a href="#" class="icon">
+                  <a href="https://t.me/+QBpGQCnQMEE4YmYy" class="icon">
                       <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
                   </a> 
                 </div>
