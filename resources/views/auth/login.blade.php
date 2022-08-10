@@ -244,8 +244,15 @@
                       <h2>About the Game</h2>
                       <h4 class="about-us-subheading">Get NFT  ->  Play Free Hide & Seek Game  ->  Earn USDT</h4>
                       <p>
+                      With our game you can hide items in the real world, than enter hints
+                      and mark radius on the map. Once players join your game they will see hints,
+                      and your marked radius on the map. They will need to follow your hints
+                       to find an item. First player who find an item wins a game.
+                       Both, game creator and game winner will receive USDT to their wallets.  
+                      </p>
+                      <p>
                       NFT supply will be limited, we will be minting 5000 NFT's,
-                      before starting our open beta program. From the first minting we will list
+                      before starting our open beta program. From the total minted NFT's there will be
                       125 Pirates NFT's and 4875 Treasure NFT's. With Pirates you will be able to
                       create a game, and with Treasure you will be able to play a game.  
                       </p>
