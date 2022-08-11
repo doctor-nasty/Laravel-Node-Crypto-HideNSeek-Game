@@ -156,11 +156,14 @@
               <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
             </li>
             <li class="nav-item header-nav header-social">
-                <a href="https://t.me/+QBpGQCnQMEE4YmYy" class="nav-icon">
+                <a href="https://t.me/hidenseek_group" class="nav-icon">
                   <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
                 </a>
-                <a href="https://discord.gg/S9UPDjnY" class="nav-icon">
+                <a href="https://discord.gg/DNYBCqztSv" class="nav-icon">
                   <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
+                </a>
+                <a href="https://twitter.com/hidenseek_games" class="nav-icon">
+                  <img src="{{ asset('svgs/twitter.svg')}}" alt="twitter icon">
                 </a>
             </li>
 			      <!-- <li class="nav-item header-nav">
@@ -192,7 +195,18 @@
               <!-- <h1>@lang('login.secondtext')</h1> -->
               <h4 id="demo"></h4>
               <p>@lang('login.thirdtext')</p>
-              <div class="full-width caption mt-30 btn-start-block">
+              <div class="sub-date">
+                <div class="data-block">
+                  <h5>August 12</h5>
+                  <span>Minting Date</span>
+                </div>
+                <div class="divider-line"></div>
+                <div class="data-block">
+                  <h5>August 24</h5>
+                  <span>Drop Date</span>
+                </div>
+              </div>
+              <div class="full-width caption btn-start-block">
                 @if(session()->get('message'))
                   <div class="alert alert-success">
                     {{ session()->get('message') }}
@@ -370,11 +384,14 @@
                 </a>
 
                 <div class="social">
-                  <a href="https://discord.gg/S9UPDjnY" class="icon">
+                  <a href="https://discord.gg/DNYBCqztSv" class="icon">
                       <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
                   </a>
-                  <a href="https://t.me/+QBpGQCnQMEE4YmYy" class="icon">
+                  <a href="https://t.me/hidenseek_group" class="icon">
                       <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
+                  </a>
+                  <a href="https://twitter.com/hidenseek_games" class="icon">
+                      <img src="{{ asset('svgs/twitter.svg')}}" alt="twitter icon">
                   </a> 
                 </div>
 
@@ -390,7 +407,7 @@
 
         <script>
 // Set the date we're counting down to
-var countDownDate = new Date("Aug 20, 2022 00:00:00").getTime();
+var countDownDate = new Date("Aug 26, 2022 00:00:00").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {

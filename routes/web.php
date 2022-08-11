@@ -19,14 +19,14 @@ Use App\User;
 //    return view('welcome');
 //});
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => false]);
 
 // Route::get('/chat', 'ChatsController@index');
 // Route::get('messages', 'ChatsController@fetchMessages');
 // Route::post('messages', 'ChatsController@sendMessage');
 //Route::get('/games', 'Games\GameController@getGames')->name('games');
 //Route::get('/game/{id}', 'Games\GameController@getGame')->name('game');
-Route::group(['middleware' => ['auth', 'verified', 'status']], function () {
+Route::group(['middleware' => ['auth', 'status']], function () {
     Route::post('/buypointspaypal', 'MyControllers\PointsController@buyPointsPaypal')->name('buypoints.paypal');
     Route::post('', 'MyControllers\GameController@activate')->name('games.activate');
 

@@ -412,6 +412,34 @@ a:hover {
   -webkit-animation-delay: 1.2s;
   animation-delay: 1.2s;
 }
+.sub-date {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
+}
+.sub-date .data-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sub-date .divider-line {
+  width: 2px;
+  height: 52px;
+  background: #9f9f9f;
+  transform: rotate(15deg);
+  margin: 0 16px;
+}
+.sub-date .data-block h5 {
+  font-weight: 700;
+  font-size: 24px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.sub-date .data-block span {
+  font-weight: 600;
+  font-size: 12px;
+  color: #b3b3b3;
+}
 .btn-start-block {
   display: flex;
   justify-content: center;
@@ -1782,7 +1810,9 @@ footer p {
     font-size: 30px;
     line-height: 1.4;
   }
-
+  .sub-date .data-block h5 {
+    font-size: 22px;
+  }
   .services .item {
     padding: 0;
   }
@@ -1846,6 +1876,12 @@ footer p {
   }
   .header .caption h1 {
     font-size: 20px;
+  }
+  .sub-date .data-block h5 {
+    font-size: 18px;
+  }
+  .sub-date {
+    margin: 10px 0;
   }
   .header .caption p {
     font-size: 14px;

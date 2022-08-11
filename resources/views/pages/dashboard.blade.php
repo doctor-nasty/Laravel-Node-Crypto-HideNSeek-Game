@@ -65,7 +65,7 @@
               </div>
             @endif
             <div class="row">
-              <div class="col-md-4 grid-margin">
+              <div class="col-md-6 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-row p-3">
@@ -80,7 +80,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 grid-margin">
+              <div class="col-md-6 grid-margin">
                 <div class="card">
                   <div class="card-body">
                     <div class="d-flex flex-row p-3">
@@ -90,21 +90,6 @@
                       </div>
                       <div class="align-self-center flex-grow text-right">
                         <i class="icon-lg mdi mdi-cash-multiple text-warning"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex flex-row p-3">
-                      <div class="align-self-top">
-                        <p class="card-title mb-1 font-weight-bold">@lang('dashboard.your_points')</p>
-                        <h3 class="mb-0">{{ Auth::user()->points }}</h3>
-                      </div>
-                      <div class="align-self-center flex-grow text-right">
-                        <i class="icon-lg mdi mdi-account-outline text-success"></i>
                       </div>
                     </div>
                   </div>
