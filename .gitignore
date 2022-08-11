@@ -4,3 +4,5 @@ vendor
 .gitignore
 public/storage
 composer.json
+.DS_Store
+composer.lock
