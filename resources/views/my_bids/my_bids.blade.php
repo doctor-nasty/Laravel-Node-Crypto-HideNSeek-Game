@@ -86,59 +86,59 @@
         <script>
             dataTableInit('#data-table', [5, 'desc'], 'POST', '{{ url('list/bid_games') }}', [
                 {
-                    title: '{{ Lang::trans('games.photo') }}',
+                    title: 'Photo',
                     data: 'photo', render : function(data, type, row){
                       return '<img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">'
                 }},
                 {
-                    title: '{{ Lang::trans('games.title') }}',
+                    title: 'Title',
                     data: 'title'
                 },
                 {
-                    title: '{{ Lang::trans('games.city') }}',
+                    title: 'City',
                     data: 'city'
                 },
                 {
-                    title: '{{ Lang::trans('games.district') }}',
+                    title: 'District',
                     data: 'district'
                 },
                 {
-                    title: '{{ Lang::trans('games.points') }}',
+                    title: 'Points',
                     data: 'points'
                 },
                 {
-                    title: '{{ Lang::trans('games.type') }}',
+                    title: 'Type',
                     data: 'type'
                 },
                 {
-                    title: '{{ Lang::trans('games.created_at') }}',
+                    title: 'Created At',
                     data: 'created_at'
                 },
                 {
-                title: '{{ Lang::trans('games.status') }}',
+                title: 'Status',
                 data: 'status', render : function(data, type, row)
                 {
                     switch (data)
                     {
-                        case 1: return '<span class="btn btn-success">{{ Lang::trans('games.going') }}</span>';
+                        case 1: return '<span class="btn btn-success">Going</span>';
                             break;
-                        case 2: return '<span class="btn btn-danger">{{ Lang::trans('games.disabled') }}</span>';
+                        case 2: return '<span class="btn btn-danger">Disabled</span>';
                             break;
                     }
                 }
             },
                 {
-                    title: '{{ Lang::trans('games.actions') }}',
+                    title: 'Actions',
                     data: 'status', render : function(data, type, row)
                     {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">{{ Lang::trans('games.view') }}</button></div>';
+                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
                     }
                 }
 
 //                {
-//                    title: '{{ Lang::trans('games.actions') }}',
+//                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
-//                                        '<button type="button" class="btn btn-info details-button" title="Details">{{ Lang::trans('games.view') }}</button> ' +
+//                                        '<button type="button" class="btn btn-info details-button" title="Details">View</button> ' +
 //                                    '</div>'
 //                }
             ]);
