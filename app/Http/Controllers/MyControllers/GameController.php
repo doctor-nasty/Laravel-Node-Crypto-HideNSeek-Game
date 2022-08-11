@@ -299,7 +299,7 @@ class GameController extends Controller {
     public function myBids() {
         // $games = Game::All();
         return view('my_bids.my_bids')
-                        ->with('title', Lang::trans('title.games'));
+                        ->with('title', 'My Bids');
     }
 
     public function getGameModalHtml(Request $request) {

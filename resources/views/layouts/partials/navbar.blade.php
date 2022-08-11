@@ -155,7 +155,7 @@
         </nav> --}}
 
           <ul class="navbar-nav navbar-nav-right">
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
               <a class="btn count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <i class="mdi mdi-earth"></i>
                 {{--<span class="count bg-danger">5</span>--}}
@@ -172,8 +172,11 @@
                 {{-- <div class="dropdown-divider"></div>
                 <p class="p-3 mb-0 text-center">Coming Soon</p> --}}
               </div>
+            </li> -->
+            <li class="nav-item your-balance">
+                <span>1.5 usdt</span>
             </li>
-            <li class="nav-item dropdown border-left">
+            <li class="nav-item dropdown">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                   <i class="mdi mdi-bell"></i>
                   <span class="count bg-danger">{{ auth()->user()->unreadNotifications->count() }}</span>
@@ -200,10 +203,10 @@
                   <div class="dropdown-divider"></div>
                   <a href="{{route('mark')}}">
                     <p class="p-3 mb-0 text-center">@lang('sidebar.markasread')</p>
-                </a>
+                  </a>
                 </div>
-              </li>
-            <li class="nav-item dropdown">
+            </li>
+            <!-- <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
                   <img class="img-sm rounded-circle" src="/storage/avatars/{{ Auth::user()->avatar }}" alt="">
               </a>
@@ -244,7 +247,7 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <p class="p-3 mb-0 text-center">Balance: {{ Auth::user()->points }}</p>
-            </li>
+            </li> -->
             {{-- <li class="nav-item dropdown">
             <a class="btn btn-dark count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <img class="img-sm rounded-circle" src="/storage/avatars/{{ Auth::user()->avatar }}" alt="">
