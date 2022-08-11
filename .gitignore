@@ -3,3 +3,4 @@ vendor
 .env
 .gitignore
 public/storage
+composer.json
