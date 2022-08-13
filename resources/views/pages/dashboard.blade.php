@@ -101,9 +101,7 @@
                 <div class="card">
                   <div class="card-body">
                     <h4 class="card-title">@lang('dashboard.bidded')</h4>
-                    <div class="table-responsive">
-                      <table class="table sortable-table table-hover" id="data-table-bid" cellspacing="0" width="100%"></table>
-                    </div>
+                      <table class="display nowrap" id="data-table-bid" cellspacing="0" width="100%"></table>
                   </div>
                 </div>
               </div>
@@ -114,9 +112,7 @@
                   <div class="card-body">
                     <h4 class="card-title">@lang('dashboard.your_games')</h4>
                     
-                    <div class="table-responsive">
-                        <table class="table sortable-table table-hover" id="data-table" cellspacing="0" width="100%"></table>
-                    </div>
+                        <table class="display nowrap" id="data-table" cellspacing="0" width="100%"></table>
                   </div>
                 </div>
               </div>

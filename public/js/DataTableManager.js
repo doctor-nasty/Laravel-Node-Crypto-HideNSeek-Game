@@ -37,6 +37,10 @@ function dataTableInit(element, order, type, url, columns, footerFunction, defin
         table = $(baseElement).DataTable({
             ajax: {"url": url, "type": type, "data": function(data){ return $.extend(data, values); }},
             columnDefs : definitions,
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            responsive: true,    
             columns: columns
             // drawCallback: function() {
             // $(baseElement).remove();

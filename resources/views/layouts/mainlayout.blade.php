@@ -7,18 +7,14 @@
   <head>
     @include('layouts.partials.head')
   </head>
+  @include('layouts.partials.navbar')
   <body class="body">
     <div class="row">
-      @include('layouts.partials.navbar')
       <div style="margin-top:0px">
         <div class="d-flex flex-row">
             @include('layouts.partials.sidebar')
             <div class="IcePoker_main_container___ZNyK">
-              <div class="get-started component  GetStarted_main_wrapper__f0u9t">
-                <div class="GetStarted_need_help__faKHS">
                   @yield('content')
-                </div>
-              </div>
             </div>
         </div>
       </div>

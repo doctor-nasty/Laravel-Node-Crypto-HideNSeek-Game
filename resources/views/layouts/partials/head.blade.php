@@ -51,7 +51,6 @@
 <link rel="preload" href="https://decentral.games/_next/static/css/19be72d9c8a2b043.css" as="style"/>
 <link rel="stylesheet" href="https://decentral.games/_next/static/css/19be72d9c8a2b043.css" data-n-p=""/>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 
 <noscript data-n-css=""></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YED843SXDX"></script>
@@ -83,8 +82,15 @@ crossorigin=""></script>
 #map { height: 180px; }
 </style>
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
+
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 <script src="{{ asset('js/DataTableManager.js') }}"></script>
 
 <style id="__jsx-b3907e65894ec280">
