@@ -16,7 +16,7 @@ class PagesController extends Controller
     public function documentation()
     {
         return view('pages.documentation')
-        ->with('title', Lang::trans('title.documentation'));
+        ->with('title', 'Documentation');
     }
 
     public function contact()
