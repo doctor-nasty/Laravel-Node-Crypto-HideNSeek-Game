@@ -39,7 +39,7 @@
 
         <div class="card-body">
             <div class="container">
-                  <table id="data-table" class="table table-responsive" style="width:100%"></table>
+                  <table id="data-table" class="display nowrap" style="width:100%"></table>
             </div>
 
         </div>
