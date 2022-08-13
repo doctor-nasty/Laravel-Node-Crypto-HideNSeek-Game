@@ -56,7 +56,7 @@
             <div class="row">
 
               <div class="col-12">
-                  <table class="table sortable-table table-hover" id="data-table" cellspacing="0" width="100%"></table>
+                  <table class="display nowrap" id="data-table" cellspacing="0" width="100%"></table>
               </div>
 
             </div>
