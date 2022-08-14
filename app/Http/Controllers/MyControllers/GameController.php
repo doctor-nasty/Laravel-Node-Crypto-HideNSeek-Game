@@ -162,8 +162,6 @@ class GameController extends Controller {
                 'full_comment' => $request->get('full_comment'),
                 // 'photo' => $request->get('photo'),
                 'photo' => 'game.jpg',
-                'city_lat' => $request->get('city_lat'),
-                'city_long' => $request->get('city_long'),
                 'mark_lat' => $request->get('mark_lat'),
                 'mark_long' => $request->get('mark_long'),
                 'user_id' => Auth::user()->id,

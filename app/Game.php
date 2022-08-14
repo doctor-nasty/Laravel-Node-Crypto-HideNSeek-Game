@@ -3,13 +3,11 @@
 namespace App;
 
 
-use Laravel\Scout\Searchable;
 use Watson\Rememberable\Rememberable;
 use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model {
 
-    use Searchable;
     use Rememberable;
     protected static $rememberable = true;
     public $table = 'games';
