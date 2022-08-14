@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   async function getProvider() {
     let provider = undefined;
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
     return new ethers.providers.Web3Provider(provider);
   }
 
-  $("#login").on("click", async function(event) {
+  $("#login").on("click", async function (event) {
     const provider = await getProvider();
 
     if (provider === undefined) return;
@@ -84,12 +84,14 @@ $(document).ready(function() {
     }
   });
 
-  $("#create_game").on("click", async function(event) {
+  $("#create_game").on("click", async function (event) {
     event.preventDefault();
 
     const provider = await getProvider();
 
     if (provider === undefined) return;
+
+    setTxStatus("Waiting user approval...");
 
     const signer = provider.getSigner();
 
@@ -120,15 +122,24 @@ $(document).ready(function() {
 
     console.log(await usdt.balanceOf(address));
 
-    let tx = await usdt.transfer(
-      address,
-      ethers.utils.parseUnits("1", decimals)
-    );
-
-    await tx.wait();
-
-    console.log(tx.hash);
-
-    $("#create_game").submit();
+    usdt
+      .transfer(address, ethers.utils.parseUnits("1", decimals))
+      .then((tx) => {
+        setTxStatus("Waiting transaction is confirmed...");
+        tx.wait()
+          .then((res) => {
+            console.log(tx.hash);
+            $("#tx_hash").val(tx.hash);
+            $("#form").trigger("submit");
+          })
+          .catch((err) => setTxStatus(err.message));
+      })
+      .catch((err) => {
+        setTxStatus(err.message);
+      });
   });
+
+  function setTxStatus(status) {
+    $("#tx_status").html(status);
+  }
 });

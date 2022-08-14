@@ -125,8 +125,11 @@ class GameController extends Controller {
                 'comment' => 'required',
                 'full_comment' => 'required',
                 // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'tx_hash' => ['required', 'string', 'regex:/^0x([A-Fa-f0-9]{64})$/']
             ]);
 
+            // TODO - CryptoDarkhorse : verify transaction hash
+            
             $index = 'user|' . Auth::user()->id . '|identifier';
 
             $lat = $request->get('mark_lat');
@@ -159,8 +162,6 @@ class GameController extends Controller {
                 'full_comment' => $request->get('full_comment'),
                 // 'photo' => $request->get('photo'),
                 'photo' => 'game.jpg',
-                'city_lat' => $request->get('city_lat'),
-                'city_long' => $request->get('city_long'),
                 'mark_lat' => $request->get('mark_lat'),
                 'mark_long' => $request->get('mark_long'),
                 'user_id' => Auth::user()->id,

@@ -22,7 +22,7 @@ class Web3Controller
         return $this->generateSignatureMessage($nonce);
     }
 
-    public function store()
+    public function login()
     {
         $data = request()->validate([
             'address' => ['required', 'string', 'regex:/0x[a-fA-F0-9]{40}/m'],
@@ -80,6 +80,10 @@ class Web3Controller
         request()->session()->regenerateToken();
 
         return response()->noContent();
+    }
+
+    public function getDepositAddress() {
+        
     }
 
     protected function getUserModel(): Model

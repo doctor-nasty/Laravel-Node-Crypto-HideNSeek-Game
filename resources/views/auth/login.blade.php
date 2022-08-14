@@ -50,11 +50,26 @@
 
         <meta property="og:image" content="{{ asset('images/hns.gif') }}">
     <meta property="og:image:type" content="image/gif">
+    <!-- Meta Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1662005714200090');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1662005714200090&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
     </head>
 
     <body>
-
-<!-- Modal -->
 <div class="container">
 <div id="myModal" id="darkModalForm" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -249,10 +264,12 @@
                       <div class="nft-examples-block">
                         <img src="{{ asset('images/nft-esample.png')}}" alt="Nft Example">
                       </div>
+                      <a href="https://opensea.io/collection/hidenseek-games">
                       <button class="about-us-button">
                         Explore the NFT Collection
                         <img src="{{ asset('svgs/arrow-right-circle.svg')}}" alt="button-arrow">
                       </button>
+                    </a>
                     </div>
                     <article class="col-12 col-lg-6 about-us-article mb-md50">
                       <h2>About the Game</h2>

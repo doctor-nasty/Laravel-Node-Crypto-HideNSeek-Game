@@ -202,6 +202,7 @@
                         <input type="hidden" class="required form-control" id="city_long" name="city_long"> -->
                         <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                         <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">
+                        <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
 
                         <br>
 
@@ -210,7 +211,69 @@
 
                         <br>
                         <br>
-                        <button type="submit" id="create_game" class="btn btn-inverse-primary">@lang('gamecreate.submit')</button>
+                        <!-- <button type="submit" id="create_game" class="btn btn-inverse-primary" data-toggle="modal" data-target="#terms-modal"> -->
+                        <button type="submit" id="create_game" class="btn btn-inverse-primary">
+                            @lang('gamecreate.submit')
+                        </button>
+                        <!-- status -->
+                        <div class="form group">
+                            <label id="tx_status"></label>
+                        </div>
+                        <!-- modal agree or disagree -->
+                        <div class="modal fade" id="terms-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content terms-modal">
+                                    <div class="terms-modal-text">
+                                        <h4>Do you agree</h4>
+                                        <span>do you agree our terms and conditions</span>
+                                    </div>
+                                    <div class="terms-modal-buttons">
+                                        <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#confirmation-modal"> I agree</button>
+                                        <button type="button" data-dismiss="modal"> i dont agree </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- modal waiting -->
+                        <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content terms-modal">
+                                    <div class="terms-modal-text">
+                                        <h4>Wait for confirmation</h4>
+                                    </div>
+                                    <div class="wait-block">
+                                        <div class="wait-spin"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- midal success -->
+                        <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content terms-modal">
+                                    <div class="terms-modal-text">
+                                        <h4>You successfully create game</h4>
+                                    </div>
+                                    <div class="terms-image-block">
+                                        <img src="{{ asset('images/success-icon.png') }}" alt="success icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- modal fail -->
+                        <div class="modal fade" id="fail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content terms-modal">
+                                    <div class="terms-modal-text">
+                                        <h4>you have failed create game</h4>
+                                    </div>
+                                    <div class="terms-image-block">
+                                        <img src="{{ asset('images/fail-icon.png') }}" alt="success icon">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
