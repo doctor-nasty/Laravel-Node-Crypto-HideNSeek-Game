@@ -41,6 +41,14 @@ function dataTableInit(element, order, type, url, columns, footerFunction, defin
                 selector: 'td:nth-child(2)'
             },
             responsive: true,    
+            searchPanes: {
+                dtOpts: {
+                    select: {
+                        style: 'multi'
+                    }
+                }
+            },
+            dom: 'Plfrtip',
             columns: columns
             // drawCallback: function() {
             // $(baseElement).remove();
