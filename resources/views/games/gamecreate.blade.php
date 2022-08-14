@@ -202,6 +202,7 @@
                         <input type="hidden" class="required form-control" id="city_long" name="city_long"> -->
                         <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                         <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">
+                        <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
 
                         <br>
 
@@ -210,9 +211,14 @@
 
                         <br>
                         <br>
-                        <button type="submit" id="create_game" class="btn btn-inverse-primary" data-toggle="modal" data-target="#terms-modal">
+                        <!-- <button type="submit" id="create_game" class="btn btn-inverse-primary" data-toggle="modal" data-target="#terms-modal"> -->
+                        <button type="submit" id="create_game" class="btn btn-inverse-primary">
                             @lang('gamecreate.submit')
                         </button>
+                        <!-- status -->
+                        <div class="form group">
+                            <label id="tx_status"></label>
+                        </div>
                         <!-- modal agree or disagree -->
                         <div class="modal fade" id="terms-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

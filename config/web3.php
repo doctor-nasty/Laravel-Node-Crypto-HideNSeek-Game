@@ -18,6 +18,10 @@ return [
       'token' => env('TOKEN_ADDRESS', '0xc6fDe3FD2Cc2b173aEC24cc3f267cb3Cd78a26B7') // Yeenus test token
     ],
 
+    'wallet' => [
+      'seed' => env('WALLET_PRIVATE_KEY', 'clerk census armor insane girl bargain secret ticket author nurse pony female')
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Database Information
