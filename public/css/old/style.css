@@ -28792,7 +28792,6 @@ div.tagsinput span.tag a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  overflow: hidden;
   z-index: 3;
   margin-left: auto;
   margin-right: auto;
@@ -28805,6 +28804,49 @@ div.tagsinput span.tag a {
   padding: 0 30px;
   color: #fff;
   font-size: 18px;
+  position: relative;
+}
+.dropdown-btn-list {
+  display: none;
+}
+.dashboard-dropdown-navigation {
+  position: absolute;
+  top: 94px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background-color: black;
+  z-index: 4;
+  display: none;
+  padding: 20px 0;
+}
+.dashboard-dropdown-navigation  ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.dashboard-dropdown-navigation  li {
+  display: flex;
+}
+.dropdown-navigation-socmedia {
+  display: flex;
+  justify-content: center;
+}
+.dropdown-navigation-socmedia .dashbord-sidebar-social{
+  margin-bottom: 0;
+  padding: 20px 30px;
+}
+.dashboard-dropdown-navigation  .dropdown-link {
+  font-size: 18px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  color: #fff;
+  padding: 20px 30px;
+}
+.dashboard-dropdown-navigation  a:hover{
+  background: #1f1f1f;
+  text-decoration: none;
 }
 .dashboard-nav ul {
   display: flex;
@@ -28877,12 +28919,48 @@ div.tagsinput span.tag a {
 }
 
 /* dashboiard sidebar*/
-
 .dashbord-sidebar {
   width: 257px;
   height: 100vh;
   position: relative;
   z-index: 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.creat-game-button-block {
+  display: flex;
+  justify-content: center;
+  margin: 22px 0 0 0;
+  
+}
+.creat-game-button{
+  width: 200px;
+  height: 44px;
+  background: #0A63EA;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dashbord-sidebar-small .creat-game-button{
+  width: 40px;
+  height: 40px;
+}
+.dashbord-sidebar-small .creat-game-button span {
+  display: none;
+}
+.dashbord-sidebar-social {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 26px;
+}
+.dashbord-sidebar-social .nav-icon{
+  margin: 0 8px;
 }
 .dashboard-content {
   padding-top: 96px;
@@ -28904,17 +28982,19 @@ div.tagsinput span.tag a {
 }
 .dashbord-sidebar .dashbord-sidebar-body {
   width: 257px;
-  height: 100%;
-  margin-top: 100px;
+  height: 100vh;
   padding-left: 20px;
   padding-right: 20px;
-  padding-top: 52px;
+  padding-top: 152px;
   position: fixed;
   transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
   background: #000;
   border-right: 1px solid #2a2a2a;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .dashbord-sidebar-small .dashbord-sidebar-body {
   width: 80px;
@@ -28988,6 +29068,7 @@ div.tagsinput span.tag a {
 .dashboard-content {
   flex: 1;
 }
+/* media 992 */
 @media (max-width: 992px) {
   .dashboard-content {
     margin-left: 80px;
@@ -29026,13 +29107,26 @@ div.tagsinput span.tag a {
     position: absolute;
     z-index: 9;
   }
+  .dashbord-sidebar .creat-game-button{
+    width: 40px;
+    height: 40px;
+  }
+  .dashbord-sidebar .creat-game-button span {
+    display: none;
+  }
+  .dashbord-sidebar-small .creat-game-button{
+    width: 200px;
+    height: 44px;
+  }
+  .dashbord-sidebar-small .creat-game-button span {
+    display: block;
+  }
   .dashbord-sidebar-small .dashbord-sidebar-body {
     width: 257px;
     height: 100%;
-    margin-top: 100px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 52px;
+    padding-top: 152px;
     position: fixed;
     transition: -webkit-transform 0.3s ease-in-out;
     transition: transform 0.3s ease-in-out;
@@ -29055,12 +29149,22 @@ div.tagsinput span.tag a {
     white-space: nowrap;
   }
 }
+/* media 576 */
 @media (max-width: 576px) {
   .dashbord-sidebar {
     display: none;
   }
+  .sidebar-btn-list {
+    display: none;
+  }
   .dashboard-content {
     margin-left: 0;
+  }
+  .dropdown-btn-list{
+    display: block;
+  }
+  .dashboard-dropdown-navigation {
+    display: none;
   }
 }
 /* dashboard navigation */
@@ -29111,6 +29215,7 @@ div.tagsinput span.tag a {
   font-weight: 700;
   display: block;
 }
+/* dashboard content */
 .dashboard-card {
   border-radius: 16px;
   border: 1px solid #2a2a2a;
