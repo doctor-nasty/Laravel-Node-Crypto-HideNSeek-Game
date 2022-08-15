@@ -17,10 +17,50 @@
              <div class="notification-number">3</div>
           </button>
         </li>
-        <li>
+        <li class="sidebar-btn-list">
           <button tupe="button" class="menu-btn burger-menu-btn">
             <img src="{{ asset('svgs/sidebar-menu.svg') }}" alt="sidebar menu item">
           </button>
+        </li>
+        <li class="dropdown-btn-list">
+          <button tupe="button" class="menu-btn dropdown-menu-btn">
+            <img src="{{ asset('svgs/burger-menu-button.svg') }}" alt="sidebar menu item">
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <nav class="dashboard-dropdown-navigation">
+      <ul>
+        <li>
+          <a href="{{ url('/') }}" class="dropdown-link">Dashboard</a>
+        </li>
+        <li>
+          <a href="{{ asset('svgs/game-controller.svg') }}" class="dropdown-link">Games</a>
+        </li>
+        <li>
+          <a href="{{ asset('svgs/shopping-bag.svg') }}" class="dropdown-link">My Bids</a>
+        </li>
+        <li>
+          <a href="{{ asset('svgs/shopping-bag.svg') }}" class="dropdown-link">Delegations</a>
+        </li>
+        <li>
+          <a href="{{ asset('svgs/file-text.svg') }}" class="dropdown-link">Documentation</a>
+        </li>
+        <li>
+          <a href="{{ url('/') }}" class="dropdown-link">Creat Game</a>
+        </li>
+        <li class="dropdown-navigation-socmedia">
+          <div class="dashbord-sidebar-social">
+            <a href="https://t.me/hidenseek_group" class="nav-icon">
+              <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
+            </a>
+            <a href="https://discord.gg/DNYBCqztSv" class="nav-icon">
+              <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
+            </a>
+            <a href="https://twitter.com/hidenseek_games" class="nav-icon">
+              <img src="{{ asset('svgs/twitter.svg')}}" alt="twitter icon">
+            </a>
+          </div>
         </li>
       </ul>
     </nav>
@@ -32,4 +72,7 @@
     const sideBar = document.querySelector('.dashbord-sidebar');
     sideBar.classList.toggle("dashbord-sidebar-small");
   }
+  $(".dropdown-menu-btn").click(function(){
+    $(".dashboard-dropdown-navigation").slideToggle();
+  });
 </script>
