@@ -66,32 +66,25 @@
             @endif
             <div class="row">
               <div class="col-md-6 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex flex-row p-3">
-                      <div class="align-self-top">
-                        <p class="card-title mb-1 font-weight-bold">@lang('dashboard.games_played')</p>
-                        <h3 class="mb-0">{{$games_played}}</h3>
-                      </div>
-                      <div class="align-self-center flex-grow text-right">
-                        <i class="icon-lg mdi mdi-chart-pie text-primary"></i>
-                      </div>
-                    </div>
+                <div class="dashboard-card">
+                  <div class="dashboard-card-text">
+                    <h5>@lang('dashboard.games_played')</h5>
+                    <span class="dashboard-card-number">{{$games_played}}</span>
+                  </div>
+                  <div class="dashboard-card-image">
+                    <img src="{{ asset('images/component2.png') }}" alt="">
                   </div>
                 </div>
               </div>
               <div class="col-md-6 grid-margin">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="d-flex flex-row p-3">
-                      <div class="align-self-top">
-                        <p class="card-title mb-1 font-weight-bold">@lang('dashboard.points_earned')</p>
-                        <h3 class="mb-0">{{Auth::user()->total_winning_points}}</h3>
-                      </div>
-                      <div class="align-self-center flex-grow text-right">
-                        <i class="icon-lg mdi mdi-cash-multiple text-warning"></i>
-                      </div>
-                    </div>
+                <div class="dashboard-card">
+                  <div class="dashboard-card-text">
+                    <h5>@lang('dashboard.points_earned')</h5>
+                    <span class="dashboard-card-number">120</span>
+                  </div>
+                  <!-- <span class="dashboard-card-number">{{Auth::user()->total_winning_points}}</span> -->
+                  <div class="dashboard-card-image">
+                    <img src="{{ asset('images/component.png') }}" alt="">
                   </div>
                 </div>
               </div>
