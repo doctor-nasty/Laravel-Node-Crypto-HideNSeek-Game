@@ -44,6 +44,14 @@
           <div class="sidebar-item-title">Documentation</div>
         </a>
       </div>
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('settings') ? 'active' : '' }}">
+        <a href="{{ url('/settings') }}">
+          <div class="sidebar-item-icon-box">
+            <img src="{{ asset('svgs/file-text.svg') }}" alt="">
+          </div>
+          <div class="sidebar-item-title">Settings</div>
+        </a>
+      </div>
       <div class="creat-game-button-block">
         <a href="{{ url('games/create') }}">
         <button type="button" class="creat-game-button" title="Creat Game"> 

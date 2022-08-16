@@ -83,8 +83,8 @@ class UserController extends Controller
     public function settings()
     {
         $user = Auth::user();
-        return view('pages.settings', compact('user', $user))
-        ->with('title', Lang::trans('title.settings'));
+        return view('pages.settings', compact('user'))
+        ->with('title', 'Settings');
     }
 
     public function edit($id)

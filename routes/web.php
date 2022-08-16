@@ -43,9 +43,9 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     // Route::post('/subscription/cancel', 'MyControllers\SubscriptionController@cancel')->name('subscription.cancel');
     // Route::get('/profile', 'MyControllers\UserController@profile');
 
-    Route::get('users', 'MyControllers\UserController@users')->name('users');
-    Route::post('users', 'MyControllers\UserController@usersPost')->name('users.post');
-    Route::get('user/{id}', 'MyControllers\UserController@show')->name('users.show');
+    // Route::get('users', 'MyControllers\UserController@users')->name('users');
+    // Route::post('users', 'MyControllers\UserController@usersPost')->name('users.post');
+    // Route::get('user/{id}', 'MyControllers\UserController@show')->name('users.show');
 
 
     Route::get('settings', 'MyControllers\UserController@settings')->name('settings');
@@ -59,8 +59,9 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     Route::get('/test-txt-file', 'MyControllers\GameController@webhook2');
     Route::post('getGameModalHtml', 'MyControllers\GameController@getGameModalHtml');
     Route::post('getGameEditModalHtml', 'MyControllers\GameController@getGameEditModalHtml');
-    Route::get('/points', 'MyControllers\PointsController@index');
+    // Route::get('/points', 'MyControllers\PointsController@index');
     Route::get('/documentation', 'MyControllers\PagesController@documentation');
+    Route::get('/delegations', 'MyControllers\PagesController@delegations');
     // Route::get('requests', 'RequestsController@requests');
     // Route::post('requests', ['as' => 'requests.store', 'uses' => 'RequestsController@requestsSaveData']);
     // Route::get('settings/password', function() {
@@ -100,9 +101,9 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     Route::get('/deposit_address', 'Web3Controller@getDepositAddress');
 });
 
-Route::post('list/users', 'JsController@ListUsers');
+// Route::post('list/users', 'JsController@ListUsers');
 Route::post('list/games', 'JsController@ListGames');
-Route::post('list/points', 'JsController@ListPoints');
+// Route::post('list/points', 'JsController@ListPoints');
 Route::post('list/own_games', 'JsController@ListOwnGames');
 Route::post('list/bid_games', 'JsController@ListBidGames');
 

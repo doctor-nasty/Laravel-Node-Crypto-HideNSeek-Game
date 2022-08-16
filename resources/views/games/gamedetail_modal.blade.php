@@ -90,13 +90,13 @@
                 <div class="tab-pane fade show active" id="profile-6-1" role="tabpanel" aria-labelledby="tab-6-1">
                     @lang('gamedetail.username'): {{ $user->username }}
                 </div>
-                <div class="tab-pane fade show active" id="profile-6-1" role="tabpanel" aria-labelledby="tab-6-1">
+                {{-- <div class="tab-pane fade show active" id="profile-6-1" role="tabpanel" aria-labelledby="tab-6-1">
                     @lang('gamedetail.rating'): {{ $user->averageRating }}
-                </div>
-                <br>
+                </div> --}}
+                {{-- <br>
                 <div class="tab-pane fade show active" id="profile-6-1" role="tabpanel" aria-labelledby="tab-6-1">
                     <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm">@lang('gamedetail.rate')</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

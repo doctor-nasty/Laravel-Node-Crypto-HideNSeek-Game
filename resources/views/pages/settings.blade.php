@@ -21,23 +21,23 @@
             <div class="card">
                 <div class="card-body">
                     <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
-                        <h4 class="card-title mb-0">@lang('settings.details')</h4>
+                        <h4 class="card-title mb-0">Settings</h4>
                         <ul class="nav nav-tabs tab-solid tab-solid-primary mb-0" id="myTab" role="tablist">
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">@lang('settings.info')</a>
+                            </li> --}}
                             <li class="nav-item">
-                                <a class="nav-link active" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">@lang('settings.info')</a>
+                                <a class="nav-link active" id="avatar-tab" data-toggle="tab" href="#avatar" role="tab" aria-controls="avatar">Avatar</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="avatar-tab" data-toggle="tab" href="#avatar" role="tab" aria-controls="avatar">@lang('settings.avatar')</a>
-                            </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" id="security-tab" data-toggle="tab" href="#security" role="tab" aria-controls="security">@lang('settings.security')</a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="wrapper">
                         <hr>
                         <div class="tab-content border-0" id="myTabContent">
-                            <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
+                            {{-- <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
                         <form enctype="multipart/form-data" method="post" action="{{ route('settings.update') }}">
                                         @csrf
                                     <div class="form-group">
@@ -76,13 +76,13 @@
                                         <button type="submit" class="btn btn-inverse-success mr-2">@lang('settings.update')</button>
                                     </div>
                         </form>
-                            </div><!-- tab content ends -->
-                            <div class="tab-pane fade" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
+                            </div> --}}
+                            <div class="tab-pane fade show active" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
                                 <form action="/settings/avatar" method="post" enctype="multipart/form-data">
                                         @csrf
                                 <div class="wrapper mb-5 mt-4">
-                                    <span class="badge badge-warning text-white">@lang('settings.note') : </span>
-                                    <p class="d-inline ml-3 text-muted">@lang('settings.note_text')</p>.</p>
+                                    <span class="badge badge-warning text-white">Note : </span>
+                                    <p class="d-inline ml-3 text-muted">Max upload size is 2 MB</p>.</p>
                                 </div>
                                     <div class="form-group">
                                         <input type="file" class="required dropify" name="avatar" id="avatarFile" aria-describedby="fileHelp">
@@ -90,7 +90,7 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                            <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
+                            {{-- <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">
                                     <form action="/settings/password" method="post" role="form">
                                             {{csrf_field()}}
                                         <div class="form-group{{ $errors->has('old') ? ' has-error' : '' }}">
@@ -123,7 +123,7 @@
                                     </div>
                                 </form>
                                 </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
