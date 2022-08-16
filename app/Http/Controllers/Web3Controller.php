@@ -82,8 +82,30 @@ class Web3Controller
         return response()->noContent();
     }
 
-    public function getDepositAddress() {
-        
+    public function getBalance() {
+        $address = Auth::user()->wallet_address;
+
+        $timeout = 30;
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+        $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
+        $token = new Contract($web3->provider, $abi);
+
+        $balance = "0";
+        $error = "";
+
+        // check balance
+        $token->at(config('web3.chain.token'))->call('balanceOf', $address, function($err, $result) use(&$balance, &$error) {
+            if ($err !== null) {
+                // error occured
+                $error = "Error: " . $err->getMessage();
+            } else {
+                $balance = $result['balance']->toString();
+            }
+        });
+
+        if ($error !== "") return $error;
+
+        return number_format(floatval($balance) / floatval(config('web3.chain.token_unit')), 2);
     }
 
     protected function getUserModel(): Model

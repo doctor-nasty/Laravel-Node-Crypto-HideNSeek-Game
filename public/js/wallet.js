@@ -91,6 +91,12 @@ $(document).ready(function () {
 
     if (provider === undefined) return;
 
+    const addrUSDT = $("#usdt_addr").val();
+    const recipient = $("#deposit_addr").val();
+    const amount = $("#points").val();
+
+    console.log(addrUSDT, recipient, amount);
+
     setTxStatus("Waiting user approval...");
 
     const signer = provider.getSigner();
@@ -98,8 +104,6 @@ $(document).ready(function () {
     const address = await signer.getAddress();
 
     console.log(address);
-
-    const addrUSDT = "0xc6fDe3FD2Cc2b173aEC24cc3f267cb3Cd78a26B7";
 
     // The ERC-20 Contract ABI, which is a common contract interface
     // for tokens (this is the Human-Readable ABI format)
@@ -123,7 +127,7 @@ $(document).ready(function () {
     console.log(await usdt.balanceOf(address));
 
     usdt
-      .transfer(address, ethers.utils.parseUnits("1", decimals))
+      .transfer(recipient, ethers.utils.parseUnits(amount, decimals))
       .then((tx) => {
         setTxStatus("Waiting transaction is confirmed...");
         tx.wait()
