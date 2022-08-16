@@ -3,13 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
 use Illuminate\Notifications\Notifiable;
 
 
 class Game_bid extends Model
 {
-    use Searchable, Notifiable;
+    use Notifiable;
 
     public $table = 'game_bids';
     protected $fillable = ['id', 'game_id', 'user_id', 'is_awarded'];

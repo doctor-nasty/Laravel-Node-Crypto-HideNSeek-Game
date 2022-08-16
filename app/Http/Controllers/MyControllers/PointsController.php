@@ -80,8 +80,8 @@ class PointsController extends Controller {
 
         $details = [
             'title' => $game->title,
-            'data' => 'მოთამაშე შემოვიდა',
-            'thanks' => 'მადლობა!',
+            'data' => 'Player has joined',
+            'thanks' => 'Thanks!',
         ];
 
         foreach ($users as $user) {
