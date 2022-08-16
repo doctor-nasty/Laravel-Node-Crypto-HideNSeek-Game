@@ -16853,13 +16853,6 @@ ol.ui.horizontal.list li:before {
   border-radius: 0.28571429rem;
   min-height: 2.85714286em;
 }
-.ui.menu:after {
-  content: "";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
 .ui.menu:first-child {
   margin-top: 0;
 }

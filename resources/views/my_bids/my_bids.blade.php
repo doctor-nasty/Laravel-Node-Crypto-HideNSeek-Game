@@ -103,7 +103,7 @@
                     data: 'district'
                 },
                 {
-                    title: 'Points',
+                    title: 'Price',
                     data: 'points'
                 },
                 {

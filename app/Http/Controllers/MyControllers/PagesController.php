@@ -19,6 +19,12 @@ class PagesController extends Controller
         ->with('title', 'Documentation');
     }
 
+    public function delegations()
+    {
+        return view('pages.delegations')
+        ->with('title', 'Delegations');
+    }
+
     public function contact()
     {
         return view('pages.contact')

@@ -1,18 +1,78 @@
-<div class="MenuTop_dashboard_menu_container__G_E3_ MenuTop_dark__hV7b9" style="top: 0px;">
-  <div class="MessageToast_container__OQq8W">
-    <div class="MessageToast_message_bar_toast__kgmRP MessageToast_hide__OKr3n">
-      <div class="MessageToast_content__EQ4ho">Please use Brave, Chrome, or Firefox to play games</div>
-    </div>
-  </div>
-  <header class="ui MenuTop_menu_container__9Gy3x menu dashboard-header">
+<div class="dashboard-header-container" style="top: 0px;">
+  <header class="dashboard-header">
     <div class="dashboard-logo">
       <img alt="HIDENSEEK GAMES LOGO" src="{{ asset('img/logo-dark.png') }}">
     </div>
-    <div class="">
-
-    </div>
+    <nav class="dashboard-nav">
+      <ul class="dashboard-nav-list">
+        <li>
+          <div class="account-block">
+            <span>12.45</span>
+            <img src="{{ asset('svgs/dollar-circle.svg') }}" alt="dolar sign">
+          </div>
+        </li>
+        <li>
+          <button tupe="button" class="menu-btn">
+             <img src="{{ asset('svgs/bell.svg') }}" alt="bell">
+             <div class="notification-number">{{ auth()->user()->unreadNotifications->count() }}</div>
+          </button>
+        </li>
+        <li class="sidebar-btn-list">
+          <button tupe="button" class="menu-btn burger-menu-btn">
+            <img src="{{ asset('svgs/sidebar-menu.svg') }}" alt="sidebar menu item">
+          </button>
+        </li>
+        <li class="dropdown-btn-list">
+          <button tupe="button" class="menu-btn dropdown-menu-btn">
+            <img src="{{ asset('svgs/burger-menu-button.svg') }}" alt="sidebar menu item">
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <nav class="dashboard-dropdown-navigation">
+      <ul>
+        <li>
+          <a href="{{ url('/') }}" class="dropdown-link">Dashboard</a>
+        </li>
+        <li>
+          <a href="{{ asset('svgs/game-controller.svg') }}" class="dropdown-link">Games</a>
+        </li>
+        <li>
+          <a href="{{ asset('svgs/shopping-bag.svg') }}" class="dropdown-link">My Bids</a>
+        </li>
+        <li>
+          <a href="{{ asset('svgs/shopping-bag.svg') }}" class="dropdown-link">Delegations</a>
+        </li>
+        <li>s
+          <a href="{{ asset('svgs/file-text.svg') }}" class="dropdown-link">Documentation</a>
+        </li>
+        <li>
+          <a href="{{ url('games/create') }}" class="dropdown-link">Create A Game</a>
+        </li>
+        <li class="dropdown-navigation-socmedia">
+          <div class="dashbord-sidebar-social">
+            <a href="https://t.me/hidenseek_group" class="nav-icon">
+              <img src="{{ asset('svgs/telegram.svg')}}" alt="telegram icon">
+            </a>
+            <a href="https://discord.gg/DNYBCqztSv" class="nav-icon">
+              <img src="{{ asset('svgs/discord.svg')}}" alt="discord icon">
+            </a>
+            <a href="https://twitter.com/hidenseek_games" class="nav-icon">
+              <img src="{{ asset('svgs/twitter.svg')}}" alt="twitter icon">
+            </a>
+          </div>
+        </li>
+      </ul>
+    </nav>
   </header>
-  <div class="MenuTop_mobile_menu__hgvNq">
-    <span class="d-flex flex-column w-100"></span>
-  </div>
 </div>
+<script>
+  const burgerMenu = document.querySelector('.burger-menu-btn');
+  burgerMenu.onclick = function (){
+    const sideBar = document.querySelector('.dashbord-sidebar');
+    sideBar.classList.toggle("dashbord-sidebar-small");
+  }
+  $(".dropdown-menu-btn").click(function(){
+    $(".dashboard-dropdown-navigation").slideToggle();
+  });
+</script>
