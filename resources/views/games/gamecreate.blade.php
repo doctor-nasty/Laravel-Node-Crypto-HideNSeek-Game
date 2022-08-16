@@ -203,7 +203,8 @@
                         <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                         <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">
                         <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
-
+                        <input type="hidden" class="required form-control" id="deposit_addr" value="{{ config('web3.wallet.address') }}">
+                        <input type="hidden" class="required form-control" id="usdt_addr" value="{{ config('web3.chain.token') }}">
                         <br>
 
                         <br>

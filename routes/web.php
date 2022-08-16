@@ -98,7 +98,7 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     })->name('mark');
 
     // web3 endpoints
-    Route::get('/deposit_address', 'Web3Controller@getDepositAddress');
+    Route::get('/get_balance', 'Web3Controller@getBalance');
 });
 
 // Route::post('list/users', 'JsController@ListUsers');

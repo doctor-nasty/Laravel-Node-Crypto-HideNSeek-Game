@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username', 20)->nullable();
             $table->string('wallet_address', '45')->unique();
+            $table->integer ('payment_nonce')->default(-1);
             $table->string('status', 255)->default('3');
             $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
