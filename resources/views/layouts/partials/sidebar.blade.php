@@ -4,7 +4,7 @@
       <div class="dashbord-sidebar-title">
         <h3>HIDENSEEK.GAMES</h3>
       </div>
-      <div class="dashbord-sidebar-item dashbord-sidebar-item-active" id="">
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('/') ? 'active' : '' }}" id="">
         <a href="{{ url('/') }}">
           <div class="sidebar-item-icon-box">
             <img src="{{ asset('svgs/home.svg') }}" alt="home icon">
@@ -12,7 +12,7 @@
           <div class="sidebar-item-title">Dashboard</div>
         </a>
       </div>
-      <div class="dashbord-sidebar-item">
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('games') ? 'active' : '' }}">
         <a href="{{ url('/games') }}">
           <div class="sidebar-item-icon-box">
             <img src="{{ asset('svgs/game-controller.svg') }}" alt="">
@@ -20,7 +20,7 @@
           <div class="sidebar-item-title">Games</div>
         </a>
       </div>
-      <div class="dashbord-sidebar-item">
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('my_bids') ? 'active' : '' }}">
         <a href="{{ url('/my_bids') }}">
           <div class="sidebar-item-icon-box">
             <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="">
@@ -28,7 +28,7 @@
           <div class="sidebar-item-title">My Bids</div>
         </a>
       </div>
-      <div class="dashbord-sidebar-item">
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('delegations') ? 'active' : '' }}">
         <a href="{{ url('/delegations') }}">
           <div class="sidebar-item-icon-box">
               <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="">
@@ -36,7 +36,7 @@
           <div class="sidebar-item-title">Delegations</div>
         </a>
       </div>
-      <div class="dashbord-sidebar-item">
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('documentation') ? 'active' : '' }}">
         <a href="{{ url('/documentation') }}">
           <div class="sidebar-item-icon-box">
             <img src="{{ asset('svgs/file-text.svg') }}" alt="">
