@@ -27,21 +27,21 @@ Auth::routes(['verify' => false]);
 //Route::get('/games', 'Games\GameController@getGames')->name('games');
 //Route::get('/game/{id}', 'Games\GameController@getGame')->name('game');
 Route::group(['middleware' => ['auth', 'status']], function () {
-    Route::post('/buypointspaypal', 'MyControllers\PointsController@buyPointsPaypal')->name('buypoints.paypal');
+    // Route::post('/buypointspaypal', 'MyControllers\PointsController@buyPointsPaypal')->name('buypoints.paypal');
     Route::post('', 'MyControllers\GameController@activate')->name('games.activate');
 
     Route::get('/', 'MyControllers\MainController@getMain')->name('dashboard');
-    Route::get('/plans', 'MyControllers\PlanController@index')->name('plans.index');
-    Route::get('/coinbase', 'MyControllers\CoinbaseController@index')->name('coinbase.index');
-    Route::get('/plan/{plan}', 'MyControllers\PlanController@show')->name('plans.show');
-    Route::get('/buypoints', 'MyControllers\PointsController@buyPoints')->name('buy_points');
+    // Route::get('/plans', 'MyControllers\PlanController@index')->name('plans.index');
+    // Route::get('/coinbase', 'MyControllers\CoinbaseController@index')->name('coinbase.index');
+    // Route::get('/plan/{plan}', 'MyControllers\PlanController@show')->name('plans.show');
+    // Route::get('/buypoints', 'MyControllers\PointsController@buyPoints')->name('buy_points');
     Route::get('/bid/{game_id}', 'MyControllers\PointsController@bid')->name('bid');
     Route::post('/bid_answer', 'MyControllers\PointsController@bidAnswer')->name('bid.answer');
-    Route::post('/buy_points', 'MyControllers\PointsController@buyPoint')->name('buy.points');
-    Route::post('/buy-points', 'MyControllers\CoinbaseController@buyPoint')->name('buy.points.coinbase');
-    Route::post('/subscription', 'MyControllers\SubscriptionController@create')->name('subscription.create');
-    Route::post('/subscription/cancel', 'MyControllers\SubscriptionController@cancel')->name('subscription.cancel');
-    Route::get('/profile', 'MyControllers\UserController@profile');
+    // Route::post('/buy_points', 'MyControllers\PointsController@buyPoint')->name('buy.points');
+    // Route::post('/buy-points', 'MyControllers\CoinbaseController@buyPoint')->name('buy.points.coinbase');
+    // Route::post('/subscription', 'MyControllers\SubscriptionController@create')->name('subscription.create');
+    // Route::post('/subscription/cancel', 'MyControllers\SubscriptionController@cancel')->name('subscription.cancel');
+    // Route::get('/profile', 'MyControllers\UserController@profile');
 
     Route::get('users', 'MyControllers\UserController@users')->name('users');
     Route::post('users', 'MyControllers\UserController@usersPost')->name('users.post');
@@ -61,18 +61,18 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     Route::post('getGameEditModalHtml', 'MyControllers\GameController@getGameEditModalHtml');
     Route::get('/points', 'MyControllers\PointsController@index');
     Route::get('/documentation', 'MyControllers\PagesController@documentation');
-    Route::get('requests', 'RequestsController@requests');
-    Route::post('requests', ['as' => 'requests.store', 'uses' => 'RequestsController@requestsSaveData']);
-    Route::get('settings/password', function() {
-        return view('pages.settings');
-    });
-    Route::post('settings/password', 'MyControllers\UpdatePasswordController@update');
+    // Route::get('requests', 'RequestsController@requests');
+    // Route::post('requests', ['as' => 'requests.store', 'uses' => 'RequestsController@requestsSaveData']);
+    // Route::get('settings/password', function() {
+    //     return view('pages.settings');
+    // });
+    // Route::post('settings/password', 'MyControllers\UpdatePasswordController@update');
     Route::post('settings/avatar', 'MyControllers\UserController@update_avatar');
-    Route::get('search', 'MyControllers\SearchController@search');
-    Route::get('contact', 'ContactUsController@contactUS');
-    Route::post('save_contact', ['as' => 'save_contact', 'uses' => 'ContactUsController@contactSaveData']);
-    Route::get('redeem', 'RedeemController@redeem');
-    Route::post('redeem', ['as' => 'redeem.store', 'uses' => 'RedeemController@redeemSaveData']);
+    // Route::get('search', 'MyControllers\SearchController@search');
+    // Route::get('contact', 'ContactUsController@contactUS');
+    // Route::post('save_contact', ['as' => 'save_contact', 'uses' => 'ContactUsController@contactSaveData']);
+    // Route::get('redeem', 'RedeemController@redeem');
+    // Route::post('redeem', ['as' => 'redeem.store', 'uses' => 'RedeemController@redeemSaveData']);
     // Route::get('send', 'MyControllers\MainController@sendNotification');
     // Route::get('/notify', function () {
 

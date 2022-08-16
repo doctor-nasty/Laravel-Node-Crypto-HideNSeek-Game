@@ -45,10 +45,12 @@
         </a>
       </div>
       <div class="creat-game-button-block">
+        <a href="{{ url('games/create') }}">
         <button type="button" class="creat-game-button" title="Creat Game"> 
           <img src="{{ asset('svgs/plus.svg') }}" alt="">
-          <span>Creat Game</span>
+          <span>Create A Game</span>
         </button>
+      </a>
       </div>
     </div>
     <div class="dashbord-sidebar-social">
