@@ -160,7 +160,7 @@ class GameController extends Controller {
         $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
         $token = new Contract($web3->provider, $abi);
 
-        $points = $points * 100000000; // decimals
+        $points = $points * intval(config('web3.chain.token_unit')); // decimals
 
         $data = $token->at($token_addr)->getData('transfer', config('web3.wallet.address'), $points);
 

@@ -7,7 +7,7 @@
       <ul class="dashboard-nav-list">
         <li>
           <div class="account-block">
-            <span>12.45</span>
+            <span id="balance">0.00</span>
             <img src="{{ asset('svgs/dollar-circle.svg') }}" alt="dolar sign">
           </div>
         </li>
@@ -75,4 +75,13 @@
   $(".dropdown-menu-btn").click(function(){
     $(".dashboard-dropdown-navigation").slideToggle();
   });
+
+  $.ajax({
+    url: "{{ url('/get_balance') }}",
+  })
+    .done(function( data ) {
+      $('#balance').html(data);
+      console.log( "Sample of data:", data.slice( 0, 100 ) );
+    });
+
 </script>
