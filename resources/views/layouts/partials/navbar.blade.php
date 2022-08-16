@@ -14,7 +14,7 @@
         <li>
           <button tupe="button" class="menu-btn">
              <img src="{{ asset('svgs/bell.svg') }}" alt="bell">
-             <div class="notification-number">3</div>
+             <div class="notification-number">{{ auth()->user()->unreadNotifications->count() }}</div>
           </button>
         </li>
         <li class="sidebar-btn-list">
@@ -43,11 +43,11 @@
         <li>
           <a href="{{ asset('svgs/shopping-bag.svg') }}" class="dropdown-link">Delegations</a>
         </li>
-        <li>
+        <li>s
           <a href="{{ asset('svgs/file-text.svg') }}" class="dropdown-link">Documentation</a>
         </li>
         <li>
-          <a href="{{ url('/') }}" class="dropdown-link">Creat Game</a>
+          <a href="{{ url('games/create') }}" class="dropdown-link">Create A Game</a>
         </li>
         <li class="dropdown-navigation-socmedia">
           <div class="dashbord-sidebar-social">

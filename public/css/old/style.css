@@ -28946,6 +28946,7 @@ div.tagsinput span.tag a {
   color: #FFFFFF;
   font-weight: 600;
   cursor: pointer;
+  border: 0;
 }
 .dashbord-sidebar-small .creat-game-button{
   width: 40px;

@@ -165,7 +165,7 @@
                     data: 'district'
                 },
                 {
-                    title: 'Points',
+                    title: 'Price',
                     data: 'points'
                 },
                 // {
@@ -235,7 +235,7 @@
                     data: 'district'
                 },
                 {
-                    title: 'Points',
+                    title: 'Price',
                     data: 'points'
                 },
                 // {
