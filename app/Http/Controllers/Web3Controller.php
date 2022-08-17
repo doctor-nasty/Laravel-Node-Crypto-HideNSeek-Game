@@ -110,70 +110,28 @@ class Web3Controller
     }
 
     public function canCreateGame() {
-        $nfts = $this->getNFTs();
+        $web3_helper = new \App\Lib\Web3Helper();
 
-        for ($i = 0; $i < count($nfts); $i++) {
-            if ($nfts[$i] <= 125) return "Yes";
+        if ($web3_helper->canCreateGame(Auth::user()->wallet_address)) {
+            return "Yes";
+        } else {
+            return "No";
         }
-
-        return "No";
     }
 
     public function canPlayGame() {
-        $nfts = $this->getNFTs();
+        $web3_helper = new \App\Lib\Web3Helper();
 
-        for ($i = 0; $i < count($nfts); $i++) {
-            if ($nfts[$i] > 125) return "Yes";
+        if ($web3_helper->canPlayGame(Auth::user()->wallet_address)) {
+            return "Yes";
+        } else {
+            return "No";
         }
-
-        return 'No';
     }
 
     public function getNFTs() {
-        $address = Auth::user()->wallet_address;
-        
-        $tokenIds = [];
-
-        $client = new Client();
-        $page_key = '';
-        $total_cnt = 0;
-
-        $rep = 0;
-
-        while (true) {
-            $url = config('web3.chain.rpc') . '/getNFTs';
-            $url .= '?owner='. $address;
-            $url .= '&contractAddresses[]=' . config('web3.chain.nft');
-            $url .= '&withMetadata=false';
-
-            if ($page_key !== '') {
-                $url .= '&pageKey=' . $page_key;
-            }
-
-            $response = $client->request('GET', $url, [
-                'headers' => [
-                    'Accept' => 'application/json',
-                ],
-            ]);
-
-            $result = json_decode($response->getBody());
-
-            $total_cnt = $result->totalCount;
-
-            $cnt = count($result->ownedNfts);
-            for ($i = 0; $i < $cnt; $i++) {
-                array_push($tokenIds, hexdec($result->ownedNfts[$i]->id->tokenId));
-            }
-
-            if (isset($result->pageKey)) {
-                // pages
-                $page_key =  $result->pageKey;
-            } else {
-                break;
-            }
-        }
-        
-        return $tokenIds;
+        $web3_helper = new \App\Lib\Web3Helper();
+        return $web3_helper->getNFTs(Auth::user()->wallet_address);
     }
 
     protected function getUserModel(): Model

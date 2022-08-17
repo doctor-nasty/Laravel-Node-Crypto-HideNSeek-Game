@@ -46,9 +46,11 @@
         <li>s
           <a href="{{ asset('svgs/file-text.svg') }}" class="dropdown-link">Documentation</a>
         </li>
+        @if (session('can_create'))
         <li>
           <a href="{{ url('games/create') }}" class="dropdown-link">Create A Game</a>
         </li>
+        @endif
         <li class="dropdown-navigation-socmedia">
           <div class="dashbord-sidebar-social">
             <a href="https://t.me/hidenseek_group" class="nav-icon">

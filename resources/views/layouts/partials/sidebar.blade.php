@@ -52,6 +52,7 @@
           <div class="sidebar-item-title">Settings</div>
         </a>
       </div>
+      @if (session('can_create'))
       <div class="creat-game-button-block">
         <a href="{{ url('games/create') }}">
         <button type="button" class="creat-game-button" title="Creat Game"> 
@@ -60,6 +61,7 @@
         </button>
       </a>
       </div>
+      @endif
     </div>
     <div class="dashbord-sidebar-social">
       <a href="https://t.me/hidenseek_group" class="nav-icon">
