@@ -153,6 +153,75 @@ $(document).ready(function () {
       });
   });
 
+  $("#join_game").on("click", async function (event) {
+    event.preventDefault();
+
+    // check treasure token ownership
+    let response = await fetch("/can_play_game");
+    let message = await response.text();
+
+    console.log(message);
+    if (message !== "Yes") {
+      alert("Can't join the game - you need a treasure NFT to join a game!");
+      return;
+    }
+
+    const provider = await getProvider();
+
+    if (provider === undefined) return;
+
+    const addrUSDT = $("#usdt_addr").val();
+    const recipient = $("#deposit_addr").val();
+    const amount = $("#points").val();
+
+    console.log(addrUSDT, recipient, amount);
+
+    setTxStatus("Waiting user approval...");
+
+    const signer = provider.getSigner();
+
+    const address = await signer.getAddress();
+
+    console.log(address);
+
+    // The ERC-20 Contract ABI, which is a common contract interface
+    // for tokens (this is the Human-Readable ABI format)
+    const usdtAbi = [
+      // Read-Only Functions
+      "function balanceOf(address owner) view returns (uint256)",
+      "function decimals() view returns (uint8)",
+      "function symbol() view returns (string)",
+
+      // Authenticated Functions
+      "function transfer(address to, uint amount) returns (bool)",
+
+      // Events
+      "event Transfer(address indexed from, address indexed to, uint amount)",
+    ];
+
+    // The Contract object
+    const usdt = new ethers.Contract(addrUSDT, usdtAbi, signer);
+    const decimals = await usdt.decimals();
+
+    console.log(await usdt.balanceOf(address));
+
+    usdt
+      .transfer(recipient, ethers.utils.parseUnits(amount, decimals))
+      .then((tx) => {
+        setTxStatus("Waiting transaction is confirmed...");
+        tx.wait()
+          .then((res) => {
+            console.log(tx.hash);
+            $("#tx_hash").val(tx.hash);
+            $("#form_join").trigger("submit");
+          })
+          .catch((err) => setTxStatus(err.message));
+      })
+      .catch((err) => {
+        setTxStatus(err.message);
+      });
+  });
+
   function setTxStatus(status) {
     $("#tx_status").html(status);
   }

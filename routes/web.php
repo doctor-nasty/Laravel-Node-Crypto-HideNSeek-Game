@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     // Route::get('/coinbase', 'MyControllers\CoinbaseController@index')->name('coinbase.index');
     // Route::get('/plan/{plan}', 'MyControllers\PlanController@show')->name('plans.show');
     // Route::get('/buypoints', 'MyControllers\PointsController@buyPoints')->name('buy_points');
-    Route::get('/bid/{game_id}', 'MyControllers\PointsController@bid')->name('bid');
+    Route::post('/bid/{game_id}', 'MyControllers\PointsController@bid')->name('bid');
     Route::post('/bid_answer', 'MyControllers\PointsController@bidAnswer')->name('bid.answer');
     // Route::post('/buy_points', 'MyControllers\PointsController@buyPoint')->name('buy.points');
     // Route::post('/buy-points', 'MyControllers\CoinbaseController@buyPoint')->name('buy.points.coinbase');
