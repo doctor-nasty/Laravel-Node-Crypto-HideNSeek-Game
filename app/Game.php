@@ -11,7 +11,7 @@ class Game extends Model {
     use Rememberable;
     protected static $rememberable = true;
     public $table = 'games';
-    protected $fillable = ['id', 'identifier', 'user_id', 'points', 'type', 'title', 'comment', 'full_comment', 'city', 'district', 'status', 'photo', 'winner_user_id', 'mark_long', 'mark_lat', 'city_lat', 'city_long'];
+    protected $fillable = ['id', 'identifier', 'user_id', 'points', 'type', 'title', 'comment', 'full_comment', 'city', 'country', 'players', 'district', 'status', 'photo', 'winner_user_id', 'mark_long', 'mark_lat', 'city_lat', 'city_long'];
     protected $rules = [
         'mark_lat' => 'required',
         'mark_long' => 'required',

@@ -190,6 +190,7 @@ class GameController extends Controller {
             // 'city' => 'required',
             'mark_lat' => 'required',
             'mark_long' => 'required',
+            'players' => 'required',
             // 'district' => 'required',
             'comment' => 'required',
             'full_comment' => 'required',
@@ -216,6 +217,7 @@ class GameController extends Controller {
             $j=json_decode($result, true);
             $city = $j['address']['city']; 
             $suburb = $j['address']['suburb']; 
+            $country = $j['address']['country']; 
 
             $game = new Game([
                 'identifier' => Cache::get($index),
@@ -224,6 +226,8 @@ class GameController extends Controller {
                 'type' => $request->get('type'),
                 'city' => $city,
                 'status' => '1',
+                'country' => $country,
+                'players' => $request->get('players'),
                 // 'district' => $request->get('district'),
                 'district' => $suburb,
                 'comment' => $request->get('comment'),

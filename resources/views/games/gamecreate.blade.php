@@ -101,6 +101,16 @@
                                 <small>@lang('gamecreate.points_text')</small>
                             </div>
                             <div class="form-group">
+                                <label for="players">Players *</label>
+                                <select id="players" name="players" type="text" class="required form-control">
+                                    <option disabled selected></option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>50</option>
+                                </select>
+                                <small>How many players should join for a game to start</small>
+                            </div>
+                            <div class="form-group">
                                 <label for="full_comment">@lang('gamecreate.full_description') *</label>
                                 <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
                             </div>
