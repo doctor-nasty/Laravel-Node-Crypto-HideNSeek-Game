@@ -198,14 +198,7 @@
 
                     }
                 }
-            },
-            {
-                    title: 'Actions',
-                    data: 'status', render : function(data, type, row)
-                    {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
-                    }
-                }
+            }
 //                {
 //                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
@@ -263,7 +256,7 @@
                     title: 'Actions',
                     data: 'status', render : function(data, type, row)
                     {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
+                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">Play</button></div>';
                     }
                 }
 //                {

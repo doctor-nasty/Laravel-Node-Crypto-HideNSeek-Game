@@ -210,6 +210,10 @@
                         <small class="text text-danger">* @lang('gamecreate.code_text')</small>
                         <!-- <input type="hidden" class="required form-control" id="city_lat" name="city_lat">
                         <input type="hidden" class="required form-control" id="city_long" name="city_long"> -->
+                        <input type="" class="required form-control" id="city" name="city" value="">
+                        <input type="" class="required form-control" id="suburb" name="suburb" value="">
+                        <input type="" class="required form-control" id="country" name="country" value="">
+
                         <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                         <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">
                         <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
@@ -218,6 +222,9 @@
                         <br>
 
                         <br>
+                        <div id="city-error"></div>
+                        <div id="suburb-error"></div>
+                        <div id="country-error"></div>
                         <div class="col-md-12" id="map"></div>
 
                         <br>
@@ -325,6 +332,59 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 </script>
 
 
+<script>
+    function isEmpty(value) {//Function to check if value is Empty or Null
+              switch (typeof(value)) {
+                case "string": return (value.length === 0);
+                case "number":
+                case "boolean": return false;
+                case "undefined": return true;
+                case "object": return !value ? true : false; // handling for null.
+                default: return !value ? true : false
+              }
+            }
+
+map.on('click', function (e) {
+    $("#city").val('');
+    $("#suburb").val('');
+    $("#country").val('');
+$.ajax({
+type: "POST",
+contentType: "application/json; charset=utf-8",
+url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat=" + $('#mark_lat').val() + "&lon=" + $('#mark_long').val(),
+dataType: "json",
+success: function (data) {
+    // alert(data.address.city);
+    if(isEmpty(data.address.city)){
+        $("#city-error").replaceWith("<div id='city-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find city!</strong></div>");
+     }else {
+        $('#city').val(data.address.city);
+        $("#city-error").remove();
+     }
+    if(isEmpty(data.address.suburb)){
+        $("#suburb-error").replaceWith("<div id='suburb-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find suburb!</strong></div>");
+     }else {
+        $('#suburb').val(data.address.suburb);
+        $("#suburb-error").remove();
+     }
+    if(isEmpty(data.address.country)){
+        alert("Error");
+        $("#country-error").replaceWith("<div id='country-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find country!</strong></div>");
+     }else {
+        $('#country').val(data.address.country);
+        $("#country-error").remove();
+     }
+    // $('#city').val(data.address.city);
+    // $('#suburb').val(data.address.suburb);
+    // $('#country').val(data.address.country);
+},
+error: function (result) {
+    alert("Error");
+    // $("#map-error").replaceWith("<div id='map-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Please mark correct location!" + value + "</strong></div>");
+}
+})
+});
+    </script>
 
 
 <!-- <script>

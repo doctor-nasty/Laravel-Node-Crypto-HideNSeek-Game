@@ -20,7 +20,7 @@
 <h4 class="card-title">{{ $game->title }}</h4>
 <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
 <ul class="nav nav-tabs tab-solid  tab-solid-primary" role="tablist">
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link active" id="tab-6-1" data-toggle="tab" href="#home-6-1" role="tab" aria-controls="home-6-1" aria-selected="true">
             <i class="mdi mdi-home-outline"></i>@lang('gamedetail.basic_info')</a>
     </li>
@@ -31,7 +31,7 @@
     <li class="nav-item">
         <a class="nav-link" id="tab-6-3" data-toggle="tab" href="#contact-6-3" role="tab" aria-controls="contact-6-3" aria-selected="false">
             <i class="mdi mdi-account-outline"></i>@lang('gamedetail.game')</a>
-    </li>
+    </li> --}}
     @if($game->user_id === auth()->user()->id)
     <div class="align-self-center flex-grow text-right">
         <li class="nav-item">
@@ -58,7 +58,7 @@
 
 </ul>
 <div class="tab-content tab-content-solid">
-    <div class="tab-pane fade show active" id="home-6-1" role="tabpanel" aria-labelledby="tab-6-1">
+    {{-- <div class="tab-pane fade" id="home-6-1" role="tabpanel" aria-labelledby="tab-6-1">
         <div class="row">
             <div class="col-md-4">
                 @foreach($game->bids as $bid)
@@ -90,20 +90,13 @@
                 <div class="tab-pane fade show active" id="profile-6-1" role="tabpanel" aria-labelledby="tab-6-1">
                     @lang('gamedetail.username'): {{ $user->username }}
                 </div>
-                {{-- <div class="tab-pane fade show active" id="profile-6-1" role="tabpanel" aria-labelledby="tab-6-1">
-                    @lang('gamedetail.rating'): {{ $user->averageRating }}
-                </div> --}}
-                {{-- <br>
-                <div class="tab-pane fade show active" id="profile-6-1" role="tabpanel" aria-labelledby="tab-6-1">
-                    <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm">@lang('gamedetail.rate')</a>
-                </div> --}}
             </div>
         </div>
     </div>
     <div class="tab-pane fade" id="profile-6-2" role="tabpanel" aria-labelledby="tab-6-2">
         <span>@lang('gamedetail.players_count') {{ count($game->bids) }}</span>
-    </div>
-    <div class="tab-pane fade" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
+    </div> --}}
+    <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
         @if($game->status === 2)
         <span class="text text-danger">@lang('gamedetail.game_has_finished')</span>
         @else
