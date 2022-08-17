@@ -14,6 +14,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\GameBiddedNotification;
 
+use Web3\Web3;
+use Web3\Contract;
+use Web3\Providers\HttpProvider;
+use Web3\RequestManagers\HttpRequestManager;
+use phpseclib\Math\BigInteger;
 
 class PointsController extends Controller {
 
@@ -53,18 +58,105 @@ class PointsController extends Controller {
         return redirect('buypoints')->with('success', 'Your points creadited to your account successfully');
     }
 
-    public function bid($game_id) {
+    protected function checkConfirmation($txHash, $points) {
+        // get transaction data
+        $timeout = 30; // set this time accordingly by default it is 1 sec
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+
+        $sender = '';
+        $token_addr = '';
+        $tx_data = '';
+        $block_number = '';
+        $nonce = 0;
+
+        $web3->getEth()->getTransactionByHash($txHash, 
+            function($err, $result) use(&$sender, &$token_addr, &$tx_data, &$block_number, &$nonce) {
+                if ($err === null) {
+                    // print_r($result);
+                    $sender = $result->from;
+                    $token_addr = $result->to;
+                    $tx_data = $result->input;
+                    $block_number = $result->blockNumber;
+                    $nonce = hexdec(substr($result->nonce, 2));
+                }
+            }
+        );
+
+        if ($sender === '') {
+            // getting transaction data failed
+            return false;
+        }
+
+        // check validity
+        if (strcasecmp($sender, Auth::user()->wallet_address) != 0) {
+            // sender is invalid
+            return false;
+        }
+
+        if (strcasecmp($token_addr, config('web3.chain.token')) != 0) {
+            // token address is invalid
+            return false;
+        }
+
+        $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
+        $token = new Contract($web3->provider, $abi);
+
+        $points = new BigInteger($points);
+
+        $points = $points->multiply(new BigInteger(config('web3.chain.token_unit'))); // decimals
+
+        $data = $token->at($token_addr)->getData('transfer', config('web3.wallet.address'), $points->toString());
+
+        if ($tx_data !== '0x' . $data) {
+            // tx data is invalid
+            return false;
+        }
+
+        if ($nonce <= Auth::user()->payment_nonce) {
+            // duplicated nonce
+            return false;
+        }
+
+        // save last nonce to prevent double payment
+        $user = User::where('id', Auth::user()->id)->get()->first();
+        $user->payment_nonce = $nonce;
+        $user->save();
+
+        return true;
+    }
+
+    public function bid($game_id, Request $request) {
+        // check validataion of tx hash
+        $request->validate([
+            'points' => 'required',
+            'tx_hash' => ['required', 'string', 'regex:/^0x([A-Fa-f0-9]{64})$/']
+        ]);
+
+        if (!$this->checkConfirmation($request['tx_hash'], $request['points'])) {
+            return redirect()->back()->with('error', 'Transaction confirmation failed');
+        }
+
+        // check point
+        $game = Game::find($game_id);
+
+        if ($game->points != $request['points']) {
+            return redirect()->back()->with('error', 'Game points mismatch');
+        }
+
+        // actual bid
         $bid = new Game_bid;
         $bid->game_id = $game_id;
         $bid->user_id = Auth::user()->id;
         $bid->is_awarded = 0;
 
-        if ($bid->save()) {
-            $game = Game::find($game_id);
-            $user = User::find(Auth::user()->id);
-            $user->points = $user->points - $game->points;
-            $user->save();
-        }
+        $bid->save();
+
+        // if ($bid->save()) {
+        //     $game = Game::find($game_id);
+        //     $user = User::find(Auth::user()->id);
+        //     $user->points = $user->points - $game->points;
+        //     $user->save();
+        // }
 
         // $user = \App\Game_bid::find(1);
         // $user = (\DB::select("SELECT user_id FROM game_bids WHERE game_id = Game::find($game_id)"))->first();

@@ -154,12 +154,21 @@
         @if($game->points < auth()->user()->points)
             <td>@lang('gamedetail.points_required') {{ $game->points }} @lang('gamedetail.points_required_2')</td>
             <td>
+                <form method="post" action="{{route('bid', ['game_id' => $game->id])}}" enctype="multipart/form-data" id="form_join">
+                {{csrf_field()}}
+                <input type="hidden" class="required form-control" id="usdt_addr" value="{{ config('web3.chain.token') }}">
+                <input type="hidden" class="required form-control" id="deposit_addr" value="{{ config('web3.wallet.address') }}">
+                <input type="hidden" class="required form-control" id="points" name="points" value="{{ $game->points }}">
+                <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
                 <br>
                 <br>
-                <a href="{{route('bid', ['game_id' => $game->id])}}">
-                    <button class="btn btn-inverse-success">
+                <!-- <a href="{{route('bid', ['game_id' => $game->id])}}" id="join_game"> -->
+                    <button class="btn btn-inverse-success" id="join_game">
                         @lang('gamedetail.start_playing')
-                    </button></a>
+                    </button>
+                <!-- </a> -->
+                </form>
+                <span id="tx_status"></span>
             </td>
             @else
             <span class="text text-danger">@lang('gamedetail.no_enough_points')</span>
@@ -306,3 +315,5 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     }
 </script> -->
 
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script src="{{ asset('js/wallet.js') }}"></script>

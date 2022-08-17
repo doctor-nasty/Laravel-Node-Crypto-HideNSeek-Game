@@ -11,6 +11,7 @@ use Web3\Contract;
 use Web3\Providers\HttpProvider;
 use Web3\RequestManagers\HttpRequestManager;
 use phpseclib\Math\BigInteger;
+use GuzzleHttp\Client;
 
 class Web3Controller
 {
@@ -37,7 +38,7 @@ class Web3Controller
         // verify token balance
         $timeout = 30; // set this time accordingly by default it is 1 sec
         $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
-        $abi = json_decode(file_get_contents(base_path('public/web3/ERC721.json')));
+        $abi = json_decode(file_get_contents(base_path('public/web3/HidenSeekToken.json')));
         $nft = new Contract($web3->provider, $abi);
         $balance = new BigInteger(0);
         $error = "";
@@ -106,6 +107,73 @@ class Web3Controller
         if ($error !== "") return $error;
 
         return number_format(floatval($balance) / floatval(config('web3.chain.token_unit')), 2);
+    }
+
+    public function canCreateGame() {
+        $nfts = $this->getNFTs();
+
+        for ($i = 0; $i < count($nfts); $i++) {
+            if ($nfts[$i] <= 125) return "Yes";
+        }
+
+        return "No";
+    }
+
+    public function canPlayGame() {
+        $nfts = $this->getNFTs();
+
+        for ($i = 0; $i < count($nfts); $i++) {
+            if ($nfts[$i] > 125) return "Yes";
+        }
+
+        return 'No';
+    }
+
+    public function getNFTs() {
+        $address = Auth::user()->wallet_address;
+        
+        $tokenIds = [];
+
+        $client = new Client();
+        $page_key = '';
+        $total_cnt = 0;
+
+        $rep = 0;
+
+        while (true) {
+            $url = config('web3.chain.rpc') . '/getNFTs';
+            $url .= '?owner='. $address;
+            $url .= '&contractAddresses[]=' . config('web3.chain.nft');
+            $url .= '&withMetadata=false';
+
+            if ($page_key !== '') {
+                $url .= '&pageKey=' . $page_key;
+            }
+
+            $response = $client->request('GET', $url, [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ],
+            ]);
+
+            $result = json_decode($response->getBody());
+
+            $total_cnt = $result->totalCount;
+
+            $cnt = count($result->ownedNfts);
+            for ($i = 0; $i < $cnt; $i++) {
+                array_push($tokenIds, hexdec($result->ownedNfts[$i]->id->tokenId));
+            }
+
+            if (isset($result->pageKey)) {
+                // pages
+                $page_key =  $result->pageKey;
+            } else {
+                break;
+            }
+        }
+        
+        return $tokenIds;
     }
 
     protected function getUserModel(): Model

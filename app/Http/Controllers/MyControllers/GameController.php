@@ -16,6 +16,7 @@ use Web3\Web3;
 use Web3\Contract;
 use Web3\Providers\HttpProvider;
 use Web3\RequestManagers\HttpRequestManager;
+use phpseclib\Math\BigInteger;
 
 class GameController extends Controller {
 
@@ -160,9 +161,11 @@ class GameController extends Controller {
         $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
         $token = new Contract($web3->provider, $abi);
 
-        $points = $points * intval(config('web3.chain.token_unit')); // decimals
+        $points = new BigInteger($points);
 
-        $data = $token->at($token_addr)->getData('transfer', config('web3.wallet.address'), $points);
+        $points = $points->multiply(new BigInteger(config('web3.chain.token_unit'))); // decimals
+
+        $data = $token->at($token_addr)->getData('transfer', config('web3.wallet.address'), $points->toString());
 
         if ($tx_data !== '0x' . $data) {
             // tx data is invalid
