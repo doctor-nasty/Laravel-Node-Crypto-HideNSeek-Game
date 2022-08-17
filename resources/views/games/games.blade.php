@@ -107,6 +107,8 @@
                     }
                 }
             },
+
+            @if (session('can_play'))
                 {
                     title: 'Actions',
                     data: 'status', render : function(data, type, row)
@@ -114,6 +116,7 @@
                         return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">Play</button></div>';
                     }
                 }
+            @endif
 //                {
 //                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
