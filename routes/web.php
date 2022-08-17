@@ -99,6 +99,9 @@ Route::group(['middleware' => ['auth', 'status']], function () {
 
     // web3 endpoints
     Route::get('/get_balance', 'Web3Controller@getBalance');
+    Route::get('/get_nfts', 'Web3Controller@getNFTs');
+    Route::get('/can_create_game', 'Web3Controller@canCreateGame');
+    Route::get('/can_play_game', 'Web3Controller@canPlayGame');
 });
 
 // Route::post('list/users', 'JsController@ListUsers');

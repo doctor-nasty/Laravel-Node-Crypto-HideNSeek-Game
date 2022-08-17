@@ -30,7 +30,7 @@ $(document).ready(function () {
     }
 
     // change to polygon network
-    const targetChain = 4; // rinkeby testnet
+    const targetChain = 80001; // mumbai testnet
     // const targetChain = 137; // polygon
 
     if (provider.getChainId() != targetChain) {
@@ -86,6 +86,16 @@ $(document).ready(function () {
 
   $("#create_game").on("click", async function (event) {
     event.preventDefault();
+
+    // check Pirate token ownership
+    let response = await fetch("/can_create_game");
+    let message = await response.text();
+
+    console.log(message);
+    if (message !== "Yes") {
+      alert("Can't create game - you need a pirate NFT to create a game!");
+      return;
+    }
 
     const provider = await getProvider();
 

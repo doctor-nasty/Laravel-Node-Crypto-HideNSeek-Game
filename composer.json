@@ -8,10 +8,11 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "8.0.21",
+    "php": "8.1.6",
     "ext-gmp": "*",
     "doctrine/dbal": "^3.3",
     "fideloper/proxy": "^4.4",
+    "guzzlehttp/guzzle": "^7.4",
     "kornrunner/keccak": "^1.1",
     "laravel/cashier": "^13.14",
     "laravel/framework": "^9.0",
