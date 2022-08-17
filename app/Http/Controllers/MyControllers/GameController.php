@@ -50,6 +50,13 @@ class GameController extends Controller {
 
     public function create() {
         $index = 'user|' . Auth::user()->id . '|identifier';
+        
+        $web3_helper = new \App\Lib\Web3Helper();
+        $can = $web3_helper->canCreateGame(Auth::user()->wallet_address);
+
+        if ($can === false) {
+            return redirect('/');
+        }
 
         if (Cache::get($index) == NULL) {
             srand((double) microtime() * 1000000);
@@ -59,8 +66,9 @@ class GameController extends Controller {
             $identifier = Cache::get($index);
         }
 
-        return view('games.gamecreate')->with('identifier', $identifier)
-                        ->with('title', 'Create a game');
+        return view('games.gamecreate')
+            ->with('identifier', $identifier)
+            ->with('title', 'Create a game');
     }
 
 //     public function activate(array $data) {

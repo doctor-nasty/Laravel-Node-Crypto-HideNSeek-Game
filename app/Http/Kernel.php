@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'ajax' => \App\Http\Middleware\OnlyAjax::class,
         'status' => \App\Http\Middleware\CheckStatus::class,
+        'check.token' => \App\Http\Middleware\CheckTokenOwnership::class,
     ];
 
     /**
