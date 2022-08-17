@@ -345,7 +345,6 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             }
 
 map.on('click', function (e) {
-    $("#map-error").empty(); 
     $("#city").val('');
     $("#suburb").val('');
     $("#country").val('');
@@ -357,19 +356,23 @@ dataType: "json",
 success: function (data) {
     // alert(data.address.city);
     if(isEmpty(data.address.city)){
-        $("#city-error").replaceWith("<div id='map-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find city!</strong></div>");
+        $("#city-error").replaceWith("<div id='city-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find city!</strong></div>");
      }else {
         $('#city').val(data.address.city);
+        $("#city-error").remove();
      }
     if(isEmpty(data.address.suburb)){
-        $("#suburb-error").replaceWith("<div id='map-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find suburb!</strong></div>");
+        $("#suburb-error").replaceWith("<div id='suburb-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find suburb!</strong></div>");
      }else {
         $('#suburb').val(data.address.suburb);
+        $("#suburb-error").remove();
      }
     if(isEmpty(data.address.country)){
-        $("#country-error").replaceWith("<div id='map-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find country!</strong></div>");
+        alert("Error");
+        $("#country-error").replaceWith("<div id='country-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find country!</strong></div>");
      }else {
         $('#country').val(data.address.country);
+        $("#country-error").remove();
      }
     // $('#city').val(data.address.city);
     // $('#suburb').val(data.address.suburb);
