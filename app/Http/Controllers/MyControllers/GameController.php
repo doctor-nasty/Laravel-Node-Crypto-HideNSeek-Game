@@ -196,7 +196,7 @@ class GameController extends Controller {
     public function store(Request $request) {
         $request->validate([
             'title' => 'required',
-            'type' => 'required',
+            //'type' => 'required',
             'points' => 'required',
             // 'city' => 'required',
             'mark_lat' => 'required',
