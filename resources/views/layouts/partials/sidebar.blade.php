@@ -52,8 +52,8 @@
           <div class="sidebar-item-title">Settings</div>
         </a>
       </div>
-      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('settings') ? 'active' : '' }}">
-        <a href="{{ url('/settings') }}">
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('logout') ? 'active' : '' }}">
+        <a href="{{ url('/logout') }}">
           <div class="sidebar-item-icon-box">
             <img src="{{ asset('svgs/logout.svg') }}" alt="">
           </div>
