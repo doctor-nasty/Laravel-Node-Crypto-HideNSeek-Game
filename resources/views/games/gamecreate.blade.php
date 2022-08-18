@@ -374,6 +374,10 @@ $("#game-form").validate({
         country: {
             required: "Incorrect country."
         }
+    },
+    submitHandler: function(form) {
+        createNewGame(form);
+        //form.submit();
     }
 });
     </script>
