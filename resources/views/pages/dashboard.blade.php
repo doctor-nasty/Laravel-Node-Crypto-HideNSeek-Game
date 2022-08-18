@@ -52,15 +52,17 @@
             <div class="player-card">
                 <div class="payer-avatar-block">
                     <div class="payer-avatar-image">
-                        <img src="{{ asset('images/avatar.jpg') }}" alt="random avatar">
+                        <img src="/storage/avatars/{{Auth::user()->avatar}}" alt="random avatar">
                     </div>
+                    <a href="/settings">
                     <button class="avatar-edit-button">
                         <img src="{{ asset('svgs/pencil.png') }}" alt="">
                     </button>
+                </a>
                 </div>
                 <div class="player-content">
                     <div class="player-info">
-                        <h4>Player Name</h4>
+                        <h4>{{Str::substr(Auth::user()->wallet_address, 0, 5)}}....{{Str::substr(Auth::user()->wallet_address, -5);}}</h4>
                     </div>
                     <div class="player-point-row">
                         <div class="player-point-block">
