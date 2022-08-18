@@ -234,7 +234,7 @@ class GameController extends Controller {
                 'identifier' => Cache::get($index),
                 'title' => $request->get('title'),
                 'points' => $request->get('points'),
-                'type' => $request->get('type'),
+                'type' => 'Item',
                 'city' => $city,
                 'status' => '1',
                 'country' => $country,
@@ -333,7 +333,6 @@ class GameController extends Controller {
 //        die;
         $request->validate([
             'title' => 'required',
-            'type' => 'required',
             'city' => 'required',
             'comment' => 'required',
             'full_comment' => 'required',
@@ -342,7 +341,7 @@ class GameController extends Controller {
 
         $game = Game::find($id);
         $game->title = $request->get('title');
-        $game->type = $request->get('type');
+        $game->type = 'Item';
         $game->city = $request->get('city');
         // $game->district = $request->get('district');
         $game->comment = $request->get('comment');
