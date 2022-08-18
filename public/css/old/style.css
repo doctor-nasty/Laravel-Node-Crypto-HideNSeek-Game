@@ -10956,11 +10956,11 @@ input[type="button"].btn-block {
   -ms-flex-direction: column;
   flex-direction: column;
   min-width: 0;
+  background-color: black;
   word-wrap: break-word;
-  background-color: #111214;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px !important;
 }
 .card > hr {
   margin-right: 0;
@@ -28820,23 +28820,23 @@ div.tagsinput span.tag a {
   display: none;
   padding: 20px 0;
 }
-.dashboard-dropdown-navigation  ul{
+.dashboard-dropdown-navigation ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
-.dashboard-dropdown-navigation  li {
+.dashboard-dropdown-navigation li {
   display: flex;
 }
 .dropdown-navigation-socmedia {
   display: flex;
   justify-content: center;
 }
-.dropdown-navigation-socmedia .dashbord-sidebar-social{
+.dropdown-navigation-socmedia .dashbord-sidebar-social {
   margin-bottom: 0;
   padding: 20px 30px;
 }
-.dashboard-dropdown-navigation  .dropdown-link {
+.dashboard-dropdown-navigation .dropdown-link {
   font-size: 18px;
   width: 100%;
   display: flex;
@@ -28844,7 +28844,7 @@ div.tagsinput span.tag a {
   color: #fff;
   padding: 20px 30px;
 }
-.dashboard-dropdown-navigation  a:hover{
+.dashboard-dropdown-navigation a:hover {
   background: #1f1f1f;
   text-decoration: none;
 }
@@ -28916,336 +28916,4 @@ div.tagsinput span.tag a {
 .IcePoker_menu_item__thO4W svg {
   width: 24px;
   height: 24px;
-}
-
-/* dashboiard sidebar*/
-.dashbord-sidebar {
-  width: 257px;
-  height: 100vh;
-  position: relative;
-  z-index: 9;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.creat-game-button-block {
-  display: flex;
-  justify-content: center;
-  margin: 22px 0 0 0;
-  
-}
-.creat-game-button{
-  width: 200px;
-  height: 44px;
-  background: #0A63EA;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
-  color: #FFFFFF;
-  font-weight: 600;
-  cursor: pointer;
-  border: 0;
-}
-.dashbord-sidebar-small .creat-game-button{
-  width: 40px;
-  height: 40px;
-}
-.dashbord-sidebar-small .creat-game-button span {
-  display: none;
-}
-.dashbord-sidebar-social {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 26px;
-}
-.dashbord-sidebar-social .nav-icon{
-  margin: 0 8px;
-}
-.dashboard-content {
-  padding-top: 96px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  flex: 1;
-}
-.dashbord-sidebar-small {
-  width: 80px;
-  overflow: hidden;
-}
-.dashbord-sidebar-small .sidebar-item-title {
-  display: none;
-}
-.dashbord-sidebar-small .dashbord-sidebar-item {
-  padding-left: 0;
-  display: flex;
-  justify-content: center;
-}
-.dashbord-sidebar .dashbord-sidebar-body {
-  width: 257px;
-  height: 100vh;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 152px;
-  position: fixed;
-  transition: -webkit-transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-  background: #000;
-  border-right: 1px solid #2a2a2a;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.dashbord-sidebar-small .dashbord-sidebar-body {
-  width: 80px;
-  overflow: hidden;
-}
-.dashbord-sidebar-body .dashbord-sidebar-title {
-  margin-bottom: 16px;
-  padding-left: 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.dashbord-sidebar-small .dashbord-sidebar-title {
-  display: none !important;
-}
-.dashbord-sidebar-body .dashbord-sidebar-title h3 {
-  color: #808191 !important;
-  font-size: 12px;
-  margin: 0;
-}
-.dashbord-sidebar-item {
-  padding-left: 22px;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  transition: 100ms;
-  border-radius: 10px;
-  align-items: center;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  cursor: pointer;
-  opacity: 0.5;
-}
-.dashbord-sidebar-item a {
-  display: flex;
-  align-items: center;
-}
-.dashbord-sidebar-item a:hover {
-  text-decoration: none;
-}
-.sidebar-item {
-  width: 24px;
-  height: 24px;
-}
-.dashbord-sidebar-item:hover {
-  background: linear-gradient(
-    89.96deg,
-    #323438 -6.09%,
-    rgba(24, 26, 30, 0) 99.95%
-  );
-  opacity: 1;
-}
-.dashbord-sidebar-item-active {
-  background: linear-gradient(
-    89.96deg,
-    #323438 -6.09%,
-    rgba(24, 26, 30, 0) 99.95%
-  );
-  opacity: 1;
-}
-.dashbord-sidebar-item .sidebar-item-title {
-  font-size: 14px;
-  font-family: Larsseit-Medium;
-  color: rgba(255, 255, 255) !important;
-  margin-left: 18px;
-  white-space: nowrap;
-}
-.dashbord-sidebar-small {
-  width: 80px;
-  overflow: hidden;
-}
-.dashboard-content {
-  flex: 1;
-}
-/* media 992 */
-@media (max-width: 992px) {
-  .dashboard-content {
-    margin-left: 80px;
-  }
-  .dashbord-sidebar {
-    width: 80px;
-    overflow: hidden;
-    position: absolute;
-  }
-  .dashbord-sidebar .dashbord-sidebar-title {
-    display: none;
-  }
-  .dashbord-sidebar .dashbord-sidebar-body {
-    width: 80px;
-    overflow: hidden;
-  }
-  .dashbord-sidebar .sidebar-item-title {
-    display: none;
-  }
-  .dashbord-sidebar-small .sidebar-item-title {
-    display: block;
-  }
-  .dashbord-sidebar .dashbord-sidebar-item {
-    padding-left: 0;
-    display: flex;
-    justify-content: center;
-  }
-  .dashbord-sidebar-small .dashbord-sidebar-item {
-    padding-left: 22px;
-    display: flex;
-    justify-content: flex-start;
-  }
-  .dashbord-sidebar-small {
-    width: 257px;
-    height: 100vh;
-    position: absolute;
-    z-index: 9;
-  }
-  .dashbord-sidebar .creat-game-button{
-    width: 40px;
-    height: 40px;
-  }
-  .dashbord-sidebar .creat-game-button span {
-    display: none;
-  }
-  .dashbord-sidebar-small .creat-game-button{
-    width: 200px;
-    height: 44px;
-  }
-  .dashbord-sidebar-small .creat-game-button span {
-    display: block;
-  }
-  .dashbord-sidebar-small .dashbord-sidebar-body {
-    width: 257px;
-    height: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 152px;
-    position: fixed;
-    transition: -webkit-transform 0.3s ease-in-out;
-    transition: transform 0.3s ease-in-out;
-    transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-    background: #000;
-    border-right: 1px solid #2a2a2a;
-  }
-  .dashbord-sidebar-body-small .dashbord-sidebar-title {
-    margin-bottom: 16px;
-    padding-left: 22px;
-    display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .dashbord-sidebar-small .sidebar-item-title {
-    font-size: 14px;
-    font-family: Larsseit-Medium;
-    color: rgba(255, 255, 255, 0.5) !important;
-    margin-left: 18px;
-    white-space: nowrap;
-  }
-}
-/* media 576 */
-@media (max-width: 576px) {
-  .dashbord-sidebar {
-    display: none;
-  }
-  .sidebar-btn-list {
-    display: none;
-  }
-  .dashboard-content {
-    margin-left: 0;
-  }
-  .dropdown-btn-list{
-    display: block;
-  }
-  .dashboard-dropdown-navigation {
-    display: none;
-  }
-}
-/* dashboard navigation */
-.dashboard-nav-list li {
-  margin-left: 6px;
-}
-.dashboard-nav-list .menu-btn {
-  width: 40px;
-  height: 40px;
-  background: #111214;
-  border: 1px solid #1f2021;
-  border-radius: 10px;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.notification-number {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 16px;
-  height: 16px;
-  background: #DF1B1B;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  font-size: 10px;
-  color: #ffffff;
-}
-.account-block {
-  background: #111214;
-  border: 1px solid #1f2021;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  height: 40px;
-  box-sizing: border-box;
-}
-.account-block span{
-  font-size: 15px;
-  color: #FFFFFF;
-  margin-right: 7px;
-  font-weight: 700;
-  display: block;
-}
-/* dashboard content */
-.dashboard-card {
-  border-radius: 16px;
-  border: 1px solid #2a2a2a;
-  height: 150px;
-  position: relative;
-  padding: 32px 26px;
-  overflow: hidden;
-}
-.dashboard-card-text{
-  position: relative;
-  z-index: 2;
-}
-.dashboard-card h5{
-  color: #979797;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-}
-.dashboard-card .dashboard-card-number {
-  font-weight: 700;
-  font-size: 48px;
-  color: #FFFFFF;
-}
-.dashboard-card-image {
-  position: absolute;
-  top: 0;
-  right: -1px;
-  bottom: 0;
-  height: 100%;
-  z-index: 1;
 }
