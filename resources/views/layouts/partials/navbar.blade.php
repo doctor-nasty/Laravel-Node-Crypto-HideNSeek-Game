@@ -35,7 +35,6 @@
               <p class="p-3 mb-0 text-center">Mark As Read</p>
           </a>
           </div>
-          </div>
         </li>
         <li class="sidebar-btn-list">
           <button tupe="button" class="menu-btn burger-menu-btn">
