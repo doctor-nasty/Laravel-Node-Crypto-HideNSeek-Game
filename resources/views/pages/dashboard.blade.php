@@ -192,7 +192,10 @@
                 // },
                 {
                     title: 'Created At',
-                    data: 'created_at'
+                    data: 'created_at', render : function(data)
+                {
+                    return moment(data).format("DD MMM YYYY HH:mm:ss");
+                }
                 }
                 ,
                 {
@@ -255,7 +258,10 @@
                 // },
                 {
                     title: 'Created At',
-                    data: 'created_at'
+                    data: 'created_at', render : function(data)
+                {
+                    return moment(data).format("DD MMM YYYY HH:mm:ss");
+                }
                 },
                 {
                 title: 'Status',
@@ -320,6 +326,7 @@ let content_inside = document.querySelectorAll('.content_inside');
 
 Array.from(button).forEach(function(buttonArray, i) {
 buttonArray.addEventListener('click', function() {
+  window.dispatchEvent(new Event('resize'));
 
     Array.from(button).forEach(buttonAll => buttonAll.classList.remove('button_active'));
     
