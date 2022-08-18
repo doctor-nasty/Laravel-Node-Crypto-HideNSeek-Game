@@ -16,6 +16,7 @@ use Web3\Web3;
 use Web3\Contract;
 use Web3\Providers\HttpProvider;
 use Web3\RequestManagers\HttpRequestManager;
+use phpseclib\Math\BigInteger;
 
 class GameController extends Controller {
 
@@ -49,6 +50,13 @@ class GameController extends Controller {
 
     public function create() {
         $index = 'user|' . Auth::user()->id . '|identifier';
+        
+        $web3_helper = new \App\Lib\Web3Helper();
+        $can = $web3_helper->canCreateGame(Auth::user()->wallet_address);
+
+        if ($can === false) {
+            return redirect('/');
+        }
 
         if (Cache::get($index) == NULL) {
             srand((double) microtime() * 1000000);
@@ -58,8 +66,9 @@ class GameController extends Controller {
             $identifier = Cache::get($index);
         }
 
-        return view('games.gamecreate')->with('identifier', $identifier)
-                        ->with('title', 'Create a game');
+        return view('games.gamecreate')
+            ->with('identifier', $identifier)
+            ->with('title', 'Create a game');
     }
 
 //     public function activate(array $data) {
@@ -160,9 +169,11 @@ class GameController extends Controller {
         $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
         $token = new Contract($web3->provider, $abi);
 
-        $points = $points * intval(config('web3.chain.token_unit')); // decimals
+        $points = new BigInteger($points);
 
-        $data = $token->at($token_addr)->getData('transfer', config('web3.wallet.address'), $points);
+        $points = $points->multiply(new BigInteger(config('web3.chain.token_unit'))); // decimals
+
+        $data = $token->at($token_addr)->getData('transfer', config('web3.wallet.address'), $points->toString());
 
         if ($tx_data !== '0x' . $data) {
             // tx data is invalid
@@ -185,11 +196,12 @@ class GameController extends Controller {
     public function store(Request $request) {
         $request->validate([
             'title' => 'required',
-            'type' => 'required',
+            //'type' => 'required',
             'points' => 'required',
             // 'city' => 'required',
             'mark_lat' => 'required',
             'mark_long' => 'required',
+            'players' => 'required',
             // 'district' => 'required',
             'comment' => 'required',
             'full_comment' => 'required',
@@ -216,14 +228,17 @@ class GameController extends Controller {
             $j=json_decode($result, true);
             $city = $j['address']['city']; 
             $suburb = $j['address']['suburb']; 
+            $country = $j['address']['country']; 
 
             $game = new Game([
                 'identifier' => Cache::get($index),
                 'title' => $request->get('title'),
                 'points' => $request->get('points'),
-                'type' => $request->get('type'),
+                'type' => 'Item',
                 'city' => $city,
                 'status' => '1',
+                'country' => $country,
+                'players' => $request->get('players'),
                 // 'district' => $request->get('district'),
                 'district' => $suburb,
                 'comment' => $request->get('comment'),
@@ -318,7 +333,6 @@ class GameController extends Controller {
 //        die;
         $request->validate([
             'title' => 'required',
-            'type' => 'required',
             'city' => 'required',
             'comment' => 'required',
             'full_comment' => 'required',
@@ -327,7 +341,7 @@ class GameController extends Controller {
 
         $game = Game::find($id);
         $game->title = $request->get('title');
-        $game->type = $request->get('type');
+        $game->type = 'Item';
         $game->city = $request->get('city');
         // $game->district = $request->get('district');
         $game->comment = $request->get('comment');

@@ -11,6 +11,7 @@ use Web3\Contract;
 use Web3\Providers\HttpProvider;
 use Web3\RequestManagers\HttpRequestManager;
 use phpseclib\Math\BigInteger;
+use GuzzleHttp\Client;
 
 class Web3Controller
 {
@@ -37,7 +38,7 @@ class Web3Controller
         // verify token balance
         $timeout = 30; // set this time accordingly by default it is 1 sec
         $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
-        $abi = json_decode(file_get_contents(base_path('public/web3/ERC721.json')));
+        $abi = json_decode(file_get_contents(base_path('public/web3/HidenSeekToken.json')));
         $nft = new Contract($web3->provider, $abi);
         $balance = new BigInteger(0);
         $error = "";
@@ -106,6 +107,31 @@ class Web3Controller
         if ($error !== "") return $error;
 
         return number_format(floatval($balance) / floatval(config('web3.chain.token_unit')), 2);
+    }
+
+    public function canCreateGame() {
+        $web3_helper = new \App\Lib\Web3Helper();
+
+        if ($web3_helper->canCreateGame(Auth::user()->wallet_address)) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    public function canPlayGame() {
+        $web3_helper = new \App\Lib\Web3Helper();
+
+        if ($web3_helper->canPlayGame(Auth::user()->wallet_address)) {
+            return "Yes";
+        } else {
+            return "No";
+        }
+    }
+
+    public function getNFTs() {
+        $web3_helper = new \App\Lib\Web3Helper();
+        return $web3_helper->getNFTs(Auth::user()->wallet_address);
     }
 
     protected function getUserModel(): Model

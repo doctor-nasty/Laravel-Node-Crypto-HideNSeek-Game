@@ -7,15 +7,18 @@
       <ul class="dashboard-nav-list">
         <li>
           <div class="account-block">
-            <span id="balance">0.00</span>
-            <img src="{{ asset('svgs/dollar-circle.svg') }}" alt="dolar sign">
+            <span id="balance"></span>
+            <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="dolar sign">
           </div>
         </li>
-        <li>
+        <li class="notification-dropdown-btn">
           <button tupe="button" class="menu-btn">
              <img src="{{ asset('svgs/bell.svg') }}" alt="bell">
              <div class="notification-number">{{ auth()->user()->unreadNotifications->count() }}</div>
           </button>
+          <div class="notification-dropdown">
+
+          </div>
         </li>
         <li class="sidebar-btn-list">
           <button tupe="button" class="menu-btn burger-menu-btn">
@@ -46,9 +49,11 @@
         <li>s
           <a href="{{ asset('svgs/file-text.svg') }}" class="dropdown-link">Documentation</a>
         </li>
+        @if (session('can_create'))
         <li>
           <a href="{{ url('games/create') }}" class="dropdown-link">Create A Game</a>
         </li>
+        @endif
         <li class="dropdown-navigation-socmedia">
           <div class="dashbord-sidebar-social">
             <a href="https://t.me/hidenseek_group" class="nav-icon">
@@ -83,5 +88,7 @@
       $('#balance').html(data);
       console.log( "Sample of data:", data.slice( 0, 100 ) );
     });
-
+  $(".notification-dropdown-btn").click(function(){
+    $(".notification-dropdown").slideToggle();
+  });
 </script>

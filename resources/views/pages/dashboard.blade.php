@@ -2,48 +2,8 @@
 
 @section('content')
 
-<!-- google map api start -->
-<!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCaWBIHePh4f4bQIROBybqJzKfaqiNCkac"></script> -->
-<!-- <script src="http://maps.google.com/maps/api/js?key=AIzaSyDkduGOlqZSICxQ40aTrr_shmIr1Nm5k2Q"></script> -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gmaps.js/0.4.24/gmaps.js"></script> -->
-
-
-<!-- <style type="text/css">
-    #mymap {
-        border: 1px solid red;
-        width: 100%;
-        height: 500px;
-    }
-
-    #mymap_create_game {
-        border: 1px solid red;
-        width: 800px;
-        height: 500px;
-    }
-</style> -->
-<!-- <div class="container-fluid text-center mt-5">
-    <h1>{{ config('app.name') }}</h1>
-    <div class="d-flex justify-content-center mt-5">
-        <button id="login-button" onclick="phantomLogin()" class="btn btn-dark">Login with Phantom Wallet</button>
-    </div>
-
-    <div class="d-flex justify-content-center mt-5">
-        <div class="public-key" style="display: none"></div>
-    </div>
-
-    <div class="d-flex justify-content-center mt-5">
-        <div class="sol-balance" style="display: none">
-
-        </div>
-    </div>
-</div> -->
 <div id="app">
 </div>
-<!-- <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      // Work-around node polyfills missing in Vite.
-      window.global = window;
-    </script>     -->
           <div class="content-wrapper">
             @if(session()->get('success'))
             <div class="alert alert-success">
@@ -64,7 +24,7 @@
                 {{ session('status') }}
               </div>
             @endif
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-6 grid-margin">
                 <div class="dashboard-card">
                   <div class="dashboard-card-text">
@@ -82,14 +42,92 @@
                     <h5>@lang('dashboard.points_earned')</h5>
                     <span class="dashboard-card-number">120</span>
                   </div>
-                  <!-- <span class="dashboard-card-number">{{Auth::user()->total_winning_points}}</span> -->
+                  <span class="dashboard-card-number">{{Auth::user()->total_winning_points}}</span> 
                   <div class="dashboard-card-image">
                     <img src="{{ asset('images/component.png') }}" alt="">
                   </div>
                 </div>
               </div>
+            </div> -->
+            <div class="player-card">
+                <div class="payer-avatar-block">
+                    <div class="payer-avatar-image">
+                        <img src="{{ asset('images/avatar.jpg') }}" alt="random avatar">
+                    </div>
+                    <button class="avatar-edit-button">
+                        <img src="{{ asset('svgs/pencil.png') }}" alt="">
+                    </button>
+                </div>
+                <div class="player-content">
+                    <div class="player-info">
+                        <h4>Player Name</h4>
+                    </div>
+                    <div class="player-point-row">
+                        <div class="player-point-block">
+                            <div class="point-icon">
+                                <img src="{{ asset('svgs/controler-blue.svg') }}" alt="controler icon">
+                            </div>
+                            <div class="point-text">
+                                <h5>@lang('dashboard.games_played')</h5>
+                                <span>{{$games_played}}</span>
+                            </div>
+                        </div>
+                        <div class="player-point-block">
+                            <div class="point-icon">
+                                <img src="{{ asset('svgs/point-icon.svg') }}" alt="point icon">
+                            </div>
+                            <div class="point-text">
+                                <h5>@lang('dashboard.points_earned')</h5>
+                                <span>120</span>
+                            </div>
+                        </div>
+                        <div class="player-point-block">
+                            <div class="point-icon">
+                                <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="point icon">
+                            </div>
+                            <div class="point-text">
+                                <h5>Your Balance</h5>
+                                <span id="balance">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="row grid-margin">
+<div class="">
+  <div class="menu">
+    <button class="button_active">Games Bidded</button>
+    <button>Own Games</button>
+    <button>Test</button>
+  </div>
+  <div class="content">
+    <div class="content_inside content_inside_active">
+        <div class="table-responsive">
+            <table class="display dashboard-table table" id="data-table-bid" cellspacing="0" style="width:100%"></table>
+        </div>
+    </div>
+    <div class="content_inside">
+        <div class="table-responsive">
+            <table class="display dashboard-table table" id="data-table" cellspacing="0" style="width:100%"></table>
+        </div>
+    </div>
+    </div>
+    <div class="content_inside">
+<span>test</span>
+</div>
+  </div>
+</div>
+<div>
+    
+</div>
+<script>
+    $(window).resize(function() {
+        $(".dtr-hidden").prev().css("border-radius", "0 30px 30px 0")
+    });
+    $(document).ready(function() {
+        $(".dtr-hidden").prev().css("border-radius", "0 30px 30px 0")
+    });
+</script>
+            <!-- <div class="row grid-margin" id="bidded">
               <div class="col-12">
                 <div class="card">
                   <div class="card-body">
@@ -109,7 +147,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             
             <div id="myModal" id="darkModalForm" tabindex="-1" class="modal fade" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
@@ -150,7 +188,7 @@
                 {
                     title: 'Photo',
                     data: 'photo', render : function(data, type, row){
-                      return '<img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">'
+                      return '<div class="table-image"><img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></div>'
                 }},
                 {
                     title: 'Title',
@@ -174,7 +212,10 @@
                 // },
                 {
                     title: 'Created At',
-                    data: 'created_at'
+                    data: 'created_at', render : function(data)
+                {
+                    return moment(data).format("DD MMM YYYY HH:mm:ss");
+                }
                 }
                 ,
                 {
@@ -198,14 +239,7 @@
 
                     }
                 }
-            },
-            {
-                    title: 'Actions',
-                    data: 'status', render : function(data, type, row)
-                    {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
-                    }
-                }
+            }
 //                {
 //                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
@@ -220,7 +254,7 @@
                 {
                     title: 'Photo',
                     data: 'photo', render : function(data, type, row){
-                      return '<img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">'
+                      return '<div class="table-image"><img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt=""></div>'
                 }},
                 {
                     title: 'Title',
@@ -244,7 +278,10 @@
                 // },
                 {
                     title: 'Created At',
-                    data: 'created_at'
+                    data: 'created_at', render : function(data)
+                {
+                    return moment(data).format("DD MMM YYYY HH:mm:ss");
+                }
                 },
                 {
                 title: 'Status',
@@ -259,13 +296,15 @@
                     }
                 }
             },
+            @if (session('can_play'))
                 {
                     title: 'Actions',
                     data: 'status', render : function(data, type, row)
                     {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
+                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">Play</button></div>';
                     }
                 }
+            @endif
 //                {
 //                    title: 'Actions',
 //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
@@ -301,23 +340,47 @@ $(document).ready(function(){
      });
 });
         </script>
-<!-- <script>
-    $(function() {
-        $.ajax({
-            url: 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=&lon=',
-            type: 'GET',
-            dataType: 'html',
-            success: function(data, status, xhr)
-            {
-                var suburb = JSON.parse(data).address.suburb;
+<script>
+let button = document.querySelectorAll('.menu button');
+let content_inside = document.querySelectorAll('.content_inside');
 
-                $("#city").html(suburb);
-            },
-            error: function(xhr, status, error)
-            {
-                $("#city").html("Error: " + status + " " + error);
-            }
-        });
-    });
-</script> -->
+Array.from(button).forEach(function(buttonArray, i) {
+buttonArray.addEventListener('click', function() {
+  window.dispatchEvent(new Event('resize'));
+
+    Array.from(button).forEach(buttonAll => buttonAll.classList.remove('button_active'));
+    
+    Array.from(content_inside).forEach(content_insideAll => content_insideAll.classList.remove('content_inside_active'));
+    
+    button[i].classList.add('button_active'); 
+    
+    content_inside[i].classList.add('content_inside_active');  
+  });
+});
+</script>
+<style>
+    .menu {
+  display: flex;
+}
+
+.menu button {
+  margin: 10px;
+  cursor: pointer;
+}
+
+.button_active {
+  color: teal;
+}
+
+.content_inside {
+  display: none;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.content_inside_active {
+  display: block;
+}
+</style>
 @endsection

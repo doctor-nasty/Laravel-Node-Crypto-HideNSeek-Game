@@ -26,7 +26,7 @@ Auth::routes(['verify' => false]);
 // Route::post('messages', 'ChatsController@sendMessage');
 //Route::get('/games', 'Games\GameController@getGames')->name('games');
 //Route::get('/game/{id}', 'Games\GameController@getGame')->name('game');
-Route::group(['middleware' => ['auth', 'status']], function () {
+Route::group(['middleware' => ['auth', 'status', 'check.token']], function () {
     // Route::post('/buypointspaypal', 'MyControllers\PointsController@buyPointsPaypal')->name('buypoints.paypal');
     Route::post('', 'MyControllers\GameController@activate')->name('games.activate');
 
@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth', 'status']], function () {
     // Route::get('/coinbase', 'MyControllers\CoinbaseController@index')->name('coinbase.index');
     // Route::get('/plan/{plan}', 'MyControllers\PlanController@show')->name('plans.show');
     // Route::get('/buypoints', 'MyControllers\PointsController@buyPoints')->name('buy_points');
-    Route::get('/bid/{game_id}', 'MyControllers\PointsController@bid')->name('bid');
+    Route::post('/bid/{game_id}', 'MyControllers\PointsController@bid')->name('bid');
     Route::post('/bid_answer', 'MyControllers\PointsController@bidAnswer')->name('bid.answer');
     // Route::post('/buy_points', 'MyControllers\PointsController@buyPoint')->name('buy.points');
     // Route::post('/buy-points', 'MyControllers\CoinbaseController@buyPoint')->name('buy.points.coinbase');
@@ -99,6 +99,9 @@ Route::group(['middleware' => ['auth', 'status']], function () {
 
     // web3 endpoints
     Route::get('/get_balance', 'Web3Controller@getBalance');
+    Route::get('/get_nfts', 'Web3Controller@getNFTs');
+    Route::get('/can_create_game', 'Web3Controller@canCreateGame');
+    Route::get('/can_play_game', 'Web3Controller@canPlayGame');
 });
 
 // Route::post('list/users', 'JsController@ListUsers');

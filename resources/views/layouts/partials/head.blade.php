@@ -41,14 +41,14 @@
 <meta name="theme-color" content="#000000" />
 
 {{-- <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}"> --}}
-<link rel="preload" href="https://decentral.games/_next/static/css/14b6afc48ba56a11.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/14b6afc48ba56a11.css" data-n-g=""/>
-<link rel="preload" href="https://decentral.games/_next/static/css/7b1208e7a7b9a565.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/7b1208e7a7b9a565.css" data-n-p=""/>
-<link rel="preload" href="https://decentral.games/_next/static/css/0d999f051cbbd0e5.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/0d999f051cbbd0e5.css" data-n-p=""/>
-<link rel="preload" href="https://decentral.games/_next/static/css/19be72d9c8a2b043.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/19be72d9c8a2b043.css" data-n-p=""/>
+<link rel="preload" href="/css/dg/14b6afc48ba56a11.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/14b6afc48ba56a11.css" data-n-g=""/>
+<link rel="preload" href="/css/dg/7b1208e7a7b9a565.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/7b1208e7a7b9a565.css" data-n-p=""/>
+<link rel="preload" href="/css/dg/0d999f051cbbd0e5.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/0d999f051cbbd0e5.css" data-n-p=""/>
+<link rel="preload" href="/css/dg/19be72d9c8a2b043.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/19be72d9c8a2b043.css" data-n-p=""/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
@@ -101,21 +101,23 @@ crossorigin=""></script>
 #map { height: 180px; }
 </style>
 
-<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.2.8/css/rowReorder.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/2.0.2/css/searchPanes.dataTables.min.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.4.0/css/select.dataTables.min.css">
 <link rel="stylesheet" href="{{ asset('css/old/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/dashboard1.css') }}">
+<link rel="stylesheet" href="{{ asset('css/datatabes.css') }}">
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="https://cdn.datatables.net/searchpanes/2.0.2/js/dataTables.searchPanes.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.4.0/js/dataTables.select.min.js"></script>
 <script src="{{ asset('js/DataTableManager.js') }}"></script>
+
 
 {{-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> --}}
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
