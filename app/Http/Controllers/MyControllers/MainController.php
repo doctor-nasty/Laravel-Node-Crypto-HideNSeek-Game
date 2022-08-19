@@ -43,7 +43,7 @@ class MainController extends Controller
             $j=json_decode($result, true);
             $nft_name[$index] = $j['name'];
             $nft_image[$index] = $j['image'];
-            };
+        };
 
 
         

@@ -96,11 +96,11 @@
                     </div>
                 </div>
             </div>
-<div class="">
-  <div class="menu">
-    <button class="button_active">Games Bidded</button>
-    <button>Own Games</button>
-    <button>My Items</button>
+<div>
+  <div class="menu change-content-btn">
+    <button class="button_active btn-change">Games Bidded</button>
+    <button class="btn-change">Own Games</button>
+    <button class="btn-change">My Items</button>
   </div>
   <div class="content dashboard-table-card">
     <div class="content_inside content_inside_active">
@@ -115,24 +115,17 @@
     </div>
     </div>
     <div class="content_inside">
-@foreach($tokens as $index => $token)
-<span>{{$nft_name[$index]}}</span>
-<img class="img-fluid" src="{{$nft_image[$index]}}"></img>
-@endforeach
-</div>
+        @foreach($tokens as $index => $token)
+        
+        <span>{{$nft_name[$index]}}</span>
+        <img class="img-fluid" src="{{$nft_image[$index]}}"></img>
+        @endforeach
+    </div>
   </div>
 </div>
 <div>
     
 </div>
-<script>
-    $(window).resize(function() {
-        $(".dtr-hidden").prev().css("border-radius", "0 30px 30px 0")
-    });
-    $(document).ready(function() {
-        $(".dtr-hidden").prev().css("border-radius", "0 30px 30px 0")
-    });
-</script>
             <!-- <div class="row grid-margin" id="bidded">
               <div class="col-12">
                 <div class="card">
@@ -365,24 +358,14 @@ buttonArray.addEventListener('click', function() {
 });
 </script>
 <style>
-    .menu {
+.menu {
   display: flex;
 }
-
-.menu button {
-  margin: 10px;
-  cursor: pointer;
-}
-
-.button_active {
-  color: teal;
-}
-
 .content_inside {
   display: none;
-  border: 1px solid #000000;
-  border-radius: 10px;
-  padding: 10px;
+  border: 1px solid #2a2a2a;
+  border-radius: 28px;
+  padding: 22px;
 }
 
 .content_inside_active {
@@ -416,11 +399,15 @@ buttonArray.addEventListener('click', function() {
 	function timeFunction() {
 	    setTimeout(function(){
             tableResize()
-        }, 500);
+        }, 50);
 	}
     timeFunction()
     $(window).resize(function() {
        tableResize() 
+    });
+    $(".wallet-copy").click(function () {
+        const walletInfo = {{Auth::user()->wallet_address}};
+        console.log(walletInfo); 
     });
 </script>
 @endsection
