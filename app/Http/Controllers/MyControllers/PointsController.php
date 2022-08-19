@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Game_bid;
 use App\Game;
+use App\Models\Award;
 use Auth;
 use Illuminate\Support\Facades\Lang;
 use DB;
@@ -218,7 +219,12 @@ class PointsController extends Controller {
 
                 // send to user
                 $web3_helper = new \App\Lib\Web3Helper();
-                $web3_helper->sendTokenToUser($user->wallet_address, $winning_points);
+                Award::create([
+                    'address' => $user->wallet_address,
+                    'amount' => $winning_points,
+                    'award_type' => 'Game winner award'
+                ]);
+                // $web3_helper->sendTokenToUser($user->wallet_address, $winning_points);
 
                 //$user->points += $winning_points;
                 $user->total_winning_points += $winning_points;
@@ -228,7 +234,12 @@ class PointsController extends Controller {
                 // $gameAuthor->points += (((count($bids) + 1) * $game->points + $game->points) * 30) / 100;
                 $creator_points = $total_points * 30 / 100; // creator 30%
                 // send to createor
-                $web3_helper->sendTokenToUser($gameAuthor->wallet_address, $creator_points);
+                Award::create([
+                    'address' => $gameAuthor->wallet_address,
+                    'amount' => $creator_points,
+                    'award_type' => 'Game creator award'
+                ]);
+                // $web3_helper->sendTokenToUser($gameAuthor->wallet_address, $creator_points);
 
                 // $gameAuthor->save();
 

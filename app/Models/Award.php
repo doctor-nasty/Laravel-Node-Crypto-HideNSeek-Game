@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TokenInfo extends Model
+class Award extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'token_id', 'owner', 'purchase_time'
-    ];
-
-    protected $casts = [
-        'purchase_time' => 'datetime',
+        'address', 'amount', 'award_type', 'status'
     ];
 }

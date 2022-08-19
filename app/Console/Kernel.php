@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        Commands\SendAward::class,
         Commands\DailyAward::class,
         Commands\UpdateTokenInfo::class
     ];
@@ -25,8 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('award:daily')->daily();
         $schedule->command('update:token')->everyMinute()->withoutOverlapping();
+        $schedule->command('award:daily')->daily();
+        $schedule->command('award:send')->everyMinute()->withoutOverlapping();
     }
 
     /**

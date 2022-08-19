@@ -50,8 +50,7 @@ class UpdateTokenInfo extends Command
             $lastSyncedBlock = $synced->value;
         }
 
-        printf("Syncing block # %s -> %s\n", $lastSyncedBlock, $currentBlock);
-        
+        Log::info("Syncing block # {$lastSyncedBlock} -> {$currentBlock}");
 
         $nft_address = config('web3.chain.nft');
 
