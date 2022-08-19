@@ -115,10 +115,10 @@
     </div>
     </div>
     <div class="content_inside">
-        @foreach($tokens as $token)
+        @foreach($tokens as $index => $token)
         
-        <span>{{$nft_name}}</span>
-        <img class="img-fluid" src="{{$nft_image}}"></img>
+        <span>{{$nft_name[$index]}}</span>
+        <img class="img-fluid" src="{{$nft_image[$index]}}"></img>
         @endforeach
     </div>
   </div>
