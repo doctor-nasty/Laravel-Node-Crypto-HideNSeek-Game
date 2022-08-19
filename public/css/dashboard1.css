@@ -185,6 +185,9 @@
 .notification-dropdown-btn {
   position: relative;
 }
+.dashboard-table-card {
+  width: 100%;
+}
 .notification-dropdown {
   position: absolute;
   right: 0;
@@ -310,6 +313,8 @@
 }
 .player-info {
   margin-bottom: 12px;
+  position: relative;
+  display: flex;
 }
 .player-content .player-info h4 {
   color: white;
@@ -317,6 +322,12 @@
 }
 .player-point-row {
   display: flex;
+}
+.wallet-copy {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: green;
 }
 .player-point-block {
   display: flex;
