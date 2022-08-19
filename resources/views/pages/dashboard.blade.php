@@ -99,7 +99,7 @@
   <div class="menu">
     <button class="button_active">Games Bidded</button>
     <button>Own Games</button>
-    <button>Test</button>
+    <button>My Items</button>
   </div>
   <div class="content">
     <div class="content_inside content_inside_active">
@@ -114,7 +114,10 @@
     </div>
     </div>
     <div class="content_inside">
-<span>test</span>
+@foreach($tokens as $token)
+<span>{{$nft_name}}</span>
+<img class="img-fluid" src="{{$nft_image}}"></img>
+@endforeach
 </div>
   </div>
 </div>
