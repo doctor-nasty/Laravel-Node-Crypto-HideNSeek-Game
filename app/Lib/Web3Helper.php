@@ -141,6 +141,16 @@ class Web3Helper {
     return $tokenIds;
   }
 
+  public function getBlockNumber() {
+    $timeout = 30;
+    $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+    $web3->getEth()->blockNumber(function ($err, $result) use(&$blockNumber) {
+      $blockNumber = $result;
+    });
+
+    return $blockNumber;
+  }
+
   function getBalance($eth, $account) {
     $balance = 0;
     $eth->getBalance($account, function ($err, $rawBalance) use (&$balance) {

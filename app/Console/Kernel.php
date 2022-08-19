@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\DailyAward::class,
+        Commands\UpdateTokenInfo::class
     ];
 
     /**
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('award:daily')->daily();
+        $schedule->command('update:token')->everyMinute()->withoutOverlapping();
     }
 
     /**
