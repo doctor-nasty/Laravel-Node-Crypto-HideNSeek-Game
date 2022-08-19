@@ -716,7 +716,7 @@ table.dataTable td.reorder {
 table.dataTable.dtr-inline.collapsed > tbody > tr > td.child,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th.child,
 table.dataTable.dtr-inline.collapsed > tbody > tr > td.dataTables_empty {
-  cursor: default !important;
+  border-radius: 30px;
 }
 table.dataTable.dtr-inline.collapsed > tbody > tr > td.child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th.child:before,
@@ -732,7 +732,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
 table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
   top: 50%;
-  left: 5px;
+  left: 4px;
   height: 1em;
   width: 1em;
   margin-top: -9px;
@@ -747,8 +747,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
   text-indent: 0 !important;
   font-family: "Courier New", Courier, monospace;
   line-height: 1em;
-  content: "+";
-  background-color: #31b131;
+  content: "\203A" !important;
+  background: none !important;
 }
 table.dataTable.dtr-inline.collapsed
   > tbody
@@ -758,8 +758,9 @@ table.dataTable.dtr-inline.collapsed
   > tbody
   > tr.parent
   > th.dtr-control:before {
-  content: "-";
-  background-color: #d33333;
+  content: "\203A";
+  transform: rotate(90deg);
+  background: none !important;
 }
 table.dataTable.dtr-inline.collapsed.compact > tbody > tr > td.dtr-control,
 table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th.dtr-control {
@@ -833,6 +834,12 @@ table.dataTable > tbody > tr.child ul.dtr-details {
 table.dataTable > tbody > tr.child ul.dtr-details > li {
   border-bottom: 1px solid #efefef;
   padding: 0.5em 0;
+  display: flex;
+  align-items: center;
+}
+table.dataTable > tbody > tr.child ul.dtr-details > li span {
+  display: flex;
+  align-items: center;
 }
 table.dataTable > tbody > tr.child ul.dtr-details > li:first-child {
   padding-top: 0;
@@ -1414,14 +1421,19 @@ div.dataTables_wrapper span.select-item {
 .dashboard-table tbody tr:nth-child(odd) td:first-child {
   border-radius: 30px 0 0 30px;
 }
-.dashboard-table tbody tr:nth-child(odd) td:last-child {
-  border-radius: 0 30px 30px 0;
-}
-
 .dashboard-table .table-image {
   margin: auto;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.radius {
+  border-radius: 0 30px 30px 0;
+}
+.dashboard-table tbody tr td:nth-child(7) {
+  border-radius: 0 30px 30px 0;
 }
