@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-  <!-- Mirrored from decentral.games/ice/start by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 Aug 2022 21:02:56 GMT -->
-  <!-- Added by HTTrack -->
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <!-- /Added by HTTrack -->
+ <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <head>
     @include('layouts.partials.head')
   </head>
@@ -23,5 +20,4 @@
       </section>
     </div>
   </body>
-  <!-- Mirrored from decentral.games/ice/start by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 Aug 2022 21:03:01 GMT -->
 </html>

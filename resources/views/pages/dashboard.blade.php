@@ -62,7 +62,8 @@
                 </div>
                 <div class="player-content">
                     <div class="player-info">
-                        <h4>{{Str::substr(Auth::user()->wallet_address, 0, 5)}}....{{Str::substr(Auth::user()->wallet_address, -5);}}</h4>
+                        <h4 class="player-wallet">{{Str::substr(Auth::user()->wallet_address, 0, 5)}}....{{Str::substr(Auth::user()->wallet_address, -5);}}</h4>
+                        <button class="wallet-copy"></button>
                     </div>
                     <div class="player-point-row">
                         <div class="player-point-block">
@@ -99,9 +100,9 @@
   <div class="menu">
     <button class="button_active">Games Bidded</button>
     <button>Own Games</button>
-    <button>Test</button>
+    <button>My Items</button>
   </div>
-  <div class="content">
+  <div class="content dashboard-table-card">
     <div class="content_inside content_inside_active">
         <div class="table-responsive">
             <table class="display dashboard-table table" id="data-table-bid" cellspacing="0" style="width:100%"></table>
@@ -114,7 +115,10 @@
     </div>
     </div>
     <div class="content_inside">
-<span>test</span>
+@foreach($tokens as $token)
+<span>{{$nft_name}}</span>
+<img class="img-fluid" src="{{$nft_image}}"></img>
+@endforeach
 </div>
   </div>
 </div>
@@ -385,4 +389,38 @@ buttonArray.addEventListener('click', function() {
   display: block;
 }
 </style>
+<script>
+    function tableResize(){
+        let tableBlock = document.querySelector('.dashboard-table-card');
+        let tableWidth = tableBlock.offsetWidth;
+        if(tableWidth >= 252 && tableWidth < 300){
+            $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0 30px 30px 0");
+        }
+        else if (tableWidth >= 300 && tableWidth < 366){
+            $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0 30px 30px 0")
+        }
+        else if(tableWidth >= 366 && tableWidth < 448){
+            $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0 30px 30px 0")
+        }
+        else if(tableWidth >= 448 && tableWidth < 530){
+            $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0 30px 30px 0")
+        }
+        else if(tableWidth >= 530){
+            $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(7)").css("border-radius", "0 30px 30px 0")
+        }
+    }
+	function timeFunction() {
+	    setTimeout(function(){
+            tableResize()
+        }, 500);
+	}
+    timeFunction()
+    $(window).resize(function() {
+       tableResize() 
+    });
+</script>
 @endsection
