@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e6807cb59796ea73330e1b48c9ec650",
+    "content-hash": "6b670796d6bb570d3142afbf6ec90141",
     "packages": [
         {
             "name": "brick/math",
@@ -6790,6 +6790,142 @@
                 "source": "https://github.com/dwightwatson/rememberable/tree/6.0.0"
             },
             "time": "2022-02-04T00:49:55+00:00"
+        },
+        {
+            "name": "web3p/ethereum-tx",
+            "version": "0.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/web3p/ethereum-tx.git",
+                "reference": "8dc1adc10ae45ac440c43ac32a3c5adf63ed8cef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/web3p/ethereum-tx/zipball/8dc1adc10ae45ac440c43ac32a3c5adf63ed8cef",
+                "reference": "8dc1adc10ae45ac440c43ac32a3c5adf63ed8cef",
+                "shasum": ""
+            },
+            "require": {
+                "kornrunner/keccak": "~1",
+                "php": "^7.1|^8.0",
+                "simplito/elliptic-php": "~1.0.6",
+                "web3p/ethereum-util": "~0.1.3",
+                "web3p/rlp": "0.3.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~7|~8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Web3p\\EthereumTx\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sc0Vu",
+                    "email": "alk03073135@gmail.com"
+                }
+            ],
+            "description": "Ethereum transaction library in PHP.",
+            "support": {
+                "issues": "https://github.com/web3p/ethereum-tx/issues",
+                "source": "https://github.com/web3p/ethereum-tx/tree/0.4.3"
+            },
+            "time": "2021-09-01T05:13:20+00:00"
+        },
+        {
+            "name": "web3p/ethereum-util",
+            "version": "0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/web3p/ethereum-util.git",
+                "reference": "77a860f35028eae57cd7e7a044ab6c11ffe1ad9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/web3p/ethereum-util/zipball/77a860f35028eae57cd7e7a044ab6c11ffe1ad9e",
+                "reference": "77a860f35028eae57cd7e7a044ab6c11ffe1ad9e",
+                "shasum": ""
+            },
+            "require": {
+                "kornrunner/keccak": "~1",
+                "php": "^7.1 | ^8.0",
+                "simplito/elliptic-php": "~1.0.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~7 | ~8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Web3p\\EthereumUtil\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sc0Vu",
+                    "email": "alk03073135@gmail.com"
+                }
+            ],
+            "description": "A collection of utility functions for Ethereum written in PHP.",
+            "support": {
+                "issues": "https://github.com/web3p/ethereum-util/issues",
+                "source": "https://github.com/web3p/ethereum-util/tree/0.1.3"
+            },
+            "time": "2021-06-05T05:35:13+00:00"
+        },
+        {
+            "name": "web3p/rlp",
+            "version": "0.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/web3p/rlp.git",
+                "reference": "1653af23142863b490bdf22c6d0335bdb588c983"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/web3p/rlp/zipball/1653af23142863b490bdf22c6d0335bdb588c983",
+                "reference": "1653af23142863b490bdf22c6d0335bdb588c983",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^7.1 | ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~7|~8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Web3p\\RLP\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sc0Vu",
+                    "email": "alk03073135@gmail.com"
+                }
+            ],
+            "description": "Recursive Length Prefix Encoding in PHP.",
+            "support": {
+                "issues": "https://github.com/web3p/rlp/issues",
+                "source": "https://github.com/web3p/rlp/tree/0.3.4"
+            },
+            "time": "2021-08-30T10:22:03+00:00"
         },
         {
             "name": "web3p/web3.php",
