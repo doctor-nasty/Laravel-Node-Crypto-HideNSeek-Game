@@ -63,7 +63,9 @@
                 <div class="player-content">
                     <div class="player-info">
                         <h4 class="player-wallet">{{Str::substr(Auth::user()->wallet_address, 0, 5)}}....{{Str::substr(Auth::user()->wallet_address, -5);}}</h4>
-                        <button class="wallet-copy"></button>
+                        <button class="wallet-copy">
+                            <img src="{{ asset('svgs/copy.png') }}" alt="">
+                        </button>
                     </div>
                     <div class="player-point-row">
                         <div class="player-point-block">
@@ -115,11 +117,16 @@
     </div>
     </div>
     <div class="content_inside">
-        @foreach($tokens as $index => $token)
-        
-        <span>{{$nft_name[$index]}}</span>
-        <img class="img-fluid" src="{{$nft_image[$index]}}"></img>
-        @endforeach
+        <div class="nft-image-cont">
+            @foreach($tokens as $index => $token)
+            <div class="nft-image-row">
+                <div class="nft-image-block">
+                    <img class="img-fluid" src="{{$nft_image[$index]}}"></img>
+                    <h4>{{$nft_name[$index]}}</h4>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
   </div>
 </div>
@@ -376,22 +383,22 @@ buttonArray.addEventListener('click', function() {
     function tableResize(){
         let tableBlock = document.querySelector('.dashboard-table-card');
         let tableWidth = tableBlock.offsetWidth;
-        if(tableWidth >= 252 && tableWidth < 300){
+        if(tableWidth <= 252 && tableWidth < 300){
             $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0 30px 30px 0");
         }
-        else if (tableWidth >= 300 && tableWidth < 366){
+        else if (tableWidth >= 335 && tableWidth < 400){
             $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0")
             $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0 30px 30px 0")
         }
-        else if(tableWidth >= 366 && tableWidth < 448){
+        else if(tableWidth >= 400 && tableWidth < 482){
             $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0")
             $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0 30px 30px 0")
         }
-        else if(tableWidth >= 448 && tableWidth < 530){
+        else if(tableWidth >= 482 && tableWidth < 567){
             $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0")
             $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0 30px 30px 0")
         }
-        else if(tableWidth >= 530){
+        else if(tableWidth >= 567){
             $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0")
             $(".dashboard-table tbody tr td:nth-child(7)").css("border-radius", "0 30px 30px 0")
         }
@@ -404,10 +411,6 @@ buttonArray.addEventListener('click', function() {
     timeFunction()
     $(window).resize(function() {
        tableResize() 
-    });
-    $(".wallet-copy").click(function () {
-        const walletInfo = {{Auth::user()->wallet_address}};
-        console.log(walletInfo); 
     });
 </script>
 @endsection

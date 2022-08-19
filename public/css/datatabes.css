@@ -74,8 +74,14 @@ table.dataTable thead > tr > td.sorting_asc:before,
 table.dataTable thead > tr > td.sorting_desc:before,
 table.dataTable thead > tr > td.sorting_asc_disabled:before,
 table.dataTable thead > tr > td.sorting_desc_disabled:before {
-  bottom: 26%;
-  content: "\01F891" !important;
+  bottom: 50%;
+  background-image: url(../svgs/arrow-up.svg);
+  background-position: center;
+  background-size: 8px;
+  width: 8px;
+  height: 8px;
+  background-repeat: no-repeat;
+  content: "" !important;
   right: 10px !important;
   color: white !important;
   font-size: 16px !important;
@@ -90,9 +96,15 @@ table.dataTable thead > tr > td.sorting_asc:after,
 table.dataTable thead > tr > td.sorting_desc:after,
 table.dataTable thead > tr > td.sorting_asc_disabled:after,
 table.dataTable thead > tr > td.sorting_desc_disabled:after {
-  top: 26%;
+  top: 50%;
   right: 10px !important;
-  content: "\01F893" !important;
+  background-image: url(../svgs/arrow-down.svg);
+  background-position: center;
+  background-size: 8px;
+  width: 8px;
+  height: 8px;
+  background-repeat: no-repeat;
+  content: "" !important;
   color: white !important;
   font-size: 16px !important;
 }
