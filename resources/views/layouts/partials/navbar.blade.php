@@ -7,15 +7,34 @@
       <ul class="dashboard-nav-list">
         <li>
           <div class="account-block">
-            <span id="balance">0.00</span>
-            <img src="{{ asset('svgs/dollar-circle.svg') }}" alt="dolar sign">
+            <span id="balance"></span>
+            <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="dolar sign">
           </div>
         </li>
-        <li>
+        <li class="notification-dropdown-btn">
           <button tupe="button" class="menu-btn">
              <img src="{{ asset('svgs/bell.svg') }}" alt="bell">
              <div class="notification-number">{{ auth()->user()->unreadNotifications->count() }}</div>
           </button>
+          <div class="notification-dropdown">
+            @foreach(auth()->user()->unreadNotifications as $notification)
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-dark rounded-circle">
+                  <i class="mdi mdi-xbox-controller text-success"></i>
+                </div>
+              </div>
+              <div class="preview-item-content">
+                  <p class="preview-subject mb-1">{{ $notification->data['title'] }}</p>
+                  <p class="text-muted ellipsis mb-0">{{ $notification->data['data'] }}</p>
+              </div>
+            </a>
+            @endforeach
+            <div class="dropdown-divider"></div>
+            <a href="{{route('mark')}}">
+              <p class="p-3 mb-0 text-center">Mark As Read</p>
+          </a>
+          </div>
         </li>
         <li class="sidebar-btn-list">
           <button tupe="button" class="menu-btn burger-menu-btn">
@@ -35,16 +54,22 @@
           <a href="{{ url('/') }}" class="dropdown-link">Dashboard</a>
         </li>
         <li>
-          <a href="{{ asset('svgs/game-controller.svg') }}" class="dropdown-link">Games</a>
+          <a href="{{ url('/games') }}" class="dropdown-link">Games</a>
         </li>
         <li>
-          <a href="{{ asset('svgs/shopping-bag.svg') }}" class="dropdown-link">My Bids</a>
+          <a href="{{ url('/my_bids') }}" class="dropdown-link">My Bids</a>
         </li>
         <li>
-          <a href="{{ asset('svgs/shopping-bag.svg') }}" class="dropdown-link">Delegations</a>
+          <a href="{{ url('/delegations') }}" class="dropdown-link">Delegations</a>
         </li>
-        <li>s
-          <a href="{{ asset('svgs/file-text.svg') }}" class="dropdown-link">Documentation</a>
+        <li>
+          <a href="{{ url('/documentation') }}" class="dropdown-link">Documentation</a>
+        </li>
+        <li>
+          <a href="{{ url('/settings') }}" class="dropdown-link">Settings</a>
+        </li>
+        <li>
+          <a href="{{ url('/logout') }}" class="dropdown-link">Logout</a>
         </li>
         @if (session('can_create'))
         <li>
@@ -85,5 +110,7 @@
       $('#balance').html(data);
       console.log( "Sample of data:", data.slice( 0, 100 ) );
     });
-
+  $(".notification-dropdown-btn").click(function(){
+    $(".notification-dropdown").slideToggle();
+  });
 </script>

@@ -41,14 +41,14 @@
 <meta name="theme-color" content="#000000" />
 
 {{-- <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}"> --}}
-<link rel="preload" href="https://decentral.games/_next/static/css/14b6afc48ba56a11.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/14b6afc48ba56a11.css" data-n-g=""/>
-<link rel="preload" href="https://decentral.games/_next/static/css/7b1208e7a7b9a565.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/7b1208e7a7b9a565.css" data-n-p=""/>
-<link rel="preload" href="https://decentral.games/_next/static/css/0d999f051cbbd0e5.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/0d999f051cbbd0e5.css" data-n-p=""/>
-<link rel="preload" href="https://decentral.games/_next/static/css/19be72d9c8a2b043.css" as="style"/>
-<link rel="stylesheet" href="https://decentral.games/_next/static/css/19be72d9c8a2b043.css" data-n-p=""/>
+<link rel="preload" href="/css/dg/14b6afc48ba56a11.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/14b6afc48ba56a11.css" data-n-g=""/>
+<link rel="preload" href="/css/dg/7b1208e7a7b9a565.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/7b1208e7a7b9a565.css" data-n-p=""/>
+<link rel="preload" href="/css/dg/0d999f051cbbd0e5.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/0d999f051cbbd0e5.css" data-n-p=""/>
+<link rel="preload" href="/css/dg/19be72d9c8a2b043.css" as="style"/>
+<link rel="stylesheet" href="/css/dg/19be72d9c8a2b043.css" data-n-p=""/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 

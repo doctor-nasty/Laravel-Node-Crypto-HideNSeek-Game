@@ -112,7 +112,10 @@
                 },
                 {
                     title: 'Created At',
-                    data: 'created_at'
+                    data: 'created_at', render : function(data)
+                {
+                    return moment(data).format("DD MMM YYYY HH:mm:ss");
+                }
                 },
                 {
                 title: 'Status',

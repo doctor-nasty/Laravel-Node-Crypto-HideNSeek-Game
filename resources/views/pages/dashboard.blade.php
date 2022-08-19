@@ -24,7 +24,7 @@
                 {{ session('status') }}
               </div>
             @endif
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-6 grid-margin">
                 <div class="dashboard-card">
                   <div class="dashboard-card-text">
@@ -42,32 +42,54 @@
                     <h5>@lang('dashboard.points_earned')</h5>
                     <span class="dashboard-card-number">120</span>
                   </div>
-                  <!-- <span class="dashboard-card-number">{{Auth::user()->total_winning_points}}</span> -->
+                  <span class="dashboard-card-number">{{Auth::user()->total_winning_points}}</span> 
                   <div class="dashboard-card-image">
                     <img src="{{ asset('images/component.png') }}" alt="">
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="player-card">
                 <div class="payer-avatar-block">
                     <div class="payer-avatar-image">
-                        <img src="{{ asset('images/avatar.jpg') }}" alt="random avatar">
+                        <img src="/storage/avatars/{{Auth::user()->avatar}}" alt="random avatar">
                     </div>
+                    <a href="/settings">
                     <button class="avatar-edit-button">
                         <img src="{{ asset('svgs/pencil.png') }}" alt="">
                     </button>
+                </a>
                 </div>
                 <div class="player-content">
                     <div class="player-info">
-                        <h4>Player Name</h4>
+                        <h4>{{Str::substr(Auth::user()->wallet_address, 0, 5)}}....{{Str::substr(Auth::user()->wallet_address, -5);}}</h4>
                     </div>
                     <div class="player-point-row">
                         <div class="player-point-block">
-                            <div class="point-icon"></div>
+                            <div class="point-icon">
+                                <img src="{{ asset('svgs/controler-blue.svg') }}" alt="controler icon">
+                            </div>
                             <div class="point-text">
-                                <h5></h5>
-                                <span></span>
+                                <h5>@lang('dashboard.games_played')</h5>
+                                <span>{{$games_played}}</span>
+                            </div>
+                        </div>
+                        <div class="player-point-block">
+                            <div class="point-icon">
+                                <img src="{{ asset('svgs/point-icon.svg') }}" alt="point icon">
+                            </div>
+                            <div class="point-text">
+                                <h5>@lang('dashboard.points_earned')</h5>
+                                <span>120</span>
+                            </div>
+                        </div>
+                        <div class="player-point-block">
+                            <div class="point-icon">
+                                <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="point icon">
+                            </div>
+                            <div class="point-text">
+                                <h5>Your Balance</h5>
+                                <span id="balance">0</span>
                             </div>
                         </div>
                     </div>
@@ -192,7 +214,10 @@
                 // },
                 {
                     title: 'Created At',
-                    data: 'created_at'
+                    data: 'created_at', render : function(data)
+                {
+                    return moment(data).format("DD MMM YYYY HH:mm:ss");
+                }
                 }
                 ,
                 {
@@ -255,7 +280,10 @@
                 // },
                 {
                     title: 'Created At',
-                    data: 'created_at'
+                    data: 'created_at', render : function(data)
+                {
+                    return moment(data).format("DD MMM YYYY HH:mm:ss");
+                }
                 },
                 {
                 title: 'Status',
@@ -320,6 +348,7 @@ let content_inside = document.querySelectorAll('.content_inside');
 
 Array.from(button).forEach(function(buttonArray, i) {
 buttonArray.addEventListener('click', function() {
+  window.dispatchEvent(new Event('resize'));
 
     Array.from(button).forEach(buttonAll => buttonAll.classList.remove('button_active'));
     
