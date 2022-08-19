@@ -102,8 +102,6 @@ Route::group(['middleware' => ['auth', 'status', 'check.token']], function () {
     Route::get('/get_nfts', 'Web3Controller@getNFTs');
     Route::get('/can_create_game', 'Web3Controller@canCreateGame');
     Route::get('/can_play_game', 'Web3Controller@canPlayGame');
-
-    Route::get('/test_transfer', 'Web3Controller@test');
 });
 
 // Route::post('list/users', 'JsController@ListUsers');

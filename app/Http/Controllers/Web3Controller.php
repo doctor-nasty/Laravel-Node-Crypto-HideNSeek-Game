@@ -15,12 +15,6 @@ use GuzzleHttp\Client;
 
 class Web3Controller
 {
-    public function test() {
-        $web3_helper = new \App\Lib\Web3Helper();
-
-        $web3_helper->sendTokenToUser(config('web3.wallet.address'), 1);
-    }
-
     public function signature()
     {
         $nonce = Str::random();

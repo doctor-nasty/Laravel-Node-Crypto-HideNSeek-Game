@@ -20,7 +20,7 @@ return [
     ],
 
     'wallet' => [
-      'private_key' => env('WALLET_PRIVATE_KEY', '65551be36cfbaf60cab2e9da4dfd498abe89343996d086a9c0fa48a7e53add2d'),
+      'seed' => env('WALLET_SEED', 'clerk census armor insane girl bargain secret ticket author nurse pony female'),
       'address' => env('WALLET_ADDRESS', '0x1978a92b590EcbC678613a38FDa020A139Fb6592')
     ],
 
