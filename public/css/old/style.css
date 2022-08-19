@@ -4378,7 +4378,7 @@ pre code {
 .table-responsive {
   display: block;
   width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
@@ -21010,6 +21010,7 @@ div.breadcrumb.tagsinput .breadcrumb-item span,
   background: rgba(237, 156, 40, 0.2);
   border: 1px solid #da9025;
   color: #b4771e;
+  margin-bottom: 30px;
 }
 
 .card-inverse-danger {

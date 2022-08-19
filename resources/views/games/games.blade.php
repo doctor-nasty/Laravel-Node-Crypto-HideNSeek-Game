@@ -24,11 +24,17 @@
 
     <div class="content-wrapper">
         <nav aria-label="breadcrumb" role="navigation">
-          <ol class="breadcrumb breadcrumb-custom">
-            <li class="breadcrumb-item"><a href="{{ url('') }}">@lang('games.dashboard')</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><span>@lang('games.games')</span></li>
-            <li class="breadcrumb-item"><a href="{{ route('games.create') }}">@lang('games.create_game')</a></li>
-          </ol>
+          <div class="change-content-btn">
+            <div>
+                <a href="{{ url('') }}" class="btn-change">@lang('games.dashboard')</a>
+            </div>
+            <div class="active" aria-current="page">
+                <span class="btn-change">@lang('games.games')</span>
+            </div>
+            <div>
+                <a class="btn-change" href="{{ route('games.create') }}">@lang('games.create_game')</a>
+            </div>
+          </div>
         </nav>
       @if(session()->get('success'))
         <div class="alert alert-success">

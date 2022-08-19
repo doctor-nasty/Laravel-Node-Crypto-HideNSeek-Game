@@ -62,7 +62,10 @@
                 </div>
                 <div class="player-content">
                     <div class="player-info">
-                        <h4>{{Str::substr(Auth::user()->wallet_address, 0, 5)}}....{{Str::substr(Auth::user()->wallet_address, -5);}}</h4>
+                        <h4 class="player-wallet">{{Str::substr(Auth::user()->wallet_address, 0, 5)}}....{{Str::substr(Auth::user()->wallet_address, -5);}}</h4>
+                        <button class="wallet-copy">
+                            <img src="{{ asset('svgs/copy.png') }}" alt="">
+                        </button>
                     </div>
                     <div class="player-point-row">
                         <div class="player-point-block">
@@ -95,13 +98,13 @@
                     </div>
                 </div>
             </div>
-<div class="">
-  <div class="menu">
-    <button class="button_active">Games Bidded</button>
-    <button>Own Games</button>
-    <button>Test</button>
+<div>
+  <div class="menu change-content-btn">
+    <button class="button_active btn-change">Games Bidded</button>
+    <button class="btn-change">Own Games</button>
+    <button class="btn-change">My Items</button>
   </div>
-  <div class="content">
+  <div class="content dashboard-table-card">
     <div class="content_inside content_inside_active">
         <div class="table-responsive">
             <table class="display dashboard-table table" id="data-table-bid" cellspacing="0" style="width:100%"></table>
@@ -114,21 +117,22 @@
     </div>
     </div>
     <div class="content_inside">
-<span>test</span>
-</div>
+        <div class="nft-image-cont">
+            @foreach($tokens as $index => $token)
+            <div class="nft-image-row">
+                <div class="nft-image-block">
+                    <img class="img-fluid" src="{{$nft_image[$index]}}"></img>
+                    <h4>{{$nft_name[$index]}}</h4>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
   </div>
 </div>
 <div>
     
 </div>
-<script>
-    $(window).resize(function() {
-        $(".dtr-hidden").prev().css("border-radius", "0 30px 30px 0")
-    });
-    $(document).ready(function() {
-        $(".dtr-hidden").prev().css("border-radius", "0 30px 30px 0")
-    });
-</script>
             <!-- <div class="row grid-margin" id="bidded">
               <div class="col-12">
                 <div class="card">
@@ -361,28 +365,52 @@ buttonArray.addEventListener('click', function() {
 });
 </script>
 <style>
-    .menu {
+.menu {
   display: flex;
 }
-
-.menu button {
-  margin: 10px;
-  cursor: pointer;
-}
-
-.button_active {
-  color: teal;
-}
-
 .content_inside {
   display: none;
-  border: 1px solid #000000;
-  border-radius: 10px;
-  padding: 10px;
+  border: 1px solid #2a2a2a;
+  border-radius: 28px;
+  padding: 22px;
 }
 
 .content_inside_active {
   display: block;
 }
 </style>
+<script>
+    function tableResize(){
+        let tableBlock = document.querySelector('.dashboard-table-card');
+        let tableWidth = tableBlock.offsetWidth;
+        if(tableWidth <= 252 && tableWidth < 300){
+            $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0 30px 30px 0");
+        }
+        else if (tableWidth >= 335 && tableWidth < 400){
+            $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0 30px 30px 0")
+        }
+        else if(tableWidth >= 400 && tableWidth < 482){
+            $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0 30px 30px 0")
+        }
+        else if(tableWidth >= 482 && tableWidth < 567){
+            $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0 30px 30px 0")
+        }
+        else if(tableWidth >= 567){
+            $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0")
+            $(".dashboard-table tbody tr td:nth-child(7)").css("border-radius", "0 30px 30px 0")
+        }
+    }
+	function timeFunction() {
+	    setTimeout(function(){
+            tableResize()
+        }, 50);
+	}
+    timeFunction()
+    $(window).resize(function() {
+       tableResize() 
+    });
+</script>
 @endsection

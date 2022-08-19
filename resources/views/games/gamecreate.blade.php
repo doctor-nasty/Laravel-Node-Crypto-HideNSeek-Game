@@ -37,14 +37,6 @@
         {{ session()->get('error') }}
     </div>
     @endif
-    <nav aria-label="breadcrumb" role="navigation">
-        <ol class="breadcrumb breadcrumb-custom">
-            <li class="breadcrumb-item"><a href="{{ url('') }}">@lang('gamecreate.dashboard')</a></li>
-            <li class="breadcrumb-item"><a href="{{ url('games') }}">@lang('gamecreate.games')</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><span>@lang('gamecreate.create_new_game')</span></li>
-        </ol>
-    </nav>
-
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -65,6 +57,19 @@
             </p>
         </div>
     </div>
+        <nav aria-label="breadcrumb" role="navigation">
+        <div class="change-content-btn">
+            <div>
+                <a href="{{ url('') }}" class="btn-change">@lang('gamecreate.dashboard')</a>
+            </div>
+            <div>
+                <a href="{{ url('') }}" class="btn-change">@lang('gamecreate.games')</a>
+            </div>
+            <div class="active">
+                <span class="btn-change">@lang('gamecreate.create_new_game')</span>
+            </div>
+          </div>
+    </nav>
     <div class="row">
 
         <div class="col-12 grid-margin">
@@ -106,19 +111,6 @@
                                 <label for="full_comment">@lang('gamecreate.full_description') *</label>
                                 <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
                             </div>
-
-                            <div class="form-group">
-                                <label for="country">Country *</label>
-                                <input readonly id="country" name="country" value="{{ old('country') }}" type="text" class="required form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="city">City *</label>
-                                <input readonly id="city" name="city" value="{{ old('city') }}" type="text" class="required form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="district">District *</label>
-                                <input readonly id="district" name="district" value="{{ old('district') }}" type="text" class="required form-control">
-                            </div>
                             
                             <!-- <div class="card">
                                 <div class="card-body">
@@ -128,7 +120,7 @@
                             </div> -->
                     </div>
                     <div>
-                        <div class="input-group">
+                        <div class="input-group map-input-block">
                             <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span>
                             <input required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
                         </div>
@@ -147,11 +139,25 @@
                         <div id="suburb-error"></div>
                         <div id="country-error"></div>
                         <div class="col-md-12" id="map"></div>
-
                         <br>
+                        <br>
+                        <div class="map-input-block">
+                            <div class="form-group">
+                                <label for="country">Country *</label>
+                                <input readonly id="country" name="country" value="{{ old('country') }}" type="text" class="required form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input readonly id="city" name="city" value="{{ old('city') }}" type="text" class="required form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="district">District *</label>
+                                <input readonly id="district" name="district" value="{{ old('district') }}" type="text" class="required form-control">
+                            </div>
+                        </div>
                         <br>
                         <!-- <button type="submit" id="create_game" class="btn btn-inverse-primary" data-toggle="modal" data-target="#terms-modal"> -->
-                        <button type="submit" class="btn btn-inverse-primary">
+                        <button type="submit" class="btn btn-inverse-primary create-game">
                             @lang('gamecreate.submit')
                         </button>
                         <!-- status -->
