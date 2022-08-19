@@ -12,6 +12,8 @@ use Web3p\EthereumTx\Transaction;
 use phpseclib\Math\BigInteger;
 use GuzzleHttp\Client;
 
+use App\Models\TokenInfo;
+
 class Web3Helper {
   public function sendTokenToUser($address, $amount) {
     $timeout = 30;
@@ -99,46 +101,54 @@ class Web3Helper {
   public function getNFTs($address) {
     $tokenIds = [];
 
-    $client = new Client();
-    $page_key = '';
-    $total_cnt = 0;
+    $tokens = TokenInfo::where('owner', $address)->get();
 
-    $rep = 0;
-
-    while (true) {
-      $url = config('web3.chain.rpc') . '/getNFTs';
-      $url .= '?owner='. $address;
-      $url .= '&contractAddresses[]=' . config('web3.chain.nft');
-      $url .= '&withMetadata=false';
-
-      if ($page_key !== '') {
-        $url .= '&pageKey=' . $page_key;
-      }
-
-      $response = $client->request('GET', $url, [
-        'headers' => [
-          'Accept' => 'application/json',
-        ],
-      ]);
-
-      $result = json_decode($response->getBody());
-
-      $total_cnt = $result->totalCount;
-
-      $cnt = count($result->ownedNfts);
-      for ($i = 0; $i < $cnt; $i++) {
-        array_push($tokenIds, hexdec($result->ownedNfts[$i]->id->tokenId));
-      }
-
-      if (isset($result->pageKey)) {
-        // pages
-        $page_key =  $result->pageKey;
-      } else {
-        break;
-      }
+    foreach($tokens as $token) {
+      array_push($tokenIds, $token->token_id);
     }
-    
+
     return $tokenIds;
+
+    // $client = new Client();
+    // $page_key = '';
+    // $total_cnt = 0;
+
+    // $rep = 0;
+
+    // while (true) {
+    //   $url = config('web3.chain.rpc') . '/getNFTs';
+    //   $url .= '?owner='. $address;
+    //   $url .= '&contractAddresses[]=' . config('web3.chain.nft');
+    //   $url .= '&withMetadata=false';
+
+    //   if ($page_key !== '') {
+    //     $url .= '&pageKey=' . $page_key;
+    //   }
+
+    //   $response = $client->request('GET', $url, [
+    //     'headers' => [
+    //       'Accept' => 'application/json',
+    //     ],
+    //   ]);
+
+    //   $result = json_decode($response->getBody());
+
+    //   $total_cnt = $result->totalCount;
+
+    //   $cnt = count($result->ownedNfts);
+    //   for ($i = 0; $i < $cnt; $i++) {
+    //     array_push($tokenIds, hexdec($result->ownedNfts[$i]->id->tokenId));
+    //   }
+
+    //   if (isset($result->pageKey)) {
+    //     // pages
+    //     $page_key =  $result->pageKey;
+    //   } else {
+    //     break;
+    //   }
+    // }
+    
+    // return $tokenIds;
   }
 
   public function getBlockNumber() {
