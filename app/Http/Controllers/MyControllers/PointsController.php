@@ -210,15 +210,27 @@ class PointsController extends Controller {
                 $bid->is_awarded = 1;
                 $bid->save();
 
+                $total_points = (count($bids) + 1) * $game->points;
+
                 // $winning_points = ((count($bids) * $game->points + $game->points) * 50) / 100;
-                $winning_points = (((count($bids) + 1) * $game->points + $game->points) * 60) / 100;
-                $user->points += $winning_points;
+                // $winning_points = (((count($bids) + 1) * $game->points + $game->points) * 60) / 100;
+                $winning_points = $total_points * 55 / 100; // winner 55%
+
+                // send to user
+                $web3_helper = new \App\Lib\Web3Helper();
+                $web3_helper->sendTokenToUser($user->wallet_address, $winning_points);
+
+                //$user->points += $winning_points;
                 $user->total_winning_points += $winning_points;
                 $user->save();
 
                 // $gameAuthor->points += ((count($bids) * $game->points + $game->points) * 50) / 100;
-                $gameAuthor->points += (((count($bids) + 1) * $game->points + $game->points) * 30) / 100;
-                $gameAuthor->save();
+                // $gameAuthor->points += (((count($bids) + 1) * $game->points + $game->points) * 30) / 100;
+                $creator_points = $total_points * 30 / 100; // creator 30%
+                // send to createor
+                $web3_helper->sendTokenToUser($gameAuthor->wallet_address, $creator_points);
+
+                // $gameAuthor->save();
 
                 return redirect('games')->with('success', 'You have won the game!');
             } else {
