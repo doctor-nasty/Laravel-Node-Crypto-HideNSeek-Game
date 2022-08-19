@@ -36,7 +36,7 @@
 .dashbord-sidebar-social {
   display: flex;
   justify-content: center;
-  margin-bottom: 26px;
+  margin: 26px 0;
 }
 .dashbord-sidebar-social .nav-icon {
   margin: 0 8px;
@@ -333,6 +333,7 @@
   background-color: rgb(39, 39, 39);
   cursor: pointer;
   margin: 0 8px;
+  border: 0;
 }
 .player-point-block {
   display: flex;
@@ -388,7 +389,6 @@
   border-radius: 24px;
   margin: auto;
   width: 334px;
-  z-index: 10;
   margin-bottom: -22px;
   background-color: #000;
   position: relative;
@@ -407,6 +407,7 @@
   line-height: 19px;
   background-color: #000;
   outline: none;
+  border: 0;
 }
 .active .btn-change {
   background-color: #1f1f1f !important;
