@@ -27,7 +27,9 @@ class MainController extends Controller
         
         $tokens = $web3_helper->getNFTs(Auth::user()->wallet_address);
 
-        foreach ($tokens as $token_id) {
+        $nft_name = [];
+        $nft_image = [];
+        foreach ($tokens as $index => $token_id) {
             $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$token_id;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL,$url);
@@ -39,8 +41,8 @@ class MainController extends Controller
             $result= curl_exec ($ch);
             curl_close ($ch);
             $j=json_decode($result, true);
-            $nft_name = $j['name'];
-            $nft_image = $j['image'];
+            $nft_name[$index] = $j['name'];
+            $nft_image[$index] = $j['image'];
             };
 
 
