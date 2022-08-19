@@ -497,3 +497,67 @@
     margin-right: 10px;
   }
 }
+.change-content-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #2a2a2a;
+  padding: 3px;
+  border-radius: 24px;
+  margin: auto;
+  width: 334px;
+  z-index: 10;
+  margin-bottom: -22px;
+  background-color: #000;
+  position: relative;
+}
+.change-content-btn .btn-change {
+  padding: 7px 14px;
+  display: flex;
+  align-items: center;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: 0.2s ease-in;
+  opacity: 0.5;
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  line-height: 19px;
+  background-color: #000;
+  outline: none;
+}
+.active .btn-change {
+  background-color: #1f1f1f !important;
+  opacity: 1 !important;
+}
+.button_active {
+  background-color: #1f1f1f !important;
+  opacity: 1 !important;
+}
+.map-input-block input {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  background-color: #111214 !important;
+  border-radius: 4px;
+}
+.change-content-btn .btn-change:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+.map-input-block span {
+  color: white;
+}
+.create-game {
+  width: 100px;
+  height: 25px;
+  background: #0a63ea;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0;
+}
