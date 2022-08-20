@@ -10,7 +10,7 @@
       <div style="margin-top:0px">
         <div class="d-flex flex-row">
             @include('layouts.partials.sidebar')
-            <div class="IcePoker_main_container___ZNyK dashboard-content">
+            <div class="dashboard-content">
                   @yield('content')
             </div>
         </div>

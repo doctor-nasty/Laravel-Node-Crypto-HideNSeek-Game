@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-<div>
+<div class="section-block">
   <div class="menu change-content-btn">
     <button class="button_active btn-change">Games Bidded</button>
     <button class="btn-change">Own Games</button>
