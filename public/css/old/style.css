@@ -28843,7 +28843,7 @@ div.tagsinput span.tag a {
   display: flex;
   justify-content: flex-start;
   color: #fff;
-  padding: 20px 30px;
+  padding: 12px 30px;
 }
 .dashboard-dropdown-navigation a:hover {
   background: #1f1f1f;
