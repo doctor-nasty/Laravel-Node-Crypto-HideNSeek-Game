@@ -31,7 +31,7 @@
 </style> -->
 <!-- google map api end -->
 
-<div class="content-wrapper">
+<div class="content-wrapper section-block ">
     @if(session()->get('error'))
     <div class="alert alert-danger">
         {{ session()->get('error') }}
@@ -57,8 +57,7 @@
             </p>
         </div>
     </div>
-        <nav aria-label="breadcrumb" role="navigation">
-        <div class="change-content-btn">
+    <div class="change-content-btn">
             <div>
                 <a href="{{ url('') }}" class="btn-change">@lang('gamecreate.dashboard')</a>
             </div>
@@ -68,10 +67,8 @@
             <div class="active">
                 <span class="btn-change">@lang('gamecreate.create_new_game')</span>
             </div>
-          </div>
-    </nav>
-    <div class="row">
-
+    </div>
+    <div class="row"></div>
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -219,9 +216,9 @@
                             </div>
                         </div>
                         
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>
