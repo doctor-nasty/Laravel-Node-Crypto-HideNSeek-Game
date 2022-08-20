@@ -31,7 +31,7 @@
 </style> -->
 <!-- google map api end -->
 
-<div class="content-wrapper">
+<div class="content-wrapper section-block ">
     @if(session()->get('error'))
     <div class="alert alert-danger">
         {{ session()->get('error') }}
@@ -57,8 +57,7 @@
             </p>
         </div>
     </div>
-        <nav aria-label="breadcrumb" role="navigation">
-        <div class="change-content-btn">
+    <div class="change-content-btn">
             <div>
                 <a href="{{ url('') }}" class="btn-change">@lang('gamecreate.dashboard')</a>
             </div>
@@ -68,10 +67,8 @@
             <div class="active">
                 <span class="btn-change">@lang('gamecreate.create_new_game')</span>
             </div>
-          </div>
-    </nav>
-    <div class="row">
-
+    </div>
+    <div class="row"></div>
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
@@ -219,9 +216,9 @@
                             </div>
                         </div>
                         
+                        </div>
                     </div>
                 </div>
-            </div>
             </form>
         </div>
     </div>
@@ -281,26 +278,6 @@ contentType: "application/json; charset=utf-8",
 url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat=" + $('#mark_lat').val() + "&lon=" + $('#mark_long').val(),
 dataType: "json",
 success: function (data) {
-    // alert(data.address.city);
-    // if(isEmpty(data.address.city)){
-    //     $("#city-error").replaceWith("<div id='city-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find city!</strong></div>");
-    //  }else {
-    //     $('#city').val(data.address.city);
-    //     $("#city-error").remove();
-    //  }
-    // if(isEmpty(data.address.suburb)){
-    //     $("#suburb-error").replaceWith("<div id='suburb-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find suburb!</strong></div>");
-    //  }else {
-    //     $('#suburb').val(data.address.suburb);
-    //     $("#suburb-error").remove();
-    //  }
-    // if(isEmpty(data.address.country)){
-    //     alert("Error");
-    //     $("#country-error").replaceWith("<div id='country-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Can't find country!</strong></div>");
-    //  }else {
-    //     $('#country').val(data.address.country);
-    //     $("#country-error").remove();
-    //  }
     $('#city').val(data.address.city);
     $("#city-error").remove();
     $('#district').val(data.address.suburb);
@@ -310,7 +287,6 @@ success: function (data) {
 },
 error: function (result) {
     alert("Error");
-    // $("#map-error").replaceWith("<div id='map-error' class='alert alert-danger col-xs-10 col-xs-offset-1'><strong>Please mark correct location!" + value + "</strong></div>");
 }
 })
 });

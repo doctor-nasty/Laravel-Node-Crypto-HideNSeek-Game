@@ -22,9 +22,8 @@
     }
 </style> -->
 
-    <div class="content-wrapper">
-        <nav aria-label="breadcrumb" role="navigation">
-          <div class="change-content-btn">
+    <div class="content-wrapper section-block">
+        <div class="change-content-btn">
             <div>
                 <a href="{{ url('') }}" class="btn-change">@lang('games.dashboard')</a>
             </div>
@@ -34,8 +33,7 @@
             <div>
                 <a class="btn-change" href="{{ route('games.create') }}">@lang('games.create_game')</a>
             </div>
-          </div>
-        </nav>
+        </div>
       @if(session()->get('success'))
         <div class="alert alert-success">
           {{ session()->get('success') }}

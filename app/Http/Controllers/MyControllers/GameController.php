@@ -212,35 +212,18 @@ class GameController extends Controller {
         if ($this->checkConfirmation($request['tx_hash'], $request['points'])) {
             $index = 'user|' . Auth::user()->id . '|identifier';
 
-            $lat = $request->get('mark_lat');
-            $long = $request->get('mark_long');
-            
-            $url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat='.$lat.'&lon='.$long;
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL,$url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            $result= curl_exec ($ch);
-            curl_close ($ch);
-            $j=json_decode($result, true);
-            $city = $j['address']['city']; 
-            $suburb = $j['address']['suburb']; 
-            $country = $j['address']['country']; 
 
             $game = new Game([
                 'identifier' => Cache::get($index),
                 'title' => $request->get('title'),
                 'points' => $request->get('points'),
                 'type' => 'Item',
-                'city' => $city,
+                'city' => $request->get('city'),
                 'status' => '1',
-                'country' => $country,
+                'country' => $request->get('country'),
                 'players' => $request->get('players'),
                 // 'district' => $request->get('district'),
-                'district' => $suburb,
+                'district' => $request->get('district'),
                 'comment' => $request->get('comment'),
                 'full_comment' => $request->get('full_comment'),
                 // 'photo' => $request->get('photo'),
