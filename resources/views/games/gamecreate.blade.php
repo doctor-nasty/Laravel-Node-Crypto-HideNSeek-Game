@@ -109,36 +109,6 @@
                                 <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
                             </div>
                             
-                            <!-- <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title">@lang('gamecreate.upload_image') *</h4>
-                                    <input name="photo" id="clipboardExample2" value="{{ old('photo') }}" type="file" class="required dropify" />
-                                </div>
-                            </div> -->
-                    </div>
-                    <div>
-                        <div class="input-group map-input-block">
-                            <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span>
-                            <input required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
-                        </div>
-                        <small class="text text-danger">* @lang('gamecreate.code_text')</small>
-                        <!-- <input type="hidden" class="required form-control" id="city_lat" name="city_lat">
-                        <input type="hidden" class="required form-control" id="city_long" name="city_long"> -->
-                        <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
-                        <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">
-                        <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
-                        <input type="hidden" class="required form-control" id="deposit_addr" value="{{ config('web3.wallet.address') }}">
-                        <input type="hidden" class="required form-control" id="usdt_addr" value="{{ config('web3.chain.token') }}">
-                        <br>
-
-                        <br>
-                        <div id="city-error"></div>
-                        <div id="suburb-error"></div>
-                        <div id="country-error"></div>
-                        <div class="col-md-12" id="map"></div>
-                        <br>
-                        <br>
-                        <div class="map-input-block">
                             <div class="form-group">
                                 <label for="country">Country *</label>
                                 <input readonly id="country" name="country" value="{{ old('country') }}" type="text" class="required form-control">
@@ -151,7 +121,31 @@
                                 <label for="district">District *</label>
                                 <input readonly id="district" name="district" value="{{ old('district') }}" type="text" class="required form-control">
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span>
+                                <input required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
+                                <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
+                                <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">        
+                                </div>
+                            <!-- <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">@lang('gamecreate.upload_image') *</h4>
+                                    <input name="photo" id="clipboardExample2" value="{{ old('photo') }}" type="file" class="required dropify" />
+                                </div>
+                            </div> -->
+                    </div>
+                    <div>
+                        <small class="text text-danger">* @lang('gamecreate.code_text')</small>
+                        <!-- <input type="hidden" class="required form-control" id="city_lat" name="city_lat">
+                        <input type="hidden" class="required form-control" id="city_long" name="city_long"> -->
+                        <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
+                        <input type="hidden" class="required form-control" id="deposit_addr" value="{{ config('web3.wallet.address') }}">
+                        <input type="hidden" class="required form-control" id="usdt_addr" value="{{ config('web3.chain.token') }}">
+                        <br>
+
+                        <br>
+                        <div class="col-md-12" id="map"></div>
+                        <br>
                         <br>
                         <!-- <button type="submit" id="create_game" class="btn btn-inverse-primary" data-toggle="modal" data-target="#terms-modal"> -->
                         <button type="submit" class="btn btn-inverse-primary create-game">
@@ -268,6 +262,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
               }
             }
 
+
+
 map.on('click', function (e) {
     $("#city").val('');
     $("#district").val('');
@@ -278,15 +274,29 @@ contentType: "application/json; charset=utf-8",
 url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat=" + $('#mark_lat').val() + "&lon=" + $('#mark_long').val(),
 dataType: "json",
 success: function (data) {
+    if (data.address.city == null)
+    {
+    $('#city').val(data.address.county);
+    }
+    else if (data.address.city != null)
+        {
     $('#city').val(data.address.city);
-    $("#city-error").remove();
+        }
+    if (data.address.suburb == null)
+        {
+    $('#district').val(data.address.road);
+        }
+    else if (data.address.suburb != null)
+        {
     $('#district').val(data.address.suburb);
-    $("#district-error").remove();
+        }
+    
     $('#country').val(data.address.country);
     $("#country-error").remove();
+
 },
 error: function (result) {
-    alert("Error");
+    alert("Can't get location data!");
 }
 })
 });
