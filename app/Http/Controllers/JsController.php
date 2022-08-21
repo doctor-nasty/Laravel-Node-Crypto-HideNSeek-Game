@@ -17,45 +17,22 @@ class JsController extends Controller {
     public function ListGames(Request $request) {
 
         if (false && Cache::has('new_game_'.Auth::user()->id)) {
-//            echo "<pre>";
-//            print_r('123123inin');
-//            print_r(Cache::get('new_game_'.Auth::user()->id));
-//            die;
             $data = Cache::get('new_game_'.Auth::user()->id);
-//            $temp = $data->getData();
-//            $temp->draw += 1;
-//            $data->setData($temp);
-//            Cache::forget('new_game_'.Auth::user()->id);
-//            Cache::remember('new_game_'.Auth::user()->id, 3600, function() use($data) {
-//                return $data;
-//            });
-
-//            echo "<pre>";
-//            print_r($data->setData($temp));
-//            print_r($data->getData());
-//            die;
             return $data;
         } else {
-        //    echo "<pre>";
-        //    print_r('123123');
-        //    die;
             $query = DB::table('games')
             ->leftJoin('users', 'games.user_id', '=', 'users.id')
             ->select('users.average_rating', 'games.id', 'games.status', 'games.title', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
                     ->where('games.user_id', '<>', Auth::user()->id)
                     ->where('games.status', '=', '1')
-                    // ->random(10);
                     ->orderByRaw('RAND()')
                     ->take(10);
-            // ->whereIn('games.status_id', [ExamManager::getStatus(false, 'regular')->id, ExamManager::getStatus(false, 'retake')->id]);
-
-            // $data = DataTables::of($query->orderByRaw('RAND()'))->toJson();
             $data = DataTables::of($query)->toJson();
 
             $result = Cache::remember('new_game_'.Auth::user()->id, 600, function() use($data) {
                 return $data;
             });
-            
+
             // return $result;
             return $data;
         }
@@ -89,7 +66,6 @@ class JsController extends Controller {
 //        die;
         $query = Game_bid::select(
                         'games.id', 'games.status', 'games.title', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
-                // ->where(['games.user_id' => Game_bid::find($user_id)]);
                 ->where('games.status', '=', '1')
                 ->where('game_bids.user_id', '=', Auth::user()->id)
                 ->leftJoin('games', 'game_bids.game_id', '=', 'games.id')

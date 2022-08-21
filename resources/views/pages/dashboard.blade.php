@@ -1,7 +1,18 @@
 @extends('layouts.mainlayout')
 
 @section('content')
-
+<script>  
+    $.ajax({
+      url: "{{ url('/get_balance') }}",
+    })
+      .done(function( data ) {
+        $('#balance2').html(data);
+        console.log( "Sample of data:", data.slice( 0, 100 ) );
+      });
+    $(".notification-dropdown-btn").click(function(){
+      $(".notification-dropdown").slideToggle();
+    });
+  </script>
     <div id="app">
     </div>
     <div class="content-wrapper">
@@ -85,7 +96,7 @@
                         </div>
                         <div class="point-text">
                             <h5>@lang('dashboard.points_earned')</h5>
-                            <span>120</span>
+                            <span></span>
                         </div>
                     </div>
                     <div class="player-point-block">
@@ -94,7 +105,7 @@
                         </div>
                         <div class="point-text">
                             <h5>Your Balance</h5>
-                            <span id="balance">0</span>
+                            <span id="balance2"></span>
                         </div>
                     </div>
                 </div>
