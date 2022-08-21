@@ -44,13 +44,21 @@ class MainController extends Controller
             $nft_name[$index] = $j['name'];
             $nft_image[$index] = $j['image'];
         };
-
-
         
+        $owngames = Game::where('user_id', '=', Auth::user()->id)->get();
 
-        $games = Game_bid::where('user_id', Auth::user()->id)->get()->count();
+
+    $gamesbidded = DB::table('game_bids')
+->where('games.status', '=', '1')
+->where('game_bids.user_id', '=', Auth::user()->id)
+->leftJoin('games', 'game_bids.game_id', '=', 'games.id')
+->leftJoin('users', 'game_bids.user_id', '=', 'users.id')->get();
+
+
+
+        $gamesplayed = Game_bid::where('user_id', Auth::user()->id)->get()->count();
         $user = Auth::user();
-        return view('pages.dashboard', ['games_played' => $games], compact('nft_name', 'nft_image', 'tokens'));
+        return view('pages.dashboard', compact('gamesplayed', 'nft_name', 'nft_image', 'tokens', 'gamesbidded', 'owngames'));
     }
 
 }
