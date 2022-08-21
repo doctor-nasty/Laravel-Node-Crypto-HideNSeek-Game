@@ -26,9 +26,10 @@ class GameController extends Controller {
     }
 
     public function index() {
-        // $games = Game::All();
+        $games = Game::All();
         return view('games.games')
-                        ->with('title', 'Games');
+        ->with('title', 'Games')
+        ->with('games', $games);
     }
 
     // public function index(Request $request)
