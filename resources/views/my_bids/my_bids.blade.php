@@ -55,9 +55,45 @@
         <div class="card-body">
             <div class="row">
 
-              <div class="col-12">
-                  <table class="display nowrap" id="data-table" cellspacing="0" width="100%"></table>
-              </div>
+                <div class="table-responsive">
+                    <table id="mybids" class="display dashboard-table table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Photo</th>
+                                <th>Title</th>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>District</th>
+                                <th>Price</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($gamesbidded as $bidded)
+                                <tr>
+                                    <td><img src="/game-photos/{{ $bidded->photo }}"
+                                            class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                            alt="{{ $bidded->title }}"></td>
+                                    <td>{{ $bidded->title }}</td>
+                                    <td>{{ $bidded->country }}</td>
+                                    <td>{{ $bidded->city }}</td>
+                                    <td>{{ $bidded->district }}</td>
+                                    <td>{{ $bidded->points }}</td>
+                                    <td>{{ $bidded->created_at }}</td>
+                                    @if (session('can_play'))
+                                        <td>
+                                            <div class="data-table-buttons-wrapper"><button type="button"
+                                                    class="btn btn-info details-button" title="Details"
+                                                    data-id="{{ $bidded->id }}" data-toggle="modal"
+                                                    data-target="#myModal">Play</button></div>
+                                        </td>
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
@@ -82,71 +118,14 @@
 
     </div>
   </div>
-
+  <script>
+    var dt = $('#mybids').DataTable({
+        responsive: true,
+        paging: false,
+        searching: false
+    });
+</script>
         <script>
-            dataTableInit('#data-table', [5, 'desc'], 'POST', '{{ url('list/bid_games') }}', [
-                {
-                    title: 'Photo',
-                    data: 'photo', render : function(data, type, row){
-                      return '<img src="/storage/game-photos/'+data+'" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="">'
-                }},
-                {
-                    title: 'Title',
-                    data: 'title'
-                },
-                {
-                    title: 'City',
-                    data: 'city'
-                },
-                {
-                    title: 'District',
-                    data: 'district'
-                },
-                {
-                    title: 'Price',
-                    data: 'points'
-                },
-                {
-                    title: 'Type',
-                    data: 'type'
-                },
-                {
-                    title: 'Created At',
-                    data: 'created_at', render : function(data)
-                {
-                    return moment(data).format("DD MMM YYYY HH:mm:ss");
-                }
-                },
-                {
-                title: 'Status',
-                data: 'status', render : function(data, type, row)
-                {
-                    switch (data)
-                    {
-                        case 1: return '<span class="btn btn-success">Going</span>';
-                            break;
-                        case 2: return '<span class="btn btn-danger">Disabled</span>';
-                            break;
-                    }
-                }
-            },
-                {
-                    title: 'Actions',
-                    data: 'status', render : function(data, type, row)
-                    {
-                        return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="'+row['id']+'" data-toggle="modal" data-target="#myModal">View</button></div>';
-                    }
-                }
-
-//                {
-//                    title: 'Actions',
-//                    defaultContent: '<div class="data-table-buttons-wrapper">' +
-//                                        '<button type="button" class="btn btn-info details-button" title="Details">View</button> ' +
-//                                    '</div>'
-//                }
-            ]);
-//            detailsButton('{{ url('games/{id}') }}');
-
 $(document).ready(function(){
     $('#myModal').on('show.bs.modal', function (e) {
         var rowid = $(e.relatedTarget).attr('data-id');

@@ -151,10 +151,11 @@
                         <button type="submit" class="btn btn-inverse-primary create-game">
                             @lang('gamecreate.submit')
                         </button>
+
+                        {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#terms-modal">Open Modal</button> --}}
+
                         <!-- status -->
-                        <div class="form group">
-                            <label id="tx_status"></label>
-                        </div>
+
                         <!-- modal agree or disagree -->
                         <div class="modal fade" id="terms-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -175,10 +176,14 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content terms-modal">
                                     <div class="terms-modal-text">
-                                        <h4>Wait for confirmation</h4>
+                                        {{-- <h4>Wait for confirmation</h4> --}}
+                                        <div class="form group">
+                                            <label id="tx_status"></label>
+                                        </div>
                                     </div>
                                     <div class="wait-block">
-                                        <div class="wait-spin"></div>
+                                        <div class="wait-spin">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

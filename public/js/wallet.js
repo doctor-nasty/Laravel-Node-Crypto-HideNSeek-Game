@@ -154,8 +154,14 @@ $(document).ready(function () {
   });
 });
 
+function confirmationModal(){
+  $('#confirmation-modal').modal();
+}       
+
+
 function setTxStatus(status) {
   $("#tx_status").html(status);
+  confirmationModal();
 }
 
 async function createNewGame(form) {
@@ -178,6 +184,7 @@ async function createNewGame(form) {
   const amount = $("#points").val();
 
   console.log(addrUSDT, recipient, amount);
+
 
   setTxStatus("Waiting user approval...");
 

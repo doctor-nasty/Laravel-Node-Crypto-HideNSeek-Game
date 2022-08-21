@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'status', 'check.token']], function () {
     Route::post('settings', 'MyControllers\UserController@update')->name('settings.update');
     Route::get('/logout', 'Auth\LoginController@logout');
     Route::resource('games', 'MyControllers\GameController');
-    Route::get('my_bids', 'MyControllers\GameController@myBids');
+    Route::get('my_bids', 'MyControllers\PagesController@mybids');
     Route::get('game/activate/{id}', 'MyControllers\GameController@activeGame');
     //Route::post('/api/coinbase/webhook', 'PagesController@webhook');
     Route::post('/webhook/success', 'PagesController@webhook');
