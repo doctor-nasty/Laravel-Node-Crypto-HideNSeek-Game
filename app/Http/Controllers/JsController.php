@@ -16,17 +16,6 @@ class JsController extends Controller {
 
     public function ListGames(Request $request) {
 
-//        Cache::remember('articles', 1500, function() {
-//            return '----250000----';
-//        });
-//
-        //echo "<pre>";
-        //print_r($request->length);
-        //print_r(Cache::has('articles'));
-        //print_r(Cache::has('new_game_'.Auth::user()->id));
-        //print_r(Cache::get('articles'));
-        //print_r(Cache::get('games'));
-        //die;
         if (false && Cache::has('new_game_'.Auth::user()->id)) {
 //            echo "<pre>";
 //            print_r('123123inin');
@@ -66,8 +55,9 @@ class JsController extends Controller {
             $result = Cache::remember('new_game_'.Auth::user()->id, 600, function() use($data) {
                 return $data;
             });
-
-            return $result;
+            
+            // return $result;
+            return $data;
         }
 
 //        return DataTables::of($query->orderByRaw('RAND()')->remember(5))->toJson();

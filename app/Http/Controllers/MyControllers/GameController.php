@@ -26,9 +26,14 @@ class GameController extends Controller {
     }
 
     public function index() {
-        // $games = Game::All();
+        $games = Game::get()
+                        ->where('user_id', '<>', Auth::user()->id)
+                        ->where('status', '=', '1')
+                        // ->orderByRaw('RAND()')
+                        ->take(10);
         return view('games.games')
-                        ->with('title', 'Games');
+        ->with('title', 'Games')
+        ->with('games', $games);
     }
 
     // public function index(Request $request)

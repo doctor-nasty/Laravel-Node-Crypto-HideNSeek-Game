@@ -42,8 +42,51 @@
       <div class="card">
 
         <div class="card-body">
-            <div class="container">
-                  <table id="data-table" class="display nowrap" style="width:100%"></table>
+            <div class="table-responsive">
+                  <table id="data-table" class="display dashboard-table table" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Title</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>District</th>
+                            <th>Price</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($games as $game)
+                        <tr>
+                            <td><img src="/game-photos/{{ $game->photo }}" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="{{ $game->title }}"></td>
+                            <td>{{ $game->title }}</td>
+                            <td>{{ $game->country }}</td>
+                            <td>{{ $game->city }}</td>
+                            <td>{{ $game->district }}</td>
+                            <td>{{ $game->points }}</td>
+                            <td>{{ $game->created_at }}</td>
+                            @if (session('can_play'))
+                            <td>
+                           <div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="{{$game->id}}" data-toggle="modal" data-target="#myModal">Play</button></div>
+                            </td>
+                        @endif
+                        </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Title</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>District</th>
+                            <th>Price</th>
+                            <th>Created At</th>
+                            <th>Actions</th>
+                        </tr>
+                    </tfoot>            
+                </table>
             </div>
 
         </div>
@@ -66,9 +109,30 @@
 
                 </div>
             </div>
-
+<script>
+$(document).ready(function() {
+    var dt = $('#data-table').DataTable({
+        searchPanes: {
+            dtOpts: {
+                select: {
+                    style: 'multi'
+                }
+            }
+        },
+        responsive: true,
+        searching: false,
+      paging: false,
+      language: {
+        searchPanes: {
+          emptyPanes: null,
+        },
+      },
+        dom: 'Plfrtip'
+    });
+});
+    </script>
         <script>
-            dataTableInit('#data-table', [5, 'desc'], 'POST', '{{ url('list/games') }}', [
+            dataTableInit('#old', [5, 'desc'], 'POST', '{{ url('list/games') }}', [
                 {
                     title: 'Photo',
                     data: 'photo', render : function(data, type, row){
