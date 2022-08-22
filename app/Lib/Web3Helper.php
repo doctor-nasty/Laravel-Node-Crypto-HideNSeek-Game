@@ -100,6 +100,22 @@ class Web3Helper {
     // return false;
   }
 
+  public function getDelegator($address) {
+    $numOwned = TokenInfo::where([
+      ['token_id', '>', 125],
+      ['owner', $address],
+      ['status', '<>', 2]
+    ])->count();
+
+    if ($numOwned > 0) return null;
+
+    return TokenInfo::where([
+      ['token_id', '>', 125],
+      ['borrower', $address],
+      ['status', 2]
+    ])->first();
+  }
+
   public function canPlayGame($address) {
     $num = TokenInfo::where('token_id', '>', 125)
                     ->where(function($query) use($address) {

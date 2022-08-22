@@ -219,6 +219,14 @@ class PointsController extends Controller {
 
                 // send to user
                 $web3_helper = new \App\Lib\Web3Helper();
+                
+                $delegator = $web3_helper->getDelegator($user->wallet_address);
+
+                if ($delegator != null) {
+                    // user is borrowed a NFT
+                    // TODO: pay to delegator
+                }
+
                 Award::create([
                     'address' => $user->wallet_address,
                     'amount' => $winning_points,
