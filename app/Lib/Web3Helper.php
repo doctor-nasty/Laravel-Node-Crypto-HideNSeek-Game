@@ -78,6 +78,22 @@ class Web3Helper {
     }
   }
 
+  public function getPirateDelegator($address) {
+    $numOwned = TokenInfo::where([
+      ['token_id', '<=', 125],
+      ['owner', $address],
+      ['status', '<>', 2]
+    ])->count();
+
+    if ($numOwned > 0) return null;
+
+    return TokenInfo::where([
+      ['token_id', '<=', 125],
+      ['borrower', $address],
+      ['status', 2]
+    ])->first();
+  }
+
   public function canCreateGame($address) {
     $num = TokenInfo::where('token_id', '<=', 125)
                     ->where(function($query) use($address) {
@@ -100,7 +116,7 @@ class Web3Helper {
     // return false;
   }
 
-  public function getDelegator($address) {
+  public function getTreasureDelegator($address) {
     $numOwned = TokenInfo::where([
       ['token_id', '>', 125],
       ['owner', $address],
