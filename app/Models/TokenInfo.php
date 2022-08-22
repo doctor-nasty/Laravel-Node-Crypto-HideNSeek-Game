@@ -10,7 +10,8 @@ class TokenInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'token_id', 'owner', 'purchase_time'
+        'token_id', 'owner', 'purchase_time', 
+        'status', 'borrower', 'duration', 'expiresAt'
     ];
 
     protected $casts = [

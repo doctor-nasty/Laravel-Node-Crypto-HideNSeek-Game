@@ -15,9 +15,18 @@ return new class extends Migration
     {
         Schema::create('token_infos', function (Blueprint $table) {
             $table->id();
+
+            // ownership
             $table->string('token_id', 20)->unique();
             $table->string('owner', 50);
             $table->dateTime('purchase_time')->nullable();
+            
+            // delegation info
+            $table->integer('status')->default(0); // 0-default, 1-offered, 2-delegated
+            $table->string('borrower', 50)->nullable();
+            $table->integer('duration')->nullable();
+            $table->dateTime('expiresAt')->nullable();
+
             $table->timestamps();
         });
     }
