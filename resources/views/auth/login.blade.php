@@ -409,7 +409,16 @@
                     <div class="col-12">
                       <div class="swiper mySwiper">
                           <div class="swiper-wrapper">
+                            @foreach ($delegations as $index => $delegation)
                             <div class="swiper-slide">
+                              <h4>{{ $nft_name[$index] }}</h4>
+                              <h4>{{ $delegation->duration }}</h4>
+                              <img src="{{ $nft_image[$index] }}" alt="mouse icon">
+                            </div>
+                            <button class="slider-button-delegate" onclick="">Borrow</button>
+
+                            @endforeach
+                            {{-- <div class="swiper-slide">
                               <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
                             </div>
                             <div class="swiper-slide">
@@ -417,10 +426,7 @@
                             </div>
                             <div class="swiper-slide">
                               <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
-                            </div>
-                            <div class="swiper-slide">
-                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
-                            </div>
+                            </div> --}}
                           </div>
                       </div>
                     </div>

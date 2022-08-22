@@ -70,6 +70,7 @@ class Web3Controller
                 $balance = $result[0];
             }
         });
+        
 
         if ($error !== "") return $error;
 
@@ -87,7 +88,7 @@ class Web3Controller
             request()->session()->invalidate();
             request()->session()->regenerateToken();
         }
-
+        
         Auth::login($user);
 
         return 'Success';

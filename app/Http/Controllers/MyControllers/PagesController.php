@@ -49,6 +49,14 @@ class PagesController extends Controller
         ->with('tokens', $tokens);
     }
 
+    public function borrow()
+    {
+        $delegations = TokenInfo::where('status', 1);
+
+        return view('auth.login')
+        ->with('delegations', $delegations);
+    }
+
     public function contact()
     {
         return view('pages.contact')
