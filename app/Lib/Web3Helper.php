@@ -101,7 +101,7 @@ class Web3Helper {
   public function getNFTs($address) {
     $tokenIds = [];
 
-    $tokens = TokenInfo::where('owner', $address)->get();
+    $tokens = TokenInfo::where('owner', $address)->paginate(10);
 
     foreach($tokens as $token) {
       array_push($tokenIds, $token->token_id);

@@ -13,6 +13,8 @@ use Web3\RequestManagers\HttpRequestManager;
 use phpseclib\Math\BigInteger;
 use GuzzleHttp\Client;
 
+use App\Models\TokenInfo;
+
 class Web3Controller
 {
     public function test() {
@@ -138,6 +140,84 @@ class Web3Controller
     public function getNFTs() {
         $web3_helper = new \App\Lib\Web3Helper();
         return $web3_helper->getNFTs(Auth::user()->wallet_address);
+    }
+
+    public function updateDelegation() {
+        $data = request()->validate([
+            'type' => ['required', 'string', 'regex:/(create|cancel)$/'],
+            'tx_hash' => ['required', 'string', 'regex:/^0x([A-Fa-f0-9]{64})$/'],
+            'duration' => ['required', 'string'],
+            'token_id' => ['required', 'string']
+        ]);
+
+        // check token ownership
+        $tokenInfo = TokenInfo::where('token_id', $data['token_id'])->first();
+
+        if ($tokenInfo === null) {
+            return redirect()->back()->with('error', 'Token ownership verification failed');
+        }
+
+        // verify transaction data
+        $timeout = 30; // set this time accordingly by default it is 1 sec
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+
+        $sender = '';
+        $token_addr = '';
+        $tx_data = '';
+
+        $web3->getEth()->getTransactionByHash($data['tx_hash'], 
+            function($err, $result) use(&$sender, &$token_addr, &$tx_data) {
+                if ($err === null) {
+                    // print_r($result);
+                    $sender = $result->from;
+                    $token_addr = $result->to;
+                    $tx_data = $result->input;
+                }
+            }
+        );
+
+        // check sender
+        if ($sender === '') {
+            // getting transaction data failed
+            return redirect()->back()->with('error', 'Transaction verification failed');
+        }
+        if (strcasecmp($sender, Auth::user()->wallet_address) != 0) {
+            // sender is invalid
+            return redirect()->back()->with('error', 'Transaction verification failed');
+        }
+
+        // check nft address
+        if (strcasecmp($token_addr, config('web3.chain.nft')) != 0) {
+            // token address is invalid
+            return redirect()->back()->with('error', 'Transaction verification failed');
+        }
+
+        $abi = json_decode(file_get_contents(base_path('public/web3/HidenSeekToken.json')));
+        $nft = new Contract($web3->provider, $abi);
+
+        if ($data['type'] == 'create') {
+            $expected_data = $nft->at($token_addr)->getData('offerRent', $data['token_id'], $data['duration']);
+        } else if ($data['type'] == 'cancel') {
+            $expected_data = $nft->at($token_addr)->getData('cancelOffer', $data['token_id']);
+        }
+
+        if ($tx_data !== '0x' . $expected_data) {
+            // tx data is invalid
+            return redirect()->back()->with('error', 'Transaction verification failed');
+        }
+
+        // transaction is verified
+        // update db and show result
+        if ($data['type'] == 'create') {
+            $tokenInfo->status = 1; // create
+            $tokenInfo->duration = $data['duration'];
+        } else if ($data['type'] == 'cancel') {
+            $tokenInfo->status = 0; // normal
+        }
+
+        $tokenInfo->save();
+
+        return redirect()->back()->with('success', 'Successfully updated!');
     }
 
     protected function getUserModel(): Model

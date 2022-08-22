@@ -3,6 +3,17 @@
 @section('content')
 
 <div class="content-wrapper">
+  @if(session()->get('success'))
+    <div class="alert alert-success">
+      {{ session()->get('success') }}
+    </div>
+  @endif
+  @if(session()->get('error'))
+    <div class="alert alert-danger">
+      {{ session()->get('error') }}
+    </div>
+  @endif
+
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb breadcrumb-custom">
             <li class="breadcrumb-item"><a href="{{ url('') }}">Dashboard</a></li>
@@ -18,57 +29,32 @@
           <div class="dashboard-slider">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
+                  @foreach ($tokens as $token)
                   <div class="swiper-slide">
-                    <img src="{{ asset('images/slider-test.png') }}" alt="point icon">
+                    <img src="{{ $token->image }}" alt="point icon">
                     <div class="slider-content">
                       <div class="slider-text">
-                        <h4>Pirate with hat</h4>
+                        <h4>{{ $token->name }}</h4>
+                        @if ($token->status == 1)
+                        <span>Duration: {{ $token->duration }} days</span>
+                        @elseif ($token->status == 2)
                         <span>Expiration Date: 01:02:2022</span>
+                        @endif
                       </div>
                       <div class="slider-buttons">
-                        <button class="slider-button-cancel">
-                          Cancel
-                        </button>
-                        <button class="slider-button-delegate">
+                        @if ($token->status == 0)
+                        <button class="slider-button-delegate" onclick="javascript:createDelegationOffer({{ $token->token_id }})">
                           Delegate
                         </button>
+                        @else
+                        <button class="slider-button-cancel" onclick="javascript:cancelDelegationOffer({{ $token->token_id }})">
+                          Cancel
+                        </button>
+                        @endif
                       </div>
                     </div>
                   </div>
-                  <div class="swiper-slide">
-                    <img src="{{ asset('images/slider-test.png') }}" alt="point icon">
-                    <div class="slider-content">
-                      <div class="slider-text">
-                        <h4>Pirate with hat</h4>
-                        <span>Expiration Date: 01:02:2022</span>
-                      </div>
-                      <div class="slider-buttons">
-                        <button class="slider-button-cancel">
-                          Cancel
-                        </button>
-                        <button class="slider-button-delegate">
-                          Delegate
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="swiper-slide">
-                    <img src="{{ asset('images/slider-test.png') }}" alt="point icon">
-                    <div class="slider-content">
-                      <div class="slider-text">
-                        <h4>Pirate with hat</h4>
-                        <span>Expiration Date: 01:02:2022</span>
-                      </div>
-                      <div class="slider-buttons">
-                        <button class="slider-button-cancel">
-                          Cancel
-                        </button>
-                        <button class="slider-button-delegate">
-                          Delegate
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -77,8 +63,18 @@
         </div>
       </div>
     </div>
+    <input type="hidden" class="required form-control" id="nft_addr" value="{{ config('web3.chain.nft') }}">
+    <span id="tx_status"></span>
   </div>
 </div>
+
+<form method="post" action="{{ route('web3.delegation') }}" enctype="multipart/form-data" id="form_delegation">
+  @csrf
+  <input type="hidden" name="token_id" id="token_id">
+  <input type="hidden" name="duration" id="duration">
+  <input type="hidden" name="type" id="type">
+  <input type="hidden" name="tx_hash" id="tx_hash">
+</form>
     <script>
       var swiper = new Swiper(".mySwiper", {
         slidesPerView: 3,
@@ -106,4 +102,7 @@
     </script>
 @endsection
 
-
+<!-- jQuery -->
+<script src="{{ asset('js/login/jquery-3.0.0.min.js') }}"></script>
+<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<script src="{{ asset('js/wallet.js') }}"></script>
