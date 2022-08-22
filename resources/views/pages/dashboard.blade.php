@@ -202,15 +202,23 @@
                 </div>
             </div>
             <div class="content_inside">
-                <div class="nft-image-cont">
-                    @foreach ($tokens as $index => $token)
-                        <div class="nft-image-row">
-                            <div class="nft-image-block">
-                                <img class="img-fluid" src="{{ $nft_image[$index] }}"></img>
-                                <h4>{{ $nft_name[$index] }}</h4>
-                            </div>
+                <div class="dashboard-slider">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($tokens as $index => $token)
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ $nft_image[$index] }}"></img>
+                                    <div class="slider-content">
+                                        <div class="slider-text">
+                                            <h4>{{ $nft_name[$index] }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -275,20 +283,39 @@
 
     </div>
     <script>
+        var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+         breakpoints: {
+          "@0.00": {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          "@1.00": {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          "@1.50": {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+        },
+      });
         var dt = $('#gamesbidded').DataTable({
             responsive: true,
             paging: false,
             searching: false
         });
-    </script>
-    <script>
         var dt = $('#owngames').DataTable({
             responsive: true,
             paging: false,
             searching: false
         });
-    </script>
-    <script>
         $(document).ready(function() {
             $('#myModal').on('show.bs.modal', function(e) {
                 var rowid = $(e.relatedTarget).attr('data-id');

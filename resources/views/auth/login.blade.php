@@ -28,7 +28,7 @@
         {{ config('app.name') }}
         @endif
     </title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 		<!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
@@ -69,7 +69,7 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
     </head>
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <body>
 
 <div class="container">
@@ -171,6 +171,9 @@
 			      </li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-scroll-nav="2">Borrow NFT</a>
             </li>
             <li class="nav-item header-nav header-social">
                 <a href="https://t.me/hidenseek_group" class="nav-icon">
@@ -305,7 +308,7 @@
                 </div>
             </div>
         </section>
-        <!-- <section class="hero section-padding" data-scroll-index="2">
+        <!-- <section class="hero section-padding">
             <div class="container">
                 <div class="row">
 
@@ -341,7 +344,7 @@
                 </div>
             </div>
         </section> -->
-        <section class="card-list-section" data-scroll-index="2">
+        <section class="card-list-section">
           <div class="container">
             <div class="row">
               <div class="col-lg-4 mb-mb-120 d-flex">
@@ -390,7 +393,40 @@
         </section>
         <!-- End Hero ====
         ======================================= -->
-
+        <section class="slider-section" data-scroll-index="2">
+            <div class="container">
+                <div class="row">
+                    <article class="col-12 borrow-article mb-md50">
+                      <h2>Borrow NFT</h2>
+                      <p>
+                      With our game you can hide items in the real world, than enter hints
+                      and mark radius on the map. Once players join your game they will see hints,
+                      and your marked radius on the map. They will need to follow your hints
+                       to find an item. First player who find an item wins a game.
+                       Both, game creator and game winner will receive USDT to their wallets.  
+                      </p>
+                    </article>
+                    <div class="col-12">
+                      <div class="swiper mySwiper">
+                          <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
+                            </div>
+                            <div class="swiper-slide">
+                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- =====================================
         ==== Start Footer -->
 
@@ -509,12 +545,35 @@ var x = setInterval(function() {
         <!-- wallet scripts -->
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script src="{{ asset('js/wallet.js') }}"></script>
-        
         <script type="text/javascript">
           @if (count($errors) > 0)
               $('#myModal').modal('show');
           @endif
           </script>
-
+          <script>
+            var swiper = new Swiper(".mySwiper", {
+              slidesPerView: 3,
+              spaceBetween: 30,
+              loop: true,
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+              breakpoints: {
+                "@0.00": {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                },
+                "@1.00": {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                "@1.50": {
+                  slidesPerView: 3,
+                  spaceBetween: 40,
+                },
+              },
+            });
+          </script>
     </body>
 </html>
