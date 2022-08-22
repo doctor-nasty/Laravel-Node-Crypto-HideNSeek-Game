@@ -43,6 +43,16 @@ class Web3Controller
             return "Invalid signature";
         }
 
+        // check login auth using DB to support token borrowing
+        $count = TokenInfo::where([ ['owner', $data['address']], ['status', '<>', 2] ])
+                            ->orWhere([ ['borrower', $data['address']], ['status', 2] ])
+                            ->count();
+
+        if ($count == 0) {
+            return 'Error: Insufficient balance';
+        }
+
+        /*
         // verify token balance
         $timeout = 30; // set this time accordingly by default it is 1 sec
         $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
@@ -66,6 +76,7 @@ class Web3Controller
         if ($balance->compare(new BigInteger(0)) <= 0) {
             return 'Error: Insufficient balance';
         }
+        */
         
         $user = $this->getUserModel()::firstOrCreate([
             config('web3.model.column') => $data['address'],

@@ -79,23 +79,47 @@ class Web3Helper {
   }
 
   public function canCreateGame($address) {
-    $nfts = $this->getNFTs($address);
+    $num = TokenInfo::where('token_id', '<=', 125)
+                    ->where(function($query) use($address) {
+                      $query->where([
+                        ['owner', $address],
+                        ['status', '<>', 2]
+                      ])->orWhere([
+                        ['borrower', $address],
+                        ['status', 2]
+                      ]);
+                    })->count();
 
-    for ($i = 0; $i < count($nfts); $i++) {
-      if ($nfts[$i] <= 125) return true;
-    }
+    return $num > 0;
+    // $nfts = $this->getNFTs($address);
 
-    return false;
+    // for ($i = 0; $i < count($nfts); $i++) {
+    //   if ($nfts[$i] <= 125) return true;
+    // }
+
+    // return false;
   }
 
   public function canPlayGame($address) {
-    $nfts = $this->getNFTs($address);
+    $num = TokenInfo::where('token_id', '>', 125)
+                    ->where(function($query) use($address) {
+                      $query->where([
+                        ['owner', $address],
+                        ['status', '<>', 2]
+                      ])->orWhere([
+                        ['borrower', $address],
+                        ['status', 2]
+                      ]);
+                    })->count();
 
-    for ($i = 0; $i < count($nfts); $i++) {
-      if ($nfts[$i] > 125) return true;
-    }
+    return $num > 0;
+    // $nfts = $this->getNFTs($address);
 
-    return false;
+    // for ($i = 0; $i < count($nfts); $i++) {
+    //   if ($nfts[$i] > 125) return true;
+    // }
+
+    // return false;
   }
 
   public function getNFTs($address) {
