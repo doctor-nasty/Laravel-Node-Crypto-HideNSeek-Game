@@ -39,7 +39,7 @@
 <meta name="msapplication-TileColor" content="#da532c" />
 <meta name="theme-color" content="#ffffff" />
 <meta name="theme-color" content="#000000" />
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 {{-- <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}"> --}}
 <link rel="preload" href="/css/dg/14b6afc48ba56a11.css" as="style"/>
 <link rel="stylesheet" href="/css/dg/14b6afc48ba56a11.css" data-n-g=""/>
@@ -108,6 +108,7 @@ crossorigin=""></script>
 <link rel="stylesheet" href="{{ asset('css/dashboard1.css') }}">
 <link rel="stylesheet" href="{{ asset('css/datatabes.css') }}">
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/rowreorder/1.2.8/js/dataTables.rowReorder.min.js"></script>
