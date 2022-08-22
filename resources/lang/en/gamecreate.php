@@ -20,7 +20,7 @@ return [
     'full_description' => 'Full Description',
     'city' => 'City',
     'submit' => 'Submit',
-    'create_new_game' => 'Create New Game',
+    'create_new_game' => 'Create Game',
     'upload_image' => 'Upload image',
     'code_text' => 'Unique number is valid for 1 hour.',
     'points_text' => 'This will be a bid amount for this game.',
