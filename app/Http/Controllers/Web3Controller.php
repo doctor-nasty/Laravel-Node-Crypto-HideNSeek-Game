@@ -43,6 +43,16 @@ class Web3Controller
             return "Invalid signature";
         }
 
+        // check login auth using DB to support token borrowing
+        $count = TokenInfo::where([ ['owner', $data['address']], ['status', '<>', 2] ])
+                            ->orWhere([ ['borrower', $data['address']], ['status', 2] ])
+                            ->count();
+
+        if ($count == 0) {
+            return 'Error: Insufficient balance';
+        }
+
+        /*
         // verify token balance
         $timeout = 30; // set this time accordingly by default it is 1 sec
         $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
@@ -67,6 +77,7 @@ class Web3Controller
         if ($balance->compare(new BigInteger(0)) <= 0) {
             return 'Error: Insufficient balance';
         }
+        */
         
         $user = $this->getUserModel()::firstOrCreate([
             config('web3.model.column') => $data['address'],
@@ -145,7 +156,7 @@ class Web3Controller
 
     public function updateDelegation() {
         $data = request()->validate([
-            'type' => ['required', 'string', 'regex:/(create|cancel)$/'],
+            'type' => ['required', 'string', 'regex:/(create|cancel|remove)$/'],
             'tx_hash' => ['required', 'string', 'regex:/^0x([A-Fa-f0-9]{64})$/'],
             'duration' => ['required', 'string'],
             'token_id' => ['required', 'string']
@@ -155,7 +166,13 @@ class Web3Controller
         $tokenInfo = TokenInfo::where('token_id', $data['token_id'])->first();
 
         if ($tokenInfo === null) {
-            return redirect()->back()->with('error', 'Token ownership verification failed');
+            return redirect()->back()->with('error', 'Invalid token id');
+        }
+
+        if ($data['type'] === 'create' && $tokenInfo->status != 0 ||
+                $data['type'] === 'cancel' && $tokenInfo->status != 1 ||
+                $data['type'] === 'remove' && $tokenInfo->status != 2) {
+            return redirect()->back()->with('error', "Invalid operation");
         }
 
         // verify transaction data
@@ -182,7 +199,8 @@ class Web3Controller
             // getting transaction data failed
             return redirect()->back()->with('error', 'Transaction verification failed');
         }
-        if (strcasecmp($sender, Auth::user()->wallet_address) != 0) {
+        if ($tokenInfo->status != 2 &&  strcasecmp($sender, Auth::user()->wallet_address) != 0 ||
+                $tokenInfo->status == 2 && strcasecmp($sender, $tokenInfo->borrower) != 0) {
             // sender is invalid
             return redirect()->back()->with('error', 'Transaction verification failed');
         }
@@ -200,6 +218,8 @@ class Web3Controller
             $expected_data = $nft->at($token_addr)->getData('offerRent', $data['token_id'], $data['duration']);
         } else if ($data['type'] == 'cancel') {
             $expected_data = $nft->at($token_addr)->getData('cancelOffer', $data['token_id']);
+        } else {
+            $expected_data = $nft->at($token_addr)->getData('endRent', $data['token_id']);
         }
 
         if ($tx_data !== '0x' . $expected_data) {
@@ -214,11 +234,92 @@ class Web3Controller
             $tokenInfo->duration = $data['duration'];
         } else if ($data['type'] == 'cancel') {
             $tokenInfo->status = 0; // normal
+        } else {
+            $tokenInfo->status = 0; // normal 
+            $tokenInfo->borrower = "";
         }
 
         $tokenInfo->save();
 
         return redirect()->back()->with('success', 'Successfully updated!');
+    }
+
+    public function checkBorrowTx($tx_hash, $token_id) {
+        // validate parameters
+        if (!preg_match("/^0x([A-Fa-f0-9]{64})$/", $tx_hash) || !preg_match("/^([0-9]+)$/", $token_id)) {
+            return "Invalid parameter";
+        }
+
+        // check token ownership
+        $tokenInfo = TokenInfo::where('token_id', $token_id)->first();
+
+        if ($tokenInfo === null) {
+            return "Invalid token id";
+        }
+
+        if ($tokenInfo->status != 1) {
+            return "Token is not offerred";
+        }
+
+        // verify transaction data
+        $timeout = 30; // set this time accordingly by default it is 1 sec
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+
+        $sender = '';
+        $token_addr = '';
+        $tx_data = '';
+
+        try {
+            $web3->getEth()->getTransactionByHash($tx_hash, 
+                function($err, $result) use(&$sender, &$token_addr, &$tx_data) {
+                    if ($err === null) {
+                        // print_r($result);
+                        $sender = $result->from;
+                        $token_addr = $result->to;
+                        $tx_data = $result->input;
+                    }
+                }
+            );
+        } catch (Exception $err) {
+            return "Invalid tx hash";
+        } 
+
+        // check sender
+        if ($sender === '') {
+            // getting transaction data failed
+            return "No tx found";
+        }
+        // if (strcasecmp($sender, Auth::user()->wallet_address) != 0) {
+        //     // sender is invalid
+        //     return "Sender address is incorrect";
+        // }
+
+        // check nft address
+        if (strcasecmp($token_addr, config('web3.chain.nft')) != 0) {
+            // token address is invalid
+            return "Nft address is incorrect";
+        }
+
+        $abi = json_decode(file_get_contents(base_path('public/web3/HidenSeekToken.json')));
+        $nft = new Contract($web3->provider, $abi);
+
+        $data = $nft->at($token_addr)->getData('fulfillOffer', $token_id);
+
+        if ($tx_data !== '0x' . $data) {
+            // tx data is invalid
+            return "Incorrect transaction";
+        }
+
+        
+        // transaction is verified
+        // update db and show result
+        $tokenInfo->status = 2; // borrowed
+        $tokenInfo->borrower = $sender;
+        $tokenInfo->expiresAt = date('Y-m-d h:i:s',strtotime("+". $tokenInfo->duration ." days")); // now
+
+        $tokenInfo->save();
+
+        return 'Successfully borrowed. You can login now.';
     }
 
     protected function getUserModel(): Model

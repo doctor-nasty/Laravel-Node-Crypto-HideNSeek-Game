@@ -163,6 +163,7 @@ function termsModal() {
 }
 
 function setTxStatus(status) {
+  console.log(status);
   $("#tx_status").html(status);
   confirmationModal();
 }
@@ -315,4 +316,116 @@ async function cancelDelegationOffer(tokenId) {
     .catch((err) => {
       setTxStatus(err.message);
     });
+}
+
+async function removeBorrowing(tokenId) {
+  // check Pirate token ownership
+  const provider = await getProvider();
+
+  if (provider === undefined) return;
+
+  setTxStatus("Waiting user approval...");
+
+  const signer = provider.getSigner();
+
+  const addrNft = $("#nft_addr").val();
+
+  // The ERC-20 Contract ABI, which is a common contract interface
+  // for tokens (this is the Human-Readable ABI format)
+  const nftAbi = ["function endRent(uint256 tokenId) external"];
+
+  // The Contract object
+  const nft = new ethers.Contract(addrNft, nftAbi, signer);
+
+  nft
+    .endRent(tokenId)
+    .then((tx) => {
+      setTxStatus("Waiting transaction is confirmed...");
+      tx.wait()
+        .then((res) => {
+          console.log(tx.hash);
+          $("#tx_hash").val(tx.hash);
+          $("#token_id").val(tokenId);
+          $("#type").val("remove");
+          $("#duration").val("0");
+          document.getElementById("form_delegation").submit();
+        })
+        .catch((err) => setTxStatus(err.message));
+    })
+    .catch((err) => {
+      setTxStatus(err.message);
+    });
+}
+
+async function borrow(tokenId, duration) {
+  // check Pirate token ownership
+  const provider = await getProvider();
+
+  if (provider === undefined) return;
+
+  setTxStatus("Waiting user approval...");
+
+  const signer = provider.getSigner();
+
+  const addrNft = $("#nft_addr").val();
+  const addrUSDT = $("#usdt_addr").val();
+
+  console.log(addrUSDT);
+
+  // The ERC-20 Contract ABI, which is a common contract interface
+  // for tokens (this is the Human-Readable ABI format)
+  const nftAbi = [
+    "function fulfillOffer(uint256 tokenId) external",
+    "function ownerOf(uint256 _tokenId) external view returns (address)",
+  ];
+  const usdtAbi = [
+    "function approve(address _spender, uint256 _value) public returns (bool success)",
+    "function decimals() view returns (uint8)",
+  ];
+
+  // The Contract object
+  const nft = new ethers.Contract(addrNft, nftAbi, signer);
+  const usdt = new ethers.Contract(addrUSDT, usdtAbi, signer);
+
+  const owner = await nft.ownerOf(tokenId);
+  const decimals = await usdt.decimals();
+  const unit = ethers.BigNumber.from(10).pow(decimals);
+  console.log(unit);
+  const cost = ethers.BigNumber.from(duration * 0.5).mul(unit);
+
+  console.log(owner, decimals, cost);
+
+  // approve USDT to payment for borrowing
+  usdt
+    .approve(addrNft, cost)
+    .then((tx) => {
+      setTxStatus("Waiting token approval is confirmed...");
+      tx.wait()
+        .then((res) => {
+          setTxStatus("Borrowing...");
+          // fulfilling offer
+          nft
+            .fulfillOffer(tokenId)
+            .then((tx) => {
+              setTxStatus("Waiting borrow transaction is confirmed...");
+              tx.wait()
+                .then((res) => {
+                  console.log(tx.hash);
+                  $("#tx_hash").val(tx.hash);
+                  fetch("/borrow/" + tx.hash + "/" + tokenId)
+                    .then((res) =>
+                      res
+                        .text()
+                        .then((msg) => alert(msg))
+                        .catch((err) => setTxStatus(err.message))
+                    )
+                    .catch((err) => setTxStatus(err.message));
+                })
+                .catch((err) => setTxStatus(err.message));
+            })
+            .catch((err) => setTxStatus(err.message));
+        })
+        .catch((err) => setTxStatus(err));
+    })
+    .catch((err) => setTxStatus(err));
 }

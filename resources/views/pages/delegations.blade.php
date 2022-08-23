@@ -30,16 +30,21 @@
           <div class="dashboard-slider">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                  @foreach ($tokens as $index => $token)
+                  @foreach ($tokens as $token)
                   <div class="swiper-slide">
-                    <img src="{{ $token_image[$index] }}" alt="point icon">
+                    <img src="{{ $token->image }}" alt="point icon">
                     <div class="slider-content">
                       <div class="slider-text">
-                        <h4>{{ $token_name[$index] }}</h4>
+                        <h4>
+                          {{ $token->name }}
+                          @if ($token->borrower == $my_address)
+                            - Borrowed
+                          @endif
+                        </h4>
                         @if ($token->status == 1)
                         <span>Duration: {{ $token->duration }} days</span>
                         @elseif ($token->status == 2)
-                        <span>Expiration Date: 01:02:2022</span>
+                        <span>Expiration Date: {{ $token->expiresAt }}</span>
                         @endif
                       </div>
                       <div class="slider-buttons">
@@ -47,9 +52,13 @@
                         <button class="slider-button-delegate" onclick="javascript:createDelegationOffer({{ $token->token_id }})">
                           Delegate
                         </button>
-                        @else
+                        @elseif ($token->status == 1)
                         <button class="slider-button-cancel" onclick="javascript:cancelDelegationOffer({{ $token->token_id }})">
                           Cancel
+                        </button>
+                        @elseif ($token->borrower == $my_address)
+                        <button class="slider-button-cancel" onclick="javascript:removeBorrowing({{ $token->token_id }})">
+                          Remove
                         </button>
                         @endif
                       </div>

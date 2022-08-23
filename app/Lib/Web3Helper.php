@@ -78,24 +78,80 @@ class Web3Helper {
     }
   }
 
+  public function getPirateDelegator($address) {
+    $numOwned = TokenInfo::where([
+      ['token_id', '<=', 125],
+      ['owner', $address],
+      ['status', '<>', 2]
+    ])->count();
+
+    if ($numOwned > 0) return null;
+
+    return TokenInfo::where([
+      ['token_id', '<=', 125],
+      ['borrower', $address],
+      ['status', 2]
+    ])->first();
+  }
+
   public function canCreateGame($address) {
-    $nfts = $this->getNFTs($address);
+    $num = TokenInfo::where('token_id', '<=', 125)
+                    ->where(function($query) use($address) {
+                      $query->where([
+                        ['owner', $address],
+                        ['status', '<>', 2]
+                      ])->orWhere([
+                        ['borrower', $address],
+                        ['status', 2]
+                      ]);
+                    })->count();
 
-    for ($i = 0; $i < count($nfts); $i++) {
-      if ($nfts[$i] <= 125) return true;
-    }
+    return $num > 0;
+    // $nfts = $this->getNFTs($address);
 
-    return false;
+    // for ($i = 0; $i < count($nfts); $i++) {
+    //   if ($nfts[$i] <= 125) return true;
+    // }
+
+    // return false;
+  }
+
+  public function getTreasureDelegator($address) {
+    $numOwned = TokenInfo::where([
+      ['token_id', '>', 125],
+      ['owner', $address],
+      ['status', '<>', 2]
+    ])->count();
+
+    if ($numOwned > 0) return null;
+
+    return TokenInfo::where([
+      ['token_id', '>', 125],
+      ['borrower', $address],
+      ['status', 2]
+    ])->first();
   }
 
   public function canPlayGame($address) {
-    $nfts = $this->getNFTs($address);
+    $num = TokenInfo::where('token_id', '>', 125)
+                    ->where(function($query) use($address) {
+                      $query->where([
+                        ['owner', $address],
+                        ['status', '<>', 2]
+                      ])->orWhere([
+                        ['borrower', $address],
+                        ['status', 2]
+                      ]);
+                    })->count();
 
-    for ($i = 0; $i < count($nfts); $i++) {
-      if ($nfts[$i] > 125) return true;
-    }
+    return $num > 0;
+    // $nfts = $this->getNFTs($address);
 
-    return false;
+    // for ($i = 0; $i < count($nfts); $i++) {
+    //   if ($nfts[$i] > 125) return true;
+    // }
+
+    // return false;
   }
 
   public function getNFTs($address) {
