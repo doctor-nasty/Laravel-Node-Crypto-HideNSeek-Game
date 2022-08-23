@@ -17,7 +17,7 @@
              <div class="notification-number">{{ auth()->user()->unreadNotifications->count() }}</div>
           </button>
           <div class="notification-dropdown">
-            @foreach(auth()->user()->unreadNotifications as $notification)
+            {{-- @foreach(auth()->user()->unreadNotifications as $notification)
             <a class="dropdown-item preview-item">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
@@ -29,7 +29,40 @@
                   <p class="text-muted ellipsis mb-0">{{ $notification->data['data'] }}</p>
               </div>
             </a>
-            @endforeach
+            @endforeach --}}
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-dark rounded-circle">
+                  <i class="mdi mdi-xbox-controller text-success"></i>
+                </div>
+              </div>
+              <div class="preview-item-content">
+                  <p class="preview-subject mb-1">Title</p>
+                  <p class="text-muted ellipsis mb-0">Player Joined</p>
+              </div>
+            </a>
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-dark rounded-circle">
+                  <i class="mdi mdi-xbox-controller text-success"></i>
+                </div>
+              </div>
+              <div class="preview-item-content">
+                  <p class="preview-subject mb-1">Title</p>
+                  <p class="text-muted ellipsis mb-0">Player Joined</p>
+              </div>
+            </a>
+            <a class="dropdown-item preview-item">
+              <div class="preview-thumbnail">
+                <div class="preview-icon bg-dark rounded-circle">
+                  <i class="mdi mdi-xbox-controller text-success"></i>
+                </div>
+              </div>
+              <div class="preview-item-content">
+                  <p class="preview-subject mb-1">Title</p>
+                  <p class="text-muted ellipsis mb-0">Player Joined</p>
+              </div>
+            </a>
             <div class="dropdown-divider"></div>
             <a href="{{route('mark')}}">
               <p class="p-3 mb-0 text-center">Mark As Read</p>

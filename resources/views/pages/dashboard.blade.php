@@ -117,7 +117,7 @@
                 <button class="btn-change">Own Games</button>
                 <button class="btn-change">My Items</button>
             </div>
-            <div class="card">
+            <div class="row">
                 <div class="content_inside content_inside_active">
                     <div class="table-responsive">
                         <table id="gamesbidded" class="display dashboard-table table">
