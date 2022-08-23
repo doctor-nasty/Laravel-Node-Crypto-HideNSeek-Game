@@ -400,8 +400,8 @@
                       <h2>Borrow NFT</h2>
                       <p>
                       Here you can see available NFTs to borrow, price per day is 0.5 USDC.
-                      Winning the game with the borrowed Creators NFT you will earn 10% from the total bid in game.
-                      Winning the game with the Players NFT you will earn 40% from the total bid in game.
+                      Winning the game with the borrowed Creators NFT will earn you a 10% from the total bid in game.
+                      Winning the game with the Players NFT will earn you a 40% from the total bid in game.
                       </p>
                     </article>
                     <div class="col-12">
