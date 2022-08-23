@@ -16,58 +16,6 @@
              <img src="{{ asset('svgs/bell.svg') }}" alt="bell">
              <div class="notification-number">{{ auth()->user()->unreadNotifications->count() }}</div>
           </button>
-          <div class="notification-dropdown">
-            {{-- @foreach(auth()->user()->unreadNotifications as $notification)
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-xbox-controller text-success"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                  <p class="preview-subject mb-1">{{ $notification->data['title'] }}</p>
-                  <p class="text-muted ellipsis mb-0">{{ $notification->data['data'] }}</p>
-              </div>
-            </a>
-            @endforeach --}}
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-xbox-controller text-success"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                  <p class="preview-subject mb-1">Title</p>
-                  <p class="text-muted ellipsis mb-0">Player Joined</p>
-              </div>
-            </a>
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-xbox-controller text-success"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                  <p class="preview-subject mb-1">Title</p>
-                  <p class="text-muted ellipsis mb-0">Player Joined</p>
-              </div>
-            </a>
-            <a class="dropdown-item preview-item">
-              <div class="preview-thumbnail">
-                <div class="preview-icon bg-dark rounded-circle">
-                  <i class="mdi mdi-xbox-controller text-success"></i>
-                </div>
-              </div>
-              <div class="preview-item-content">
-                  <p class="preview-subject mb-1">Title</p>
-                  <p class="text-muted ellipsis mb-0">Player Joined</p>
-              </div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="{{route('mark')}}">
-              <p class="p-3 mb-0 text-center">Mark As Read</p>
-          </a>
-          </div>
         </li>
         <li class="sidebar-btn-list">
           <button tupe="button" class="menu-btn burger-menu-btn">
@@ -124,6 +72,39 @@
         </li>
       </ul>
     </nav>
+    <div class="notification-dropdown">
+      <div class="notification-block">
+        <a href="{{route('mark')}}" class="mark-read">
+          Mark As Read
+        </a>
+              {{-- @foreach(auth()->user()->unreadNotifications as $notification)
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content">
+                    <span>$notification->data['title'] }}</span>
+                    <p>{{ $notification->data['data'] }}</p>
+                </div>
+              </a>
+              @endforeach --}}
+                <div class="notification-content">
+                  <div class="notification-icon">
+                    <img src="{{ asset('images/avatar.jpg') }}" alt="bell">
+                  </div>
+                  <div class="notification-text">
+                    <span>notification title</span>
+                    <p>Lorem Ipsum is simply dummy text of </p>
+                  </div>
+                </div>
+                <div class="notification-content">
+                  <div class="notification-icon">
+                    <img src="{{ asset('images/avatar.jpg') }}" alt="bell">
+                  </div>
+                  <div class="notification-text">
+                    <span>notification title</span>
+                    <p>Lorem Ipsum is simply dummy text of </p>
+                  </div>
+                </div>
+            </div>
+          </div>
   </header>
 </div>
 <script>
@@ -134,6 +115,7 @@
   }
   $(".dropdown-menu-btn").click(function(){
     $(".dashboard-dropdown-navigation").slideToggle();
+    $(".notification-dropdown").slideUp();
   });
 
   $.ajax({
@@ -145,5 +127,6 @@
     });
   $(".notification-dropdown-btn").click(function(){
     $(".notification-dropdown").slideToggle();
+    $(".dashboard-dropdown-navigation").slideUp();
   });
 </script>
