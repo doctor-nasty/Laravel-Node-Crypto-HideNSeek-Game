@@ -90,10 +90,24 @@
               </div>
           </div>
       </div>
-  </div>
+    </div>
+    <!-- modal duration-->
+    <div class="modal fade" id="duration-time-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content terms-modal">
+              <div class="terms-modal-text">
+                  <h4>Choose duration for borrowing</h4>
+                  <label>
+                    Days*
+                    <br>
+                    <input type="number" value="0">
+                  </label>
+              </div>
+          </div>
+      </div>
+    </div>
   </div>
 </div>
-
 <form method="post" action="{{ route('web3.delegation') }}" enctype="multipart/form-data" id="form_delegation">
   @csrf
   <input type="hidden" name="token_id" id="token_id">
