@@ -71,7 +71,7 @@
                                             <div class="data-table-buttons-wrapper"><button type="button"
                                                     class="btn btn-info details-button" title="Details"
                                                     data-id="{{ $game->id }}" data-toggle="modal"
-                                                    data-target="#myModal">Play</button></div>
+                                                    data-target="#myModal">Join</button></div>
                                         </td>
                                     @endif
                                 </tr>

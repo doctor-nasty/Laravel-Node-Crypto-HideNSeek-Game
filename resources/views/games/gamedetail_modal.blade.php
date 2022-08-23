@@ -103,6 +103,7 @@
         @if($game->user_id === auth()->user()->id)
         <div class="card-body">
             <span class="text text-danger">@lang('gamedetail.cant_play_own')</span><br><br>
+            <span>Players: {{count($game->bids)}}</span>
             {{-- @lang('gamedetail.game_code') --}}
             {{-- <span class="input-group-addon bg-dark" id="basic-addon1">ur_{{ $game->identifier }}</span> --}}
         </div>
@@ -121,7 +122,7 @@
         @endif
         @endforeach
 
-        @if(isset($bid_on) && $bid_on == 1 and count($game->bids) >= 2)
+        @if(isset($bid_on) && $bid_on == 1 and count($game->bids) >= 1)
         <blockquote class="blockquote blockquote-primary">
             <span>{{ $game->full_comment }}</span>
         </blockquote>
@@ -139,13 +140,13 @@
         {{ Request::get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=47.217954&lon=-1.552918') }}
 
         @else
-        @if(isset($bid_on) && $bid_on == 1 and count($game->bids) <= 2)
+        @if(isset($bid_on) && $bid_on != 1 and count($game->bids) <= 2)
         <blockquote class="blockquote blockquote-primary">
-            <span>@lang('gamedetail.onemore')</span>
+            <span>1 more players are required to join before game starts.</span>
         </blockquote>
         @else
         @if($game->points < auth()->user()->points)
-            <td>@lang('gamedetail.points_required') {{ $game->points }} @lang('gamedetail.points_required_2')</td>
+            <td>{{ $game->points }} USDC required to join this game.</td>
             <td>
                 <form method="post" action="{{route('bid', ['game_id' => $game->id])}}" enctype="multipart/form-data" id="form_join">
                 {{csrf_field()}}

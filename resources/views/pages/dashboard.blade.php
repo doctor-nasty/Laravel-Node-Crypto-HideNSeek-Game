@@ -183,14 +183,12 @@
                                         <td>{{ $own->district }}</td>
                                         <td>{{ $own->points }}</td>
                                         <td>{{ $own->created_at }}</td>
-                                        @if (session('can_play'))
                                             <td>
                                                 <div class="data-table-buttons-wrapper"><button type="button"
                                                         class="btn btn-info details-button" title="Details"
                                                         data-id="{{ $own->id }}" data-toggle="modal"
-                                                        data-target="#myModal">Play</button></div>
+                                                        data-target="#myModal">View</button></div>
                                             </td>
-                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>
