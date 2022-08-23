@@ -27,7 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('points', 255)->default('35')->nullable();
             $table->string('lockout_time', 255)->nullable();
             $table->string('type', 255)->nullable();
-            $table->string('total_winning_points', 255)->nullable();
+            $table->string('total_winning_points', 255)->default("0");
             $table->rememberToken();
             $table->timestamps();
         });

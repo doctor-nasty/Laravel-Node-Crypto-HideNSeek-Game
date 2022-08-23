@@ -96,7 +96,7 @@
                         </div>
                         <div class="point-text">
                             <h5>@lang('dashboard.points_earned')</h5>
-                            <span></span>
+                            <span>{{ $points_earned }}</span>
                         </div>
                     </div>
                     <div class="player-point-block">
@@ -105,7 +105,7 @@
                         </div>
                         <div class="point-text">
                             <h5>Your Balance</h5>
-                            <span id="balance2"></span>
+                            <span id="balance2">0.00</span>
                         </div>
                     </div>
                 </div>
