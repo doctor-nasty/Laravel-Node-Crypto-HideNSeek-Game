@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="content-wrapper">
+<div class="content-wrapper section-block">
   @if(session()->get('success'))
     <div class="alert alert-success">
       {{ session()->get('success') }}
@@ -13,13 +13,14 @@
       {{ session()->get('error') }}
     </div>
   @endif
-
-    <nav aria-label="breadcrumb" role="navigation">
-        <ol class="breadcrumb breadcrumb-custom">
-            <li class="breadcrumb-item"><a href="{{ url('') }}">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><span>Delegations</span></li>
-        </ol>
-    </nav>
+  <div class="change-content-btn">
+    <div>
+      <a href="{{ url('') }}" class="btn-change">Dashboard</a>
+    </div>
+    <div class="active">
+      <span class="btn-change">Delegations</span>
+    </div>
+  </div>
   <div class="row">
     <div class="col-12 grid-margin stretch-card">
       <div class="card">

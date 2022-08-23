@@ -692,6 +692,12 @@
   .nft-image-row {
     width: 100%;
   }
+  .swiper {
+    height: 350px;
+  }
+  .swiper-slide {
+    height: 350px;
+  }
 }
 /* media 576 */
 @media (max-width: 576px) {
