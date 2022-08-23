@@ -49,7 +49,7 @@
                       </div>
                       <div class="slider-buttons">
                         @if ($token->status == 0)
-                        <button class="slider-button-delegate" onclick="javascript:createDelegationOffer({{ $token->token_id }})">
+                        <button class="slider-button-delegate" onclick="javascript:setDelegationCreateParam({{ $token->token_id }})">
                           Delegate
                         </button>
                         @elseif ($token->status == 1)
@@ -100,7 +100,8 @@
                   <label>
                     Days*
                     <br>
-                    <input type="number" value="0">
+                    <input type="number" value="0" id="param_duration">
+                    <button type="button" onclick="createDelegationOffer()">Confirm</button>
                   </label>
               </div>
           </div>

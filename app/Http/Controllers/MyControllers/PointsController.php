@@ -215,15 +215,15 @@ class PointsController extends Controller {
 
                 $web3_helper = new \App\Lib\Web3Helper();
                 
-                $winning_points = $total_points * 55 / 100; // winner 55%
+                $winning_points = $total_points * 55 / 100.0; // winner 55%
                 $delegator = $web3_helper->getTreasureDelegator($user->wallet_address);
 
                 if ($delegator !== null) {
-                    $delegator_points = $total_points * 15 / 100; // 15% for owner
+                    $delegator_points = $total_points * 15 / 100.0; // 15% for owner
                     $winning_points -= $delegator_points; // remaining - 40% for borrower
                     Award::create([
                         'address' => $delegator->owner,
-                        'amount' => $winning_points,
+                        'amount' => $delegator_points,
                         'award_type' => 'Game winner award(delegator)'
                     ]);
                 }
@@ -237,15 +237,15 @@ class PointsController extends Controller {
                 $user->total_winning_points += $winning_points;
                 $user->save();
 
-                $creator_points = $total_points * 30 / 100; // creator 30%
+                $creator_points = $total_points * 30 / 100.0; // creator 30%
 
                 $delegator = $web3_helper->getPirateDelegator($gameAuthor->wallet_address);
                 if ($delegator !== null) {
-                    $delegator_points = $total_points * 20 / 100; // 20% for owner
+                    $delegator_points = $total_points * 20 / 100.0; // 20% for owner
                     $creator_points -= $delegator_points; // remaining part - 10% for borrower
                     Award::create([
                         'address' => $delegator->owner,
-                        'amount' => $winning_points,
+                        'amount' => $delegator_points,
                         'award_type' => 'Game creator award(delegator)'
                     ]);
                 }

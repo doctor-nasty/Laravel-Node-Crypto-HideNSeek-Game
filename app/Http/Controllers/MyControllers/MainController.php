@@ -59,7 +59,8 @@ class MainController extends Controller
 
         $gamesplayed = Game_bid::where('user_id', Auth::user()->id)->get()->count();
         $user = Auth::user();
-        return view('pages.dashboard', compact('gamesplayed', 'nft_name', 'nft_image', 'tokens', 'gamesbidded', 'owngames'));
+        $points_earned = $user->total_winning_points;
+        return view('pages.dashboard', compact('gamesplayed', 'nft_name', 'nft_image', 'tokens', 'gamesbidded', 'owngames', 'points_earned'));
     }
 
 }
