@@ -15,11 +15,13 @@ use GuzzleHttp\Client;
 use App\Models\TokenInfo;
 
 class Web3Helper {
-  public function sendTokenToUser($address, $amount) {
+  function __construct() {
     $timeout = 30;
-    $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+    $this->web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+  }
 
-    $eth = $web3->getEth();
+  public function sendTokenToUser($address, $amount, $nonce) {
+    $web3 = $this->web3;
 
     $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
     $token = new Contract($web3->provider, $abi);
@@ -42,8 +44,7 @@ class Web3Helper {
     $data = $token->getData('transfer', $address, $amount);
 
     // get nonce
-    $nonce = $this->getNonce($eth, config('web3.wallet.address'));
-    $gasPrice = $this->getGasPrice($eth);
+    $gasPrice = $this->getGasPrice();
 
     $transaction = new Transaction([
       'from' => config('web3.wallet.address'),
@@ -57,7 +58,7 @@ class Web3Helper {
 
     $transaction->sign(config('web3.wallet.private_key'));
 
-    $eth->sendRawTransaction(
+    $this->web3->getEth()->sendRawTransaction(
       '0x' . $transaction->serialize(), 
       function ($err, $transaction) use (&$txHash) {
         if ($err !== null) {
@@ -67,15 +68,8 @@ class Web3Helper {
           $txHash = $transaction;
         }
       });
-
-    if ($txHash !== null) {
-      $transaction = $this->confirmTx($eth, $txHash);
-      if (!$transaction) {
-        throw new Error('Transaction was not confirmed.');
-      } else {
-        echo 'Transaction confirmed' . "<br>\n";
-      }
-    }
+    
+    return $txHash;
   }
 
   public function getPirateDelegator($address) {
@@ -217,7 +211,9 @@ class Web3Helper {
     return $blockNumber;
   }
 
-  function getBalance($eth, $account) {
+  public function getBalance($account) {
+    $eth = $this->web3->getEth();
+
     $balance = 0;
     $eth->getBalance($account, function ($err, $rawBalance) use (&$balance) {
       if ($err !== null) {
@@ -228,7 +224,9 @@ class Web3Helper {
     return $balance;
   }
 
-  function getGasPrice($eth) {
+  public function getGasPrice() {
+    $eth = $this->web3->getEth();
+
     $gasPrice = 0;
     $eth->gasPrice(function ($err, $rawGasPrice) use (&$gasPrice) {
       if ($err !== null) {
@@ -239,7 +237,9 @@ class Web3Helper {
     return $gasPrice;
   }
 
-  function getNonce($eth, $account) {
+  public function getNonce($account) {
+    $eth = $this->web3->getEth();
+
     $nonce = 0;
     $eth->getTransactionCount($account, function ($err, $count) use (&$nonce) {
       if ($err !== null) {
@@ -250,7 +250,9 @@ class Web3Helper {
     return $nonce;
   }
 
-  function getTransactionReceipt($eth, $txHash) {
+  public function getTransactionReceipt($txHash) {
+    $eth = $this->web3->getEth();
+
     $tx;
     $eth->getTransactionReceipt($txHash, function ($err, $transaction) use (&$tx) {
       if ($err !== null) {
@@ -261,10 +263,13 @@ class Web3Helper {
     return $tx;
   }
 
-  function confirmTx($eth, $txHash) {
+  public function confirmTx($txHash) {
+    $eth = $this->web3->getEth();
+
     $transaction = null;
     while (!$transaction) {
-      $transaction = $this->getTransactionReceipt($eth, $txHash);
+      $transaction = $this->getTransactionReceipt($txHash);
+      
       if ($transaction) {
         return $transaction;
       } else {
