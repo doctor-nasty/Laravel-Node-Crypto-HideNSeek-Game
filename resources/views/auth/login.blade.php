@@ -409,6 +409,8 @@
                     <div class="col-12">
                       <div class="swiper mySwiper">
                           <div class="swiper-wrapper">
+                            <input type="hidden" id="usdt_addr" value="{{config('web3.chain.token')}}">
+                            <input type="hidden" id="nft_addr" value="{{config('web3.chain.nft')}}">
                             @foreach ($delegations as $index => $delegation)
                             <div class="swiper-slide">
                               <div class="slider-content">
@@ -417,7 +419,7 @@
                                   <span>{{ $delegation->duration }}</span>
                                 </div>
                                 <div class="slider-buttons">
-                                  <button class="slider-button-delegate" onclick="">Borrow</button> 
+                                  <button class="slider-button-delegate" onclick="javascript:borrow({{$delegation->token_id}}, {{$delegation->duration}})">Borrow</button> 
                                 </div>
                               </div>
                               <img src="{{ $nft_image[$index] }}" alt="mouse icon">
