@@ -25,13 +25,13 @@ class Web3Helper {
     $token = new Contract($web3->provider, $abi);
 
 
-    $amount = new BigInteger($amount);
-    $amount = $amount->multiply(new BigInteger(config('web3.chain.token_unit'))); // decimals
+    $amount = new BigInteger($amount * 100);
+    $amount = $amount->multiply(new BigInteger(config('web3.chain.token_unit')))->divide(new BigInteger(100))[0]; // decimals
 
     // esitmate gas
     $estimatedGas = '0x200b20';
 
-    $token->at(config('web3.chain.token'))->estimateGas('transfer', $address, $amount->toString(), [
+    $token->at(config('web3.chain.token'))->estimateGas('transfer', $address, $amount, [
       'from' => config('web3.wallet.address')
     ], function($err, $result) use(&$estimatedGas) {
       if ($err === null) {
