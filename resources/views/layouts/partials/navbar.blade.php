@@ -1,7 +1,9 @@
 <div class="dashboard-header-container" style="top: 0px;">
   <header class="dashboard-header">
     <div class="dashboard-logo">
-      <img alt="HIDENSEEK GAMES LOGO" src="{{ asset('img/logo-dark.png') }}">
+      <a href="/">
+        <img alt="HIDENSEEK GAMES LOGO" src="{{ asset('img/logo-dark.png') }}">
+      </a>
     </div>
     <nav class="dashboard-nav">
       <ul class="dashboard-nav-list">

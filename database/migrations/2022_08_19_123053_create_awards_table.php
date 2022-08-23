@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('awards', function (Blueprint $table) {
             $table->id();
             $table->string('address', 50);
-            $table->integer('amount');
+            $table->double('amount');
             $table->string('award_type');
             $table->integer('status')->default(0);
             $table->timestamps();
