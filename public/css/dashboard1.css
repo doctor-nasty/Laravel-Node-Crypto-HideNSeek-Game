@@ -588,7 +588,18 @@
   height: 100%;
   object-fit: cover;
 }
-
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  color: white;
+  font-size: 20px;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #0a63ea;
+}
 /* media 992 */
 @media (max-width: 992px) {
   .dashboard-content {
