@@ -278,7 +278,7 @@
                     </div>
                     <article class="col-12 col-lg-6 about-us-article mb-md50">
                       <h2>About the Game</h2>
-                      <h4 class="about-us-subheading">Get NFT  ->  Play Free Hide & Seek Game  ->  Earn USDT</h4>
+                      <h4 class="about-us-subheading">Get NFT  ->  Play Free Hide & Seek Game  ->  Earn USDC</h4>
                       <p>
                       With our game you can hide items in the real world, than enter hints
                       and mark radius on the map. Once players join your game they will see hints,
@@ -297,7 +297,7 @@
                         Players will earn 55% from total bid amount in game.
                         Please note that we will never ask for your private keys, 
                         NFT's you buy will stay in your wallet.
-                        USDT you earn daily will also be staying in your wallet.
+                        USDC you earn daily will also be staying in your wallet.
                       </p>
                       <p>
                         To explore our whole collection please use a button to go to Opensea.
@@ -367,7 +367,7 @@
                   </div>
                   <h3>Money</h3>
                   <p>
-                    User who owns NFT will receive a USDT coins to their wallets 
+                    User who owns NFT will receive a USDC coins to their wallets 
                     daily for the first month, twice a week for the second 
                     month, once a week for a third month. 
                     With the received amount you can either withdraw it, or 
@@ -399,14 +399,13 @@
                     <article class="col-12 borrow-article mb-md50">
                       <h2>Borrow NFT</h2>
                       <p>
-                      With our game you can hide items in the real world, than enter hints
-                      and mark radius on the map. Once players join your game they will see hints,
-                      and your marked radius on the map. They will need to follow your hints
-                       to find an item. First player who find an item wins a game.
-                       Both, game creator and game winner will receive USDT to their wallets.  
+                      Here you can see available NFTs to borrow, price per day is 0.5 USDC.
+                      Winning the game with the borrowed Creators NFT you will earn 10% from the total bid in game.
+                      Winning the game with the Players NFT you will earn 40% from the total bid in game.
                       </p>
                     </article>
                     <div class="col-12">
+                      @if($delegations != null)
                       <div class="swiper mySwiper">
                           <div class="swiper-wrapper">
                             @foreach ($delegations as $index => $delegation)
@@ -414,7 +413,7 @@
                               <div class="slider-content">
                                 <div class="slider-text">
                                   <h4>{{ $nft_name[$index] }}</h4>
-                                  <span>{{ $delegation->duration }}</span>
+                                  <span>{{ $delegation->duration }} Days</span>
                                 </div>
                                 <div class="slider-buttons">
                                   <button class="slider-button-delegate" onclick="">Borrow</button> 
@@ -425,6 +424,9 @@
                             @endforeach
                           </div>
                       </div>
+                      @else
+                      <p>no nfts to borrow</p>
+                      @endif
                     </div>
                 </div>
             </div>

@@ -26,6 +26,9 @@ class PagesController extends Controller
     public function delegations()
     {
         $tokens = TokenInfo::where('owner', Auth::user()->wallet_address)->get();
+        $token_name = [];
+        $token_image = [];
+
         foreach($tokens as $index => $token) {
             // get token metadata
             $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$token->token_id;
@@ -40,12 +43,15 @@ class PagesController extends Controller
             curl_close ($ch);
             $j=json_decode($result, true);
 
-            $token->name = $j['name'];
-            $token->image = $j['image'];
+            $token_name[$index] = $j['name'];
+            $token_image[$index] = $j['image'];
+
         }
 
         return view('pages.delegations')
         ->with('title', 'Delegations')
+        ->with('token_name', $token_name)
+        ->with('token_image', $token_image)
         ->with('tokens', $tokens);
     }
 

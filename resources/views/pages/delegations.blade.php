@@ -29,12 +29,12 @@
           <div class="dashboard-slider">
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
-                  @foreach ($tokens as $token)
+                  @foreach ($tokens as $index => $token)
                   <div class="swiper-slide">
-                    <img src="{{ $token->image }}" alt="point icon">
+                    <img src="{{ $token_image[$index] }}" alt="point icon">
                     <div class="slider-content">
                       <div class="slider-text">
-                        <h4>{{ $token->name }}</h4>
+                        <h4>{{ $token_name[$index] }}</h4>
                         @if ($token->status == 1)
                         <span>Duration: {{ $token->duration }} days</span>
                         @elseif ($token->status == 2)
@@ -64,7 +64,23 @@
       </div>
     </div>
     <input type="hidden" class="required form-control" id="nft_addr" value="{{ config('web3.chain.nft') }}">
-    <span id="tx_status"></span>
+    <!-- modal waiting -->
+    <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content terms-modal">
+              <div class="terms-modal-text">
+                  {{-- <h4>Wait for confirmation</h4> --}}
+                  <div class="form group">
+                      <label id="tx_status"></label>
+                  </div>
+              </div>
+              <div class="wait-block">
+                  <div class="wait-spin">
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
   </div>
 </div>
 

@@ -60,7 +60,7 @@
                         <thead>
                             <tr>
                                 <th>Photo</th>
-                                <th>Title</th>
+                                {{-- <th>Title</th> --}}
                                 <th>Country</th>
                                 <th>City</th>
                                 <th>District</th>
@@ -75,7 +75,7 @@
                                     <td><img src="/game-photos/{{ $bidded->photo }}"
                                             class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
                                             alt="{{ $bidded->title }}"></td>
-                                    <td>{{ $bidded->title }}</td>
+                                    {{-- <td>{{ $bidded->title }}</td> --}}
                                     <td>{{ $bidded->country }}</td>
                                     <td>{{ $bidded->city }}</td>
                                     <td>{{ $bidded->district }}</td>

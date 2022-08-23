@@ -158,12 +158,17 @@ function confirmationModal() {
   $("#confirmation-modal").modal();
 }
 
+function termsModal() {
+  $("#terms-modal").modal();
+}
+
 function setTxStatus(status) {
   $("#tx_status").html(status);
   confirmationModal();
 }
 
 async function createNewGame(form) {
+  // termsModal();
   // check Pirate token ownership
   let response = await fetch("/can_create_game");
   let message = await response.text();
