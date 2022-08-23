@@ -411,22 +411,18 @@
                           <div class="swiper-wrapper">
                             @foreach ($delegations as $index => $delegation)
                             <div class="swiper-slide">
-                              <h4>{{ $nft_name[$index] }}</h4>
-                              <h4>{{ $delegation->duration }}</h4>
+                              <div class="slider-content">
+                                <div class="slider-text">
+                                  <h4>{{ $nft_name[$index] }}</h4>
+                                  <span>{{ $delegation->duration }}</span>
+                                </div>
+                                <div class="slider-buttons">
+                                  <button class="slider-button-delegate" onclick="">Borrow</button> 
+                                </div>
+                              </div>
                               <img src="{{ $nft_image[$index] }}" alt="mouse icon">
                             </div>
-                            <button class="slider-button-delegate" onclick="">Borrow</button>
-
                             @endforeach
-                            {{-- <div class="swiper-slide">
-                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
-                            </div>
-                            <div class="swiper-slide">
-                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
-                            </div>
-                            <div class="swiper-slide">
-                              <img src="{{ asset('images/slider-test.png')}}" alt="mouse icon">
-                            </div> --}}
                           </div>
                       </div>
                     </div>
@@ -558,9 +554,8 @@ var x = setInterval(function() {
           </script>
           <script>
             var swiper = new Swiper(".mySwiper", {
-              slidesPerView: 3,
+              slidesPerView: 1,
               spaceBetween: 30,
-              loop: true,
               navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
