@@ -117,14 +117,14 @@
                 <button class="btn-change">Own Games</button>
                 <button class="btn-change">My Items</button>
             </div>
-            <div class="content dashboard-table-card">
+            <div class="row">
                 <div class="content_inside content_inside_active">
                     <div class="table-responsive">
-                        <table id="gamesbidded" class="display dashboard-table table" style="width:100%">
+                        <table id="gamesbidded" class="display dashboard-table table">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
-                                    <th>Title</th>
+                                    {{-- <th>Title</th> --}}
                                     <th>Country</th>
                                     <th>City</th>
                                     <th>District</th>
@@ -139,7 +139,7 @@
                                         <td><img src="/game-photos/{{ $bidded->photo }}"
                                                 class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
                                                 alt="{{ $bidded->title }}"></td>
-                                        <td>{{ $bidded->title }}</td>
+                                        {{-- <td>{{ $bidded->title }}</td> --}}
                                         <td>{{ $bidded->country }}</td>
                                         <td>{{ $bidded->city }}</td>
                                         <td>{{ $bidded->district }}</td>
@@ -161,11 +161,11 @@
                 </div>
                 <div class="content_inside">
                     <div class="table-responsive">
-                        <table id="owngames" class="display dashboard-table table" style="width:100%">
+                        <table id="owngames" class="display dashboard-table table">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
-                                    <th>Title</th>
+                                    {{-- <th>Title</th> --}}
                                     <th>Country</th>
                                     <th>City</th>
                                     <th>District</th>
@@ -180,7 +180,7 @@
                                         <td><img src="/game-photos/{{ $own->photo }}"
                                                 class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
                                                 alt="{{ $own->title }}"></td>
-                                        <td>{{ $own->title }}</td>
+                                        {{-- <td>{{ $own->title }}</td> --}}
                                         <td>{{ $own->country }}</td>
                                         <td>{{ $own->city }}</td>
                                         <td>{{ $own->district }}</td>
@@ -374,6 +374,7 @@
         }
 
         .content_inside {
+            width:100%;
             display: none;
             border: 1px solid #2a2a2a;
             border-radius: 28px;
@@ -381,6 +382,7 @@
         }
 
         .content_inside_active {
+            width:100%;
             display: block;
         }
     </style>
