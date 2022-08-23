@@ -213,35 +213,48 @@ class PointsController extends Controller {
 
                 $total_points = (count($bids) + 1) * $game->points;
 
-                // $winning_points = ((count($bids) * $game->points + $game->points) * 50) / 100;
-                // $winning_points = (((count($bids) + 1) * $game->points + $game->points) * 60) / 100;
-                $winning_points = $total_points * 55 / 100; // winner 55%
-
-                // send to user
                 $web3_helper = new \App\Lib\Web3Helper();
+                
+                $winning_points = $total_points * 55 / 100; // winner 55%
+                $delegator = $web3_helper->getTreasureDelegator($user->wallet_address);
+
+                if ($delegator !== null) {
+                    $delegator_points = $total_points * 15 / 100; // 15% for owner
+                    $winning_points -= $delegator_points; // remaining - 40% for borrower
+                    Award::create([
+                        'address' => $delegator->owner,
+                        'amount' => $winning_points,
+                        'award_type' => 'Game winner award(delegator)'
+                    ]);
+                }
+
                 Award::create([
                     'address' => $user->wallet_address,
                     'amount' => $winning_points,
                     'award_type' => 'Game winner award'
                 ]);
-                // $web3_helper->sendTokenToUser($user->wallet_address, $winning_points);
 
-                //$user->points += $winning_points;
                 $user->total_winning_points += $winning_points;
                 $user->save();
 
-                // $gameAuthor->points += ((count($bids) * $game->points + $game->points) * 50) / 100;
-                // $gameAuthor->points += (((count($bids) + 1) * $game->points + $game->points) * 30) / 100;
                 $creator_points = $total_points * 30 / 100; // creator 30%
+
+                $delegator = $web3_helper->getPirateDelegator($gameAuthor->wallet_address);
+                if ($delegator !== null) {
+                    $delegator_points = $total_points * 20 / 100; // 20% for owner
+                    $creator_points -= $delegator_points; // remaining part - 10% for borrower
+                    Award::create([
+                        'address' => $delegator->owner,
+                        'amount' => $winning_points,
+                        'award_type' => 'Game creator award(delegator)'
+                    ]);
+                }
                 // send to createor
                 Award::create([
                     'address' => $gameAuthor->wallet_address,
                     'amount' => $creator_points,
                     'award_type' => 'Game creator award'
                 ]);
-                // $web3_helper->sendTokenToUser($gameAuthor->wallet_address, $creator_points);
-
-                // $gameAuthor->save();
 
                 return redirect('games')->with('success', 'You have won the game!');
             } else {

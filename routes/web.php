@@ -120,6 +120,8 @@ Route::get('login/locked', 'Auth\LoginController@locked')->middleware('auth.lock
 Route::post('login/locked', 'Auth\LoginController@unlock')->name('login.unlock');
 Route::get('login/signature', 'Web3Controller@signature');
 Route::post('login/check_signature', 'Web3Controller@login');
+Route::get('/borrow/{tx_hash}/{token_id}', 'Web3Controller@checkBorrowTx');
+
 
 // Route::group(['middleware' => 'verified'], function () {
 //     Route::get('admin', 'AdminController@admin')->name('admin');
