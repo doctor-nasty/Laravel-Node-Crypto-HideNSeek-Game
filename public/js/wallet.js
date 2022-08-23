@@ -236,8 +236,20 @@ async function createNewGame(form) {
     });
 }
 
-async function createDelegationOffer(tokenId) {
-  const duration = 30; // TODO - change using frontend
+function setDelegationCreateParam(tokenId) {
+  $("#token_id").val(tokenId);
+  $("#duration-time-modal").modal();
+}
+
+async function createDelegationOffer() {
+  if ($("#param_duration").val() <= 0) {
+    alert("Duration is invalid");
+    return;
+  }
+  $("#duration-time-modal").modal("hide");
+
+  tokenId = $("#token_id").val();
+  const duration = $("#param_duration").val();
 
   // check Pirate token ownership
   const provider = await getProvider();
