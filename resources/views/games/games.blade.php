@@ -21,7 +21,7 @@
         }
     </style> -->
 
-    <div class="content-wrapper section-block">
+    <div class="content-wrapper section-block table-size">
         <div class="change-content-btn">
             <div>
                 <a href="{{ url('') }}" class="btn-change">@lang('games.dashboard')</a>
@@ -39,7 +39,6 @@
             </div>
         @endif
         <div class="card">
-
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="games" class="display dashboard-table table" style="width:100%">
