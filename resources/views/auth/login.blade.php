@@ -28,7 +28,7 @@
         {{ config('app.name') }}
         @endif
     </title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 		<!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
@@ -69,7 +69,7 @@
   /></noscript>
   <!-- End Meta Pixel Code -->
     </head>
-
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <body>
 
 <div class="container">
@@ -171,6 +171,9 @@
 			      </li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-scroll-nav="2">Borrow NFT</a>
             </li>
             <li class="nav-item header-nav header-social">
                 <a href="https://t.me/hidenseek_group" class="nav-icon">
@@ -275,7 +278,7 @@
                     </div>
                     <article class="col-12 col-lg-6 about-us-article mb-md50">
                       <h2>About the Game</h2>
-                      <h4 class="about-us-subheading">Get NFT  ->  Play Free Hide & Seek Game  ->  Earn USDT</h4>
+                      <h4 class="about-us-subheading">Get NFT  ->  Play Free Hide & Seek Game  ->  Earn USDC</h4>
                       <p>
                       With our game you can hide items in the real world, than enter hints
                       and mark radius on the map. Once players join your game they will see hints,
@@ -294,7 +297,7 @@
                         Players will earn 55% from total bid amount in game.
                         Please note that we will never ask for your private keys, 
                         NFT's you buy will stay in your wallet.
-                        USDT you earn daily will also be staying in your wallet.
+                        USDC you earn daily will also be staying in your wallet.
                       </p>
                       <p>
                         To explore our whole collection please use a button to go to Opensea.
@@ -305,7 +308,7 @@
                 </div>
             </div>
         </section>
-        <!-- <section class="hero section-padding" data-scroll-index="2">
+        <!-- <section class="hero section-padding">
             <div class="container">
                 <div class="row">
 
@@ -341,7 +344,7 @@
                 </div>
             </div>
         </section> -->
-        <section class="card-list-section" data-scroll-index="2">
+        <section class="card-list-section">
           <div class="container">
             <div class="row">
               <div class="col-lg-4 mb-mb-120 d-flex">
@@ -364,7 +367,7 @@
                   </div>
                   <h3>Money</h3>
                   <p>
-                    User who owns NFT will receive a USDT coins to their wallets 
+                    User who owns NFT will receive a USDC coins to their wallets 
                     daily for the first month, twice a week for the second 
                     month, once a week for a third month. 
                     With the received amount you can either withdraw it, or 
@@ -390,7 +393,44 @@
         </section>
         <!-- End Hero ====
         ======================================= -->
-
+        <section class="slider-section" data-scroll-index="2">
+            <div class="container">
+                <div class="row">
+                    <article class="col-12 borrow-article mb-md50">
+                      <h2>Borrow NFT</h2>
+                      <p>
+                      Here you can see available NFTs to borrow, price per day is 0.5 USDC.
+                      Winning the game with the borrowed Creators NFT you will earn 10% from the total bid in game.
+                      Winning the game with the Players NFT you will earn 40% from the total bid in game.
+                      </p>
+                    </article>
+                    <div class="col-12">
+                      @if($delegations != null)
+                      <div class="swiper mySwiper">
+                          <div class="swiper-wrapper">
+                            @foreach ($delegations as $index => $delegation)
+                            <div class="swiper-slide">
+                              <div class="slider-content">
+                                <div class="slider-text">
+                                  <h4>{{ $nft_name[$index] }}</h4>
+                                  <span>{{ $delegation->duration }} Days</span>
+                                </div>
+                                <div class="slider-buttons">
+                                  <button class="slider-button-delegate" onclick="">Borrow</button> 
+                                </div>
+                              </div>
+                              <img src="{{ $nft_image[$index] }}" alt="mouse icon">
+                            </div>
+                            @endforeach
+                          </div>
+                      </div>
+                      @else
+                      <p>no nfts to borrow</p>
+                      @endif
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- =====================================
         ==== Start Footer -->
 
@@ -509,12 +549,34 @@ var x = setInterval(function() {
         <!-- wallet scripts -->
         <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
         <script src="{{ asset('js/wallet.js') }}"></script>
-        
         <script type="text/javascript">
           @if (count($errors) > 0)
               $('#myModal').modal('show');
           @endif
           </script>
-
+          <script>
+            var swiper = new Swiper(".mySwiper", {
+              slidesPerView: 1,
+              spaceBetween: 30,
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+              breakpoints: {
+                "@0.00": {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                },
+                "@1.00": {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                "@1.50": {
+                  slidesPerView: 3,
+                  spaceBetween: 40,
+                },
+              },
+            });
+          </script>
     </body>
 </html>

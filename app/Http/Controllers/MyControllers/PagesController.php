@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Game_bid;
+use App\Models\TokenInfo;
 
 class PagesController extends Controller
 {
@@ -24,8 +25,42 @@ class PagesController extends Controller
 
     public function delegations()
     {
+        $tokens = TokenInfo::where('owner', Auth::user()->wallet_address)->get();
+        $token_name = [];
+        $token_image = [];
+
+        foreach($tokens as $index => $token) {
+            // get token metadata
+            $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$token->token_id;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $result= curl_exec ($ch);
+            curl_close ($ch);
+            $j=json_decode($result, true);
+
+            $token_name[$index] = $j['name'];
+            $token_image[$index] = $j['image'];
+
+        }
+
         return view('pages.delegations')
-        ->with('title', 'Delegations');
+        ->with('title', 'Delegations')
+        ->with('token_name', $token_name)
+        ->with('token_image', $token_image)
+        ->with('tokens', $tokens);
+    }
+
+    public function borrow()
+    {
+        $delegations = TokenInfo::where('status', 1);
+
+        return view('auth.login')
+        ->with('delegations', $delegations);
     }
 
     public function contact()

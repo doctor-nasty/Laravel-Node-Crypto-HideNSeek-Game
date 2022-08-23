@@ -154,10 +154,13 @@ $(document).ready(function () {
   });
 });
 
-function confirmationModal(){
-  $('#confirmation-modal').modal();
-}       
+function confirmationModal() {
+  $("#confirmation-modal").modal();
+}
 
+function termsModal() {
+  $("#terms-modal").modal();
+}
 
 function setTxStatus(status) {
   $("#tx_status").html(status);
@@ -165,6 +168,7 @@ function setTxStatus(status) {
 }
 
 async function createNewGame(form) {
+  // termsModal();
   // check Pirate token ownership
   let response = await fetch("/can_create_game");
   let message = await response.text();
@@ -184,7 +188,6 @@ async function createNewGame(form) {
   const amount = $("#points").val();
 
   console.log(addrUSDT, recipient, amount);
-
 
   setTxStatus("Waiting user approval...");
 
@@ -224,6 +227,88 @@ async function createNewGame(form) {
           console.log(tx.hash);
           $("#tx_hash").val(tx.hash);
           form.submit();
+        })
+        .catch((err) => setTxStatus(err.message));
+    })
+    .catch((err) => {
+      setTxStatus(err.message);
+    });
+}
+
+async function createDelegationOffer(tokenId) {
+  const duration = 30; // TODO - change using frontend
+
+  // check Pirate token ownership
+  const provider = await getProvider();
+
+  if (provider === undefined) return;
+
+  setTxStatus("Waiting user approval...");
+
+  const signer = provider.getSigner();
+
+  const addrNft = $("#nft_addr").val();
+
+  // The ERC-20 Contract ABI, which is a common contract interface
+  // for tokens (this is the Human-Readable ABI format)
+  const nftAbi = [
+    "function offerRent(uint256 tokenId, uint256 duration) external",
+  ];
+
+  // The Contract object
+  const nft = new ethers.Contract(addrNft, nftAbi, signer);
+
+  nft
+    .offerRent(tokenId, duration)
+    .then((tx) => {
+      setTxStatus("Waiting transaction is confirmed...");
+      tx.wait()
+        .then((res) => {
+          console.log(tx.hash);
+          $("#tx_hash").val(tx.hash);
+          $("#token_id").val(tokenId);
+          $("#duration").val(duration);
+          $("#type").val("create");
+          document.getElementById("form_delegation").submit();
+        })
+        .catch((err) => setTxStatus(err.message));
+    })
+    .catch((err) => {
+      setTxStatus(err.message);
+    });
+}
+
+async function cancelDelegationOffer(tokenId) {
+  // check Pirate token ownership
+  const provider = await getProvider();
+
+  if (provider === undefined) return;
+
+  setTxStatus("Waiting user approval...");
+
+  const signer = provider.getSigner();
+
+  const addrNft = $("#nft_addr").val();
+
+  // The ERC-20 Contract ABI, which is a common contract interface
+  // for tokens (this is the Human-Readable ABI format)
+  const nftAbi = ["function cancelOffer(uint256 tokenId) external"];
+
+  // The Contract object
+  const nft = new ethers.Contract(addrNft, nftAbi, signer);
+
+  nft
+    .cancelOffer(tokenId)
+    .then((tx) => {
+      setTxStatus("Waiting transaction is confirmed...");
+      tx.wait()
+        .then((res) => {
+          console.log(tx.hash);
+          $("#tx_hash").val(tx.hash);
+          $("#token_id").val(tokenId);
+          $("#type").val("cancel");
+          $("#duration").val("0");
+          document.getElementById("form_delegation").submit();
         })
         .catch((err) => setTxStatus(err.message));
     })

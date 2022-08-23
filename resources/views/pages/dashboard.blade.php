@@ -117,14 +117,14 @@
                 <button class="btn-change">Own Games</button>
                 <button class="btn-change">My Items</button>
             </div>
-            <div class="content dashboard-table-card">
+            <div class="card">
                 <div class="content_inside content_inside_active">
                     <div class="table-responsive">
                         <table id="gamesbidded" class="display dashboard-table table" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
-                                    <th>Title</th>
+                                    {{-- <th>Title</th> --}}
                                     <th>Country</th>
                                     <th>City</th>
                                     <th>District</th>
@@ -139,7 +139,7 @@
                                         <td><img src="/game-photos/{{ $bidded->photo }}"
                                                 class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
                                                 alt="{{ $bidded->title }}"></td>
-                                        <td>{{ $bidded->title }}</td>
+                                        {{-- <td>{{ $bidded->title }}</td> --}}
                                         <td>{{ $bidded->country }}</td>
                                         <td>{{ $bidded->city }}</td>
                                         <td>{{ $bidded->district }}</td>
@@ -165,7 +165,7 @@
                             <thead>
                                 <tr>
                                     <th>Photo</th>
-                                    <th>Title</th>
+                                    {{-- <th>Title</th> --}}
                                     <th>Country</th>
                                     <th>City</th>
                                     <th>District</th>
@@ -180,7 +180,7 @@
                                         <td><img src="/game-photos/{{ $own->photo }}"
                                                 class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
                                                 alt="{{ $own->title }}"></td>
-                                        <td>{{ $own->title }}</td>
+                                        {{-- <td>{{ $own->title }}</td> --}}
                                         <td>{{ $own->country }}</td>
                                         <td>{{ $own->city }}</td>
                                         <td>{{ $own->district }}</td>
@@ -202,15 +202,23 @@
                 </div>
             </div>
             <div class="content_inside">
-                <div class="nft-image-cont">
-                    @foreach ($tokens as $index => $token)
-                        <div class="nft-image-row">
-                            <div class="nft-image-block">
-                                <img class="img-fluid" src="{{ $nft_image[$index] }}"></img>
-                                <h4>{{ $nft_name[$index] }}</h4>
-                            </div>
+                <div class="dashboard-slider">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($tokens as $index => $token)
+                                <div class="swiper-slide">
+                                    <img class="img-fluid" src="{{ $nft_image[$index] }}"></img>
+                                    <div class="slider-content">
+                                        <div class="slider-text">
+                                            <h4>{{ $nft_name[$index] }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -275,20 +283,38 @@
 
     </div>
     <script>
+        var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+         breakpoints: {
+          "@0.00": {
+            slidesPerView: 1,
+            spaceBetween: 10,
+          },
+          "@1.00": {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          "@1.50": {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+        },
+      });
         var dt = $('#gamesbidded').DataTable({
             responsive: true,
             paging: false,
             searching: false
         });
-    </script>
-    <script>
         var dt = $('#owngames').DataTable({
             responsive: true,
             paging: false,
             searching: false
         });
-    </script>
-    <script>
         $(document).ready(function() {
             $('#myModal').on('show.bs.modal', function(e) {
                 var rowid = $(e.relatedTarget).attr('data-id');
