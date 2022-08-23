@@ -120,7 +120,7 @@
             <div class="card">
                 <div class="content_inside content_inside_active">
                     <div class="table-responsive">
-                        <table id="gamesbidded" class="display dashboard-table table" style="width:100%">
+                        <table id="gamesbidded" class="display dashboard-table table">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
@@ -161,7 +161,7 @@
                 </div>
                 <div class="content_inside">
                     <div class="table-responsive">
-                        <table id="owngames" class="display dashboard-table table" style="width:100%">
+                        <table id="owngames" class="display dashboard-table table">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
@@ -374,6 +374,7 @@
         }
 
         .content_inside {
+            width:100%;
             display: none;
             border: 1px solid #2a2a2a;
             border-radius: 28px;
@@ -381,6 +382,7 @@
         }
 
         .content_inside_active {
+            width:100%;
             display: block;
         }
     </style>
