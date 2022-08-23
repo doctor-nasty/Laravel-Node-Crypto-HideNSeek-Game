@@ -115,7 +115,7 @@
                 <button class="btn-change">My Items</button>
             </div>
             <div class="row">
-                <div class="content_inside">
+                <div class="content_inside content_inside_active">
                     <div class="table-responsive">
                         <table id="gamesbidded" class="display dashboard-table table">
                             <thead>
@@ -156,7 +156,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="content_inside content_inside_active">
+                <div class="content_inside">
                     <div class="table-responsive">
                         <table id="owngames" class="display dashboard-table table">
                             <thead>
