@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Lang;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
 
 use Web3\Web3;
 use Web3\Contract;
@@ -26,11 +27,16 @@ class GameController extends Controller {
     }
 
     public function index() {
-        $games = Game::get()
-                        ->where('user_id', '<>', Auth::user()->id)
-                        ->where('status', '=', '1')
-                        // ->orderByRaw('RAND()')
-                        ->take(10);
+
+            $games = DB::table('games')
+            ->leftJoin('game_bids', 'games.id', '!=', 'game_bids.game_id')
+            ->leftJoin('users', 'game_bids.user_id', '!=', 'users.id')
+            ->select('games.id', 'games.status', 'games.title', 'games.country', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
+                        ->where('games.user_id', '!=', Auth::user()->id)
+                        ->where('games.status', '=', '1')
+                        ->where('game_bids.user_id', '!=', 'users.id')
+                        ->get();
+
         return view('games.games')
         ->with('title', 'Games')
         ->with('games', $games);
@@ -373,11 +379,29 @@ class GameController extends Controller {
                         ->with('title', 'My Bids');
     }
 
-    public function getGameModalHtml(Request $request) {
+    public function getGames(Request $request) {
         $game = Game::where('id', '=', $request->id)->with('bids')->firstOrFail();
         $user = User::where('id', '=', $game->user_id)->firstOrFail();
 
-        return view('games.gamedetail_modal', compact('user'))
+        return view('games.gamedetail_games', compact('user'))
+                        ->with('game', $game)
+                        ->with('title', $game->title);
+    }
+
+    public function getOwnGames(Request $request) {
+        $game = Game::where('id', '=', $request->id)->with('bids')->firstOrFail();
+        $user = User::where('id', '=', $game->user_id)->firstOrFail();
+
+        return view('games.gamedetail_owngames', compact('user'))
+                        ->with('game', $game)
+                        ->with('title', $game->title);
+    }
+
+    public function getMyBids(Request $request) {
+        $game = Game::where('id', '=', $request->id)->with('bids')->firstOrFail();
+        $user = User::where('id', '=', $game->user_id)->firstOrFail();
+
+        return view('games.gamedetail_mybids', compact('user'))
                         ->with('game', $game)
                         ->with('title', $game->title);
     }
@@ -400,15 +424,4 @@ class GameController extends Controller {
         return 1;
     }
 
-    //    public function getGames()
-    //    {
-    //        return view('games')
-    //             ->with('games',Game::active()->get());
-    //    }
-    //
-    //    public function getGame($id)
-    //    {
-    //        return view('gamedetail')
-    //            ->with('game', Game::where('id','=',$id)->active()->firstOrFail());
-    //    }
 }

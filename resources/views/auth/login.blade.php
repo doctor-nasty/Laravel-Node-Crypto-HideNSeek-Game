@@ -215,7 +215,7 @@
               <!-- <h1>@lang('login.secondtext')</h1> -->
               <h4 id="demo"></h4>
               <p>@lang('login.thirdtext')</p>
-              <div class="sub-date">
+              <!-- <div class="sub-date">
                 <div class="data-block">
                   <h5>August 12</h5>
                   <span>Minting Date</span>
@@ -225,8 +225,8 @@
                   <h5>August 24</h5>
                   <span>Drop Date</span>
                 </div>
-              </div>
-              <div class="full-width caption btn-start-block">
+              </div> -->
+              <div class="full-width caption btn-start-block mt-30">
                 @if(session()->get('message'))
                   <div class="alert alert-success">
                     {{ session()->get('message') }}
@@ -284,7 +284,7 @@
                       and mark radius on the map. Once players join your game they will see hints,
                       and your marked radius on the map. They will need to follow your hints
                        to find an item. First player who find an item wins a game.
-                       Both, game creator and game winner will receive USDT to their wallets.  
+                       Both, game creator and game winner will receive USDC to their wallets.  
                       </p>
                       <p>
                       NFT supply will be limited, we will be minting 5000 NFT's,
@@ -571,7 +571,7 @@ var x = setInterval(function() {
                   slidesPerView: 1,
                   spaceBetween: 10,
                 },
-                "@1.00": {
+                "@1.10": {
                   slidesPerView: 2,
                   spaceBetween: 20,
                 },

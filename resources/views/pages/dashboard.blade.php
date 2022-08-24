@@ -147,7 +147,7 @@
                                                 <div class="data-table-buttons-wrapper"><button type="button"
                                                         class="btn btn-info details-button" title="Details"
                                                         data-id="{{ $bidded->id }}" data-toggle="modal"
-                                                        data-target="#myModal">Play</button></div>
+                                                        data-target="#getMyBids">Play</button></div>
                                             </td>
                                         @endif
                                     </tr>
@@ -187,7 +187,7 @@
                                                 <div class="data-table-buttons-wrapper"><button type="button"
                                                         class="btn btn-info details-button" title="Details"
                                                         data-id="{{ $own->id }}" data-toggle="modal"
-                                                        data-target="#myModal">View</button></div>
+                                                        data-target="#getOwnGames">View</button></div>
                                             </td>
                                     </tr>
                                 @endforeach
@@ -221,54 +221,24 @@
     <div>
 
     </div>
-    <!-- <div class="row grid-margin" id="bidded">
-                      <div class="col-12">
-                        <div class="card">
-                          <div class="card-body">
-                            <h4 class="card-title">@lang('dashboard.bidded')</h4>
-                              <table class="display nowrap" id="data-table-bid" cellspacing="0" width="100%"></table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row grid-margin">
-                      <div class="col-12">
-                        <div class="card">
-                          <div class="card-body">
-                            <h4 class="card-title">@lang('dashboard.your_games')</h4>
-                            
-                                <table class="display nowrap" id="data-table" cellspacing="0" width="100%"></table>
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
-
-    <div id="myModal" id="darkModalForm" tabindex="-1" class="modal fade" role="dialog" aria-hidden="true">
+    <div id="getOwnGames" id="darkModalForm" tabindex="-1" class="modal fade" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
             <div class="modal-content">
-                <!--                        <div class="modal-header">
-                                    <h4 class="modal-title">Details</h4>
-                                    <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>-->
-                <div id="modal-body" class="modal-body">
+                <div id="OwnGamesBody" class="modal-body">
 
                 </div>
             </div>
 
         </div>
     </div>
-    <div id="myModal2" id="darkModalForm" class="modal fade" role="dialog">
+    <div id="getMyBids" id="darkModalForm" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
             <div class="modal-content">
-                <!--                        <div class="modal-header">
-                                    <h4 class="modal-title">Details</h4>
-                                    <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>-->
-                <div id="modal-body2" class="modal-body">
+                <div id="MyBidsBody" class="modal-body">
 
                 </div>
             </div>
@@ -290,7 +260,7 @@
             slidesPerView: 1,
             spaceBetween: 10,
           },
-          "@1.00": {
+          "@1.10": {
             slidesPerView: 2,
             spaceBetween: 20,
           },
@@ -311,33 +281,33 @@
             searching: false
         });
         $(document).ready(function() {
-            $('#myModal').on('show.bs.modal', function(e) {
+            $('#getOwnGames').on('show.bs.modal', function(e) {
                 var rowid = $(e.relatedTarget).attr('data-id');
                 $.ajax({
                     type: 'post',
-                    url: 'getGameModalHtml', //Here you will fetch records
+                    url: 'getOwnGames', //Here you will fetch records
                     data: {
                         "_token": "{{ csrf_token() }}",
                         'id': rowid
                     }, //Pass $id
                     success: function(data) {
-                        $('#modal-body').html(data); //Show fetched data from database
+                        $('#OwnGamesBody').html(data); //Show fetched data from database
                     }
                 });
             });
 
-            $('#myModal2').on('show.bs.modal', function(e) {
+            $('#getMyBids').on('show.bs.modal', function(e) {
                 //$('#myModal').modal('hide');
                 var rowid = $(e.relatedTarget).attr('data-id');
                 $.ajax({
                     type: 'post',
-                    url: 'getGameEditModalHtml', //Here you will fetch records
+                    url: 'getMyBids', //Here you will fetch records
                     data: {
                         "_token": "{{ csrf_token() }}",
                         'id': rowid
                     }, //Pass $id
                     success: function(data) {
-                        $('#modal-body2').html(data); //Show fetched data from database
+                        $('#MyBidsBody').html(data); //Show fetched data from database
                     }
                 });
             });
