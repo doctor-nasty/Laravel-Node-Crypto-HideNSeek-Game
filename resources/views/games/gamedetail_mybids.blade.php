@@ -51,6 +51,9 @@
 <script>
 var map = L.map('map').setView(["{{$game->mark_lat}}", "{{$game->mark_long}}"], 14);
 
+setInterval(function () {
+   map.invalidateSize();
+}, 100);
 var circle = L.circle(["{{$game->mark_lat}}", "{{$game->mark_long}}"], {
     color: 'red',
     fillColor: '#f03',

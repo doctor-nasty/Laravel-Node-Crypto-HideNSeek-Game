@@ -28829,6 +28829,7 @@ div.tagsinput span.tag a {
 .dashboard-dropdown-navigation li {
   display: flex;
 }
+
 .dropdown-navigation-socmedia {
   display: flex;
   justify-content: center;
@@ -28844,6 +28845,9 @@ div.tagsinput span.tag a {
   justify-content: flex-start;
   color: #fff;
   padding: 12px 30px;
+}
+.dashboard-dropdown-navigation .dropdown-link img {
+  margin-right: 8px;
 }
 .dashboard-dropdown-navigation a:hover {
   background: #1f1f1f;
