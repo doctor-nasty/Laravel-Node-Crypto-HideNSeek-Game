@@ -57,8 +57,9 @@ Route::group(['middleware' => ['auth', 'status', 'check.token']], function () {
     //Route::post('/api/coinbase/webhook', 'PagesController@webhook');
     Route::post('/webhook/success', 'PagesController@webhook');
     Route::get('/test-txt-file', 'MyControllers\GameController@webhook2');
-    Route::post('getGameModalHtml', 'MyControllers\GameController@getGameModalHtml');
-    Route::post('getGameEditModalHtml', 'MyControllers\GameController@getGameEditModalHtml');
+    Route::post('getGames', 'MyControllers\GameController@getGames')->name('getGames');
+    Route::post('getMyBids', 'MyControllers\GameController@getMyBids')->name('getMyBids');
+    Route::post('getOwnGames', 'MyControllers\GameController@getOwnGames')->name('getOwnGames');
     // Route::get('/points', 'MyControllers\PointsController@index');
     Route::get('/documentation', 'MyControllers\PagesController@documentation');
     Route::get('/delegations', 'MyControllers\PagesController@delegations');
