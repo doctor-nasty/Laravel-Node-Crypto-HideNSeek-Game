@@ -47,6 +47,9 @@
   overflow-y: auto;
   flex: 1;
 }
+.dashboard-dropdown-navigation .dropdown-link img {
+  margin-right: 8px;
+}
 .dashbord-sidebar-small {
   width: 80px;
   overflow: hidden;
@@ -679,6 +682,10 @@
 }
 .table-modal .modal-header {
   border-bottom: 0;
+}
+.terms-modal label {
+  font-size: 22px;
+  color: white;
 }
 /* media 992 */
 @media (max-width: 1300px) {
