@@ -64,7 +64,7 @@
                 </div>
                 <a href="/settings">
                     <button class="avatar-edit-button">
-                        <img src="{{ asset('svgs/pencil.png') }}" alt="">
+                        <img src="{{ asset('svgs/edit.svg') }}" alt="">
                     </button>
                 </a>
             </div>

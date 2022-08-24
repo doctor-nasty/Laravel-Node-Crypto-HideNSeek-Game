@@ -358,8 +358,8 @@
   align-items: center;
 }
 .avatar-edit-button img {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 .player-avatar {
   display: flex;
