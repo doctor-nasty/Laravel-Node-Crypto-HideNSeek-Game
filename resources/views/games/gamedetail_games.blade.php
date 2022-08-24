@@ -17,7 +17,7 @@
     </ul>
 </div>
 @endif
-<div>
+<div class="modal-header">
     <h4 class="card-title">{{ $game->title }}</h4>
     <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
