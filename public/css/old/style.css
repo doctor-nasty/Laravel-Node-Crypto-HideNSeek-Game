@@ -28779,7 +28779,7 @@ div.tagsinput span.tag a {
 
 /* header */
 .dashboard-header-container {
-  z-index: 30;
+  z-index: 1001;
   width: 100%;
   position: fixed;
   top: 0;

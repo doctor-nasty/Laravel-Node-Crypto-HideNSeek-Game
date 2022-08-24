@@ -17,34 +17,37 @@
     </ul>
 </div>
 @endif
-<h4 class="card-title">{{ $game->title }}</h4>
-<button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="modal-header">
+    <h4 class="card-title">{{ $game->title }}</h4>
+    <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
 <div class="tab-content tab-content-solid">
+    <div class="card-body">
+        <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
+        
+            @if($game->status === 2)
+            <span class="text text-danger">@lang('gamedetail.game_has_finished')</span>
+            @elseif(count($game->bids) >= $game->players)
+            <blockquote class="blockquote blockquote-primary blockquote-table">
+                <span>{{ $game->full_comment }}</span>
+            </blockquote>
+            <form action="{{route('bid.answer')}}" method="POST">
+                {{csrf_field()}}
+                <input name="game_id" type="hidden" value="{{$game->id}}" />
+                <label>@lang('gamedetail.enter_answer') </label>
+                <input name="answer" type="text" class="form-group form-control" required />
+                <button class="btn btn-inverse-success" type="submit">@lang('gamedetail.submit')</button>
+            </form>
 
-    <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
-        @if($game->status === 2)
-        <span class="text text-danger">@lang('gamedetail.game_has_finished')</span>
-        @elseif(count($game->bids) >= $game->players)
-        <blockquote class="blockquote blockquote-primary">
-            <span>{{ $game->full_comment }}</span>
-        </blockquote>
-        <form action="{{route('bid.answer')}}" method="POST">
-            {{csrf_field()}}
-            <input name="game_id" type="hidden" value="{{$game->id}}" />
-            <label>@lang('gamedetail.enter_answer') </label>
-            <input name="answer" type="text" class="form-group form-control" required />
-            <button class="btn btn-inverse-success" type="submit">@lang('gamedetail.submit')</button>
-        </form>
+            <br>
+            <div class="col-md-12" id="map"></div>
+            @else
+            <blockquote class="blockquote blockquote-primary">
+                <span>{{$game->players - count($game->bids)}} more players are required to join before game starts.</span>
+            </blockquote>
+            @endif
 
-        <br>
-        <div class="col-md-12" id="map"></div>
-        @else
-        <blockquote class="blockquote blockquote-primary">
-            <span>{{$game->players - count($game->bids)}} more players are required to join before game starts.</span>
-        </blockquote>
-        @endif
-
-
+        </div>
     </div>
 </div>
 

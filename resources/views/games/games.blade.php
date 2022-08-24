@@ -84,8 +84,8 @@
         </div>
     </div>
 
-    <div id="gamesModal" id="darkModalForm" class="modal fade" role="dialog">
-        <div class="modal-dialog modal-lg">
+    <div id="gamesModal" id="darkModalForm" class="modal fade table-modal" role="dialog">
+        <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content">

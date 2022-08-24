@@ -97,13 +97,13 @@
           <div class="modal-content terms-modal">
               <div class="terms-modal-text">
                   <h4>Choose duration for borrowing</h4>
-                  <label>
-                    Days*
-                    <br>
-                    <input type="number" value="0" id="param_duration">
-                    <button type="button" onclick="createDelegationOffer()">Confirm</button>
-                  </label>
               </div>
+              <label class="duration-label">
+                Days*
+                <br>
+                <input type="number" value="0" id="param_duration">
+                <button type="button" onclick="createDelegationOffer()">Confirm</button>
+              </label>
           </div>
       </div>
     </div>
