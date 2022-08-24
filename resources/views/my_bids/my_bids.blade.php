@@ -23,13 +23,15 @@
 </style>
 <!-- google map api end -->
 
-    <div class="content-wrapper">
-        <nav aria-label="breadcrumb" role="navigation">
-          <ol class="breadcrumb breadcrumb-custom">
-            <li class="breadcrumb-item"><a href="{{ url('') }}">@lang('games.dashboard')</a></li>
-            <li class="breadcrumb-item active" aria-current="page"><span>@lang('games.mybids')</span></li>
-          </ol>
-        </nav>
+    <div class="content-wrapper table-size section-block">
+        <div class="change-content-btn">
+            <div>
+                <a href="{{ url('') }}" class="btn-change">@lang('gamecreate.dashboard')</a>
+            </div>
+            <div class="active">
+                <span class="btn-change">My Bids</span>
+            </div>
+        </div>
         <!--<a href="{{ route('games.create') }}" class="btn btn-success btn-rounded btn-fw">@lang('games.create_game')</a>-->
       @if(session()->get('success'))
             <div class="alert alert-success">

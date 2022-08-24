@@ -34,31 +34,52 @@
     <nav class="dashboard-dropdown-navigation">
       <ul>
         <li>
-          <a href="{{ url('/') }}" class="dropdown-link">Dashboard</a>
+          <a href="{{ url('/') }}" class="dropdown-link">
+            <img src="{{ asset('svgs/home.svg') }}" alt="home icon">
+            Dashboard
+          </a>
         </li>
         <li>
-          <a href="{{ url('/games') }}" class="dropdown-link">Games</a>
+          <a href="{{ url('/games') }}" class="dropdown-link">
+            <img src="{{ asset('svgs/game-controller.svg') }}" alt="">
+            Games
+          </a>
         </li>
         <li>
-          <a href="{{ url('/my_bids') }}" class="dropdown-link">My Bids</a>
+          <a href="{{ url('/my_bids') }}" class="dropdown-link">
+            <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="shopping-bag">
+            My Bids
+          </a>
         </li>
         <li>
-          <a href="{{ url('/delegations') }}" class="dropdown-link">Delegations</a>
+          <a href="{{ url('/delegations') }}" class="dropdown-link">
+            <img src="{{ asset('svgs/file-text.svg') }}" alt="file text">
+            Delegations
+          </a>
         </li>
-        <li>
+        <!-- <li>
           <a href="{{ url('/documentation') }}" class="dropdown-link">Documentation</a>
-        </li>
+        </li> -->
         <li>
-          <a href="{{ url('/settings') }}" class="dropdown-link">Settings</a>
-        </li>
-        <li>
-          <a href="{{ url('/logout') }}" class="dropdown-link">Logout</a>
+          <a href="{{ url('/settings') }}" class="dropdown-link">
+            <img src="{{ asset('svgs/setting.svg') }}" alt="Settings icon">
+            Settings
+          </a>
         </li>
         @if (session('can_create'))
         <li>
-          <a href="{{ url('games/create') }}" class="dropdown-link">Create A Game</a>
+          <a href="{{ url('games/create') }}" class="dropdown-link">
+             <img src="{{ asset('svgs/add.svg') }}" alt="add icon">
+            Create A Game
+          </a>
         </li>
         @endif
+        <li>
+          <a href="{{ url('/logout') }}" class="dropdown-link">
+            <img src="{{ asset('svgs/log-out.svg') }}" alt="logout">
+            Logout
+          </a>
+        </li>
         <li class="dropdown-navigation-socmedia">
           <div class="dashbord-sidebar-social">
             <a href="https://t.me/hidenseek_group" class="nav-icon">
