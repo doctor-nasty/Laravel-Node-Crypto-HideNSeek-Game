@@ -221,9 +221,8 @@
     <div>
 
     </div>
-    <div id="getOwnGames" id="darkModalForm" tabindex="-1" class="modal fade" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-
+    <div id="getOwnGames" id="darkModalForm" tabindex="-1" class="modal fade table-modal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
                 <div id="OwnGamesBody" class="modal-body">
@@ -233,7 +232,7 @@
 
         </div>
     </div>
-    <div id="getMyBids" id="darkModalForm" class="modal fade" role="dialog">
+    <div id="getMyBids" id="darkModalForm" class="modal fade table-modal" role="dialog">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->

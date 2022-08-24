@@ -28864,8 +28864,14 @@ div.tagsinput span.tag a {
   padding: 30px;
   background-color: black !important;
 }
+.terms-modal label {
+  font-size: 22px;
+  color: white;
+}
 .terms-modal-text {
   margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
 }
 .terms-modal-text h4 {
   margin-bottom: 12px;

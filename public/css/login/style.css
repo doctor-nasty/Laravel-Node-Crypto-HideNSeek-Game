@@ -3519,6 +3519,9 @@ textarea.is-invalid.tt-hint {
     rgba(0, 0, 0, 0.7) 100%
   );
 }
+.swiper-wrapper {
+  height: auto !important;
+}
 .slider-content:hover {
   background: rgb(0, 0, 0);
   background: linear-gradient(

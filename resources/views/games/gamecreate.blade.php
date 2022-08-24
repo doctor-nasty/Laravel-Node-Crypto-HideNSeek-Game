@@ -77,15 +77,15 @@
                         <br>
                         <form method="post" action="{{ route('games.store') }}" enctype="multipart/form-data" id="game-form">
                             {{csrf_field()}}
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="userName">@lang('gamecreate.title') *</label>
                                 <input id="userName" name="title" value="{{ old('title') }}" type="text" class="required form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="confirm">@lang('gamecreate.comment') *</label>
                                 <input id="confirm" name="comment" value="{{ old('comment') }}" type="text" class="required form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="points">@lang('gamecreate.points') *</label>
                                 <select id="points" name="points" type="text" class="required form-control">
                                     <option disabled selected></option>
@@ -94,7 +94,7 @@
                                 </select>
                                 <small>@lang('gamecreate.points_text')</small>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="players">Players *</label>
                                 <select id="players" name="players" type="text" class="required form-control">
                                     <option disabled selected></option>
@@ -104,29 +104,29 @@
                                 </select>
                                 <small>How many players should join for a game to start</small>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="full_comment">@lang('gamecreate.full_description') *</label>
                                 <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
                             </div>
                             
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="country">Country *</label>
                                 <input readonly id="country" name="country" value="{{ old('country') }}" type="text" class="required form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="city">City *</label>
                                 <input readonly id="city" name="city" value="{{ old('city') }}" type="text" class="required form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group map-input-block">
                                 <label for="district">District *</label>
                                 <input readonly id="district" name="district" value="{{ old('district') }}" type="text" class="required form-control">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group map-input-hidden">
                                 <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span>
                                 <input required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
                                 <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                                 <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">        
-                                </div>
+                            </div>
                             <!-- <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">@lang('gamecreate.upload_image') *</h4>

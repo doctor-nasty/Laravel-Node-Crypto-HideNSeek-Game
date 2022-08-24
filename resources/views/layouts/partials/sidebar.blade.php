@@ -36,14 +36,14 @@
           <div class="sidebar-item-title">Delegations</div>
         </a>
       </div>
-      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('documentation') ? 'active' : '' }}">
+      <!-- <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('documentation') ? 'active' : '' }}">
         <a href="{{ url('/documentation') }}">
           <div class="sidebar-item-icon-box">
             <img src="{{ asset('svgs/file-text.svg') }}" alt="">
           </div>
           <div class="sidebar-item-title">Documentation</div>
         </a>
-      </div>
+      </div> -->
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('settings') ? 'active' : '' }}">
         <a href="{{ url('/settings') }}">
           <div class="sidebar-item-icon-box">

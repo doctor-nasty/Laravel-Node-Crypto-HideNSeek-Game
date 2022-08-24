@@ -486,12 +486,29 @@
   background-color: #111214 !important;
   border-radius: 4px;
 }
+.map-input-hidden {
+  display: flex;
+}
+.map-input-hidden input {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  background-color: #111214 !important;
+  border-radius: 4px;
+  flex: 1;
+}
+.map-input-hidden span {
+  color: white;
+}
 .change-content-btn .btn-change:hover {
   opacity: 1;
   text-decoration: none;
 }
 .map-input-block span {
   color: white;
+}
+.map-input-block .error {
+  margin-bottom: 0;
+  margin-top: 5px;
 }
 .create-game {
   width: 100px;
@@ -574,6 +591,9 @@
   -webkit-align-items: center;
   align-items: center;
 }
+.swiper-wrapper {
+  height: auto !important;
+}
 .slider-content {
   position: absolute;
   width: 100%;
@@ -632,12 +652,12 @@
 }
 .slider-button-delegate {
   height: 43px;
-  width: 100px;
   border-radius: 8px;
   background-color: #0a63ea;
   border: 1px solid #0a63ea;
   color: white;
   cursor: pointer;
+  padding: 0 10px;
 }
 .swiper-slide img {
   display: block;
@@ -656,6 +676,9 @@
   height: 40px;
   border-radius: 50%;
   background: #0a63ea;
+}
+.table-modal .modal-header {
+  border-bottom: 0;
 }
 /* media 992 */
 @media (max-width: 1300px) {
