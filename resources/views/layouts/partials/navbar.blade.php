@@ -53,7 +53,7 @@
         </li>
         <li>
           <a href="{{ url('/delegations') }}" class="dropdown-link">
-            <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="shopping-bag">
+            <img src="{{ asset('svgs/file-text.svg') }}" alt="file text">
             Delegations
           </a>
         </li>
