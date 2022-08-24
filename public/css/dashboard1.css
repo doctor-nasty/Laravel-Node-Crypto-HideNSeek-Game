@@ -689,6 +689,22 @@
   font-size: 22px;
   color: white;
 }
+.duration-label button {
+  height: 40px;
+  background: #0a63ea;
+  border-radius: 8px;
+  background-color: #0a63ea;
+  border: 1px solid #0a63ea;
+  color: white;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.duration-label input {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  background-color: #111214 !important;
+  border-radius: 4px;
+}
 /* media 992 */
 @media (max-width: 1300px) {
   .swiper-slide {
@@ -835,4 +851,14 @@
 }
 #confirmation-modal {
   pointer-events: none;
+}
+.modal-costum-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.blockquote-table {
+  border: 0 !important;
+  padding: 0 !important;
 }

@@ -17,45 +17,48 @@
     </ul>
 </div>
 @endif
-<h4 class="card-title">{{ $game->title }}</h4>
-<button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
+<div>
+    <h4 class="card-title">{{ $game->title }}</h4>
+    <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
+</div>
 <div class="tab-content tab-content-solid">
+    <div class="card-body">
+        <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
 
-    <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
-
-        <td>{{ $game->points }} USDC required to join this game.</td>
-        <td>
-            <form method="post" action="{{route('bid', ['game_id' => $game->id])}}" enctype="multipart/form-data" id="form_join">
-            {{csrf_field()}}
-            <input type="hidden" class="required form-control" id="usdt_addr" value="{{ config('web3.chain.token') }}">
-            <input type="hidden" class="required form-control" id="deposit_addr" value="{{ config('web3.wallet.address') }}">
-            <input type="hidden" class="required form-control" id="points" name="points" value="{{ $game->points }}">
-            <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
-            <br>
-            <br>
-            <!-- <a href="{{route('bid', ['game_id' => $game->id])}}" id="join_game"> -->
-                <button class="btn btn-inverse-success" id="join_game">
-                    @lang('gamedetail.start_playing')
-                </button>
-            <!-- </a> -->
-            </form>
-            <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content terms-modal">
-                        <div class="terms-modal-text">
-                            {{-- <h4>Wait for confirmation</h4> --}}
-                            <div class="form group">
-                                <label id="tx_status"></label>
+            <td>{{ $game->points }} USDC required to join this game.</td>
+            <td>
+                <form method="post" action="{{route('bid', ['game_id' => $game->id])}}" enctype="multipart/form-data" id="form_join">
+                {{csrf_field()}}
+                <input type="hidden" class="required form-control" id="usdt_addr" value="{{ config('web3.chain.token') }}">
+                <input type="hidden" class="required form-control" id="deposit_addr" value="{{ config('web3.wallet.address') }}">
+                <input type="hidden" class="required form-control" id="points" name="points" value="{{ $game->points }}">
+                <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
+                <br>
+                <br>
+                <!-- <a href="{{route('bid', ['game_id' => $game->id])}}" id="join_game"> -->
+                    <button class="btn btn-inverse-success" id="join_game">
+                        @lang('gamedetail.start_playing')
+                    </button>
+                <!-- </a> -->
+                </form>
+                <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content terms-modal">
+                            <div class="terms-modal-text">
+                                {{-- <h4>Wait for confirmation</h4> --}}
+                                <div class="form group">
+                                    <label id="tx_status"></label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="wait-block">
-                            <div class="wait-spin">
+                            <div class="wait-block">
+                                <div class="wait-spin">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </td>
+            </td>
+        </div>
     </div>
 </div>
 
