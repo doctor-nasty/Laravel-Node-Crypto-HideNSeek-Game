@@ -17,10 +17,13 @@
     </ul>
 </div>
 @endif
-<h4 class="card-title">{{ $game->title }}</h4>
-<button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ $game->title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 <div class="tab-content tab-content-solid">
-
     <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
         @if($game->user_id === auth()->user()->id)
         <div class="card-body">

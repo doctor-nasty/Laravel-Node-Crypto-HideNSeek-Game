@@ -15,7 +15,7 @@
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('games') ? 'active' : '' }}">
         <a href="{{ url('/games') }}">
           <div class="sidebar-item-icon-box">
-            <img src="{{ asset('svgs/game-controller.svg') }}" alt="">
+            <img src="{{ asset('svgs/game-controller.svg') }}" alt="game-controller">
           </div>
           <div class="sidebar-item-title">Games</div>
         </a>
@@ -23,7 +23,7 @@
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('my_bids') ? 'active' : '' }}">
         <a href="{{ url('/my_bids') }}">
           <div class="sidebar-item-icon-box">
-            <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="">
+            <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="shopping-bag">
           </div>
           <div class="sidebar-item-title">My Bids</div>
         </a>
@@ -31,23 +31,23 @@
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('delegations') ? 'active' : '' }}">
         <a href="{{ url('/delegations') }}">
           <div class="sidebar-item-icon-box">
-              <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="">
+              <img src="{{ asset('svgs/file-text.svg') }}" alt="file icon">
           </div>
           <div class="sidebar-item-title">Delegations</div>
         </a>
       </div>
-      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('documentation') ? 'active' : '' }}">
+      <!-- <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('documentation') ? 'active' : '' }}">
         <a href="{{ url('/documentation') }}">
           <div class="sidebar-item-icon-box">
             <img src="{{ asset('svgs/file-text.svg') }}" alt="">
           </div>
           <div class="sidebar-item-title">Documentation</div>
         </a>
-      </div>
+      </div> -->
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('settings') ? 'active' : '' }}">
         <a href="{{ url('/settings') }}">
           <div class="sidebar-item-icon-box">
-            <img src="{{ asset('svgs/file-text.svg') }}" alt="">
+            <img src="{{ asset('svgs/setting.svg') }}" alt="Settings icon">
           </div>
           <div class="sidebar-item-title">Settings</div>
         </a>
@@ -55,7 +55,7 @@
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('logout') ? 'active' : '' }}">
         <a href="{{ url('/logout') }}">
           <div class="sidebar-item-icon-box">
-            <img src="{{ asset('svgs/logout.svg') }}" alt="">
+            <img src="{{ asset('svgs/log-out.svg') }}" alt="logout icon">
           </div>
           <div class="sidebar-item-title">Log Out</div>
         </a>

@@ -129,7 +129,7 @@
             slidesPerView: 1,
             spaceBetween: 10,
           },
-          "@1.00": {
+          "@1.10": {
             slidesPerView: 2,
             spaceBetween: 20,
           },
