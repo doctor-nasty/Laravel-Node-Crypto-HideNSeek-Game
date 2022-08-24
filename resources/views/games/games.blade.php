@@ -71,7 +71,7 @@
                                             <div class="data-table-buttons-wrapper"><button type="button"
                                                     class="btn btn-info details-button" title="Details"
                                                     data-id="{{ $game->id }}" data-toggle="modal"
-                                                    data-target="#myModal">Join</button></div>
+                                                    data-target="#gamesModal">Join</button></div>
                                         </td>
                                     @endif
                                 </tr>
@@ -84,16 +84,13 @@
         </div>
     </div>
 
-    <div id="myModal" id="darkModalForm" class="modal fade" role="dialog">
+    <div id="gamesModal" id="darkModalForm" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
             <div class="modal-content">
-                <!--                        <div class="modal-header">
-                                <h4 class="modal-title">Details</h4>
-                                <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>-->
-                <div id="modal-body" class="modal-body">
+
+                <div id="getGamesBody" class="modal-body">
 
                 </div>
             </div>
@@ -109,6 +106,19 @@
                     }
                 }
             },
+            searchPanes: {
+          "viewTotal": true
+    },
+
+            columnDefs:[
+                {
+                    searchPanes:{
+                        show:true,
+                        threshold: 1
+                    },
+                    targets: [1, 2, 3],
+                }
+            ],
             dom: 'Plfrtip',
             responsive: true,
             language: {
@@ -175,31 +185,24 @@
                     data: 'status',
                     render: function(data, type, row) {
                         return '<div class="data-table-buttons-wrapper"><button type="button" class="btn btn-info details-button" title="Details" data-id="' +
-                            row['id'] + '" data-toggle="modal" data-target="#myModal">Play</button></div>';
+                            row['id'] + '" data-toggle="modal" data-target="#gamesModal">Play</button></div>';
                     }
                 }
             @endif
-            //                {
-            //                    title: 'Actions',
-            //                    defaultContent: '<div class="data-table-buttons-wrapper">' +
-            //                                        '<button type="button" class="btn btn-info details-button" title="Details">View</button> ' +
-            //                                    '</div>'
-            //                }
         ], undefined, [], false);
-        //            detailsButton('{{ url('games/{id}') }}');
 
         $(document).ready(function() {
-            $('#myModal').on('show.bs.modal', function(e) {
+            $('#gamesModal').on('show.bs.modal', function(e) {
                 var rowid = $(e.relatedTarget).attr('data-id');
                 $.ajax({
                     type: 'post',
-                    url: 'getGameModalHtml', //Here you will fetch records
+                    url: 'getGames', //Here you will fetch records
                     data: {
                         "_token": "{{ csrf_token() }}",
                         'id': rowid
                     }, //Pass $id
                     success: function(data) {
-                        $('#modal-body').html(data); //Show fetched data from database
+                        $('#getGamesBody').html(data); //Show fetched data from database
                     }
                 });
             });

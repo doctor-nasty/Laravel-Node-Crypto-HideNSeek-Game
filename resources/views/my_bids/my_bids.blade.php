@@ -131,7 +131,7 @@ $(document).ready(function(){
         var rowid = $(e.relatedTarget).attr('data-id');
         $.ajax({
             type : 'post',
-            url : 'getGameModalHtml', //Here you will fetch records
+            url : 'getMyBids', //Here you will fetch records
             data :  {"_token": "{{ csrf_token() }}", 'id': rowid}, //Pass $id
             success : function(data){
             $('#modal-body').html(data);//Show fetched data from database
