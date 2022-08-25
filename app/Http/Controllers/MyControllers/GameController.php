@@ -27,19 +27,19 @@ class GameController extends Controller {
     }
 
     public function index() {
-
-            $games = DB::table('games')
-            ->leftJoin('game_bids', 'games.id', '!=', 'game_bids.game_id')
-            ->leftJoin('users', 'game_bids.user_id', '!=', 'users.id')
-            ->select('games.id', 'games.status', 'games.title', 'games.country', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
-                        ->where('games.user_id', '!=', Auth::user()->id)
-                        ->where('games.status', '=', '1')
-                        ->where('game_bids.user_id', '!=', 'users.id')
-                        ->get();
+        $games = DB::table('games')
+            ->select('id', 'status', 'title', 'country', 'city', 'district', 'type', 'comment', 'points', 'created_at', 'photo')
+            ->whereNotExists(function($query) {
+                $query->select(DB::raw(1))->from('game_bids')
+                    ->whereRaw('game_bids.game_id = games.id')->where('game_bids.user_id', Auth::user()->id);
+            })
+            ->where('games.status', '=', '1')
+            ->where('games.user_id', '<>', Auth::user()->id)
+            ->get();
 
         return view('games.games')
-        ->with('title', 'Games')
-        ->with('games', $games);
+            ->with('title', 'Games')
+            ->with('games', $games);
     }
 
     // public function index(Request $request)
@@ -213,6 +213,8 @@ class GameController extends Controller {
             'mark_lat' => 'required',
             'mark_long' => 'required',
             'players' => 'required',
+            'osm_id' => 'required',
+            'place_id' => 'required',
             // 'district' => 'required',
             'comment' => 'required',
             'full_comment' => 'required',
@@ -235,6 +237,8 @@ class GameController extends Controller {
                 'players' => $request->get('players'),
                 // 'district' => $request->get('district'),
                 'district' => $request->get('district'),
+                'osm_id' => $request->get('osm_id'),
+                'place_id' => $request->get('place_id'),
                 'comment' => $request->get('comment'),
                 'full_comment' => $request->get('full_comment'),
                 // 'photo' => $request->get('photo'),

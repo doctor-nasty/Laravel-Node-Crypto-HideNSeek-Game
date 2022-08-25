@@ -11,7 +11,7 @@ class Game_bid extends Model
     use Notifiable;
 
     public $table = 'game_bids';
-    protected $fillable = ['id', 'game_id', 'user_id', 'is_awarded'];
+    protected $fillable = ['id', 'game_id', 'user_id', 'is_awarded', 'num_failure'];
 
 
 //    public function searchableAs()
