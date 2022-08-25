@@ -18,6 +18,7 @@ class CreateGameBidsTable extends Migration
             $table->string('user_id', 255)->nullable();
             $table->string('game_id', 255)->nullable();
             $table->string('is_awarded', 255)->nullable();
+            $table->integer('num_failure')->default(0);
             $table->timestamps();
         });
     }

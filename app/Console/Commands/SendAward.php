@@ -36,10 +36,13 @@ class SendAward extends Command
 
         $nonce = $web3_helper->getNonce(config('web3.wallet.address'));
 
+        $txHash = null;
+
         foreach ($awards as $award) {
             Log::info("Sending {$award->award_type} to {$award->address} - amount: {$award->amount}USDC");
             $txHash = $web3_helper->sendTokenToUser($award->address, $award->amount, $nonce);
             $award->status = 1;
+            $award->tx_hash = $txHash;
             $award->save();
             $nonce = $nonce->add(new BigInteger(1));
         }

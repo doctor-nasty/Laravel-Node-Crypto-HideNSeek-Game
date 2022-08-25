@@ -26,6 +26,8 @@ class CreateGamesTable extends Migration
             $table->string('mark_lat', 255)->nullable();
             $table->string('mark_long', 255)->nullable();
             $table->string('district', 255)->nullable();
+            $table->string('osm_id');
+            $table->string('place_id');
             $table->string('points', 255);
             $table->string('winner_user_id', 255)->nullable();
             $table->text('full_comment')->nullable();

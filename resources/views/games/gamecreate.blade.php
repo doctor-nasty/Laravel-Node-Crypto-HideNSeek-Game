@@ -126,6 +126,8 @@
                                 <input required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
                                 <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                                 <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">        
+                                <input type="hidden" class="required form-control" id="osm_id" name="osm_id" value="">
+                                <input type="hidden" class="required form-control" id="place_id" name="place_id" value="">
                             </div>
                             <!-- <div class="card">
                                 <div class="card-body">
@@ -173,20 +175,22 @@
                         </div>
                         <!-- modal waiting -->
                         <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content terms-modal">
-                                    <div class="terms-modal-text">
-                                        {{-- <h4>Wait for confirmation</h4> --}}
-                                        <div class="form group">
-                                            <label id="tx_status"></label>
+                            <div class="modal-costum-body">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content terms-modal">
+                                        <div class="terms-modal-text">
+                                            {{-- <h4>Wait for confirmation</h4> --}}
+                                            <div class="form group">
+                                                <label id="tx_status"></label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="wait-block">
-                                        <div class="wait-spin">
+                                        <div class="wait-block">
+                                            <div class="wait-spin">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>    
                         </div>
                         <!-- midal success -->
                         <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -228,84 +232,91 @@
 
 var map = L.map('map').setView([42.3154, 43.3569], 3);
 
-var circle = null;
-
-map.on('click', function (e) {
-    if (circle !== null) {
-        map.removeLayer(circle);
-    }
-    circle = L.circle(e.latlng,{
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-}).addTo(map);
-var ll = circle.getLatLng();
-document.querySelector('#mark_lat').value = ll.lat;
-document.querySelector('#mark_long').value = ll.lng;
-
-});
-
-
-
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
 }).addTo(map);
-</script>
+
+function isEmpty(value) {//Function to check if value is Empty or Null
+    switch (typeof(value)) {
+        case "string": return (value.length === 0);
+        case "number":
+        case "boolean": return false;
+        case "undefined": return true;
+        case "object": return !value ? true : false; // handling for null.
+        default: return !value ? true : false
+    }
+}
 
 
-<script>
-    function isEmpty(value) {//Function to check if value is Empty or Null
-              switch (typeof(value)) {
-                case "string": return (value.length === 0);
-                case "number":
-                case "boolean": return false;
-                case "undefined": return true;
-                case "object": return !value ? true : false; // handling for null.
-                default: return !value ? true : false
-              }
-            }
-
+var poly = null;
 
 
 map.on('click', function (e) {
+    let addressTypes = ["shop", "amenity", "leisure"];
+
+    // clear address values
     $("#city").val('');
     $("#district").val('');
     $("#country").val('');
-$.ajax({
-type: "POST",
-contentType: "application/json; charset=utf-8",
-url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat=" + $('#mark_lat').val() + "&lon=" + $('#mark_long').val(),
-dataType: "json",
-success: function (data) {
-    if (data.address.city == null)
-    {
-    $('#city').val(data.address.county);
-    }
-    else if (data.address.city != null)
-        {
-    $('#city').val(data.address.city);
-        }
-    if (data.address.suburb == null)
-        {
-    $('#district').val(data.address.road);
-        }
-    else if (data.address.suburb != null)
-        {
-    $('#district').val(data.address.suburb);
-        }
-    
-    $('#country').val(data.address.country);
-    $("#country-error").remove();
 
-},
-error: function (result) {
-    alert("Can't get location data!");
-}
-})
+    // get latitude and longitude
+    document.querySelector('#mark_lat').value = e.latlng.lat;
+    document.querySelector('#mark_long').value = e.latlng.lng;
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "https://nominatim.openstreetmap.org/reverse?format=jsonv2&accept-language=en-US&lat=" 
+            + $('#mark_lat').val() + "&lon=" + $('#mark_long').val(),
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+
+            if (addressTypes.includes(data.addresstype) === false) {
+                return ; // invalid address types
+            }
+
+            // display bounding box
+            if (poly !== null) {
+                map.removeLayer(poly);
+                poly = null;
+            }
+            let points = [
+                L.latLng(data.boundingbox[0], data.boundingbox[2]),
+                L.latLng(data.boundingbox[1], data.boundingbox[2]),
+                L.latLng(data.boundingbox[1], data.boundingbox[3]),
+                L.latLng(data.boundingbox[0], data.boundingbox[3]),
+            ];
+            poly = L.polygon(points,{
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+            }).addTo(map);
+
+            // parse city and disctrict info
+            if (data.address.city == null) {
+                $('#city').val(data.address.county);
+            } else if (data.address.city != null) {
+                $('#city').val(data.address.city);
+            }
+
+            if (data.address.suburb == null) {
+                $('#district').val(data.address.road);
+            } else if (data.address.suburb != null) {
+                $('#district').val(data.address.suburb);
+            }
+            
+            $('#country').val(data.address.country);
+            $('#osm_id').val(data.osm_id);
+            $('#place_id').val(data.place_id);
+            $("#country-error").remove();
+        },
+        error: function (result) {
+            alert("Can't get location data!");
+        }
+    })
 });
-    </script>
+</script>
 <script>
 $("#game-form").validate({
     rules: {
