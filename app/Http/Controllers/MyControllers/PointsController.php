@@ -195,11 +195,15 @@ class PointsController extends Controller {
         $bid = Game_bid::where(['user_id' => Auth::user()->id, 'game_id' => $request->game_id])
                 ->get()
                 ->first();
+        
+        if ($bid->num_failure >= 5) {
+            return redirect('/my_bids')->with('error', 'Sorry, you failed 5 times already. Cannot play anymore!');
+        }
 
         $bids = Game_bid::where('game_id', $request->game_id)
                 ->get()
                 ->toArray();
-
+        
         if (!empty($game)) {
             if ($request->osm_id == $game->osm_id && $request->place_id == $game->place_id) {
                 $gameAuthor = User::where('id', $game->user_id)->get()->first();
@@ -258,8 +262,10 @@ class PointsController extends Controller {
 
                 return redirect('games')->with('success', 'You have won the game!');
             } else {
+                $bid->num_failure += 1;
+                $bid->save();
 //                return redirect('games/' . $request->game_id)->with('error', 'Sorry, Your answer code is incorrect!');
-                return redirect('my_bids')->with('error', 'Sorry, Your answer code is incorrect!');
+                return redirect('my_bids')->with('error', 'Sorry, Your answer code is incorrect! ' . $bid->num_failure);
             }
         } else {
             return redirect('games')->with('error', 'Game not found!');

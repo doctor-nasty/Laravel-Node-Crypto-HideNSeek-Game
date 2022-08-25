@@ -34,6 +34,7 @@ class GameController extends Controller {
                     ->whereRaw('game_bids.game_id = games.id')->where('game_bids.user_id', Auth::user()->id);
             })
             ->where('games.status', '=', '1')
+            ->where('games.user_id', '<>', Auth::user()->id)
             ->get();
 
         return view('games.games')

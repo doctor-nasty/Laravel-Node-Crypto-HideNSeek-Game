@@ -250,9 +250,11 @@ function isEmpty(value) {//Function to check if value is Empty or Null
 
 
 var poly = null;
-const addressTypes = ["shop", "amenity", "leisure"];
+
 
 map.on('click', function (e) {
+    let addressTypes = ["shop", "amenity", "leisure"];
+
     // clear address values
     $("#city").val('');
     $("#district").val('');

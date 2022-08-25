@@ -60,10 +60,10 @@ setInterval(function () {
    map.invalidateSize();
 }, 100);
 
-let addressTypes = ["shop", "amenity", "leisure"];
 var poly = null;
 
 map.on('click', function (e) {
+    let addressTypes = ["shop", "amenity", "leisure"];
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
