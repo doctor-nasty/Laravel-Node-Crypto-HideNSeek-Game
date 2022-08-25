@@ -201,7 +201,7 @@ class PointsController extends Controller {
                 ->toArray();
 
         if (!empty($game)) {
-            if ($request->answer == $game->identifier) {
+            if ($request->osm_id == $game->osm_id && $request->place_id == $game->place_id) {
                 $gameAuthor = User::where('id', $game->user_id)->get()->first();
 
                 $game->status = 2;
