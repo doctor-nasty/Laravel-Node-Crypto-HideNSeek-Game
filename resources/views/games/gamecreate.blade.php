@@ -127,6 +127,7 @@
                                 <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                                 <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">        
                                 <input type="hidden" class="required form-control" id="osm_id" name="osm_id" value="">
+                                <input type="hidden" class="required form-control" id="place_id" name="place_id" value="">
                             </div>
                             <!-- <div class="card">
                                 <div class="card-body">
@@ -305,6 +306,7 @@ map.on('click', function (e) {
             
             $('#country').val(data.address.country);
             $('#osm_id').val(data.osm_id);
+            $('#place_id').val(data.place_id);
             $("#country-error").remove();
         },
         error: function (result) {
