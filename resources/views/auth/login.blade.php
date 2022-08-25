@@ -269,7 +269,7 @@
                       <div class="nft-examples-block">
                         <img src="{{ asset('images/nft-esample.png')}}" alt="Nft Example">
                       </div>
-                      <a href="https://opensea.io/collection/hidenseek-games">
+                      <a href="https://opensea.io/collection/hidenseek-games" target="_blank">
                       <button class="about-us-button">
                         Explore the NFT Collection
                         <img src="{{ asset('svgs/arrow-right-circle.svg')}}" alt="button-arrow">
