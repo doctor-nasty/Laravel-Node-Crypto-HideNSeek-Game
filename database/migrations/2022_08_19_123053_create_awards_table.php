@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('amount');
             $table->string('award_type');
             $table->integer('status')->default(0);
+            $table->string('tx_hash')->nullable();
             $table->timestamps();
         });
     }

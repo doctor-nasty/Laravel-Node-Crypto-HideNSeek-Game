@@ -10,6 +10,6 @@ class Award extends Model
     use HasFactory;
 
     protected $fillable = [
-        'address', 'amount', 'award_type', 'status'
+        'address', 'amount', 'award_type', 'status', 'tx_hash'
     ];
 }
