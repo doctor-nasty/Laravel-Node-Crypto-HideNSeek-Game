@@ -27,19 +27,18 @@ class GameController extends Controller {
     }
 
     public function index() {
-
-            $games = DB::table('games')
-            ->leftJoin('game_bids', 'games.id', '!=', 'game_bids.game_id')
-            ->leftJoin('users', 'game_bids.user_id', '!=', 'users.id')
-            ->select('games.id', 'games.status', 'games.title', 'games.country', 'games.city', 'games.district', 'games.type', 'games.comment', 'games.points', 'games.created_at', 'games.photo')
-                        ->where('games.user_id', '!=', Auth::user()->id)
-                        ->where('games.status', '=', '1')
-                        ->where('game_bids.user_id', '!=', 'users.id')
-                        ->get();
+        $games = DB::table('games')
+            ->select('id', 'status', 'title', 'country', 'city', 'district', 'type', 'comment', 'points', 'created_at', 'photo')
+            ->whereNotExists(function($query) {
+                $query->select(DB::raw(1))->from('game_bids')
+                    ->whereRaw('game_bids.game_id = games.id')->where('game_bids.user_id', Auth::user()->id);
+            })
+            ->where('games.status', '=', '1')
+            ->get();
 
         return view('games.games')
-        ->with('title', 'Games')
-        ->with('games', $games);
+            ->with('title', 'Games')
+            ->with('games', $games);
     }
 
     // public function index(Request $request)
