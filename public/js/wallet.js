@@ -401,9 +401,9 @@ async function borrow(tokenId, duration) {
 
   const owner = await nft.ownerOf(tokenId);
   const decimals = await usdt.decimals();
-  const unit = ethers.BigNumber.from(10).pow(decimals);
+  const unit = ethers.BigNumber.from(10).pow(decimals - 1);
   console.log(unit);
-  const cost = ethers.BigNumber.from(duration * 0.5).mul(unit);
+  const cost = ethers.BigNumber.from(duration * 5).mul(unit);
 
   console.log(owner, decimals, cost);
 
