@@ -26,7 +26,7 @@
 <div class="tab-content tab-content-solid">
     <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
         @if($game->user_id === auth()->user()->id)
-        <div class="body">
+        <div class="card-body">
             <span>Players: {{count($game->bids)}}
             </span>
         </div>
