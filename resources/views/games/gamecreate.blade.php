@@ -99,7 +99,7 @@
                             <div class="form-group map-input-block">
                                 <label for="full_comment">Hints *</label>
                                 <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
-                                <small>Please a hints, explain how players should find your hidden location.</small>
+                                <small>Write a hints, explain how players should find your hidden location.</small>
                             </div>
                             <br>
                             <div class="col-md-12" id="map"></div>
