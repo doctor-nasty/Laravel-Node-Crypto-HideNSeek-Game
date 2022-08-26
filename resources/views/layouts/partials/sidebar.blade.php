@@ -12,6 +12,14 @@
           <div class="sidebar-item-title">Dashboard</div>
         </a>
       </div>
+      <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('/myitems') ? 'active' : '' }}" id="">
+        <a href="{{ url('/myitems') }}">
+          <div class="sidebar-item-icon-box">
+            <img src="{{ asset('svgs/add.svg') }}" alt="home icon">
+          </div>
+          <div class="sidebar-item-title">My Items</div>
+        </a>
+      </div>
       @if (session('can_play'))
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('games') ? 'active' : '' }}">
         <a href="{{ url('/games') }}">

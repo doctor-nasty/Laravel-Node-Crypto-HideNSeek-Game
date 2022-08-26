@@ -70,6 +70,39 @@ class PagesController extends Controller
         ->with('title', Lang::trans('title.contact'));
     }
 
+    public function myitems()
+    {
+        $web3_helper = new \App\Lib\Web3Helper();
+        
+        $tokens = TokenInfo::where('owner', Auth::user()->wallet_address)
+                            ->orWhere([
+                                ['borrower', Auth::user()->wallet_address],
+                                ['status', 2],
+                                //['expiresAt', '>', now()]
+                            ])->get();
+
+        $nft_name = [];
+        $nft_image = [];
+        foreach ($tokens as $index => $token) {
+            $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$token->token_id;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $result= curl_exec ($ch);
+            curl_close ($ch);
+            $j=json_decode($result, true);
+            $nft_name[$index] = $j['name'];
+            $nft_image[$index] = $j['image'];
+        };
+
+        return view('pages.myitems', compact('nft_name', 'nft_image', 'tokens'))
+        ->with('title', 'My Items');
+    }
+
     public function requests()
     {
         return view('pages.requests')

@@ -83,37 +83,7 @@
                 </div>
             </div>
         </div>
-        <div class="content-wrapper section-block table-size">
-            <div class="change-content-btn">
-                <div class="active" aria-current="page">
-                    <span class="btn-change">My Items</span>
-                </div>
-            </div>
-    
-            <div class="card">
-                <div class="card-body">
-                    <div class="dashboard-slider">
-                        <div class="swiper mySwiper">
-                            <div class="swiper-wrapper">
-                                @foreach ($tokens as $index => $token)
-                                    <div class="swiper-slide">
-                                        <img class="img-fluid" src="{{ $nft_image[$index] }}"></img>
-                                        <div class="slider-content">
-                                            <div class="slider-text">
-                                                <h4>{{ $nft_name[$index] }}</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                    </div>
-    
-                </div>
-            </div>
-        </div>
+        @if (session('can_create'))
         <div class="content-wrapper section-block table-size">
             <div class="change-content-btn">
                 <div class="active" aria-current="page">
@@ -164,6 +134,8 @@
                 </div>
             </div>
         </div>
+        @endif
+        @if (session('can_play'))
         <div class="content-wrapper section-block table-size">
             <div class="change-content-btn">
                 <div class="active" aria-current="page">
@@ -216,6 +188,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
     </div>
     <div>
@@ -247,28 +220,6 @@
 
     </div>
     <script>
-        var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-         breakpoints: {
-          "@0.00": {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          "@1.10": {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          "@1.50": {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
-        },
-      });
         var dt = $('#gamesbidded').DataTable({
             responsive: true,
             paging: false,
