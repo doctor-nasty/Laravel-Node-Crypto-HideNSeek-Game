@@ -31,6 +31,9 @@
             <blockquote class="blockquote blockquote-primary blockquote-table">
                 <span>{{ $game->full_comment }}</span>
             </blockquote>
+            <span>You have 5 tries to find correct location</span>
+            <br>
+            <br>
 
             <div class="col-md-12" id="map"></div>
             <br>
@@ -39,7 +42,7 @@
                 {{csrf_field()}}
                 <input name="game_id" type="hidden" value="{{$game->id}}" />
                 <label>After selecting location on the map press submit button</label>
-                <input name="answer" type="text" type="hidden" class="form-group form-control"/>
+                <input name="answer" type="hidden" class="form-group form-control"/>
                 <input name="osm_id" id="osm_id" type="hidden" required />
                 <input name="place_id" id="place_id" type="hidden" required />
                 <button class="btn btn-inverse-success" type="submit">Submit</button>
