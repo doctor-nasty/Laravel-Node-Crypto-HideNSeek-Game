@@ -39,12 +39,14 @@
             Dashboard
           </a>
         </li>
+        @if (session('can_play'))
         <li>
           <a href="{{ url('/games') }}" class="dropdown-link">
             <img src="{{ asset('svgs/game-controller.svg') }}" alt="">
             Games
           </a>
         </li>
+        @endif
         <li>
           <a href="{{ url('/my_bids') }}" class="dropdown-link">
             <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="shopping-bag">
