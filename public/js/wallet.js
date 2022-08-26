@@ -374,6 +374,7 @@ async function removeBorrowing(tokenId) {
 }
 
 async function borrow(tokenId, duration) {
+  confirmationModal();
   // check Pirate token ownership
   const provider = await getProvider();
 
