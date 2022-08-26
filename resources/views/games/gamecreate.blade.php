@@ -78,14 +78,6 @@
                         <form method="post" action="{{ route('games.store') }}" enctype="multipart/form-data" id="game-form">
                             {{csrf_field()}}
                             <div class="form-group map-input-block">
-                                <label for="userName">@lang('gamecreate.title') *</label>
-                                <input id="userName" name="title" value="{{ old('title') }}" type="text" class="required form-control">
-                            </div>
-                            <div class="form-group map-input-block">
-                                <label for="confirm">@lang('gamecreate.comment') *</label>
-                                <input id="confirm" name="comment" value="{{ old('comment') }}" type="text" class="required form-control">
-                            </div>
-                            <div class="form-group map-input-block">
                                 <label for="points">@lang('gamecreate.points') *</label>
                                 <select id="points" name="points" type="text" class="required form-control">
                                     <option disabled selected></option>
@@ -102,13 +94,16 @@
                                     <option>20</option>
                                     <option>50</option>
                                 </select>
-                                <small>How many players should join for a game to start</small>
+                                <small>How many players should join for a game to start.</small>
                             </div>
                             <div class="form-group map-input-block">
-                                <label for="full_comment">@lang('gamecreate.full_description') *</label>
+                                <label for="full_comment">Hints *</label>
                                 <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
+                                <small>Please a hints, explain how players should find your hidden location.</small>
                             </div>
-                            
+                            <br>
+                            <div class="col-md-12" id="map"></div>
+                            <br>
                             <div class="form-group map-input-block">
                                 <label for="country">Country *</label>
                                 <input readonly id="country" name="country" value="{{ old('country') }}" type="text" class="required form-control">
@@ -143,12 +138,7 @@
                         <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">
                         <input type="hidden" class="required form-control" id="deposit_addr" value="{{ config('web3.wallet.address') }}">
                         <input type="hidden" class="required form-control" id="usdt_addr" value="{{ config('web3.chain.token') }}">
-                        <br>
 
-                        <br>
-                        <div class="col-md-12" id="map"></div>
-                        <br>
-                        <br>
                         <!-- <button type="submit" id="create_game" class="btn btn-inverse-primary" data-toggle="modal" data-target="#terms-modal"> -->
                         <button type="submit" class="btn btn-inverse-primary create-game">
                             @lang('gamecreate.submit')
@@ -320,12 +310,6 @@ map.on('click', function (e) {
 <script>
 $("#game-form").validate({
     rules: {
-        title: {
-            required: true
-        },
-        comment: {
-            required: true
-        },
         full_comment: {
             required: true
         },
@@ -352,12 +336,6 @@ $("#game-form").validate({
         }
     },
     messages: {
-        title: {
-            required: "Please enter a valid title."
-        },
-        comment: {
-            required: "Please provide a comment."
-        },
         full_comment: {
             required: "Please provide a full comment."
         },

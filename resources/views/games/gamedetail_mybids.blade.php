@@ -31,18 +31,20 @@
             <blockquote class="blockquote blockquote-primary blockquote-table">
                 <span>{{ $game->full_comment }}</span>
             </blockquote>
+
+            <div class="col-md-12" id="map"></div>
+            <br>
+
             <form action="{{route('bid.answer')}}" method="POST">
                 {{csrf_field()}}
                 <input name="game_id" type="hidden" value="{{$game->id}}" />
-                <label>@lang('gamedetail.enter_answer') </label>
-                <input name="answer" type="text" class="form-group form-control"/>
+                <label>After selecting location on the map press submit button</label>
+                <input name="answer" type="text" type="hidden" class="form-group form-control"/>
                 <input name="osm_id" id="osm_id" type="hidden" required />
                 <input name="place_id" id="place_id" type="hidden" required />
                 <button class="btn btn-inverse-success" type="submit">Submit</button>
             </form>
 
-            <br>
-            <div class="col-md-12" id="map"></div>
             @else
             <blockquote class="blockquote blockquote-primary">
                 <span>{{$game->players - count($game->bids)}} more players are required to join before game starts.</span>
