@@ -28,7 +28,7 @@ class GameController extends Controller {
 
     public function index() {
         $games = DB::table('games')
-            ->select('id', 'status', 'title', 'country', 'city', 'district', 'type', 'comment', 'points', 'created_at', 'photo')
+            ->select('id', 'status', 'title', 'country', 'city', 'district', 'type', 'comment', 'points', 'players', 'created_at', 'photo')
             ->whereNotExists(function($query) {
                 $query->select(DB::raw(1))->from('game_bids')
                     ->whereRaw('game_bids.game_id = games.id')->where('game_bids.user_id', Auth::user()->id);
