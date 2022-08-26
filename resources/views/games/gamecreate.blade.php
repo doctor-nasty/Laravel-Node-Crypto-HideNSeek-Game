@@ -220,7 +220,7 @@
 <script>
 // var map = L.map('map').fitWorld();
 
-var map = L.map('map').setView([42.3154, 43.3569], 3);
+var map = L.map('map', {fullscreenControl: true}).setView([42.3154, 43.3569], 3);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
