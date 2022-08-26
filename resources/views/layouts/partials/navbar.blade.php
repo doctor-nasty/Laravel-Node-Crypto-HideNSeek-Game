@@ -47,12 +47,14 @@
           </a>
         </li>
         @endif
+        @if (session('can_play'))
         <li>
           <a href="{{ url('/my_bids') }}" class="dropdown-link">
             <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="shopping-bag">
             My Bids
           </a>
         </li>
+        @endif
         <li>
           <a href="{{ url('/delegations') }}" class="dropdown-link">
             <img src="{{ asset('svgs/file-text.svg') }}" alt="file text">
