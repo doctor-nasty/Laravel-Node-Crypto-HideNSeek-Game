@@ -51,6 +51,7 @@
     <link rel="stylesheet" href="{{ asset('css/login/fontawesome.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/old/all.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/dashboard1.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}" rel="stylesheet" />
 
     <meta property="og:image" content="{{ asset('images/hns.gif') }}">
     <meta property="og:image:type" content="image/gif">
