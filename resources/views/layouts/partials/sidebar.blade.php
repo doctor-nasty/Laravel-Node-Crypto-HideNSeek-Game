@@ -22,6 +22,7 @@
         </a>
       </div>
       @endif
+      @if (session('can_play'))
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('my_bids') ? 'active' : '' }}">
         <a href="{{ url('/my_bids') }}">
           <div class="sidebar-item-icon-box">
@@ -30,6 +31,7 @@
           <div class="sidebar-item-title">My Bids</div>
         </a>
       </div>
+      @endif
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('delegations') ? 'active' : '' }}">
         <a href="{{ url('/delegations') }}">
           <div class="sidebar-item-icon-box">
