@@ -1,9 +1,0 @@
-node_modules
-vendor
-.env
-.gitignore
-public/storage
-composer.json
-.DS_Store
-composer.lock
-resources/views/auth/login.blade.php
