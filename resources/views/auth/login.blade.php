@@ -213,8 +213,7 @@
     				<div class="full-width text-center caption mt-30">
     					<h1><b>@lang('login.boldtitle')</b> @lang('login.firsttext')</h1>
               <!-- <h1>@lang('login.secondtext')</h1> -->
-              <h4 id="demo"></h4>
-              <p>@lang('login.thirdtext')</p>
+              <p>Game Launching Today</p>
               <!-- <div class="sub-date">
                 <div class="data-block">
                   <h5>August 12</h5>
@@ -468,7 +467,7 @@
 
 
 
-        <script>
+        {{-- <script>
 // Set the date we're counting down to
 var countDownDate = new Date("Aug 26, 2022 00:00:00").getTime();
 
@@ -497,7 +496,7 @@ var x = setInterval(function() {
     document.getElementById("demo").innerHTML = "EXPIRED";
   }
 }, 1000);
-</script>
+</script> --}}
         <!-- jQuery -->
         <script src="{{ asset('js/login/jquery-3.0.0.min.js') }}"></script>
         <script src="{{ asset('js/login/jquery-migrate-3.0.0.min.js') }}"></script>
