@@ -53,50 +53,64 @@ class UpdateTokenInfo extends Command
         Log::info("Syncing block # {$lastSyncedBlock} -> {$currentBlock}");
 
         $nft_address = config('web3.chain.nft');
+        $page_key = "";
 
-        $body = "{
-            \"id\":1,
-            \"jsonrpc\":\"2.0\",
-            \"method\":\"alchemy_getAssetTransfers\",
-            \"params\":[
-                {
-                    \"fromBlock\":\"{$lastSyncedBlock}\",
-                    \"toBlock\":\"{$currentBlock}\",
-                    \"contractAddresses\":[\"{$nft_address}\"],
-                    \"category\":[\"erc721\"],
-                    \"withMetadata\":true,
-                    \"maxCount\":\"0x3e8\"
+        while (1) {
+            $page_str = "";
+
+            if ($page_key !== "") $page_str = ",\"pageKey\": \"{$page_key}\"";
+
+            $body = "{
+                \"id\":1,
+                \"jsonrpc\":\"2.0\",
+                \"method\":\"alchemy_getAssetTransfers\",
+                \"params\":[
+                    {
+                        \"fromBlock\":\"{$lastSyncedBlock}\",
+                        \"toBlock\":\"{$currentBlock}\",
+                        \"contractAddresses\":[\"{$nft_address}\"],
+                        \"category\":[\"erc721\"],
+                        \"withMetadata\":true,
+                        \"maxCount\":\"0x3e8\"
+                        {$page_str}
+                    }
+                ]
+            }";
+    
+            $response = $client->request('POST', config('web3.chain.rpc'), [
+                'body' => $body,
+                'headers' => [
+                  'Accept' => 'application/json',
+                  'Content-Type' => 'application/json',
+                ],
+            ]);
+    
+            $result = json_decode($response->getBody())->result;
+    
+            foreach ($result->transfers as $trans) {
+                $id = intval($trans->erc721TokenId, 16);
+                $owner = $trans->to;
+                $timestamp = date("Y-m-d h:i:s", strtotime($trans->metadata->blockTimestamp));
+                
+                $token = TokenInfo::firstOrCreate(
+                    ["token_id" => $id],
+                    ["owner" => $owner]
+                );
+    
+                $token->owner = $owner;
+    
+                if ($token->purchase_time === null && $trans->from != "0x0000000000000000000000000000000000000000") {
+                    $token->purchase_time = $timestamp;
                 }
-            ]
-        }";
-
-        $response = $client->request('POST', config('web3.chain.rpc'), [
-            'body' => $body,
-            'headers' => [
-              'Accept' => 'application/json',
-              'Content-Type' => 'application/json',
-            ],
-        ]);
-
-        $result = json_decode($response->getBody())->result->transfers;
-
-        foreach ($result as $trans) {
-            $id = intval($trans->erc721TokenId, 16);
-            $owner = $trans->to;
-            $timestamp = date("Y-m-d h:i:s", strtotime($trans->metadata->blockTimestamp));
-            
-            $token = TokenInfo::firstOrCreate(
-                ["token_id" => $id],
-                ["owner" => $owner]
-            );
-
-            $token->owner = $owner;
-
-            if ($token->purchase_time === null && $trans->from != "0x0000000000000000000000000000000000000000") {
-                $token->purchase_time = $timestamp;
+    
+                $token->save();
             }
 
-            $token->save();
+            if (property_exists($result, "pageKey") && isset($result->pageKey)) {
+                $page_key = $result->pageKey;
+            } else {
+                break;
+            }
         }
 
         $synced->value = $currentBlock;
