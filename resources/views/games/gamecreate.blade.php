@@ -98,23 +98,23 @@
                             </div>
                             <div class="form-group map-input-block">
                                 <label for="full_comment">Hints *</label>
-                                <textarea type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
+                                <textarea style="font-size: 16px" type="text" rows="5" id="full_comment" class="required form-control" name="full_comment"></textarea>
                                 <small>Write a hints, explain how players should find your hidden location.</small>
                             </div>
                             <br>
-                            <div class="col-md-12" id="map"></div>
+                            <div style="font-size: 16px" class="col-md-12" id="map"></div>
                             <br>
                             <div class="form-group map-input-block">
                                 <label for="country">Country *</label>
-                                <input readonly id="country" name="country" value="{{ old('country') }}" type="text" class="required form-control">
+                                <input style="font-size: 16px" readonly id="country" name="country" value="{{ old('country') }}" type="text" class="required form-control">
                             </div>
                             <div class="form-group map-input-block">
                                 <label for="city">City *</label>
-                                <input readonly id="city" name="city" value="{{ old('city') }}" type="text" class="required form-control">
+                                <input style="font-size: 16px" readonly id="city" name="city" value="{{ old('city') }}" type="text" class="required form-control">
                             </div>
                             <div class="form-group map-input-block">
                                 <label for="district">District *</label>
-                                <input readonly id="district" name="district" value="{{ old('district') }}" type="text" class="required form-control">
+                                <input style="font-size: 16px" readonly id="district" name="district" value="{{ old('district') }}" type="text" class="required form-control">
                             </div>
                             <div class="form-group map-input-hidden">
                                 {{-- <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span> --}}
@@ -367,15 +367,6 @@ $("#game-form").validate({
     }
 });
     </script>
-    <style>
-        @media screen and (-webkit-min-device-pixel-ratio:0) { 
-  select,
-  textarea,
-  input {
-    font-size: 16px;
-  }
-}
-</style>
 @endsection
 
 <!-- jQuery -->
