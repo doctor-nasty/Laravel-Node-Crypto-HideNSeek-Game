@@ -32,31 +32,6 @@
                 {{ session('status') }}
             </div>
         @endif
-        <!-- <div class="row">
-                      <div class="col-md-6 grid-margin">
-                        <div class="dashboard-card">
-                          <div class="dashboard-card-text">
-                            <h5>@lang('dashboard.games_played')</h5>
-                            <span class="dashboard-card-number">{{ $gamesplayed }}</span>
-                          </div>
-                          <div class="dashboard-card-image">
-                            <img src="{{ asset('images/component2.png') }}" alt="">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6 grid-margin">
-                        <div class="dashboard-card">
-                          <div class="dashboard-card-text">
-                            <h5>@lang('dashboard.points_earned')</h5>
-                            <span class="dashboard-card-number">120</span>
-                          </div>
-                          <span class="dashboard-card-number">{{ Auth::user()->total_winning_points }}</span>
-                          <div class="dashboard-card-image">
-                            <img src="{{ asset('images/component.png') }}" alt="">
-                          </div>
-                        </div>
-                      </div>
-                    </div> -->
         <div class="player-card">
             <div class="payer-avatar-block">
                 <div class="payer-avatar-image">
@@ -108,14 +83,96 @@
                 </div>
             </div>
         </div>
-        <div class="section-block table-size">
-            <div class="menu change-content-btn">
-                <button class="button_active btn-change">Games Bidded</button>
-                <button class="btn-change">Own Games</button>
-                <button class="btn-change">My Items</button>
+        <div class="content-wrapper section-block table-size">
+            <div class="change-content-btn">
+                <div class="active" aria-current="page">
+                    <span class="btn-change">My Items</span>
+                </div>
             </div>
+    
             <div class="card">
-                <div class="card-body card-body-active">
+                <div class="card-body">
+                    <div class="dashboard-slider">
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                @foreach ($tokens as $index => $token)
+                                    <div class="swiper-slide">
+                                        <img class="img-fluid" src="{{ $nft_image[$index] }}"></img>
+                                        <div class="slider-content">
+                                            <div class="slider-text">
+                                                <h4>{{ $nft_name[$index] }}</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <div class="content-wrapper section-block table-size">
+            <div class="change-content-btn">
+                <div class="active" aria-current="page">
+                    <span class="btn-change">Own Games</span>
+                </div>
+            </div>
+    
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="owngames" class="display dashboard-table table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    {{-- <th>Title</th> --}}
+                                    <th>Country</th>
+                                    <th>City</th>
+                                    <th>District</th>
+                                    <th>Price</th>
+                                    <th>Created At</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($owngames as $own)
+                                    <tr>
+                                        <td><img src="/game-photos/{{ $own->photo }}"
+                                                class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
+                                                alt="{{ $own->title }}"></td>
+                                        {{-- <td>{{ $own->title }}</td> --}}
+                                        <td>{{ $own->country }}</td>
+                                        <td>{{ $own->city }}</td>
+                                        <td>{{ $own->district }}</td>
+                                        <td>{{ $own->points }}</td>
+                                        <td>{{ $own->created_at }}</td>
+                                            <td>
+                                                <div class="data-table-buttons-wrapper"><button type="button"
+                                                        class="btn btn-info details-button" title="Details"
+                                                        data-id="{{ $own->id }}" data-toggle="modal"
+                                                        data-target="#getOwnGames">View</button></div>
+                                            </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <div class="content-wrapper section-block table-size">
+            <div class="change-content-btn">
+                <div class="active" aria-current="page">
+                    <span class="btn-change">Games Bidded</span>
+                </div>
+            </div>
+    
+            <div class="card">
+                <div class="card-body">
                     <div class="table-responsive">
                         <table id="gamesbidded" class="display dashboard-table table" width="100%">
                             <thead>
@@ -155,68 +212,11 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="card-body" style="padding: 22px">
-                    <div class="table-responsive">
-                        <table id="owngames" class="display dashboard-table table" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Photo</th>
-                                    {{-- <th>Title</th> --}}
-                                    <th>Country</th>
-                                    <th>City</th>
-                                    <th>District</th>
-                                    <th>Price</th>
-                                    <th>Created At</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($owngames as $own)
-                                    <tr>
-                                        <td><img src="/game-photos/{{ $own->photo }}"
-                                                class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}"
-                                                alt="{{ $own->title }}"></td>
-                                        {{-- <td>{{ $own->title }}</td> --}}
-                                        <td>{{ $own->country }}</td>
-                                        <td>{{ $own->city }}</td>
-                                        <td>{{ $own->district }}</td>
-                                        <td>{{ $own->points }}</td>
-                                        <td>{{ $own->created_at }}</td>
-                                            <td>
-                                                <div class="data-table-buttons-wrapper"><button type="button"
-                                                        class="btn btn-info details-button" title="Details"
-                                                        data-id="{{ $own->id }}" data-toggle="modal"
-                                                        data-target="#getOwnGames">View</button></div>
-                                            </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body" style="border: 1px solid #2a2a2a">
-                <div class="dashboard-slider">
-                    <div class="swiper mySwiper">
-                        <div class="swiper-wrapper">
-                            @foreach ($tokens as $index => $token)
-                                <div class="swiper-slide">
-                                    <img class="img-fluid" src="{{ $nft_image[$index] }}"></img>
-                                    <div class="slider-content">
-                                        <div class="slider-text">
-                                            <h4>{{ $nft_name[$index] }}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
+    
                 </div>
             </div>
         </div>
+
     </div>
     <div>
 
@@ -312,43 +312,8 @@
             });
         });
     </script>
-    <script>
-        let button = document.querySelectorAll('.menu button');
-        let content_inside = document.querySelectorAll('.card-body');
 
-        Array.from(button).forEach(function(buttonArray, i) {
-            buttonArray.addEventListener('click', function() {
-
-                // window.dispatchEvent(new Event('resize'));
-
-                Array.from(button).forEach(buttonAll => buttonAll.classList.remove('button_active'));
-
-                Array.from(content_inside).forEach(content_insideAll => content_insideAll.classList.remove(
-                    'card-body-active'));
-
-                button[i].classList.add('button_active');
-
-                content_inside[i].classList.add('card-body-active');
-            });
-        });
-    </script>
-    <style>
-        .menu {
-            display: flex;
-        }
-
-        .card-body {
-            display: none;
-            padding: 22px;
-
-        }
-
-        .card-body-active {
-            display: block;
-            
-        }
-    </style>
-    <script>
+    {{-- <script>
         function tableResize(){
             let tableBlock = document.querySelector('.table-size');
             let tableWidth = tableBlock.offsetWidth;
@@ -381,5 +346,5 @@
         $(window).resize(function() {
         tableResize() 
         });
-    </script>
+    </script> --}}
 @endsection

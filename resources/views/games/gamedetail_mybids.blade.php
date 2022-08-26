@@ -22,7 +22,7 @@
     <button style="color:white" type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 <div class="tab-content tab-content-solid">
-    <div class="body">
+    <div class="card-body">
         <div class="tab-pane fade show active" id="contact-6-3" role="tabpanel" aria-labelledby="tab-6-3">
         
             @if($game->status === 2)
