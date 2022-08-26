@@ -33,9 +33,6 @@
             <div class="active" aria-current="page">
                 <span class="btn-change">@lang('games.games')</span>
             </div>
-            <div>
-                <a class="btn-change" href="{{ route('games.create') }}">@lang('games.create_game')</a>
-            </div>
         </div>
 
         <div class="card">
