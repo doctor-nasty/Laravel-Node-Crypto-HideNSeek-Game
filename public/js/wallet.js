@@ -15,8 +15,12 @@ async function getProvider() {
     }
   }
 
+  function nowalletModal() {
+    $("#nowallet-modal").modal();
+  }
+
   if (provider == undefined) {
-    alert("Coinbase wallet is not installed");
+    nowalletModal();
     return;
   }
 
