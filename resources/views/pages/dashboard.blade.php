@@ -114,10 +114,10 @@
                 <button class="btn-change">Own Games</button>
                 <button class="btn-change">My Items</button>
             </div>
-            <div class="row">
-                <div class="content_inside content_inside_active">
+            <div class="card">
+                <div class="card-body card-body-active">
                     <div class="table-responsive">
-                        <table id="gamesbidded" class="display dashboard-table table">
+                        <table id="gamesbidded" class="display dashboard-table table" width="100%">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
@@ -156,9 +156,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="content_inside">
+                <div class="card-body" style="padding: 22px">
                     <div class="table-responsive">
-                        <table id="owngames" class="display dashboard-table table">
+                        <table id="owngames" class="display dashboard-table table" width="100%">
                             <thead>
                                 <tr>
                                     <th>Photo</th>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content_inside">
+            <div class="card-body" style="border: 1px solid #2a2a2a">
                 <div class="dashboard-slider">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -314,7 +314,7 @@
     </script>
     <script>
         let button = document.querySelectorAll('.menu button');
-        let content_inside = document.querySelectorAll('.content_inside');
+        let content_inside = document.querySelectorAll('.card-body');
 
         Array.from(button).forEach(function(buttonArray, i) {
             buttonArray.addEventListener('click', function() {
@@ -324,11 +324,11 @@
                 Array.from(button).forEach(buttonAll => buttonAll.classList.remove('button_active'));
 
                 Array.from(content_inside).forEach(content_insideAll => content_insideAll.classList.remove(
-                    'content_inside_active'));
+                    'card-body-active'));
 
                 button[i].classList.add('button_active');
 
-                content_inside[i].classList.add('content_inside_active');
+                content_inside[i].classList.add('card-body-active');
             });
         });
     </script>
@@ -337,17 +337,15 @@
             display: flex;
         }
 
-        .content_inside {
-            width:100%;
+        .card-body {
             display: none;
-            border: 1px solid #2a2a2a;
-            border-radius: 28px;
             padding: 22px;
+
         }
 
-        .content_inside_active {
-            width:100%;
+        .card-body-active {
             display: block;
+            
         }
     </style>
     <script>
