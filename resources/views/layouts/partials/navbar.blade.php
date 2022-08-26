@@ -39,6 +39,12 @@
             Dashboard
           </a>
         </li>
+        <li>
+          <a href="{{ url('/myitems') }}" class="dropdown-link">
+            <img src="{{ asset('svgs/add.svg') }}" alt="home icon">
+            My Items
+          </a>
+        </li>
         @if (session('can_play'))
         <li>
           <a href="{{ url('/games') }}" class="dropdown-link">

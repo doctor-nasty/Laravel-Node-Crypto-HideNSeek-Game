@@ -48,7 +48,6 @@ Route::group(['middleware' => ['auth', 'status', 'check.token']], function () {
     // Route::get('user/{id}', 'MyControllers\UserController@show')->name('users.show');
 
 
-    Route::get('settings', 'MyControllers\UserController@settings')->name('settings');
     Route::post('settings', 'MyControllers\UserController@update')->name('settings.update');
     Route::get('/logout', 'Auth\LoginController@logout');
     Route::resource('games', 'MyControllers\GameController');
@@ -63,6 +62,7 @@ Route::group(['middleware' => ['auth', 'status', 'check.token']], function () {
     // Route::get('/points', 'MyControllers\PointsController@index');
     Route::get('/documentation', 'MyControllers\PagesController@documentation');
     Route::get('/delegations', 'MyControllers\PagesController@delegations');
+    Route::get('/myitems', 'MyControllers\PagesController@myitems');
     // Route::get('requests', 'RequestsController@requests');
     // Route::post('requests', ['as' => 'requests.store', 'uses' => 'RequestsController@requestsSaveData']);
     // Route::get('settings/password', function() {
