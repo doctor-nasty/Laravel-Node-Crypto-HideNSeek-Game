@@ -22,6 +22,25 @@
     }
 </style>
 <!-- google map api end -->
+@if(session()->get('success'))
+<div class="alert alert-success">
+    {{ session()->get('success') }}
+</div>
+@endif
+@if(session()->get('error'))
+<div class="alert alert-danger">
+    {{ session()->get('error') }}
+</div>
+@endif
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
     <div class="content-wrapper table-size section-block">
         <div class="change-content-btn">
@@ -33,25 +52,6 @@
             </div>
         </div>
         <!--<a href="{{ route('games.create') }}" class="btn btn-success btn-rounded btn-fw">@lang('games.create_game')</a>-->
-      @if(session()->get('success'))
-            <div class="alert alert-success">
-                {{ session()->get('success') }}
-            </div>
-        @endif
-        @if(session()->get('error'))
-            <div class="alert alert-danger">
-                {{ session()->get('error') }}
-            </div>
-        @endif
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
       <div class="card">
 
         <div class="card-body">

@@ -241,7 +241,6 @@
                 <div class="full-width text-center caption mt-30">
                     <h1><b>@lang('login.boldtitle')</b> @lang('login.firsttext')</h1>
                     <!-- <h1>@lang('login.secondtext')</h1> -->
-                    <p>Game Launching Today</p>
                     <!-- <div class="sub-date">
                 <div class="data-block">
                   <h5>August 12</h5>
@@ -325,7 +324,7 @@
                 </div>
 
                 <div id="nowallet-modal" id="darkModalForm" class="modal fade table-modal" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog" style="padding: 15%">
 
                         <!-- Modal content-->
                         <div class="modal-content">
@@ -334,7 +333,7 @@
                                 <center>
                                     <a href="https://coinbase-wallet.onelink.me/q5Sx/invite">
                                         <button class="about-us-button">
-                                            Install Coinbase Wallet
+                                            Login with Coinbase Wallet
                                         </button>
                                     </a>
                                     <p>You need to install Coinbase Wallet App on your mobile device or Coinbase Wallet
@@ -500,7 +499,8 @@
                             <div class="swiper-button-prev"></div>
                         </div>
                     @else
-                        <p>no nfts to borrow</p>
+                        <p>Currently, no NFTs are available for borrowing.</p>
+                        <p>Please, check back later.</p>
                     @endif
                 </div>
             </div>
