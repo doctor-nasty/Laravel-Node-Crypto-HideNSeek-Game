@@ -122,8 +122,8 @@
                                 <input readonly id="district" name="district" value="{{ old('district') }}" type="text" class="required form-control">
                             </div>
                             <div class="form-group map-input-hidden">
-                                <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span>
-                                <input required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
+                                {{-- <span class="input-group-addon bg-dark" id="basic-addon1">Code to hide:</span> --}}
+                                <input type="hidden" required readonly value="{{ $identifier }}" type="text" class="required form-control" id="clipboardExample2" name="identifier" placeholder="Generate Number" aria-label="Generate Nunber" aria-describedby="basic-addon1">
                                 <input type="hidden" class="required form-control" id="mark_lat" name="mark_lat" value="">
                                 <input type="hidden" class="required form-control" id="mark_long" name="mark_long" value="">        
                                 <input type="hidden" class="required form-control" id="osm_id" name="osm_id" value="">
@@ -137,7 +137,7 @@
                             </div> -->
                     </div>
                     <div>
-                        <small class="text text-danger">* @lang('gamecreate.code_text')</small>
+                        {{-- <small class="text text-danger">* @lang('gamecreate.code_text')</small> --}}
                         <!-- <input type="hidden" class="required form-control" id="city_lat" name="city_lat">
                         <input type="hidden" class="required form-control" id="city_long" name="city_long"> -->
                         <input type="hidden" class="required form-control" id="tx_hash" name="tx_hash" value="">

@@ -38,7 +38,7 @@
                 <input name="answer" type="text" class="form-group form-control"/>
                 <input name="osm_id" id="osm_id" type="hidden" required />
                 <input name="place_id" id="place_id" type="hidden" required />
-                <button class="btn btn-inverse-success" type="submit">@lang('gamedetail.submit')</button>
+                <button class="btn btn-inverse-success" type="submit">Submit</button>
             </form>
 
             <br>
