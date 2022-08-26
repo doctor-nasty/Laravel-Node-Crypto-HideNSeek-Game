@@ -56,7 +56,7 @@
 </div>
 
 <script>
-var map = L.map('map').setView(["{{$game->mark_lat + mt_rand() / mt_getrandmax() * 0.01 - 0.005}}", "{{$game->mark_long + mt_rand() / mt_getrandmax() * 0.01 - 0.005}}"], 14);
+var map = L.map('map', {fullscreenControl: true}).setView(["{{$game->mark_lat + mt_rand() / mt_getrandmax() * 0.01 - 0.005}}", "{{$game->mark_long + mt_rand() / mt_getrandmax() * 0.01 - 0.005}}"], 14);
 
 setInterval(function () {
    map.invalidateSize();

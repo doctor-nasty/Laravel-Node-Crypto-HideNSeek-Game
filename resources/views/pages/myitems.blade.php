@@ -27,6 +27,9 @@
 @endif
 <div class="content-wrapper section-block table-size">
             <div class="change-content-btn">
+                <div>
+                    <a href="{{ url('') }}" class="btn-change">Dashboard</a>
+                </div>
                 <div class="active" aria-current="page">
                     <span class="btn-change">My Items</span>
                 </div>

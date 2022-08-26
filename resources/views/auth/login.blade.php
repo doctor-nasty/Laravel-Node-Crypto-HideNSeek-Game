@@ -275,6 +275,27 @@
                       </button>
                     </a>
                     </div>
+                    <div id="nowallet-modal" id="darkModalForm" class="modal fade table-modal" role="dialog">
+                      <div class="modal-dialog">
+              
+                          <!-- Modal content-->
+                          <div class="modal-content">
+
+                <div class="modal-body">
+                  <center>
+                <a href="https://coinbase-wallet.onelink.me/q5Sx/invite">
+                  <button class="about-us-button">
+                    Install Coinbase Wallet
+                  </button>
+                </a>
+                  <p>You need to install Coinbase Wallet App on your mobile devices or Coinbase Wallet Browser Extension to play from desktop browsers.</p>
+                  <p>Press the button above to proceed.</p>
+                  </center>
+                </div>
+                          </div>
+              
+                      </div>
+                  </div>
                     <article class="col-12 col-lg-6 about-us-article mb-md50">
                       <h2>About the Game</h2>
                       <h4 class="about-us-subheading">Get NFT  ->  Play Free Hide & Seek Game  ->  Earn USDC</h4>
@@ -434,6 +455,8 @@
                 </div>
             </div>
         </section>
+
+        
         <!-- =====================================
         ==== Start Footer -->
 

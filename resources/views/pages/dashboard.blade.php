@@ -67,7 +67,7 @@
                             <img src="{{ asset('svgs/point-icon.svg') }}" alt="point icon">
                         </div>
                         <div class="point-text">
-                            <h5>@lang('dashboard.points_earned')</h5>
+                            <h5>USDC Earned</h5>
                             <span>{{ $points_earned }}</span>
                         </div>
                     </div>
@@ -103,6 +103,7 @@
                                     <th>City</th>
                                     <th>District</th>
                                     <th>Price</th>
+                                    <th>Players</th>
                                     <th>Created At</th>
                                     <th>Actions</th>
                                 </tr>
@@ -118,6 +119,7 @@
                                         <td>{{ $own->city }}</td>
                                         <td>{{ $own->district }}</td>
                                         <td>{{ $own->points }}</td>
+                                        <td>{{ $own->players }}</td>
                                         <td>{{ $own->created_at }}</td>
                                             <td>
                                                 <div class="data-table-buttons-wrapper"><button type="button"
@@ -155,6 +157,7 @@
                                     <th>City</th>
                                     <th>District</th>
                                     <th>Price</th>
+                                    <th>Players</th>
                                     <th>Created At</th>
                                     <th>Actions</th>
                                 </tr>
@@ -170,6 +173,7 @@
                                         <td>{{ $bidded->city }}</td>
                                         <td>{{ $bidded->district }}</td>
                                         <td>{{ $bidded->points }}</td>
+                                        <td>{{ $bidded->players }}</td>
                                         <td>{{ $bidded->created_at }}</td>
                                         @if (session('can_play'))
                                             <td>
