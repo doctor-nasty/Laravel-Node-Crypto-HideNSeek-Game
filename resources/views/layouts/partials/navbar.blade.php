@@ -108,24 +108,17 @@
                 </div>
               </a>
               @endforeach --}}
+              @foreach(auth()->user()->unreadNotifications as $notification)
                 <div class="notification-content">
                   <div class="notification-icon">
                     <img src="{{ asset('images/avatar.jpg') }}" alt="bell">
                   </div>
                   <div class="notification-text">
-                    <span>notification title</span>
-                    <p>Lorem Ipsum is simply dummy text of </p>
+                    <span>{{ $notification->data['title'] }}</span>
+                    <p>{{ $notification->data['data'] }}</p>
                   </div>
                 </div>
-                <div class="notification-content">
-                  <div class="notification-icon">
-                    <img src="{{ asset('images/avatar.jpg') }}" alt="bell">
-                  </div>
-                  <div class="notification-text">
-                    <span>notification title</span>
-                    <p>Lorem Ipsum is simply dummy text of </p>
-                  </div>
-                </div>
+                @endforeach
             </div>
           </div>
   </header>

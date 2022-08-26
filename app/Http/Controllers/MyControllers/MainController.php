@@ -11,7 +11,7 @@ use App\Game_bid;
 use App\User;
 use Notification;
 use App\Notifications\GameBiddedNotification;
-
+use App\Models\TokenInfo;
 
 class MainController extends Controller
 {
@@ -25,12 +25,17 @@ class MainController extends Controller
 
         $web3_helper = new \App\Lib\Web3Helper();
         
-        $tokens = $web3_helper->getNFTs(Auth::user()->wallet_address);
+        $tokens = TokenInfo::where('owner', Auth::user()->wallet_address)
+                            ->orWhere([
+                                ['borrower', Auth::user()->wallet_address],
+                                ['status', 2],
+                                //['expiresAt', '>', now()]
+                            ])->get();
 
         $nft_name = [];
         $nft_image = [];
-        foreach ($tokens as $index => $token_id) {
-            $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$token_id;
+        foreach ($tokens as $index => $token) {
+            $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$token->token_id;
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL,$url);
             curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
