@@ -206,7 +206,7 @@ class GameController extends Controller {
 
     public function store(Request $request) {
         $request->validate([
-            'title' => 'required',
+            // 'title' => 'required',
             //'type' => 'required',
             'points' => 'required',
             // 'city' => 'required',
@@ -216,7 +216,7 @@ class GameController extends Controller {
             'osm_id' => 'required',
             'place_id' => 'required',
             // 'district' => 'required',
-            'comment' => 'required',
+            // 'comment' => 'required',
             'full_comment' => 'required',
             // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'tx_hash' => ['required', 'string', 'regex:/^0x([A-Fa-f0-9]{64})$/']
@@ -228,7 +228,7 @@ class GameController extends Controller {
 
             $game = new Game([
                 'identifier' => Cache::get($index),
-                'title' => $request->get('title'),
+                'title' => 'Title',
                 'points' => $request->get('points'),
                 'type' => 'Item',
                 'city' => $request->get('city'),
@@ -239,7 +239,7 @@ class GameController extends Controller {
                 'district' => $request->get('district'),
                 'osm_id' => $request->get('osm_id'),
                 'place_id' => $request->get('place_id'),
-                'comment' => $request->get('comment'),
+                'comment' => 'Comment',
                 'full_comment' => $request->get('full_comment'),
                 // 'photo' => $request->get('photo'),
                 'photo' => 'game.jpg',

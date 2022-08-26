@@ -20,7 +20,11 @@
             height: 500px;
         }
     </style> -->
-
+    @if (session()->get('success'))
+    <div class="alert alert-success">
+        {{ session()->get('success') }}
+    </div>
+@endif
     <div class="content-wrapper section-block table-size">
         <div class="change-content-btn">
             <div>
@@ -33,11 +37,7 @@
                 <a class="btn-change" href="{{ route('games.create') }}">@lang('games.create_game')</a>
             </div>
         </div>
-        @if (session()->get('success'))
-            <div class="alert alert-success">
-                {{ session()->get('success') }}
-            </div>
-        @endif
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
