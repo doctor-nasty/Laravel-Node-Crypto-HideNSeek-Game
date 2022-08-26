@@ -324,7 +324,7 @@
                 </div>
 
                 <div id="nowallet-modal" id="darkModalForm" class="modal fade table-modal" role="dialog">
-                    <div class="modal-dialog" style="padding: 15%">
+                    <div class="modal-dialog">
 
                         <!-- Modal content-->
                         <div class="modal-content">
