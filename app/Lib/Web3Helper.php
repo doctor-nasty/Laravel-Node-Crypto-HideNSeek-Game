@@ -46,6 +46,13 @@ class Web3Helper {
     // get nonce
     $gasPrice = $this->getGasPrice();
 
+    $chain_ids = [
+      'Ethereum' => 1,
+      'Rinkeby' => 4,
+      'Polygon' => 137,
+      'Mumbai' => 80001
+    ];
+
     $transaction = new Transaction([
       'from' => config('web3.wallet.address'),
       'to' => config('web3.chain.token'),
@@ -53,7 +60,7 @@ class Web3Helper {
       'gas' => $estimatedGas,
       'gasPrice' => '0x' . $gasPrice->toHex(),
       'data' => '0x' . $data,
-      'chainId' => 80001
+      'chainId' => $chain_ids[config("web3.chain.network")]
     ]);
 
     $transaction->sign(config('web3.wallet.private_key'));
