@@ -8,6 +8,7 @@ use Web3\Utils;
 use Web3\Providers\HttpProvider;
 use Web3\RequestManagers\HttpRequestManager;
 use Web3p\EthereumTx\Transaction;
+use Illuminate\Support\Facades\Log;
 
 use phpseclib\Math\BigInteger;
 use GuzzleHttp\Client;
@@ -65,11 +66,12 @@ class Web3Helper {
 
     $transaction->sign(config('web3.wallet.private_key'));
 
+    $txHash = null;
     $this->web3->getEth()->sendRawTransaction(
       '0x' . $transaction->serialize(), 
       function ($err, $transaction) use (&$txHash) {
         if ($err !== null) {
-          echo 'Error: ' . $err->getMessage();
+          Log::info("Error: " . $err->getMessage());
         } else {
           echo 'Tx hash: ' . $transaction . "<br>\n";
           $txHash = $transaction;
