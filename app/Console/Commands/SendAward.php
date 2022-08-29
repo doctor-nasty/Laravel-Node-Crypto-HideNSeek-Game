@@ -34,6 +34,8 @@ class SendAward extends Command
         $web3_helper = new Web3Helper();
         $awards = Award::where('status', 0)->get();
 
+        Log::info("Sending award");
+
         $nonce = $web3_helper->getNonce(config('web3.wallet.address'));
 
         $txHash = null;
@@ -46,7 +48,10 @@ class SendAward extends Command
             $award->save();
             $nonce = $nonce->add(new BigInteger(1));
         }
+
+        Log::info("Transactions are sent");
         if ($txHash !== null) {
+            Log::info("Waiting until last tx {$txHash} is confirmed");
             $transaction = $web3_helper->confirmTx($txHash);
             if (!$transaction) {
                 throw new Error('Transaction was not confirmed.');
@@ -54,6 +59,7 @@ class SendAward extends Command
                 echo 'Transaction confirmed' . "<br>\n";
             }
         }
+        Log::info("SendAward ended");
       
         return 0;
     }
