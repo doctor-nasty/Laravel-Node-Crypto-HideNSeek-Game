@@ -32,7 +32,7 @@ class DailyAward extends Command
     public function handle()
     {
         $now = now();
-        $tokens = TokenInfo::where('status', 0)->get();
+        $tokens = TokenInfo::all();
 
         $awards = [];
         foreach ($tokens as $token) {
