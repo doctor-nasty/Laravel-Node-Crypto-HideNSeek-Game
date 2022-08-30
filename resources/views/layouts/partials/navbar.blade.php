@@ -41,7 +41,7 @@
         </li>
         <li>
           <a href="{{ url('/myitems') }}" class="dropdown-link">
-            <img src="{{ asset('svgs/shopping-bag.svg') }}" alt="home icon">
+            <img src="{{ asset('svgs/shopping-bag2.svg') }}" alt="home icon">
             My Items
           </a>
         </li>
