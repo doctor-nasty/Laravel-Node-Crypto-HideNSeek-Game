@@ -3633,6 +3633,7 @@ textarea.is-invalid.tt-hint {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  pointer-events: none;
 }
 @keyframes spin {
   0% {
@@ -3641,4 +3642,19 @@ textarea.is-invalid.tt-hint {
   100% {
     transform: rotate(360deg);
   }
+}
+.connect-btn {
+  background: #0a63ea;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  border: 0;
+  width: 240px;
+  height: 44px;
+  margin-bottom: 12px;
 }
