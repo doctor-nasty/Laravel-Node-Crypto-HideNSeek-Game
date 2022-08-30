@@ -3586,3 +3586,50 @@ textarea.is-invalid.tt-hint {
   border-radius: 50%;
   background: #0a63ea;
 }
+/* Modal */
+.terms-modal {
+  padding: 30px;
+  background-color: black !important;
+}
+.terms-modal label {
+  font-size: 22px;
+  color: white;
+}
+.terms-modal-text {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+}
+.terms-modal-text h4 {
+  margin-bottom: 12px;
+}
+.terms-modal-text span {
+  color: white;
+}
+.terms-modal-buttons button {
+  color: black;
+  padding: 5px;
+  border-radius: 4px;
+}
+.wait-block {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.wait-spin {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid #5a5a5a;
+  width: 100px;
+  height: 100px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

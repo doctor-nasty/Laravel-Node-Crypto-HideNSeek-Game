@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="{{ asset('css/login/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/login/fontawesome.min.css') }}" />
     <!-- <link rel="stylesheet" href="{{ asset('css/login/fontawesome.css') }}" /> -->
-    <!-- <link rel="stylesheet" href="{{ asset('css/old/all.css') }}" rel="stylesheet" /> -->
+    <!-- <link rel="stylesheet" href="{{ asset('css/old/style.css') }}" rel="stylesheet" /> -->
 
     <meta property="og:image" content="{{ asset('images/hns.gif') }}">
     <meta property="og:image:type" content="image/gif">
@@ -330,16 +330,18 @@
                         <div class="modal-content">
 
                             <div class="modal-body">
-                                <center>
                                     <a href="https://coinbase-wallet.onelink.me/q5Sx/invite">
                                         <button class="about-us-button">
                                             Login with Coinbase Wallet
                                         </button>
                                     </a>
-                                    <p>You need to install Coinbase Wallet App on your mobile device or Coinbase Wallet
-                                        Browser Extension to play from desktop browser.</p>
-                                    <p>Press the button above to proceed.</p>
-                                </center>
+                                    <p>
+                                        You need to install Coinbase Wallet App on your mobile device or Coinbase Wallet
+                                        Browser Extension to play from desktop browser.
+                                    </p>
+                                    <p>
+                                        Press the button above to proceed.
+                                    </p>
                             </div>
                         </div>
 
