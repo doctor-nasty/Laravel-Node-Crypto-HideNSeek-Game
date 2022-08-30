@@ -10,8 +10,6 @@
         console.log( "Sample of data:", data.slice( 0, 100 ) );
       });
   </script>
-    <div id="app">
-    </div>
     <div class="content-wrapper">
         @if (session()->get('success'))
             <div class="alert alert-success">
@@ -84,7 +82,7 @@
             </div>
         </div>
         @if (session('can_create'))
-        <div class="content-wrapper section-block table-size">
+        <div class="section-block table-size">
             <div class="change-content-btn">
                 <div class="active" aria-current="page">
                     <span class="btn-change">Own Games</span>
@@ -138,7 +136,7 @@
         </div>
         @endif
         @if (session('can_play'))
-        <div class="content-wrapper section-block table-size">
+        <div class="section-block table-size">
             <div class="change-content-btn">
                 <div class="active" aria-current="page">
                     <span class="btn-change">Games Bidded</span>
@@ -193,9 +191,6 @@
             </div>
         </div>
         @endif
-
-    </div>
-    <div>
 
     </div>
     <div id="getOwnGames" id="darkModalForm" tabindex="-1" class="modal fade table-modal" role="dialog" aria-hidden="true">

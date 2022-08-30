@@ -90,6 +90,7 @@
                                 <label for="players">Players *</label>
                                 <select id="players" name="players" type="text" class="required form-control">
                                     <option disabled selected></option>
+                                    <option>5</option>
                                     <option>10</option>
                                     <option>20</option>
                                     <option>50</option>
