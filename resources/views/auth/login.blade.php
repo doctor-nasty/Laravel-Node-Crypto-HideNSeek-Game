@@ -303,7 +303,7 @@
                     </a>
                 </div>
                 <!-- modal waiting -->
-                <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog"
+                <div class="modal fade table-modal" id="confirmation-modal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-costum-body">
                         <div class="modal-dialog" role="document">
@@ -324,27 +324,25 @@
                 </div>
 
                 <div id="nowallet-modal" id="darkModalForm" class="modal fade table-modal" role="dialog">
-                    <div class="modal-dialog">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-
-                            <div class="modal-body">
+                    <div class="modal-costum-body">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content terms-modal">
+                                <div class="terms-modal-text">
                                     <a href="https://coinbase-wallet.onelink.me/q5Sx/invite">
-                                        <button class="about-us-button">
+                                        <button class="about-us-button" style="border: 1px solid rgba(255, 255, 255, 0.1);">
                                             Login with Coinbase Wallet
                                         </button>
                                     </a>
-                                    <p>
-                                        You need to install Coinbase Wallet App on your mobile device or Coinbase Wallet
-                                        Browser Extension to play from desktop browser.
-                                    </p>
-                                    <p>
-                                        Press the button above to proceed.
-                                    </p>
+                                </div>
+                                <p>
+                                    You need to install Coinbase Wallet App on your mobile device or Coinbase Wallet
+                                    Browser Extension to play from desktop browser.
+                                </p>
+                                <p>
+                                    Press the button above to proceed.
+                                </p>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <article class="col-12 col-lg-6 about-us-article mb-md50">
