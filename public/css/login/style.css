@@ -3625,6 +3625,15 @@ textarea.is-invalid.tt-hint {
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
 }
+#confirmation-modal {
+  pointer-events: none;
+}
+.modal-costum-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
