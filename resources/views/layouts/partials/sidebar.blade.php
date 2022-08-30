@@ -15,7 +15,7 @@
       <div class="dashbord-sidebar-item dashbord-sidebar-item-{{ Request::is('/myitems') ? 'active' : '' }}" id="">
         <a href="{{ url('/myitems') }}">
           <div class="sidebar-item-icon-box">
-            <img src="{{ asset('svgs/shopping-bag2.svg') }}" alt="home icon">
+            <img src="{{ asset('svgs/nft.svg') }}" alt="home icon">
           </div>
           <div class="sidebar-item-title">My Items</div>
         </a>
