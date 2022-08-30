@@ -48,8 +48,8 @@
     <!-- Core Style Css -->
     <link rel="stylesheet" href="{{ asset('css/login/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/login/fontawesome.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/login/fontawesome.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/old/all.css') }}" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="{{ asset('css/login/fontawesome.css') }}" /> -->
+    <!-- <link rel="stylesheet" href="{{ asset('css/old/all.css') }}" rel="stylesheet" /> -->
 
     <meta property="og:image" content="{{ asset('images/hns.gif') }}">
     <meta property="og:image:type" content="image/gif">
@@ -187,7 +187,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <span class="icon-bar"><i class="fas fa-bars"></i></span>
+                <span class="icon-bar"><img src="/svgs/burger-menu-button.svg"></img></span>
             </button>
 
             <!-- navbar links -->
@@ -573,13 +573,13 @@ var x = setInterval(function() {
 </script> --}}
     <!-- jQuery -->
     <script src="{{ asset('js/login/jquery-3.0.0.min.js') }}"></script>
-    <script src="{{ asset('js/login/jquery-migrate-3.0.0.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/jquery-migrate-3.0.0.min.js') }}"></script> -->
 
     <!-- popper.min -->
-    <script src="{{ asset('js/login/popper.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/popper.min.js') }}"></script> -->
 
     <!-- fonts -->
-    <script src="{{ asset('js/login/all.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/all.js') }}"></script> -->
 
     <!-- bootstrap -->
     <script src="{{ asset('js/login/bootstrap.min.js') }}"></script>
@@ -588,37 +588,37 @@ var x = setInterval(function() {
     <script src="{{ asset('js/login/scrollIt.min.js') }}"></script>
 
     <!-- jquery.waypoints.min -->
-    <script src="{{ asset('js/login/jquery.waypoints.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/jquery.waypoints.min.js') }}"></script> -->
 
     <!-- jquery.counterup.min -->
-    <script src="{{ asset('js/login/jquery.counterup.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/jquery.counterup.min.js') }}"></script> -->
 
     <!-- owl carousel -->
-    <script src="{{ asset('js/login/owl.carousel.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/owl.carousel.min.js') }}"></script> -->
 
     <!-- jquery.magnific-popup js -->
-    <script src="{{ asset('js/login/jquery.magnific-popup.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/jquery.magnific-popup.min.js') }}"></script> -->
 
     <!-- stellar js -->
-    <script src="{{ asset('js/login/jquery.stellar.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/jquery.stellar.min.js') }}"></script> -->
 
     <!-- isotope.pkgd.min js -->
-    <script src="{{ asset('js/login/isotope.pkgd.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/isotope.pkgd.min.js') }}"></script> -->
 
     <!-- YouTubePopUp.jquery -->
-    <script src="{{ asset('js/login/YouTubePopUp.jquery.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/YouTubePopUp.jquery.js') }}"></script> -->
 
     <!-- particles.min js -->
-    <script src="{{ asset('js/login/particles.min.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/particles.min.js') }}"></script> -->
 
     <!-- app js -->
-    <script src="{{ asset('js/login/app.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/app.js') }}"></script> -->
 
     <!-- Map -->
-    <script src="{{ asset('js/login/map.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/map.js') }}"></script> -->
 
     <!-- validator js -->
-    <script src="{{ asset('js/login/validator.js') }}"></script>
+    <!-- <script src="{{ asset('js/login/validator.js') }}"></script> -->
 
     <!-- custom scripts -->
     <script src="{{ asset('js/login/scripts.js') }}"></script>
