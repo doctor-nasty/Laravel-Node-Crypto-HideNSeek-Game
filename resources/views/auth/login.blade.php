@@ -14,6 +14,9 @@
 
         gtag('config', 'UA-237510470-1');
     </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
 
 
     <!-- Metas -->
@@ -383,11 +386,44 @@
     <section class="card-list-section">
         <div class="container">
             <div class="row" id="nft">
-                @include('auth.nft')
+                @include('auth.nft',["data"=>$data])
             </div>
         </div>
     </section>
     @endif
+    
+<script>
+$.ajaxSetup({
+    headers: {
+    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+    </script>
+    <script>
+    $(function() {
+      $(document).on("click", "#pagination a", function() {
+
+        //get url and make final url for ajax 
+        var url = $(this).attr("href");
+        var append = url.indexOf("?") == -1 ? "?" : "&";
+        var finalURL = url + append;
+
+        //set to current url
+        window.history.pushState({}, null, finalURL);
+
+        $.get(finalURL, function(data) {
+
+          $("#nft").html(data);
+
+        });
+
+        return false;
+      })
+
+    });
+
+
+        </script>
 
     <div id="buy-modal" class="modal fade table-modal" role="dialog">
         <div class="modal-costum-body">
@@ -654,30 +690,6 @@ var x = setInterval(function() {
         });
     </script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
-    
-    $(document).on('click', '.pagination a', function(event){
-     event.preventDefault(); 
-     var page = $(this).attr('href').split('page=')[1];
-     fetch_data(page);
-    });
-    
-    function fetch_data(page)
-    {
-     $.ajax({
-      url:"/fetch_data?page="+page,
-      success:function(data)
-      {
-       $('#nft').html(data);
-      }
-     });
-    }
-    
-    });
-    
-    
-    </script>
 </body>
 
 </html>

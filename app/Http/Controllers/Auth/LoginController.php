@@ -53,6 +53,7 @@ class LoginController extends Controller
 
     public function showLoginForm(Request $request)
     {
+        
         $delegations = TokenInfo::where('status', 1)->get();
         $nft_name = [];
         $nft_image = [];
@@ -75,9 +76,12 @@ class LoginController extends Controller
             $nft_image[$index] = $j['image'];
         }
 
-        $data = Tokeninfo::paginate(5);
         // ->where('owner', '==', '0x5f24f462fb770ccec2f403953352818a0c2d649b');
 
+        $data = Tokeninfo::when($request->has("owner"),function($q)use($request){
+            return $q->where("owner","like","%".$request->get("owner")."%");
+        })->paginate(5);
+        
         foreach($data as $value => $nft) {
             // get token metadata
             $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$nft->token_id;
@@ -96,9 +100,11 @@ class LoginController extends Controller
             $nftimage[$value] = $j2['image'];
         }
 
-  
 
 
+        if($request->ajax()){
+            return view('auth.nft ',['data'=>$data]); 
+        } 
         return view('auth.login')
         ->with('data', $data)
         ->with('delegations', $delegations)
@@ -107,15 +113,6 @@ class LoginController extends Controller
         ->with('nft_image', $nft_image)
         ->with('nft_name', $nft_name);
         
-    }
-
-    public function fetch_data(Request $request)
-    {
-     if($request->ajax())
-     {
-      $data = Tokeninfo::paginate(5);
-      return view('auth.login', compact('data'))->render();
-     }
     }
 
 

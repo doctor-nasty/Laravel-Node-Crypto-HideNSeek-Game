@@ -14,11 +14,11 @@
 use Illuminate\Support\Facades\Auth;
 use App\Game;
 Use App\User;
+use App\Http\Controllers\Auth\LoginController;
 
 //Route::get('/', function () {
 //    return view('welcome');
 //});
-Route::get('fetch_data', 'Auth\LoginController@fetch_data');
 
 Auth::routes(['verify' => false]);
 

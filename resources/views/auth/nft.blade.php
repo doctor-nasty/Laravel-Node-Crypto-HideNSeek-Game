@@ -9,5 +9,9 @@
     </div>
 </div>
 @endforeach
-{{ $data->links() }}
+<div id="pagination">
+    {{-- {!{$data->appends(['per_page' => '20'])->links() !!} --}}
+    {{$data->links()}}
+</div>
+  
 
