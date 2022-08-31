@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Hash;
+use Illuminate\Http\Request;
 use App\Models\TokenInfo;
 
 
@@ -49,7 +50,8 @@ class LoginController extends Controller
             'unlock',
         ]);
     }
-    public function showLoginForm()
+
+    public function showLoginForm(Request $request)
     {
         $delegations = TokenInfo::where('status', 1)->get();
         $nft_name = [];
@@ -73,13 +75,49 @@ class LoginController extends Controller
             $nft_image[$index] = $j['image'];
         }
 
+        $data = Tokeninfo::paginate(5);
+        // ->where('owner', '==', '0x5f24f462fb770ccec2f403953352818a0c2d649b');
+
+        foreach($data as $value => $nft) {
+            // get token metadata
+            $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$nft->token_id;
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, Array("User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.15) Gecko/20080623 Firefox/2.0.0.15") ); 
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            $result= curl_exec ($ch);
+            curl_close ($ch);
+            $j2=json_decode($result, true);
+
+            $nftname[$value] = $j2['name'];
+            $nftimage[$value] = $j2['image'];
+        }
+
+  
+
 
         return view('auth.login')
+        ->with('data', $data)
         ->with('delegations', $delegations)
+        ->with('nftimage', $nftimage)
+        ->with('nftname', $nftname)
         ->with('nft_image', $nft_image)
         ->with('nft_name', $nft_name);
         
     }
+
+    public function fetch_data(Request $request)
+    {
+     if($request->ajax())
+     {
+      $data = Tokeninfo::paginate(5);
+      return view('auth.login', compact('data'))->render();
+     }
+    }
+
 
     public function locked()
     {

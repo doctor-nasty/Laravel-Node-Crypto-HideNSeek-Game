@@ -377,42 +377,40 @@
             </div>
         </div>
     </section>
-    <!-- <section class="hero section-padding">
-            <div class="container">
-                <div class="row">
 
-                    <div class="intro offset-lg-1 col-lg-10 text-center mb-80" style="color:black">
-                        <h3>@lang('login.first')</h3>
-                        <h4>@lang('login.second')</h4>
-                        <p>@lang('login.third')</p>
-                    </div>
+    @if (count($data) > 0)
 
-                    <div class="col-lg-4" style="color:black">
-                        <div class="item text-center mb-md50">
-                            <span class="fas fa-gamepad"></span>
-                            <h5>@lang('login.firstboxtitle')</h5>
-                            <p>@lang('login.firstboxtext')</p>
-                        </div>
-                    </div>
+    <section class="card-list-section">
+        <div class="container">
+            <div class="row" id="nft">
+                @include('auth.nft')
+            </div>
+        </div>
+    </section>
+    @endif
 
-                    <div class="col-lg-4" style="color:black">
-                        <div class="item text-center mb-md50">
-                            <span class="fas fa-money-bill"></span>
-                            <h5>@lang('login.secondboxtitle')</h5>
-                            <p>@lang('login.secondboxtext')</p>
-                        </div>
+    <div id="buy-modal" class="modal fade table-modal" role="dialog">
+        <div class="modal-costum-body">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content terms-modal">
+                    <div class="terms-modal-text">
+                        <a href="https://coinbase-wallet.onelink.me/q5Sx/invite">
+                            <button class="connect-btn" style="border: 1px solid rgba(255, 255, 255, 0.1);">
+                                Login with Coinbase Wallet
+                            </button>
+                        </a>
                     </div>
-
-                    <div class="col-lg-4" style="color:black">
-                        <div class="item text-center">
-                            <span class="fas fa-envelope"></span>
-                            <h5>@lang('login.thirdboxtitle')</h5>
-                            <p>@lang('login.thirdboxtext')</p>
-                        </div>
-                    </div>
+                    <span>
+Text
+                    </span>
+                    <span>
+                      text2
+                    </span>
                 </div>
             </div>
-        </section> -->
+        </div>
+    </div>
+
     <section class="card-list-section">
         <div class="container">
             <div class="row">
@@ -654,6 +652,31 @@ var x = setInterval(function() {
                 },
             },
         });
+    </script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    
+    $(document).on('click', '.pagination a', function(event){
+     event.preventDefault(); 
+     var page = $(this).attr('href').split('page=')[1];
+     fetch_data(page);
+    });
+    
+    function fetch_data(page)
+    {
+     $.ajax({
+      url:"/fetch_data?page="+page,
+      success:function(data)
+      {
+       $('#nft').html(data);
+      }
+     });
+    }
+    
+    });
+    
+    
     </script>
 </body>
 

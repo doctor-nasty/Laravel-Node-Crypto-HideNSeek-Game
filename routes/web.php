@@ -18,6 +18,7 @@ Use App\User;
 //Route::get('/', function () {
 //    return view('welcome');
 //});
+Route::get('fetch_data', 'Auth\LoginController@fetch_data');
 
 Auth::routes(['verify' => false]);
 
