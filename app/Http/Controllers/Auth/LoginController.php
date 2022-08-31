@@ -103,7 +103,11 @@ class LoginController extends Controller
 
 
         if($request->ajax()){
-            return view('auth.nft ',['data'=>$data]); 
+            return view('auth.nft')
+            ->with('data', $data)
+            ->with('nftimage', $nftimage)
+            ->with('nftname', $nftname);
+    
         } 
         return view('auth.login')
         ->with('data', $data)
