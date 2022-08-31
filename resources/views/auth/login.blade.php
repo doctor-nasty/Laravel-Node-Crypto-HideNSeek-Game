@@ -203,7 +203,10 @@
                         <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-scroll-nav="2">Borrow NFT</a>
+                        <a class="nav-link" href="#" data-scroll-nav="2">Borrow</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-scroll-nav="3">Marketplace</a>
                     </li>
                     <li class="nav-item header-nav header-social">
                         <a href="https://t.me/hidenseek_group" class="nav-icon">
@@ -383,7 +386,7 @@
 
     @if (count($data) > 0)
 
-    <section class="card-list-section">
+    <section class="card-list-section" data-scroll-index="3">
         <div class="container">
             <div class="row" id="nft">
                 @include('auth.nft',["data"=>$data])
@@ -406,7 +409,7 @@ $.ajaxSetup({
         //get url and make final url for ajax 
         var url = $(this).attr("href");
         var append = url.indexOf("?") == -1 ? "?" : "&";
-        var finalURL = url + append;
+        var finalURL = url + append + $("#searchform").serialize();
 
         //set to current url
         window.history.pushState({}, null, finalURL);
