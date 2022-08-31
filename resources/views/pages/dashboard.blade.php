@@ -193,6 +193,9 @@
         @endif
 
     </div>
+        </div>
+    <div>
+
     <div id="getOwnGames" id="darkModalForm" tabindex="-1" class="modal fade table-modal" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -216,7 +219,6 @@
 
         </div>
     </div>
-
     </div>
     <script>
         var dt = $('#gamesbidded').DataTable({
@@ -262,39 +264,4 @@
             });
         });
     </script>
-
-    {{-- <script>
-        function tableResize(){
-            let tableBlock = document.querySelector('.table-size');
-            let tableWidth = tableBlock.offsetWidth;
-            if(tableWidth >= 252 && tableWidth < 341){
-                $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0 30px 30px 0");
-            }
-            else if (tableWidth >= 341 && tableWidth < 409){
-                $(".dashboard-table tbody tr td:nth-child(3)").css("border-radius", "0")
-                $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0 30px 30px 0")
-            }
-            else if(tableWidth >= 409 && tableWidth < 490){
-                $(".dashboard-table tbody tr td:nth-child(4)").css("border-radius", "0")
-                $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0 30px 30px 0")
-            }
-            else if(tableWidth >= 490 && tableWidth < 567){
-                $(".dashboard-table tbody tr td:nth-child(5)").css("border-radius", "0")
-                $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0 30px 30px 0")
-            }
-            else if(tableWidth >= 567){
-                $(".dashboard-table tbody tr td:nth-child(6)").css("border-radius", "0")
-                $(".dashboard-table tbody tr td:nth-child(7)").css("border-radius", "0 30px 30px 0")
-            }
-        }
-        function timeFunction() {
-            setTimeout(function(){
-                tableResize()
-            }, 500);
-        }
-        timeFunction()
-        $(window).resize(function() {
-        tableResize() 
-        });
-    </script> --}}
 @endsection

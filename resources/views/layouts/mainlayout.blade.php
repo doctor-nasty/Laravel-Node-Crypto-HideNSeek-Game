@@ -7,7 +7,7 @@
   @include('layouts.partials.navbar')
   <body class="body">
     <div class="row">
-      <div style="margin-top:0px">
+      <div style="margin-top:0px" class="w-100">
         <div class="d-flex flex-row">
             @include('layouts.partials.sidebar')
             <div class="dashboard-content">
