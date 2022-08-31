@@ -417,7 +417,7 @@ Text
                 <div class="col-lg-4 mb-mb-120 d-flex">
                     <div class="card-list-block">
                         <div class="card-icon">
-                            <img src="{{ asset('svgs/controller.svg') }}" alt="controller icon">
+                            <img src="{{ asset('svgs/controller.png') }}" alt="controller icon">
                         </div>
                         <h3>Game</h3>
                         <p>
@@ -430,7 +430,7 @@ Text
                 <div class="col-lg-4 mb-mb-120 d-flex">
                     <div class="card-list-block">
                         <div class="card-icon">
-                            <img src="{{ asset('svgs/piggy-bank.svg') }}" alt="piggy bank icon">
+                            <img src="{{ asset('svgs/piggy-bank.png') }}" alt="piggy bank icon">
                         </div>
                         <h3>Money</h3>
                         <p>
@@ -445,7 +445,7 @@ Text
                 <div class="col-lg-4 d-flex">
                     <div class="card-list-block">
                         <div class="card-icon">
-                            <img src="{{ asset('svgs/mobile.svg') }}" alt="mobile icon">
+                            <img src="{{ asset('svgs/mobile.png') }}" alt="mobile icon">
                         </div>
                         <h3>Contact</h3>
                         <p>
