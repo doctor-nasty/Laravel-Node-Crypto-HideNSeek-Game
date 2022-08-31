@@ -73,7 +73,8 @@ class Web3Helper {
         if ($err !== null) {
           Log::info("Error: " . $err->getMessage());
         } else {
-          echo 'Tx hash: ' . $transaction . "<br>\n";
+          Log::info("Tx hash: {$transaction}");
+          echo "Tx hash: {$transaction}\n";
           $txHash = $transaction;
         }
       });
@@ -282,7 +283,7 @@ class Web3Helper {
       if ($transaction) {
         return $transaction;
       } else {
-        echo "Sleep one second and wait transaction to be confirmed" . "<br>\n";
+        echo "Sleep one second and wait transaction to be confirmed\n";
         sleep(1);
       }
     }
