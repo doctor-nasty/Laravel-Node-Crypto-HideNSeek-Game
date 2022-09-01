@@ -1,12 +1,14 @@
 @foreach ($data as $value => $nft)
 <div class="col-lg-4 mb-mb-120 d-flex">
-    <div class="card-list-block">
-
-        <img src="{{ $nftimage[$value] }}" alt="controller icon">
-
+    <div class="purchase-block">
+        <div class="purchase-img">
+          <img src="{{ $nftimage[$value] }}" alt="controller icon">
+        </div>
         <h3>{{ $nftname[$value] }}</h3>
-        <p>Price: 0 USDC</p>
-        <button>Buy</button>
+        <span class="price">
+          0 USDC <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="controller icon">
+        </span>
+        <button>Purchase</button>
     </div>
 </div>
 @endforeach

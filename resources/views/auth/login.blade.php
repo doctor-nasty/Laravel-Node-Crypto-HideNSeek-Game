@@ -386,8 +386,9 @@
 
     @if (count($data) > 0)
 
-    <section class="card-list-section" data-scroll-index="3">
+    <section class="card-list-section purchase-section" data-scroll-index="3">
         <div class="container">
+            <h2>Marketplace</h2>
             <div class="row" id="nft">
                 @include('auth.nft',["data"=>$data])
             </div>
