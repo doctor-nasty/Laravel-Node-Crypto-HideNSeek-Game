@@ -388,8 +388,8 @@
 
     <section class="purchase-section" data-scroll-index="3">
         <div class="container">
-            <h2>Marketplace</h2>
-            <div class="row" id="nft">
+            <div class="row position-relative" id="nft">
+                <h2 class="w-100">Marketplace</h2>
                 @include('auth.nft',["data"=>$data])
             </div>
         </div>

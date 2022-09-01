@@ -1,4 +1,4 @@
-
+<div class="row">
 @foreach ($data as $value => $nft)
 <div class="col-lg-4 mb-mb-120 d-flex">
     <div class="purchase-block">
@@ -13,8 +13,8 @@
     </div>
 </div>
 @endforeach
-
-<div id="search">
+</div>
+<div id="search" class="purchase-buttons">
     <form id="playerform" name="playerform">
         <div class="form-group">
           {{-- <label>Search by Token ID</label> --}}

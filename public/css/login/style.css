@@ -3708,3 +3708,15 @@ textarea.is-invalid.tt-hint {
   cursor: pointer;
   font-size: 18px;
 }
+.purchase-buttons {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.purchase-buttons #playerform {
+  margin-right: 12px;
+}
+.purchase-buttons .form-group {
+  margin: 0;
+}
