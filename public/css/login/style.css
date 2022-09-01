@@ -3658,6 +3658,10 @@ textarea.is-invalid.tt-hint {
   height: 44px;
   margin-bottom: 12px;
 }
+.purchase-section {
+  padding: 120px 0;
+  background: #efeff3;
+}
 .purchase-section h2 {
   color: #000000;
   font-size: 32px;
