@@ -1,30 +1,41 @@
+<div class="row">
 @foreach ($sales as $value => $nft)
 <div class="col-lg-4 mb-mb-120 d-flex">
-    <div class="card-list-block">
-
-        <img src="{{ $nft->image }}" alt="controller icon">
-
+    <div class="purchase-block">
+        <div class="purchase-img">
+          <img src="{{ $nft->image }}" alt="controller icon">
+        </div>
         <h3>{{ $nft->name }}</h3>
-        <p>Price: {{ $nft->token_id <= 125 ? 500 : 100 }} USDC</p>
-        <button onclick="javascript:buyNft({{$nft->token_id}})">Buy</button>
+        <span class="price">
+          0 USDC <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="controller icon">
+        </span>
+        <button>Purchase</button>
     </div>
 </div>
 @endforeach
-<div id="search">
-    <form id="searchform" name="searchform">
-      <div class="form-group">
-        <label>Search by Token ID</label>
-        <input type="text" name="token_id" value="{{request()->get('token_id','')}}" class="form-control" />
-        @csrf
+</div>
+<div id="search" class="purchase-buttons">
+    <form id="playerform" name="playerform">
+        <div class="form-group">
+          {{-- <label>Search by Token ID</label> --}}
+          <input hidden type="text" name="player" value="" class="form-control" />
+          @csrf
+  
+        </div>
+        <a class='btn btn-success' href='{{url("login")}}' id='playersbtn'>Players NFT</a>
+      </form>
+      <form id="creatorform" name="creatorform">
+          <div class="form-group">
+            {{-- <label>Search by Token ID</label> --}}
+            <input hidden type="text" name="creator" value="" class="form-control" />
+            @csrf
+    
+          </div>
+          <a class='btn btn-success' href='{{url("login")}}' id='creatorsbtn'>Creators NFT</a>
+        </form>
+</div>
 
-      </div>
-      <a class='btn btn-success' href='{{url("login")}}' id='search_btn'>Search</a>
-    </form>
-
-
-  </div>
-
-<div id="pagination">
+<div id="pagination" class="purchase-pagination">
     {{-- {!{$sales->appends(['per_page' => '20'])->links() !!} --}}
     {{$sales->links()}}
 </div>

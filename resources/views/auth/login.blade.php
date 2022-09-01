@@ -386,9 +386,10 @@
 
     @if (count($sales) > 0)
 
-    <section class="card-list-section" data-scroll-index="3">
+    <section class="purchase-section" data-scroll-index="3">
         <div class="container">
-            <div class="row" id="nft">
+            <div class="row position-relative" id="nft">
+                <h2 class="w-100">Marketplace</h2>
                 @include('auth.nft',["sales"=>$sales])
             </div>
         </div>
@@ -404,12 +405,12 @@ $.ajaxSetup({
     </script>
     <script>
     $(function() {
-      $(document).on("click", "#pagination a", function() {
+      $(document).on("click", "#pagination a, #playersbtn, #creatorsbtn", function() {
 
         //get url and make final url for ajax 
         var url = $(this).attr("href");
         var append = url.indexOf("?") == -1 ? "?" : "&";
-        var finalURL = url + append + $("#searchform").serialize();
+        var finalURL = url + append + $("#playerform").serialize() + $("#creatorform").serialize();
 
         //set to current url
         window.history.pushState({}, null, finalURL);
@@ -440,7 +441,7 @@ $.ajaxSetup({
                         </a>
                     </div>
                     <span>
-Text
+                        Text
                     </span>
                     <span>
                       text2
@@ -448,8 +449,53 @@ Text
                 </div>
             </div>
         </div>
-    </div>
-
+    </div>\
+    <!-- End Hero ====
+        ======================================= -->
+    <section class="slider-section" data-scroll-index="2">
+        <div class="container">
+            <div class="row">
+                <article class="col-12 borrow-article mb-md50">
+                    <h2>Borrow NFT</h2>
+                    <p>
+                        Here you can see available NFTs to borrow, price per day is 0.5 USDC.
+                        Winning the game with the borrowed Creators NFT will earn you a 10% from the total bid in game.
+                        Winning the game with the Players NFT will earn you a 40% from the total bid in game.
+                    </p>
+                </article>
+                <div class="col-12">
+                    @if (sizeof($delegations) > 0)
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <input type="hidden" id="usdt_addr" value="{{ config('web3.chain.token') }}">
+                                <input type="hidden" id="nft_addr" value="{{ config('web3.chain.nft') }}">
+                                @foreach ($delegations as $index => $delegation)
+                                    <div class="swiper-slide">
+                                        <div class="slider-content">
+                                            <div class="slider-text">
+                                                <h4>{{ $delegation->name }}</h4>
+                                                <span>{{ $delegation->duration }} Days</span>
+                                            </div>
+                                            <div class="slider-buttons">
+                                                <button class="slider-button-delegate"
+                                                    onclick="javascript:borrow({{ $delegation->token_id }}, {{ $delegation->duration }})">Borrow</button>
+                                            </div>
+                                        </div>
+                                        <img src="{{ $delegation->image }}" alt="mouse icon">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    @else
+                        <p>Currently, no NFTs are available for borrowing.</p>
+                        <p>Please, check back later.</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="card-list-section">
         <div class="container">
             <div class="row">
@@ -497,53 +543,6 @@ Text
             </div>
         </div>
     </section>
-    <!-- End Hero ====
-        ======================================= -->
-    <section class="slider-section" data-scroll-index="2">
-        <div class="container">
-            <div class="row">
-                <article class="col-12 borrow-article mb-md50">
-                    <h2>Borrow NFT</h2>
-                    <p>
-                        Here you can see available NFTs to borrow, price per day is 0.5 USDC.
-                        Winning the game with the borrowed Creators NFT will earn you a 10% from the total bid in game.
-                        Winning the game with the Players NFT will earn you a 40% from the total bid in game.
-                    </p>
-                </article>
-                <div class="col-12">
-                    @if (sizeof($delegations) > 0)
-                        <div class="swiper mySwiper">
-                            <div class="swiper-wrapper">
-                                <input type="hidden" id="usdt_addr" value="{{ config('web3.chain.token') }}">
-                                <input type="hidden" id="nft_addr" value="{{ config('web3.chain.nft') }}">
-                                @foreach ($delegations as $index => $delegation)
-                                    <div class="swiper-slide">
-                                        <div class="slider-content">
-                                            <div class="slider-text">
-                                                <h4>{{ $delegation->name }}</h4>
-                                                <span>{{ $delegation->duration }} Days</span>
-                                            </div>
-                                            <div class="slider-buttons">
-                                                <button class="slider-button-delegate"
-                                                    onclick="javascript:borrow({{ $delegation->token_id }}, {{ $delegation->duration }})">Borrow</button>
-                                            </div>
-                                        </div>
-                                        <img src="{{ $delegation->image }}" alt="mouse icon">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                    @else
-                        <p>Currently, no NFTs are available for borrowing.</p>
-                        <p>Please, check back later.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <!-- =====================================
         ==== Start Footer -->
