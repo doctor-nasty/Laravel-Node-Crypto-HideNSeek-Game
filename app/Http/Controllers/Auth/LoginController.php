@@ -55,8 +55,8 @@ class LoginController extends Controller
     {
         
         $delegations = TokenInfo::where('status', 1)->get();
-        $nft_name = [];
-        $nft_image = [];
+        // $nft_name = [];
+        // $nft_image = [];
 
         foreach($delegations as $index => $delegation) {
             // get token metadata
@@ -72,18 +72,21 @@ class LoginController extends Controller
             curl_close ($ch);
             $j=json_decode($result, true);
 
-            $nft_name[$index] = $j['name'];
-            $nft_image[$index] = $j['image'];
+            $delegation->image = $j['image'];
+            $delegation->name = $j['name'];
+
+            // $nft_name[$index] = $j['name'];
+            // $nft_image[$index] = $j['image'];
         }
 
         // ->where('owner', '==', '0x5f24f462fb770ccec2f403953352818a0c2d649b');
 
-        $data = Tokeninfo::where('owner', config('web3.wallet.address'))
+        $sales = Tokeninfo::where('owner', config('web3.wallet.address'))
                 ->when($request->has("token_id"), function($q) use($request) {
                     return $q->where("token_id","like","%".$request->get("token_id")."%");
                 })->paginate(5);
         
-        foreach($data as $value => $nft) {
+        foreach($sales as $index => $nft) {
             // get token metadata
             $url = 'https://bafybeidunbtz7jt2xnhxbm6xfifzzpjokjlf55ztx54u6vgpln6swztwfa.ipfs.nftstorage.link/metadata/'.$nft->token_id;
             $ch = curl_init();
@@ -97,26 +100,31 @@ class LoginController extends Controller
             curl_close ($ch);
             $j2=json_decode($result, true);
 
-            $nftname[$value] = $j2['name'];
-            $nftimage[$value] = $j2['image'];
+            $nft->name = $j2['name'];
+            $nft->image = $j2['image'];
+
+            // $nftname[$value] = $j2['name'];
+            // $nftimage[$value] = $j2['image'];
         }
 
 
 
         if($request->ajax()){
             return view('auth.nft')
-            ->with('data', $data)
-            ->with('nftimage', $nftimage)
-            ->with('nftname', $nftname);
-    
+            ->with('sales', $sales);
+            // ->with('data', $data)
+            // ->with('nftimage', $nftimage)
+            // ->with('nftname', $nftname);
         } 
+        
         return view('auth.login')
-        ->with('data', $data)
+        // ->with('data', $data)
         ->with('delegations', $delegations)
-        ->with('nftimage', $nftimage)
-        ->with('nftname', $nftname)
-        ->with('nft_image', $nft_image)
-        ->with('nft_name', $nft_name);
+        ->with('sales', $sales);
+        // ->with('nftimage', $nftimage)
+        // ->with('nftname', $nftname);
+        // ->with('nft_image', $nft_image)
+        // ->with('nft_name', $nft_name);
         
     }
 

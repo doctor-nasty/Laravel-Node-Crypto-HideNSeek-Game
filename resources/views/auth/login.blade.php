@@ -384,12 +384,12 @@
         </div>
     </section>
 
-    @if (count($data) > 0)
+    @if (count($sales) > 0)
 
     <section class="card-list-section" data-scroll-index="3">
         <div class="container">
             <div class="row" id="nft">
-                @include('auth.nft',["data"=>$data])
+                @include('auth.nft',["sales"=>$sales])
             </div>
         </div>
     </section>
@@ -520,7 +520,7 @@ Text
                                     <div class="swiper-slide">
                                         <div class="slider-content">
                                             <div class="slider-text">
-                                                <h4>{{ $nft_name[$index] }}</h4>
+                                                <h4>{{ $delegation->name }}</h4>
                                                 <span>{{ $delegation->duration }} Days</span>
                                             </div>
                                             <div class="slider-buttons">
@@ -528,7 +528,7 @@ Text
                                                     onclick="javascript:borrow({{ $delegation->token_id }}, {{ $delegation->duration }})">Borrow</button>
                                             </div>
                                         </div>
-                                        <img src="{{ $nft_image[$index] }}" alt="mouse icon">
+                                        <img src="{{ $delegation->image }}" alt="mouse icon">
                                     </div>
                                 @endforeach
                             </div>

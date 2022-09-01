@@ -35,7 +35,6 @@ async function getProvider() {
   }
 
   const network = $("#network_id").val();
-  alert(network);
 
   const targetChain = chainIds[network];
 
@@ -441,6 +440,73 @@ async function borrow(tokenId, duration) {
                         .catch((err) => setTxStatus(err.message))
                     )
                     .catch((err) => setTxStatus(err.message));
+                })
+                .catch((err) => setTxStatus(err.message));
+            })
+            .catch((err) => setTxStatus(err.message));
+        })
+        .catch((err) => setTxStatus(err));
+    })
+    .catch((err) => setTxStatus(err));
+}
+
+async function buyNft(tokenId) {
+  const provider = await getProvider();
+
+  if (provider === undefined) return;
+
+  confirmationModal();
+  setTxStatus("Waiting user approval...");
+
+  const signer = provider.getSigner();
+
+  const addrVendor = $("#vendor_addr").val();
+  const addrUSDT = $("#usdt_addr").val();
+  const vendorAbi = [
+    "function buyNft(uint256 tokenId, bool withReferrer) external",
+  ];
+  const usdtAbi = [
+    "function approve(address _spender, uint256 _value) public returns (bool success)",
+    "function decimals() view returns (uint8)",
+  ];
+
+  // The Contract object
+  const vendor = new ethers.Contract(addrVendor, vendorAbi, signer);
+  const usdt = new ethers.Contract(addrUSDT, usdtAbi, signer);
+  const price = tokenId <= 125 ? 5 : 1;
+
+  const decimals = await usdt.decimals();
+  const unit = ethers.BigNumber.from(10).pow(decimals);
+  console.log(unit);
+  const cost = ethers.BigNumber.from(price).mul(unit);
+
+  console.log(addrVendor, decimals, cost);
+
+  // approve USDT to payment for borrowing
+  usdt
+    .approve(addrVendor, cost)
+    .then((tx) => {
+      setTxStatus("Waiting token approval is confirmed...");
+      tx.wait()
+        .then((res) => {
+          setTxStatus("Buying...");
+          // fulfilling offer
+          vendor
+            .buyNft(tokenId, false)
+            .then((tx) => {
+              setTxStatus("Waiting buying transaction is confirmed...");
+              tx.wait()
+                .then((res) => {
+                  console.log(tx.hash);
+                  $("#tx_hash").val(tx.hash);
+                  // fetch("/borrow/" + tx.hash + "/" + tokenId)
+                  //   .then((res) =>
+                  //     res
+                  //       .text()
+                  //       .then((msg) => alert(msg))
+                  //       .catch((err) => setTxStatus(err.message))
+                  //   )
+                  //   .catch((err) => setTxStatus(err.message));
                 })
                 .catch((err) => setTxStatus(err.message));
             })

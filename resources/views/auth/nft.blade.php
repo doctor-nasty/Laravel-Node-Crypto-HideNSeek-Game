@@ -1,12 +1,12 @@
-@foreach ($data as $value => $nft)
+@foreach ($sales as $value => $nft)
 <div class="col-lg-4 mb-mb-120 d-flex">
     <div class="card-list-block">
 
-        <img src="{{ $nftimage[$value] }}" alt="controller icon">
+        <img src="{{ $nft->image }}" alt="controller icon">
 
-        <h3>{{ $nftname[$value] }}</h3>
-        <p>Price: 0 USDC</p>
-        <button>Buy</button>
+        <h3>{{ $nft->name }}</h3>
+        <p>Price: {{ $nft->token_id <= 125 ? 500 : 100 }} USDC</p>
+        <button onclick="javascript:buyNft({{$nft->token_id}})">Buy</button>
     </div>
 </div>
 @endforeach
@@ -25,8 +25,14 @@
   </div>
 
 <div id="pagination">
-    {{-- {!{$data->appends(['per_page' => '20'])->links() !!} --}}
-    {{$data->links()}}
+    {{-- {!{$sales->appends(['per_page' => '20'])->links() !!} --}}
+    {{$sales->links()}}
 </div>
   
-
+<form>
+  <input type="hidden" name="token_id" id="purchase_token_id">
+  <input type="hidden" name="tx_hash" id="purchase_tx_hash">
+  <input type="hidden" id="usdc_addr" value="{{ config('web3.chain.token') }}">
+  <input type="hidden" id="vendor_addr" value="{{ config('web3.chain.vendor') }}">
+  @csrf
+</form>
