@@ -74,12 +74,7 @@ class LoginController extends Controller
 
             $delegation->image = $j['image'];
             $delegation->name = $j['name'];
-
-            // $nft_name[$index] = $j['name'];
-            // $nft_image[$index] = $j['image'];
         }
-
-        // ->where('owner', '==', '0x5f24f462fb770ccec2f403953352818a0c2d649b');
 
         $sales = Tokeninfo::when($request->has("player"),function($q)use($request){
             return $q->where("token_id",">","125");
@@ -103,30 +98,21 @@ class LoginController extends Controller
 
             $nft->name = $j2['name'];
             $nft->image = $j2['image'];
-
-            // $nftname[$value] = $j2['name'];
-            // $nftimage[$value] = $j2['image'];
         }
 
-
+        $referrer = "";
+        if ($request->has('referrer')) $referrer = $request['referrer'];
 
         if($request->ajax()){
             return view('auth.nft')
+            ->with('referrer', $referrer)
             ->with('sales', $sales);
-            // ->with('data', $data)
-            // ->with('nftimage', $nftimage)
-            // ->with('nftname', $nftname);
         } 
         
         return view('auth.login')
-        // ->with('data', $data)
+        ->with('referrer', $referrer)
         ->with('delegations', $delegations)
         ->with('sales', $sales);
-        // ->with('nftimage', $nftimage)
-        // ->with('nftname', $nftname);
-        // ->with('nft_image', $nft_image)
-        // ->with('nft_name', $nft_name);
-        
     }
 
 

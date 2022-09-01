@@ -473,14 +473,16 @@ async function buyNft(tokenId) {
   // The Contract object
   const vendor = new ethers.Contract(addrVendor, vendorAbi, signer);
   const usdt = new ethers.Contract(addrUSDT, usdtAbi, signer);
+
   const price = tokenId <= 125 ? 5 : 1;
 
   const decimals = await usdt.decimals();
   const unit = ethers.BigNumber.from(10).pow(decimals);
-  console.log(unit);
   const cost = ethers.BigNumber.from(price).mul(unit);
 
   console.log(addrVendor, decimals, cost);
+
+  const hasReferrer = $("#referrer").val().length > 0;
 
   // approve USDT to payment for borrowing
   usdt
@@ -492,7 +494,7 @@ async function buyNft(tokenId) {
           setTxStatus("Buying...");
           // fulfilling offer
           vendor
-            .buyNft(tokenId, false)
+            .buyNft(tokenId, hasReferrer)
             .then((tx) => {
               setTxStatus("Waiting buying transaction is confirmed...");
               tx.wait()

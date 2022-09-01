@@ -42,8 +42,9 @@
   
 <form>
   <input type="hidden" name="token_id" id="purchase_token_id">
+  <input type="hidden" id="referrer" name="referrer" value="{{ $referrer }}">
   <input type="hidden" name="tx_hash" id="purchase_tx_hash">
-  <input type="hidden" id="usdc_addr" value="{{ config('web3.chain.token') }}">
+  <input type="hidden" id="usdt_addr" value="{{ config('web3.chain.token') }}">
   <input type="hidden" id="vendor_addr" value="{{ config('web3.chain.vendor') }}">
   @csrf
 </form>
