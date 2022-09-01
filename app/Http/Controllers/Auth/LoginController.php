@@ -85,7 +85,7 @@ class LoginController extends Controller
             return $q->where("token_id",">","125");
         })->when($request->has("creator"),function($q)use($request){
             return $q->where("token_id","<=","125");
-        })->paginate(3);
+        })->where('owner', config('web3.wallet.address'))->paginate(3);
         
         foreach($sales as $index => $nft) {
             // get token metadata
