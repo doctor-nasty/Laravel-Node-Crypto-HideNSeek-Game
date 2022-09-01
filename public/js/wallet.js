@@ -499,6 +499,8 @@ async function buyNft(tokenId) {
                 .then((res) => {
                   console.log(tx.hash);
                   $("#tx_hash").val(tx.hash);
+                  $("#confirmation-modal").modal("hide");
+                  alert("Bought success");
                   // fetch("/borrow/" + tx.hash + "/" + tokenId)
                   //   .then((res) =>
                   //     res

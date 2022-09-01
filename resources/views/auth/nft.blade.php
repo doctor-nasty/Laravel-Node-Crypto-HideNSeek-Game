@@ -7,9 +7,9 @@
         </div>
         <h3>{{ $nft->name }}</h3>
         <span class="price">
-          0 USDC <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="controller icon">
+        {{ $nft->token_id <= 125 ? 500 : 100 }} USDC <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="controller icon">
         </span>
-        <button>Purchase</button>
+        <button onclick="javascript:buyNft({{$nft->token_id}})">Purchase</button>
     </div>
 </div>
 @endforeach
