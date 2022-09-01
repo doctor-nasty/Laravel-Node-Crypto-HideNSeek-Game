@@ -405,12 +405,12 @@ $.ajaxSetup({
     </script>
     <script>
     $(function() {
-      $(document).on("click", "#pagination a", function() {
+      $(document).on("click", "#pagination a, #playersbtn, #creatorsbtn", function() {
 
         //get url and make final url for ajax 
         var url = $(this).attr("href");
         var append = url.indexOf("?") == -1 ? "?" : "&";
-        var finalURL = url + append + $("#searchform").serialize();
+        var finalURL = url + append + $("#playerform").serialize() + $("#creatorform").serialize();
 
         //set to current url
         window.history.pushState({}, null, finalURL);

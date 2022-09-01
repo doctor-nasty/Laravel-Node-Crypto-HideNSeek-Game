@@ -1,3 +1,4 @@
+
 @foreach ($data as $value => $nft)
 <div class="col-lg-4 mb-mb-120 d-flex">
     <div class="purchase-block">
@@ -12,21 +13,29 @@
     </div>
 </div>
 @endforeach
+
 <div id="search">
-    <form id="searchform" name="searchform">
-      <div class="form-group">
-        <label>Search by Token ID</label>
-        <input type="text" name="token_id" value="{{request()->get('token_id','')}}" class="form-control" />
-        @csrf
+    <form id="playerform" name="playerform">
+        <div class="form-group">
+          {{-- <label>Search by Token ID</label> --}}
+          <input hidden type="text" name="player" value="" class="form-control" />
+          @csrf
+  
+        </div>
+        <a class='btn btn-success' href='{{url("login")}}' id='playersbtn'>Players NFT</a>
+      </form>
+      <form id="creatorform" name="creatorform">
+          <div class="form-group">
+            {{-- <label>Search by Token ID</label> --}}
+            <input hidden type="text" name="creator" value="" class="form-control" />
+            @csrf
+    
+          </div>
+          <a class='btn btn-success' href='{{url("login")}}' id='creatorsbtn'>Creators NFT</a>
+        </form>
+</div>
 
-      </div>
-      <a class='btn btn-success' href='{{url("login")}}' id='search_btn'>Search</a>
-    </form>
-
-
-  </div>
-
-<div id="pagination">
+<div id="pagination" style="cent">
     {{-- {!{$data->appends(['per_page' => '20'])->links() !!} --}}
     {{$data->links()}}
 </div>

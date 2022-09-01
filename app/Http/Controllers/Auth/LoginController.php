@@ -78,9 +78,11 @@ class LoginController extends Controller
 
         // ->where('owner', '==', '0x5f24f462fb770ccec2f403953352818a0c2d649b');
 
-        $data = Tokeninfo::when($request->has("token_id"),function($q)use($request){
-            return $q->where("token_id","like","%".$request->get("token_id")."%");
-        })->paginate(5);
+        $data = Tokeninfo::when($request->has("player"),function($q)use($request){
+            return $q->where("token_id",">","125");
+        })->when($request->has("creator"),function($q)use($request){
+            return $q->where("token_id","<=","125");
+        })->paginate(3);
         
         foreach($data as $value => $nft) {
             // get token metadata
