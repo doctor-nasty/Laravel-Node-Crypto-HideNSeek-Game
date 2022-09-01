@@ -384,13 +384,13 @@
         </div>
     </section>
 
-    @if (count($data) > 0)
+    @if (count($sales) > 0)
 
     <section class="purchase-section" data-scroll-index="3">
         <div class="container">
             <div class="row position-relative" id="nft">
                 <h2 class="w-100">Marketplace</h2>
-                @include('auth.nft',["data"=>$data])
+                @include('auth.nft',["sales"=>$sales])
             </div>
         </div>
     </section>
@@ -473,7 +473,7 @@ $.ajaxSetup({
                                     <div class="swiper-slide">
                                         <div class="slider-content">
                                             <div class="slider-text">
-                                                <h4>{{ $nft_name[$index] }}</h4>
+                                                <h4>{{ $delegation->name }}</h4>
                                                 <span>{{ $delegation->duration }} Days</span>
                                             </div>
                                             <div class="slider-buttons">
@@ -481,7 +481,7 @@ $.ajaxSetup({
                                                     onclick="javascript:borrow({{ $delegation->token_id }}, {{ $delegation->duration }})">Borrow</button>
                                             </div>
                                         </div>
-                                        <img src="{{ $nft_image[$index] }}" alt="mouse icon">
+                                        <img src="{{ $delegation->image }}" alt="mouse icon">
                                     </div>
                                 @endforeach
                             </div>
@@ -661,6 +661,7 @@ var x = setInterval(function() {
 
     <!-- wallet scripts -->
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <input type="hidden" id="network_id" value="{{config('web3.chain.network')}}" />
     <script src="{{ asset('js/wallet.js') }}"></script>
     <script type="text/javascript">
         @if (count($errors) > 0)
