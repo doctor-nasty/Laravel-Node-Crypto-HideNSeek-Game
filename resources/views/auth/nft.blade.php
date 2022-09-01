@@ -35,7 +35,7 @@
         </form>
 </div>
 
-<div id="pagination" style="cent">
+<div id="pagination" class="purchase-pagination">
     {{-- {!{$data->appends(['per_page' => '20'])->links() !!} --}}
     {{$data->links()}}
 </div>

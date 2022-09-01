@@ -3720,3 +3720,11 @@ textarea.is-invalid.tt-hint {
 .purchase-buttons .form-group {
   margin: 0;
 }
+.purchase-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.purchase-pagination ul {
+  margin-bottom: 0;
+}
