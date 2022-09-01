@@ -80,4 +80,5 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 </script>
 
 <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<input type="hidden" id="network_id" value="{{config('web3.chain.network')}}" />
 <script src="{{ asset('js/wallet.js') }}"></script>

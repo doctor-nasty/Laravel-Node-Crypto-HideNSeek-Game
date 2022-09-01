@@ -662,6 +662,7 @@ var x = setInterval(function() {
 
     <!-- wallet scripts -->
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <input type="hidden" id="network_id" value="{{config('web3.chain.network')}}" />
     <script src="{{ asset('js/wallet.js') }}"></script>
     <script type="text/javascript">
         @if (count($errors) > 0)
