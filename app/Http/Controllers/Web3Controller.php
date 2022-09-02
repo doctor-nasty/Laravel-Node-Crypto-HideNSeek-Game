@@ -414,7 +414,7 @@ class Web3Controller
                     }
                 } else {
                     $promotion->num_treasures += 1;
-                    if ($promotion->num_pirates % 10 == 0) { // every 10 treasures
+                    if ($promotion->num_pirates % 5 == 0) { // every 5 treasures
                         NftAward::create([
                             'address' => $promotion->user_wallet,
                             'nft_type' => 1, // treasure
