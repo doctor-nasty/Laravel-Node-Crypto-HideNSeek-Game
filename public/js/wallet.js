@@ -482,7 +482,7 @@ async function buyNft(tokenId) {
 
   console.log(addrVendor, decimals, cost);
 
-  const hasReferrer = $("#referrer").val().length > 0;
+  const hasReferrer = $("#referrer").val() != "none";
 
   // approve USDT to payment for borrowing
   usdt
@@ -502,7 +502,23 @@ async function buyNft(tokenId) {
                   console.log(tx.hash);
                   $("#tx_hash").val(tx.hash);
                   $("#confirmation-modal").modal("hide");
-                  alert("Bought success");
+
+                  console.log($("#purchase_form"));
+
+                  $.post(
+                    $("#purchase_form").attr("action"),
+                    {
+                      token_id: tokenId,
+                      referrer: $("#referrer").val(),
+                      tx_hash: tx.hash,
+                      _token: $('meta[name="csrf-token"]').attr("content"),
+                    },
+                    function (result) {
+                      alert(result);
+                      location.reload();
+                    }
+                  );
+                  // $("purchase_form").trigger("submit");
                   // fetch("/borrow/" + tx.hash + "/" + tokenId)
                   //   .then((res) =>
                   //     res

@@ -1,3 +1,4 @@
+<h2 class="w-100">Marketplace</h2>
 <div class="row">
 @foreach ($sales as $value => $nft)
 <div class="col-lg-4 mb-mb-120 d-flex">
@@ -7,13 +8,22 @@
         </div>
         <h3>{{ $nft->name }}</h3>
         <span class="price">
-        {{ $nft->token_id <= 125 ? 500 : 100 }} USDC <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="controller icon">
+        {{ $nft->token_id <= 125 ? 500 * $ratio : 100 * $ratio }} USDC <img src="{{ asset('svgs/usdc-icon.svg') }}" alt="controller icon">
         </span>
         <button onclick="javascript:buyNft({{$nft->token_id}})">Purchase</button>
     </div>
 </div>
 @endforeach
 </div>
+<form id="search_form" name="search_form">
+  <div class="form-group">
+    {{-- <label>Search by Token ID</label> --}}
+    @csrf
+    <input hidden type="text" id="nft_type" name="type" value="{{ $nft_type }}" class="form-control" />
+    <input hidden type="text" name="referrer" value="{{ $referrer }}" class="form-control" />
+  </div>
+</form>
+
 <div id="search" class="purchase-buttons">
     <form id="playerform" name="playerform">
         <div class="form-group">
@@ -40,7 +50,7 @@
     {{$sales->links()}}
 </div>
   
-<form>
+<form method="post" action='{{url("/check_purchase")}}' enctype="multipart/formdata" id="purchase_form">
   <input type="hidden" name="token_id" id="purchase_token_id">
   <input type="hidden" id="referrer" name="referrer" value="{{ $referrer }}">
   <input type="hidden" name="tx_hash" id="purchase_tx_hash">
