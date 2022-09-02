@@ -40,7 +40,7 @@
     {{$sales->links()}}
 </div>
   
-<form>
+<form method="post" action='{{url("/check_purchase")}}' enctype="multipart/formdata" id="purchase_form">
   <input type="hidden" name="token_id" id="purchase_token_id">
   <input type="hidden" id="referrer" name="referrer" value="{{ $referrer }}">
   <input type="hidden" name="tx_hash" id="purchase_tx_hash">

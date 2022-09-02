@@ -100,7 +100,7 @@ class LoginController extends Controller
             $nft->image = $j2['image'];
         }
 
-        $referrer = "";
+        $referrer = "none";
         if ($request->has('referrer')) $referrer = $request['referrer'];
 
         if($request->ajax()){

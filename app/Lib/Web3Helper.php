@@ -82,6 +82,66 @@ class Web3Helper {
     return $txHash;
   }
 
+  public function sendNftToUser($address, $token_id, $nonce) {
+    $web3 = $this->web3;
+
+    $abi = json_decode(file_get_contents(base_path('public/web3/HidenSeekToken.json')));
+    $token = new Contract($web3->provider, $abi);
+
+
+    // esitmate gas
+    $estimatedGas = '0x200b20';
+
+    $token->at(config('web3.chain.nft'))->estimateGas('safeTransferFrom', config('web3.wallet.address'), $address, $token_id, [
+      'from' => config('web3.wallet.address')
+    ], function($err, $result) use(&$estimatedGas) {
+      if ($err === null) {
+        $estimatedGas = '0x' . $result->toHex();
+      } else {
+        echo 'Failed to estimate gas';
+      }
+    });
+
+    $data = $token->getData('safeTransferFrom', config('web3.wallet.address'), $address, $token_id);
+
+    // get nonce
+    $gasPrice = $this->getGasPrice();
+
+    $chain_ids = [
+      'Ethereum' => 1,
+      'Rinkeby' => 4,
+      'Polygon' => 137,
+      'Mumbai' => 80001
+    ];
+
+    $transaction = new Transaction([
+      'from' => config('web3.wallet.address'),
+      'to' => config('web3.chain.nft'),
+      'nonce' => '0x' . $nonce->toHex(),
+      'gas' => $estimatedGas,
+      'gasPrice' => '0x' . $gasPrice->toHex(),
+      'data' => '0x' . $data,
+      'chainId' => $chain_ids[config("web3.chain.network")]
+    ]);
+
+    $transaction->sign(config('web3.wallet.private_key'));
+
+    $txHash = null;
+    $this->web3->getEth()->sendRawTransaction(
+      '0x' . $transaction->serialize(), 
+      function ($err, $transaction) use (&$txHash) {
+        if ($err !== null) {
+          Log::info("Error: " . $err->getMessage());
+        } else {
+          Log::info("Tx hash: {$transaction}");
+          echo "Tx hash: {$transaction}\n";
+          $txHash = $transaction;
+        }
+      });
+    
+    return $txHash;
+  }
+
   public function getPirateDelegator($address) {
     $numOwned = TokenInfo::where([
       ['token_id', '<=', 125],
