@@ -203,10 +203,10 @@
                         <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-scroll-nav="2">Borrow</a>
+                        <a class="nav-link" href="#" data-scroll-nav="2">Marketplace</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-scroll-nav="3">Marketplace</a>
+                        <a class="nav-link" href="#" data-scroll-nav="3">Borrow</a>
                     </li>
                     <li class="nav-item header-nav header-social">
                         <a href="https://t.me/hidenseek_group" class="nav-icon">
@@ -386,7 +386,7 @@
 
     @if (count($sales) > 0)
 
-    <section class="purchase-section" data-scroll-index="3">
+    <section class="purchase-section" data-scroll-index="2">
         <div class="container">
             <div class="row position-relative" id="nft">
                 @include('auth.nft',["sales"=>$sales])
@@ -454,7 +454,7 @@ $.ajaxSetup({
     </div>\
     <!-- End Hero ====
         ======================================= -->
-    <section class="slider-section" data-scroll-index="2">
+    <section class="slider-section" data-scroll-index="3">
         <div class="container">
             <div class="row">
                 <article class="col-12 borrow-article mb-md50">

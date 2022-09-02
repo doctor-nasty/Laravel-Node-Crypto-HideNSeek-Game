@@ -45,7 +45,7 @@
                         <hr>
                         <div class="tab-content border-0" id="myTabContent">
                             <div class="tab-pane fade" id="referral" role="tabpanel" aria-labelledby="info">
-                                <span class="badge badge-warning text-white"><a href="{{$referral_url}}">{{$referral_url}}</a></span>
+                                <span class="badge badge-warning text-white">Referral URL:</span> <a href="{{$referral_url}}">{{$referral_url}}</a>
                             </div>
                             <div class="tab-pane fade show active" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
                                 <form action="/settings/avatar" method="post" enctype="multipart/form-data">

@@ -1,7 +1,7 @@
 <h2 class="w-100">Marketplace</h2>
 <div class="row">
 @foreach ($sales as $value => $nft)
-<div class="col-lg-4 mb-mb-120 d-flex">
+<div class="col-lg-4 d-flex">
     <div class="purchase-block">
         <div class="purchase-img">
           <img src="{{ $nft->image }}" alt="controller icon">
