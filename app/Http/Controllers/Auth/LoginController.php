@@ -76,9 +76,19 @@ class LoginController extends Controller
             $delegation->name = $j['name'];
         }
 
-        $sales = Tokeninfo::when($request->has("player"),function($q)use($request){
+        $referrer = "none";
+        if ($request->has('referrer')) $referrer = $request['referrer'];
+
+        $ratio = 1;
+
+        if ($referrer != 'none') $ratio = 0.975;
+
+        $nft_type = "creator";
+        if ($request->has('type')) $nft_type = $request['type'];
+
+        $sales = Tokeninfo::when($nft_type=='player',function($q)use($request){
             return $q->where("token_id",">","125");
-        })->when($request->has("creator"),function($q)use($request){
+        })->when($nft_type=='creator',function($q)use($request){
             return $q->where("token_id","<=","125");
         })->where('owner', config('web3.wallet.address'))->paginate(3);
         
@@ -100,17 +110,18 @@ class LoginController extends Controller
             $nft->image = $j2['image'];
         }
 
-        $referrer = "none";
-        if ($request->has('referrer')) $referrer = $request['referrer'];
-
         if($request->ajax()){
             return view('auth.nft')
             ->with('referrer', $referrer)
+            ->with('nft_type', $nft_type)
+            ->with('ratio', $ratio)
             ->with('sales', $sales);
         } 
         
         return view('auth.login')
         ->with('referrer', $referrer)
+        ->with('nft_type', $nft_type)
+        ->with('ratio', $ratio)
         ->with('delegations', $delegations)
         ->with('sales', $sales);
     }

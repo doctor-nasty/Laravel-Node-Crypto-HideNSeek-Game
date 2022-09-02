@@ -389,7 +389,6 @@
     <section class="purchase-section" data-scroll-index="3">
         <div class="container">
             <div class="row position-relative" id="nft">
-                <h2 class="w-100">Marketplace</h2>
                 @include('auth.nft',["sales"=>$sales])
             </div>
         </div>
@@ -406,14 +405,17 @@ $.ajaxSetup({
     <script>
     $(function() {
       $(document).on("click", "#pagination a, #playersbtn, #creatorsbtn", function() {
-
         //get url and make final url for ajax 
+        
+        if ($(this).attr('id') == "playersbtn") $("#nft_type").val("player");
+        else if ($(this).attr('id') == "creatorsbtn") $("#nft_type").val("creator");
+
         var url = $(this).attr("href");
         var append = url.indexOf("?") == -1 ? "?" : "&";
-        var finalURL = url + append + $("#playerform").serialize() + $("#creatorform").serialize();
+        var finalURL = url + append + $("#search_form").serialize();
 
         //set to current url
-        window.history.pushState({}, null, finalURL);
+        // window.history.pushState({}, null, url);
 
         $.get(finalURL, function(data) {
 
