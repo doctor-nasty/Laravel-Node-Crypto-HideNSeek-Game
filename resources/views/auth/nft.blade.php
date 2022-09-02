@@ -1,4 +1,4 @@
-{{-- <h2 class="w-100">Marketplace</h2> --}}
+<h2 class="w-100">Marketplace</h2>
 @foreach ($sales as $value => $nft)
 <div class="col-lg-4 d-flex">
     <div class="purchase-block">
@@ -21,7 +21,7 @@
   </div>
 </form>
 
-<div id="search" class="purchase-buttons">
+{{-- <div id="search" class="purchase-buttons">
     <form id="playerform" name="playerform">
         <div class="form-group">
           <input hidden type="text" name="player" value="" class="form-control" />
@@ -38,7 +38,7 @@
           </div>
           <a class='btn btn-success' href='{{url("login")}}' id='creatorsbtn'>Creators NFT</a>
         </form>
-</div>
+</div> --}}
 
 <div id="pagination" class="purchase-pagination">
     {{$sales->links()}}

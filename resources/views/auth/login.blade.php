@@ -219,13 +219,6 @@
                             <img src="{{ asset('svgs/twitter.svg') }}" alt="twitter icon">
                         </a>
                     </li>
-                    <!-- <li class="nav-item header-nav">
-              <a href="/register">
-                <button type="button" class="sign-in-btn" href="/register">
-                  Sign in
-                </button>
-              </a>
-   </li> -->
                 </ul>
             </div>
         </div>
