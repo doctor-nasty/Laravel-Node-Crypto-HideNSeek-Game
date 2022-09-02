@@ -91,6 +91,20 @@ class Web3Controller
             request()->session()->invalidate();
             request()->session()->regenerateToken();
         }
+
+        // check referral id
+        if (Promotion::where('user_wallet', $user->wallet_address)->count() == 0) {
+            // generate new referral id
+            $id = '';
+            while (true) {
+                $id = $this->generateReferralId();
+                if (Promotion::where('referral_id', $id)->count() == 0) break;
+            }
+            Promotion::create([
+                'user_wallet' => $user->wallet_address,
+                'referral_id' => $id
+            ]);
+        }
         
         Auth::login($user);
 
@@ -464,5 +478,15 @@ class Web3Controller
     protected function pubKeyToAddress($pubkey)
     {
         return "0x" . substr(\kornrunner\Keccak::hash(substr(hex2bin($pubkey->encode("hex")), 1), 256), 24);
+    }
+
+    protected function generateReferralId() {
+        $id = '';
+        for ($i = 0; $i < 8; $i++) {
+            $v = rand(0, 35);
+            if ($v < 10) $id = $id . chr(ord('0') + $v);
+            else $id = $id . chr(ord('A') + $v - 10);
+        }
+        return $id;
     }
 }
