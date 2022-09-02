@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Hash;
 use Illuminate\Http\Request;
 use App\Models\TokenInfo;
-
+use App\Models\Promotion;
 
 class LoginController extends Controller
 {
@@ -78,6 +78,10 @@ class LoginController extends Controller
 
         $referrer = "none";
         if ($request->has('referrer')) $referrer = $request['referrer'];
+
+        if (Promotion::where('referral_id', $referrer)->count() == 0) {
+            $referrer = 'none';
+        }
 
         $ratio = 1;
 
