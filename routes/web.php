@@ -14,6 +14,7 @@
 use Illuminate\Support\Facades\Auth;
 use App\Game;
 Use App\User;
+use App\Http\Controllers\Auth\LoginController;
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -123,7 +124,8 @@ Route::post('login/locked', 'Auth\LoginController@unlock')->name('login.unlock')
 Route::get('login/signature', 'Web3Controller@signature');
 Route::post('login/check_signature', 'Web3Controller@login');
 Route::get('/borrow/{tx_hash}/{token_id}', 'Web3Controller@checkBorrowTx');
-
+Route::post('/check_purchase', 'Web3Controller@checkPurchase');
+Route::get('/check_purchase', 'Web3Controller@checkPurchase');
 
 // Route::group(['middleware' => 'verified'], function () {
 //     Route::get('admin', 'AdminController@admin')->name('admin');

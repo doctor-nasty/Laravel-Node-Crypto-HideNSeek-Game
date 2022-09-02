@@ -14,6 +14,9 @@ use phpseclib\Math\BigInteger;
 use GuzzleHttp\Client;
 
 use App\Models\TokenInfo;
+use App\Models\NftPurchase;
+use App\Models\Promotion;
+use App\Models\NftAward;
 
 class Web3Controller
 {
@@ -87,6 +90,20 @@ class Web3Controller
             Auth::logout();
             request()->session()->invalidate();
             request()->session()->regenerateToken();
+        }
+
+        // check referral id
+        if (Promotion::where('user_wallet', $user->wallet_address)->count() == 0) {
+            // generate new referral id
+            $id = '';
+            while (true) {
+                $id = $this->generateReferralId();
+                if (Promotion::where('referral_id', $id)->count() == 0) break;
+            }
+            Promotion::create([
+                'user_wallet' => $user->wallet_address,
+                'referral_id' => $id
+            ]);
         }
         
         Auth::login($user);
@@ -322,6 +339,115 @@ class Web3Controller
         return 'Successfully borrowed. You can login now.';
     }
 
+    public function checkPurchase() {
+        $data = request()->validate([
+            'token_id' => ['required', 'integer'],
+            'tx_hash' => ['required', 'string', 'regex:/^0x([A-Fa-f0-9]{64})$/'],
+            'referrer'=> ['required', 'string'],
+        ]);
+
+        if ($data['referrer'] === 'none') $data['referrer'] = '';
+
+        // check token ownership
+        $tokenInfo = TokenInfo::where('token_id', $data['token_id'])->first();
+
+        if ($tokenInfo === null) {
+            return "Invalid token id";
+        }
+
+        // verify transaction data
+        $timeout = 30; // set this time accordingly by default it is 1 sec
+        $web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
+
+        $sender = '';
+        $vendor_addr = '';
+        $tx_data = '';
+
+        try {
+            $web3->getEth()->getTransactionByHash($data['tx_hash'], 
+                function($err, $result) use(&$sender, &$vendor_addr, &$tx_data) {
+                    if ($err === null) {
+                        // print_r($result);
+                        $sender = $result->from;
+                        $vendor_addr = $result->to;
+                        $tx_data = $result->input;
+                    }
+                }
+            );
+        } catch (Exception $err) {
+            return "Invalid tx hash";
+        } 
+
+        // check sender
+        if ($sender === '') {
+            // getting transaction data failed
+            return "No tx found";
+        }
+
+        // check nft address
+        if (strcasecmp($vendor_addr, config('web3.chain.vendor')) != 0) {
+            // token address is invalid
+            return "Nft vendor address is incorrect";
+        }
+
+
+        $abi = json_decode(file_get_contents(base_path('public/web3/Vendor.json')));
+        $vendor = new Contract($web3->provider, $abi);
+
+        $expected_data = $vendor->at($vendor_addr)->getData('buyNft', $data['token_id'], $data['referrer'] !== '');
+
+        if ($tx_data !== '0x' . $expected_data) {
+            // tx data is invalid
+            return "Incorrect transaction";
+        }
+
+        if (NftPurchase::where('tx_hash', $data['tx_hash'])->count() > 0) {
+            return "Duplicated tx hash";
+        }
+
+        // update db
+        $purchase = new NftPurchase();
+        $purchase->token_id = $data['token_id'];
+        $purchase->referal_id = $data['referrer'];
+        $purchase->tx_hash = $data['tx_hash'];
+        $purchase->status = 1;
+        $purchase->save();
+
+        if ($data['referrer'] !== '') {
+            $promotion = Promotion::where('referral_id', $data['referrer'])->first();
+            if ($promotion != null) {
+                if ($data['token_id'] <= 125) {
+                    $promotion->num_pirates += 1;
+
+                    if ($promotion->num_pirates % 5 == 0) { // every 5 pirate
+                        NftAward::create([
+                            'address' => $promotion->user_wallet,
+                            'nft_type' => 0, // pirate
+                            'description' => 'Award for promotion'
+                        ]);
+                    }
+                } else {
+                    $promotion->num_treasures += 1;
+                    if ($promotion->num_pirates % 5 == 0) { // every 5 treasures
+                        NftAward::create([
+                            'address' => $promotion->user_wallet,
+                            'nft_type' => 1, // treasure
+                            'description' => 'Award for invitation'
+                        ]);
+                    }
+                }
+                $promotion->save();
+            }
+        }
+
+        // change token info
+        $tokenInfo->owner = $sender;
+        $tokenInfo->purchase_time = now();
+        $tokenInfo->save();
+
+        return 'Successfully purchased. You can login now.';
+    }
+
     protected function getUserModel(): Model
     {
         return app(config('auth.providers.users.model'));
@@ -352,5 +478,15 @@ class Web3Controller
     protected function pubKeyToAddress($pubkey)
     {
         return "0x" . substr(\kornrunner\Keccak::hash(substr(hex2bin($pubkey->encode("hex")), 1), 256), 24);
+    }
+
+    protected function generateReferralId() {
+        $id = '';
+        for ($i = 0; $i < 8; $i++) {
+            $v = rand(0, 35);
+            if ($v < 10) $id = $id . chr(ord('0') + $v);
+            else $id = $id . chr(ord('A') + $v - 10);
+        }
+        return $id;
     }
 }

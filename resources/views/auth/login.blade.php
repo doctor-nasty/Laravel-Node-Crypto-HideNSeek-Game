@@ -14,6 +14,9 @@
 
         gtag('config', 'UA-237510470-1');
     </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" />
 
 
     <!-- Metas -->
@@ -200,7 +203,10 @@
                         <a class="nav-link" href="#" data-scroll-nav="1">@lang('login.about')</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-scroll-nav="2">Borrow NFT</a>
+                        <a class="nav-link" href="#" data-scroll-nav="2">Marketplace</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-scroll-nav="3">Borrow</a>
                     </li>
                     <li class="nav-item header-nav header-social">
                         <a href="https://t.me/hidenseek_group" class="nav-icon">
@@ -377,42 +383,121 @@
             </div>
         </div>
     </section>
-    <!-- <section class="hero section-padding">
-            <div class="container">
-                <div class="row">
 
-                    <div class="intro offset-lg-1 col-lg-10 text-center mb-80" style="color:black">
-                        <h3>@lang('login.first')</h3>
-                        <h4>@lang('login.second')</h4>
-                        <p>@lang('login.third')</p>
-                    </div>
+    @if (count($sales) > 0)
 
-                    <div class="col-lg-4" style="color:black">
-                        <div class="item text-center mb-md50">
-                            <span class="fas fa-gamepad"></span>
-                            <h5>@lang('login.firstboxtitle')</h5>
-                            <p>@lang('login.firstboxtext')</p>
-                        </div>
-                    </div>
+    <section class="purchase-section" data-scroll-index="2">
+        <div class="container">
+            <div class="row position-relative" id="nft">
+                @include('auth.nft',["sales"=>$sales])
+            </div>
+        </div>
+    </section>
+    @endif
+    
+<script>
+$.ajaxSetup({
+    headers: {
+    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+    </script>
+    <script>
+    $(function() {
+      $(document).on("click", "#pagination a, #playersbtn, #creatorsbtn", function() {
+        //get url and make final url for ajax 
+        
+        if ($(this).attr('id') == "playersbtn") $("#nft_type").val("player");
+        else if ($(this).attr('id') == "creatorsbtn") $("#nft_type").val("creator");
 
-                    <div class="col-lg-4" style="color:black">
-                        <div class="item text-center mb-md50">
-                            <span class="fas fa-money-bill"></span>
-                            <h5>@lang('login.secondboxtitle')</h5>
-                            <p>@lang('login.secondboxtext')</p>
-                        </div>
-                    </div>
+        var url = $(this).attr("href");
+        var append = url.indexOf("?") == -1 ? "?" : "&";
+        var finalURL = url + append + $("#search_form").serialize();
 
-                    <div class="col-lg-4" style="color:black">
-                        <div class="item text-center">
-                            <span class="fas fa-envelope"></span>
-                            <h5>@lang('login.thirdboxtitle')</h5>
-                            <p>@lang('login.thirdboxtext')</p>
-                        </div>
+        //set to current url
+        // window.history.pushState({}, null, url);
+
+        $.get(finalURL, function(data) {
+
+          $("#nft").html(data);
+
+        });
+
+        return false;
+      })
+
+    });
+
+
+        </script>
+
+    <div id="buy-modal" class="modal fade table-modal" role="dialog">
+        <div class="modal-costum-body">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content terms-modal">
+                    <div class="terms-modal-text">
+                        <a href="https://coinbase-wallet.onelink.me/q5Sx/invite">
+                            <button class="connect-btn" style="border: 1px solid rgba(255, 255, 255, 0.1);">
+                                Login with Coinbase Wallet
+                            </button>
+                        </a>
                     </div>
+                    <span>
+                        Text
+                    </span>
+                    <span>
+                      text2
+                    </span>
                 </div>
             </div>
-        </section> -->
+        </div>
+    </div>\
+    <!-- End Hero ====
+        ======================================= -->
+    <section class="slider-section" data-scroll-index="3">
+        <div class="container">
+            <div class="row">
+                <article class="col-12 borrow-article mb-md50">
+                    <h2>Borrow NFT</h2>
+                    <p>
+                        Here you can see available NFTs to borrow, price per day is 0.5 USDC.
+                        Winning the game with the borrowed Creators NFT will earn you a 10% from the total bid in game.
+                        Winning the game with the Players NFT will earn you a 40% from the total bid in game.
+                    </p>
+                </article>
+                <div class="col-12">
+                    @if (sizeof($delegations) > 0)
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <input type="hidden" id="usdt_addr" value="{{ config('web3.chain.token') }}">
+                                <input type="hidden" id="nft_addr" value="{{ config('web3.chain.nft') }}">
+                                @foreach ($delegations as $index => $delegation)
+                                    <div class="swiper-slide">
+                                        <div class="slider-content">
+                                            <div class="slider-text">
+                                                <h4>{{ $delegation->name }}</h4>
+                                                <span>{{ $delegation->duration }} Days</span>
+                                            </div>
+                                            <div class="slider-buttons">
+                                                <button class="slider-button-delegate"
+                                                    onclick="javascript:borrow({{ $delegation->token_id }}, {{ $delegation->duration }})">Borrow</button>
+                                            </div>
+                                        </div>
+                                        <img src="{{ $delegation->image }}" alt="mouse icon">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    @else
+                        <p>Currently, no NFTs are available for borrowing.</p>
+                        <p>Please, check back later.</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="card-list-section">
         <div class="container">
             <div class="row">
@@ -460,53 +545,6 @@
             </div>
         </div>
     </section>
-    <!-- End Hero ====
-        ======================================= -->
-    <section class="slider-section" data-scroll-index="2">
-        <div class="container">
-            <div class="row">
-                <article class="col-12 borrow-article mb-md50">
-                    <h2>Borrow NFT</h2>
-                    <p>
-                        Here you can see available NFTs to borrow, price per day is 0.5 USDC.
-                        Winning the game with the borrowed Creators NFT will earn you a 10% from the total bid in game.
-                        Winning the game with the Players NFT will earn you a 40% from the total bid in game.
-                    </p>
-                </article>
-                <div class="col-12">
-                    @if (sizeof($delegations) > 0)
-                        <div class="swiper mySwiper">
-                            <div class="swiper-wrapper">
-                                <input type="hidden" id="usdt_addr" value="{{ config('web3.chain.token') }}">
-                                <input type="hidden" id="nft_addr" value="{{ config('web3.chain.nft') }}">
-                                @foreach ($delegations as $index => $delegation)
-                                    <div class="swiper-slide">
-                                        <div class="slider-content">
-                                            <div class="slider-text">
-                                                <h4>{{ $nft_name[$index] }}</h4>
-                                                <span>{{ $delegation->duration }} Days</span>
-                                            </div>
-                                            <div class="slider-buttons">
-                                                <button class="slider-button-delegate"
-                                                    onclick="javascript:borrow({{ $delegation->token_id }}, {{ $delegation->duration }})">Borrow</button>
-                                            </div>
-                                        </div>
-                                        <img src="{{ $nft_image[$index] }}" alt="mouse icon">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                        </div>
-                    @else
-                        <p>Currently, no NFTs are available for borrowing.</p>
-                        <p>Please, check back later.</p>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <!-- =====================================
         ==== Start Footer -->
@@ -625,6 +663,7 @@ var x = setInterval(function() {
 
     <!-- wallet scripts -->
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    <input type="hidden" id="network_id" value="{{config('web3.chain.network')}}" />
     <script src="{{ asset('js/wallet.js') }}"></script>
     <script type="text/javascript">
         @if (count($errors) > 0)
@@ -655,6 +694,7 @@ var x = setInterval(function() {
             },
         });
     </script>
+
 </body>
 
 </html>

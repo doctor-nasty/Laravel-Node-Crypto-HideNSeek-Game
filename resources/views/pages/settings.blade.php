@@ -16,16 +16,23 @@
                 </ul>
             </div>
         @endif
+        <div class="change-content-btn">
+            <div>
+              <a href="{{ url('') }}" class="btn-change">Dashboard</a>
+            </div>
+            <div class="active">
+              <span class="btn-change">Settings</span>
+            </div>
+          </div>
     <div class="row user-profile">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div class="wrapper d-block d-sm-flex align-items-center justify-content-between">
-                        <h4 class="card-title mb-0">Settings</h4>
                         <ul class="nav nav-tabs tab-solid tab-solid-primary mb-0" id="myTab" role="tablist">
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-expanded="true">@lang('settings.info')</a>
-                            </li> --}}
+                            <li class="nav-item">
+                                <a class="nav-link" id="info-tab" data-toggle="tab" href="#referral" role="tab" aria-controls="referral" aria-expanded="true">Referrals</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link active" id="avatar-tab" data-toggle="tab" href="#avatar" role="tab" aria-controls="avatar">Avatar</a>
                             </li>
@@ -37,46 +44,9 @@
                     <div class="wrapper">
                         <hr>
                         <div class="tab-content border-0" id="myTabContent">
-                            {{-- <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info">
-                        <form enctype="multipart/form-data" method="post" action="{{ route('settings.update') }}">
-                                        @csrf
-                                    <div class="form-group">
-                                        <label for="username">@lang('settings.username')</label>
-                                        <input required class="required form-control"  type="text" name="username" id="username" placeholder="Change Username" value="{{ $user->username }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">@lang('settings.email')</label>
-                                        <input required class="required form-control"  type="text" name="email" id="email" placeholder="Change E-Mail" value="{{ $user->email }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="firstname">@lang('settings.first_name') *</label>
-                                        <input required class="required form-control"  type="text" name="firstname" id="firstname" placeholder="Change First Name" value="{{ $user->firstname }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="lastname">@lang('settings.last_name') *</label>
-                                        <input required class="required form-control"  type="text" name="lastname" id="lastname" placeholder="Change Last Name" value="{{ $user->lastname }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="gender">@lang('settings.gender') *</label>
-                                        <input required class="required form-control"  type="text" name="gender" id="gender" placeholder="Change Gender" value="{{ $user->gender }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="date_of_birth">@lang('settings.date_of_birth')</label>
-                                        <input required class="required form-control"  type="date" name="date_of_birth" id="date_of_birth" placeholder="Change Date Of Birth" value="{{ $user->date_of_birth }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone_number">@lang('settings.phone_number') *</label>
-                                        <input required class="required form-control"  type="number" name="phone_number" id="phone_number" placeholder="Change Phone Number" value="{{ $user->phone_number }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="id_number">@lang('settings.id_number') *</label>
-                                        <p>{{ $user->id_number }}</p>
-                                    </div>
-                                    <div class="form-group mt-5">
-                                        <button type="submit" class="btn btn-inverse-success mr-2">@lang('settings.update')</button>
-                                    </div>
-                        </form>
-                            </div> --}}
+                            <div class="tab-pane fade" id="referral" role="tabpanel" aria-labelledby="info">
+                                <span class="badge badge-warning text-white">Referral URL:</span> <a href="{{$referral_url}}">{{$referral_url}}</a>
+                            </div>
                             <div class="tab-pane fade show active" id="avatar" role="tabpanel" aria-labelledby="avatar-tab">
                                 <form action="/settings/avatar" method="post" enctype="multipart/form-data">
                                         @csrf

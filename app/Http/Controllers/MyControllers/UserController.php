@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Game;
+use App\Models\Promotion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 
@@ -83,8 +84,11 @@ class UserController extends Controller
     public function settings()
     {
         $user = Auth::user();
+        $promotion = Promotion::where('user_wallet', $user->wallet_address)->first();
+
         return view('pages.settings', compact('user'))
-        ->with('title', 'Settings');
+                ->with('referral_url', url("/login?referrer={$promotion->referral_id}"))
+                ->with('title', 'Settings');
     }
 
     public function edit($id)

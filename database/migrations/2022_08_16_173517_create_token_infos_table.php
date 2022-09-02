@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             // ownership
-            $table->string('token_id', 20)->unique();
+            $table->integer('token_id')->unique();
             $table->string('owner', 50);
             $table->dateTime('purchase_time')->nullable();
             
