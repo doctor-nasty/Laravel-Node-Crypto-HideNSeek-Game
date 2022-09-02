@@ -474,7 +474,7 @@ async function buyNft(tokenId) {
   const vendor = new ethers.Contract(addrVendor, vendorAbi, signer);
   const usdt = new ethers.Contract(addrUSDT, usdtAbi, signer);
 
-  const price = tokenId <= 125 ? 5 : 1;
+  const price = tokenId <= 125 ? 500 : 100;
 
   const decimals = await usdt.decimals();
   const unit = ethers.BigNumber.from(10).pow(decimals);
