@@ -1,5 +1,4 @@
-<h2 class="w-100">Marketplace</h2>
-<div class="row">
+{{-- <h2 class="w-100">Marketplace</h2> --}}
 @foreach ($sales as $value => $nft)
 <div class="col-lg-4 d-flex">
     <div class="purchase-block">
@@ -14,10 +13,8 @@
     </div>
 </div>
 @endforeach
-</div>
 <form id="search_form" name="search_form">
   <div class="form-group">
-    {{-- <label>Search by Token ID</label> --}}
     @csrf
     <input hidden type="text" id="nft_type" name="type" value="{{ $nft_type }}" class="form-control" />
     <input hidden type="text" name="referrer" value="{{ $referrer }}" class="form-control" />
@@ -27,7 +24,6 @@
 <div id="search" class="purchase-buttons">
     <form id="playerform" name="playerform">
         <div class="form-group">
-          {{-- <label>Search by Token ID</label> --}}
           <input hidden type="text" name="player" value="" class="form-control" />
           @csrf
   
@@ -36,7 +32,6 @@
       </form>
       <form id="creatorform" name="creatorform">
           <div class="form-group">
-            {{-- <label>Search by Token ID</label> --}}
             <input hidden type="text" name="creator" value="" class="form-control" />
             @csrf
     
@@ -46,7 +41,6 @@
 </div>
 
 <div id="pagination" class="purchase-pagination">
-    {{-- {!{$sales->appends(['per_page' => '20'])->links() !!} --}}
     {{$sales->links()}}
 </div>
   
