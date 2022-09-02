@@ -97,4 +97,9 @@ class RegisterController extends Controller
 
         return $user;
     }
+
+    public function showRegistrationForm()
+    {
+        abort(404);
+    }
 }
