@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_wallet', 50)->unique();
             $table->string('referral_id', 50)->unique();
-            $table->integer('num_pirates')->defalut(0);
+            $table->integer('num_pirates')->default(0);
             $table->integer('num_treasures')->default(0);
             $table->timestamps();
         });
