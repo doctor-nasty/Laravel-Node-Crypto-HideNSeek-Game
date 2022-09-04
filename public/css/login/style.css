@@ -1908,6 +1908,12 @@ footer p {
   .swiper-slide {
     height: 350px;
   }
+  .purchase-block-header {
+    flex-direction: column;
+  }
+  .purchase-section h2 {
+    margin-bottom: 16px;
+  }
 }
 @media screen and (max-width: 480px) {
   .section-head h4 {
@@ -3666,7 +3672,6 @@ textarea.is-invalid.tt-hint {
   color: #000000;
   font-size: 32px;
   font-weight: 800;
-  margin-bottom: 16px;
 }
 .purchase-block {
   padding: 32px;
@@ -3708,9 +3713,14 @@ textarea.is-invalid.tt-hint {
   cursor: pointer;
   font-size: 18px;
 }
+.purchase-block-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
 .purchase-buttons {
   display: flex;
-  position: absolute;
   top: 0;
   right: 0;
 }
