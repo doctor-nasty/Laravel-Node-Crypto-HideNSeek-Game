@@ -381,7 +381,7 @@
 
     <section class="purchase-section" data-scroll-index="2">
         <div class="container">
-            <div class="row position-relative" id="nft">
+            <div id="nft">
                 @include('auth.nft',["sales"=>$sales])
             </div>
         </div>
