@@ -48,7 +48,7 @@
                                 <th>District</th>
                                 <th>Price</th>
                                 <th>Players</th>
-                                <th>Created At</th>
+                                {{-- <th>Created At</th> --}}
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -63,8 +63,8 @@
                                     <td>{{ $game->city }}</td>
                                     <td>{{ $game->district }}</td>
                                     <td>{{ $game->points }}</td>
-                                    <td>{{ $game->players }}</td>
-                                    <td>{{ $game->created_at }}</td>
+                                    <td>{{count($game->bids)}}/{{ $game->players }}</td>
+                                    {{-- <td>{{ $game->created_at }}</td> --}}
                                     @if (session('can_play'))
                                         <td>
                                             <div class="data-table-buttons-wrapper"><button type="button"
