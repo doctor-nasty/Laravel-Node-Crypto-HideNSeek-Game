@@ -48,10 +48,17 @@ class SendAward extends Command
             if ($txInfo->status == "0x1") {
                 $award->status = 2;
                 $award->save();
+            } else if ($txInfo->status == '0x0') {
+                $award->status = 0;
+                $award->save();
             }
         }
 
         $awards = Award::where('status', '<>', 2)->get(); // get failed or new awards
+
+        if (count($awards) == 0) return ;
+
+        $balance = new BigInteger($web3_helper->getTokenBalance());
 
         $nonce = $web3_helper->getNonce(config('web3.wallet.address'));
 
@@ -60,7 +67,17 @@ class SendAward extends Command
 
         foreach ($awards as $award) {
             Log::info("Sending {$award->award_type} to {$award->address} - amount: {$award->amount}USDC");
-            $txHash = $web3_helper->sendTokenToUser($award->address, $award->amount, $nonce);
+
+            $amount = new BigInteger($award->amount * 100);
+            $amount = $amount->multiply(new BigInteger(config('web3.chain.token_unit')))->divide(new BigInteger(100))[0]; // decimals
+
+            if ($balance->compare($amount) < 0) {
+                break;
+            }
+
+            $balance = $balance->subtract($amount);
+
+            $txHash = $web3_helper->sendTokenToUser($award->address, $amount, $nonce);
 
             if  ($txHash == null) break;
 
