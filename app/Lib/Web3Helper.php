@@ -21,15 +21,34 @@ class Web3Helper {
     $this->web3 = new Web3(new HttpProvider(new HttpRequestManager(config('web3.chain.rpc'), $timeout)));
   }
 
+  public function getTokenBalance() {
+    $web3 = $this->web3;
+
+    $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
+    $token = new Contract($web3->provider, $abi);
+
+    $balance = "0";
+    // get token balance
+    $token->at(config('web3.chain.token'))->call('balanceOf', config('web3.wallet.address'), 
+      function($err, $result) use(&$balance, &$error) {
+        if ($err !== null) {
+            // error occured
+            $error = "Error: " . $err->getMessage();
+        } else {
+            $balance = $result['balance']->toString();
+        }
+      });
+    
+    return $balance;
+  }
+
   public function sendTokenToUser($address, $amount, $nonce) {
     $web3 = $this->web3;
 
     $abi = json_decode(file_get_contents(base_path('public/web3/ERC20.json')));
     $token = new Contract($web3->provider, $abi);
 
-
-    $amount = new BigInteger($amount * 100);
-    $amount = $amount->multiply(new BigInteger(config('web3.chain.token_unit')))->divide(new BigInteger(100))[0]; // decimals
+    
 
     // esitmate gas
     $estimatedGas = '0x200b20';
